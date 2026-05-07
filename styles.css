@@ -828,14 +828,30 @@ sup { font-size: 0.55em; vertical-align: super; }
 .footer-brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-family: var(--serif);
-  font-style: italic;
+  gap: 12px;
   text-transform: none;
   letter-spacing: 0;
   color: var(--cream);
+}
+.footer-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.2;
+}
+.footer-brand-name {
+  font-family: var(--serif);
+  font-style: italic;
   font-size: 16px;
   font-weight: 500;
+}
+.footer-legal {
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: rgba(241, 235, 222, 0.55);
 }
 .footer-meta {
   display: inline-flex;
