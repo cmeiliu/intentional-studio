@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Plate — a protein-first meal plan</title>
+<meta name="description" content="A small, calm meal planner that gets you to 120g of protein a day." />
+<meta name="theme-color" content="#e7e3d6" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="meals.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="#" class="brand">
+      <span class="brand-mark"></span>
+      Plate
+    </a>
+    <div class="topbar-actions">
+      <button class="btn btn-ghost" id="open-target-btn">
+        Target · <strong id="target-chip">120g</strong>
+      </button>
+      <button class="btn btn-ghost" id="add-idea-btn">＋ Idea</button>
+      <button class="btn btn-primary" id="add-meal-btn">＋ Log meal</button>
+    </div>
+  </div>
+</header>
+
+<main class="frame">
+
+  <!-- TODAY -->
+  <section class="today">
+    <div class="today-left">
+      <p class="eyebrow"><span class="eyebrow-line"></span> Today · <span id="today-date">—</span></p>
+      <h1 class="today-title">
+        <span id="today-protein">0</span><span class="unit">g</span>
+        <span class="of">of</span>
+        <span id="today-target">120</span><span class="unit">g</span>
+        <span class="protein-word">protein</span>
+      </h1>
+      <div class="progress">
+        <div class="progress-track">
+          <div class="progress-fill" id="today-progress"></div>
+        </div>
+        <div class="progress-scale">
+          <span>0</span><span>30</span><span>60</span><span>90</span><span>120+</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="today-right">
+      <div class="macro-tile">
+        <div class="macro-num" id="today-cal">0</div>
+        <div class="macro-label">cal</div>
+      </div>
+      <div class="macro-tile">
+        <div class="macro-num" id="today-carbs">0<span class="macro-g">g</span></div>
+        <div class="macro-label">carbs</div>
+      </div>
+      <div class="macro-tile">
+        <div class="macro-num" id="today-fat">0<span class="macro-g">g</span></div>
+        <div class="macro-label">fat</div>
+      </div>
+      <div class="macro-tile macro-tile-accent">
+        <div class="macro-num" id="today-remaining">120<span class="macro-g">g</span></div>
+        <div class="macro-label">to go</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEEK -->
+  <section class="section section-week">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow eyebrow-maroon"><span class="eyebrow-line"></span> The plan</p>
+        <h2 class="section-title">This <em>week</em>.</h2>
+      </div>
+      <div class="week-nav">
+        <button class="iconbtn" id="prev-week" aria-label="Previous week">←</button>
+        <span class="week-label" id="week-label">—</span>
+        <button class="iconbtn" id="next-week" aria-label="Next week">→</button>
+        <button class="btn btn-ghost btn-sm" id="today-btn">Today</button>
+      </div>
+    </div>
+    <div class="week-grid" id="week-grid"></div>
+  </section>
+
+  <!-- IDEAS -->
+  <section class="section section-ideas">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow eyebrow-turquoise"><span class="eyebrow-line"></span> A library to pull from</p>
+        <h2 class="section-title">Meal <em>ideas</em>.</h2>
+      </div>
+      <button class="btn btn-ghost" id="add-idea-btn-2">＋ New idea</button>
+    </div>
+    <div class="ideas-grid" id="ideas-grid"></div>
+  </section>
+
+  <footer class="footer">
+    <span class="brand-mark"></span>
+    <span>Plate · a small, private meal planner. Data stays on this device.</span>
+  </footer>
+</main>
+
+
+<!-- ────── MEAL MODAL ────── -->
+<div class="modal" id="meal-modal" hidden aria-hidden="true">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card" role="dialog" aria-labelledby="meal-modal-title">
+    <header class="modal-head">
+      <h3 id="meal-modal-title">Log a meal</h3>
+      <button class="iconbtn modal-close" data-close aria-label="Close">✕</button>
+    </header>
+
+    <div class="modal-body">
+
+      <div class="dropzone" id="dropzone" tabindex="0">
+        <input type="file" id="meal-image-input" accept="image/*" hidden />
+        <div class="dropzone-empty" id="dropzone-empty">
+          <div class="dropzone-icon">📷</div>
+          <div class="dropzone-text">
+            <strong>Drop a screenshot</strong>
+            <span>or click to choose · we'll try to read the macros</span>
+          </div>
+        </div>
+        <div class="dropzone-preview" id="dropzone-preview" hidden>
+          <img id="dropzone-img" alt="meal preview" />
+          <div class="dropzone-preview-actions">
+            <button class="btn btn-ghost btn-sm" id="rescan-btn">Re-scan</button>
+            <button class="btn btn-ghost btn-sm" id="clear-image-btn">Remove</button>
+          </div>
+        </div>
+        <div class="ocr-status" id="ocr-status" hidden>
+          <span class="spinner"></span> Reading screenshot…
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <label class="field field-wide">
+          <span class="field-label">Meal name</span>
+          <input type="text" id="f-name" placeholder="BBQ Organic Chicken Plate" />
+        </label>
+
+        <label class="field field-wide">
+          <span class="field-label">Description / notes</span>
+          <input type="text" id="f-desc" placeholder="with Grilled Corn, Broccolini, and Dijon Potato Salad" />
+        </label>
+
+        <label class="field field-protein">
+          <span class="field-label">Protein <em>★</em></span>
+          <div class="field-input-wrap">
+            <input type="number" id="f-protein" placeholder="53" min="0" step="1" inputmode="numeric" />
+            <span class="field-suffix">g</span>
+          </div>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Calories</span>
+          <div class="field-input-wrap">
+            <input type="number" id="f-cal" placeholder="747" min="0" step="1" inputmode="numeric" />
+            <span class="field-suffix">cal</span>
+          </div>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Carbs</span>
+          <div class="field-input-wrap">
+            <input type="number" id="f-carbs" placeholder="55" min="0" step="1" inputmode="numeric" />
+            <span class="field-suffix">g</span>
+          </div>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Fat</span>
+          <div class="field-input-wrap">
+            <input type="number" id="f-fat" placeholder="35" min="0" step="1" inputmode="numeric" />
+            <span class="field-suffix">g</span>
+          </div>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Date</span>
+          <input type="date" id="f-date" />
+        </label>
+
+        <label class="field">
+          <span class="field-label">Meal</span>
+          <select id="f-slot">
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch" selected>Lunch</option>
+            <option value="dinner">Dinner</option>
+            <option value="snack">Snack</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <footer class="modal-foot">
+      <button class="btn btn-ghost" id="delete-meal-btn" hidden>Delete</button>
+      <div class="modal-foot-spacer"></div>
+      <button class="btn btn-ghost" data-close>Cancel</button>
+      <button class="btn btn-primary" id="save-meal-btn">Save meal</button>
+    </footer>
+  </div>
+</div>
+
+
+<!-- ────── IDEA MODAL ────── -->
+<div class="modal" id="idea-modal" hidden aria-hidden="true">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card" role="dialog" aria-labelledby="idea-modal-title">
+    <header class="modal-head">
+      <h3 id="idea-modal-title">New meal idea</h3>
+      <button class="iconbtn modal-close" data-close aria-label="Close">✕</button>
+    </header>
+    <div class="modal-body">
+      <label class="field field-wide">
+        <span class="field-label">Name</span>
+        <input type="text" id="i-name" placeholder="Greek yogurt parfait" />
+      </label>
+      <label class="field field-wide">
+        <span class="field-label">Recipe / notes</span>
+        <textarea id="i-recipe" rows="9" placeholder="Paste the recipe, link, or a few notes. Anything goes."></textarea>
+      </label>
+      <div class="form-grid form-grid-tight">
+        <label class="field field-protein">
+          <span class="field-label">Protein (est.)</span>
+          <div class="field-input-wrap">
+            <input type="number" id="i-protein" placeholder="30" min="0" step="1" inputmode="numeric" />
+            <span class="field-suffix">g</span>
+          </div>
+        </label>
+        <label class="field">
+          <span class="field-label">Calories</span>
+          <div class="field-input-wrap">
+            <input type="number" id="i-cal" placeholder="" min="0" step="1" inputmode="numeric" />
+            <span class="field-suffix">cal</span>
+          </div>
+        </label>
+        <label class="field">
+          <span class="field-label">Tag</span>
+          <input type="text" id="i-tag" placeholder="breakfast · quick · meal-prep" />
+        </label>
+      </div>
+    </div>
+    <footer class="modal-foot">
+      <button class="btn btn-ghost" id="delete-idea-btn" hidden>Delete</button>
+      <div class="modal-foot-spacer"></div>
+      <button class="btn btn-ghost" data-close>Cancel</button>
+      <button class="btn btn-primary" id="save-idea-btn">Save idea</button>
+    </footer>
+  </div>
+</div>
+
+
+<!-- ────── PLAN-IDEA MODAL ────── -->
+<div class="modal" id="plan-modal" hidden aria-hidden="true">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card modal-card-narrow" role="dialog" aria-labelledby="plan-modal-title">
+    <header class="modal-head">
+      <h3 id="plan-modal-title">Plan this idea</h3>
+      <button class="iconbtn modal-close" data-close aria-label="Close">✕</button>
+    </header>
+    <div class="modal-body">
+      <p class="modal-lede" id="plan-modal-lede">—</p>
+      <div class="form-grid form-grid-tight">
+        <label class="field">
+          <span class="field-label">Date</span>
+          <input type="date" id="p-date" />
+        </label>
+        <label class="field">
+          <span class="field-label">Meal</span>
+          <select id="p-slot">
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch" selected>Lunch</option>
+            <option value="dinner">Dinner</option>
+            <option value="snack">Snack</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <footer class="modal-foot">
+      <div class="modal-foot-spacer"></div>
+      <button class="btn btn-ghost" data-close>Cancel</button>
+      <button class="btn btn-primary" id="confirm-plan-btn">Add to plan</button>
+    </footer>
+  </div>
+</div>
+
+
+<!-- ────── TARGET MODAL ────── -->
+<div class="modal" id="target-modal" hidden aria-hidden="true">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card modal-card-narrow" role="dialog" aria-labelledby="target-modal-title">
+    <header class="modal-head">
+      <h3 id="target-modal-title">Daily protein target</h3>
+      <button class="iconbtn modal-close" data-close aria-label="Close">✕</button>
+    </header>
+    <div class="modal-body">
+      <label class="field field-protein">
+        <span class="field-label">Target</span>
+        <div class="field-input-wrap">
+          <input type="number" id="target-input" min="1" step="1" inputmode="numeric" />
+          <span class="field-suffix">g / day</span>
+        </div>
+      </label>
+    </div>
+    <footer class="modal-foot">
+      <div class="modal-foot-spacer"></div>
+      <button class="btn btn-ghost" data-close>Cancel</button>
+      <button class="btn btn-primary" id="save-target-btn">Save</button>
+    </footer>
+  </div>
+</div>
+
+
+<!-- toast -->
+<div class="toast" id="toast" hidden></div>
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.0/dist/tesseract.min.js"></script>
+<script src="meals.js"></script>
+</body>
+</html>
