@@ -6,6 +6,15 @@
 <title>Plate — a protein-first meal plan</title>
 <meta name="description" content="A small, calm meal planner that gets you to 120g of protein a day." />
 <meta name="theme-color" content="#e7e3d6" />
+<script>
+  // Resolve relative assets correctly whether accessed as /meals or /meals/
+  (function () {
+    var p = location.pathname;
+    if (!p.endsWith('/') && !/\.[a-z0-9]+$/i.test(p)) {
+      document.write('<base href="' + p + '/">');
+    }
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
