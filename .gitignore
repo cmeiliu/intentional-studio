@@ -3,3 +3,7 @@
 .idea/
 node_modules/
 *.log
+.env*.local
+.next/
+out/
+tsconfig.tsbuildinfo
