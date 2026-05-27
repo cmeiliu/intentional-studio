@@ -5,19 +5,37 @@ Teaching, custom software, and website redesigns for businesses that want to act
 
 ## Stack
 
-Pure HTML, CSS, and a small dash of JavaScript. No framework, no build step.
+Next.js 16, React 19, TypeScript, Tailwind CSS v4, Drizzle, Neon, Anthropic, Cal.com, PostHog, and the existing custom CSS.
 
-- `index.html` — semantic structure
-- `styles.css` — Chanel-cruise palette (cream, maroon, mint turquoise) with a Cormorant Garamond + Inter type system
-- `script.js` — reveal-on-scroll, navbar state, hero card hover
-- `assets/` — imagery
+- `app/page.tsx` - current brochure markup
+- `app/globals.css` - Tailwind entry plus the Chanel-cruise palette and type system
+- `app/BrochureEffects.tsx` - reveal-on-scroll, navbar state, hero card hover
+- `app/start`, `app/projects`, `app/schedule` - onboarding funnel
+- `app/api/start/*`, `app/api/webhooks/cal` - backend routes for intake, streaming generation, and booking persistence
+- `lib/onboarding`, `lib/meetings` - Drizzle schemas and DB helpers
+- `drizzle/0000_onboarding_meetings.sql` - funnel-scoped schema migration
+- `public/assets/` - imagery
 
 ## Local preview
 
-Open `index.html` directly in a browser, or run a tiny local server:
+Install dependencies and run the local Next.js server:
 
 ```bash
-python3 -m http.server 8000
+npm install
+npm run dev
 ```
 
-Then visit <http://localhost:8000>.
+Then visit <http://localhost:3000>.
+
+## Backend
+
+The funnel stores sessions and bookings in the `pebbled-lead-gen` Neon database.
+Run the scoped migration before sending traffic to the funnel:
+
+```bash
+npm run db:migrate
+npm run db:check
+```
+
+The migration creates only `onboarding.*` and `meetings.*` objects. It does not
+touch the existing `public.*` lead-gen CRM tables.
