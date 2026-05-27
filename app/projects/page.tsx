@@ -10,7 +10,7 @@ export default async function ProjectsPage() {
   if (!session) redirect("/start");
 
   return (
-    <div className="flex min-h-screen flex-col bg-cream-1">
+    <div className="flex flex-1 flex-col">
       <AnalyticsTrigger
         event="projects_viewed"
         properties={{
@@ -26,9 +26,9 @@ export default async function ProjectsPage() {
           <span className="ital text-burgundy-deep">{prettyHost(session.url)}</span>.
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-2">
-          I read your site and the bottleneck you named. Pick the idea that
-          would take the most weight off your week. On the call, we will turn it
-          into a real build plan.
+          I read your site and the bottleneck you named. Here&rsquo;s what I
+          would build first. Pick the one that would take the most weight off
+          your week. On our 30-minute call, we turn it into a real plan.
         </p>
         <div className="mt-12">
           <ProjectsList

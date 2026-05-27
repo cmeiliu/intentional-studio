@@ -1,36 +1,37 @@
-const STEPS = ["Intake", "Ideas", "Schedule"] as const;
+const STEPS = [
+  { label: "Tell me", path: "/start" },
+  { label: "Pick", path: "/projects" },
+  { label: "Book", path: "/schedule" },
+];
 
 export function FunnelProgress({ current }: { current: 1 | 2 | 3 }) {
   return (
-    <div className="flex items-center gap-3 text-[12px] mono text-ink-muted">
-      {STEPS.map((step, index) => {
-        const n = index + 1;
-        const active = n === current;
-        const complete = n < current;
-        return (
-          <div key={step} className="flex items-center gap-3">
+    <div className="mono flex items-center gap-3 text-[12px] text-ink-muted">
+      <span className="uppercase tracking-wide">
+        Step {current} of {STEPS.length}
+      </span>
+      <div className="flex items-center gap-1.5">
+        {STEPS.map((step, index) => {
+          const stepNum = index + 1;
+          const isActive = stepNum === current;
+          const isDone = stepNum < current;
+          return (
             <span
-              className="grid h-7 w-7 place-items-center rounded-full border text-[11px]"
+              key={step.path}
+              className="h-1 rounded-full transition-all"
               style={{
-                borderColor:
-                  active || complete
-                    ? "var(--color-burgundy-deep)"
-                    : "var(--color-cream-4)",
-                background: active
+                width: isActive ? 36 : 14,
+                background: isDone
                   ? "var(--color-burgundy-deep)"
-                  : complete
+                  : isActive
                     ? "var(--color-burgundy)"
-                    : "transparent",
-                color: active || complete ? "var(--color-cream-0)" : "inherit",
+                    : "rgba(26,24,20,.12)",
               }}
-            >
-              {n}
-            </span>
-            <span className={active ? "text-ink" : ""}>{step}</span>
-            {n < STEPS.length ? <span className="text-ink-muted">/</span> : null}
-          </div>
-        );
-      })}
+              aria-label={`${step.label}${isActive ? " (current)" : isDone ? " (done)" : ""}`}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

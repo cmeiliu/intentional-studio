@@ -18,7 +18,7 @@ export default async function SchedulePage() {
   const calLink = process.env.NEXT_PUBLIC_CAL_LINK;
 
   return (
-    <div className="flex min-h-screen flex-col bg-cream-1">
+    <div className="flex flex-1 flex-col">
       <AnalyticsTrigger
         event="schedule_viewed"
         properties={{
@@ -37,7 +37,7 @@ export default async function SchedulePage() {
               Let&apos;s plan this <span className="ital">together</span>.
             </h1>
             <p className="mt-6 text-base leading-relaxed text-ink-2">
-              Thirty minutes on Zoom. We will walk through your workflow,
+              Thirty minutes on Zoom. We&rsquo;ll walk through your workflow,
               confirm which tools we need to connect, and leave with enough
               detail to price the first version and start building.
             </p>

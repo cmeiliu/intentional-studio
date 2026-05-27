@@ -1,7 +1,26 @@
 import type { Metadata } from "next";
+import { Geist, JetBrains_Mono, Newsreader } from "next/font/google";
 import Script from "next/script";
 import { PostHogProvider } from "./PostHogProvider";
 import "./globals.css";
+
+const geist = Geist({
+  variable: "--font-geist",
+  subsets: ["latin"],
+});
+
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+});
 
 export const metadata: Metadata = {
   title: "Intentional Studio - Mei Liu",
@@ -19,9 +38,25 @@ export default function RootLayout({
 }>) {
   const instantlyPid = process.env.NEXT_PUBLIC_INSTANTLY_PID;
   return (
-    <html lang="en">
-      <body>
-        <PostHogProvider>{children}</PostHogProvider>
+    <html
+      lang="en"
+      className={`${geist.variable} ${newsreader.variable} ${jetbrainsMono.variable} h-full antialiased`}
+    >
+      <body className="min-h-full">
+        <div className="aurora" aria-hidden="true">
+          <div className="orb o1" />
+          <div className="orb o2" />
+          <div className="orb o3" />
+          <div className="orb o4" />
+          <div className="orb o5" />
+          <div className="orb o6" />
+        </div>
+        <div className="grain" aria-hidden="true" />
+        <PostHogProvider>
+          <div className="app-stage flex min-h-[100dvh] flex-col">
+            {children}
+          </div>
+        </PostHogProvider>
         {instantlyPid ? (
           <Script
             id="instantly-pixel"
