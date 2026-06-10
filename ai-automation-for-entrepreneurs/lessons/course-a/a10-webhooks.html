@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A10 · Webhooks: Connecting Anything</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course A · Module A3 No-Code Automation · Lesson 10 of 17</p>
+  <h1>Webhooks: Connecting Anything <span class="deep">deep dive</span></h1>
+  <p class="lede">When there's no ready-made connector between two apps, a webhook bridges
+  the gap — and it's mostly just copy and paste.</p>
+  <p class="meta">~16 min · Have Make or Zapier open · Prereq: A9 multi-step automation complete</p>
+
+  <p>Every automation platform has hundreds of built-in app connectors. But sooner or later
+  you'll hit one that isn't listed. Maybe it's your booking system, your custom client portal,
+  or a niche industry tool. That's when people say "you'd need a developer." They're usually
+  wrong. Your single win: by the end of this lesson you'll understand what a webhook is,
+  when to reach for one, and that setting one up is almost always <strong>copy a URL, paste
+  it somewhere, save</strong>. That's the whole job.</p>
+
+  <h2>What a webhook actually is</h2>
+
+  <div class="analogy">
+    <p>Imagine a doorbell at your house. You don't stand at the window watching for visitors —
+    you wait until the bell rings. The moment someone arrives, it sends you a signal automatically.</p>
+    <p>A webhook works exactly the same way. Instead of your automation tool constantly asking
+    "did anything happen yet?" — which is slow and wasteful — the <em>other</em> app rings the
+    doorbell the instant something occurs. It sends a small packet of data
+    ("a new order just came in — here are the details") straight to a URL your automation
+    tool is listening on. No polling. No delay. Instant.</p>
+  </div>
+
+  <p>That URL your automation tool gives you is called a <strong>webhook URL</strong>.
+  It's the address of your doorbell. You copy it, go to the other app's settings, and
+  paste it into a field usually labelled "Webhook URL" or "Callback URL". Done.</p>
+
+  <h2>When you'd reach for a webhook</h2>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>Good webhook candidates</h3>
+      <ul>
+        <li>An app that's not in your platform's connector list</li>
+        <li>Any app with a "Webhooks" or "Integrations" section in its settings</li>
+        <li>Your own website or landing page (most page builders can send webhooks on form submit)</li>
+        <li>Payment processors not natively supported (many support webhooks as a fallback)</li>
+      </ul>
+    </div>
+    <div class="card bad">
+      <h3>Try the connector first</h3>
+      <ul>
+        <li>If your platform lists the app natively, use that connector — it's pre-tested and handles authentication for you</li>
+        <li>If the app has no "Webhooks" or "API" section in its settings, it may not support them at all — check their docs</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>The basic flow — step by step</h2>
+
+  <div class="steps">
+    <ol>
+      <li>
+        <strong>Create a webhook trigger in your automation tool.</strong>
+        In Make: add a module → Webhooks → Custom webhook → Create. In Zapier:
+        choose "Webhooks by Zapier" as the trigger → Catch Hook. The tool generates
+        a URL for you.
+      </li>
+      <li>
+        <strong>Copy that URL.</strong> It looks something like
+        <code>https://hook.eu2.make.com/abc123xyz</code>. Copy the whole thing.
+      </li>
+      <li>
+        <strong>Paste it into the other app's webhook settings.</strong> Every app
+        labels this slightly differently — look for "Webhook URL", "Callback URL",
+        "Notification URL", or "Endpoint". Paste and save.
+      </li>
+      <li>
+        <strong>Trigger a test event.</strong> Do the thing in the other app that
+        should fire the webhook (submit a form, create an order). Go back to your
+        automation tool and click "Determine data structure" or "Test trigger" — it
+        should show you the packet of data that just arrived.
+      </li>
+      <li>
+        <strong>Map the fields and build the rest of your scenario.</strong> Now that
+        your tool can see the incoming data, the rest is normal automation — use the
+        fields just like any other trigger.
+      </li>
+    </ol>
+  </div>
+
+  <div class="callout">
+    <strong>The reassuring truth:</strong> the data that arrives in a webhook is just
+    text — a list of labelled values like <code>name: "Acme Corp"</code>,
+    <code>amount: 450</code>. You don't need to understand how it's structured beforehand.
+    Run the test, let your automation tool parse it, and all the fields appear as
+    clickable options. Technical knowledge not required.
+  </div>
+
+  <h2>What can go wrong — and how to fix it</h2>
+
+  <div class="files">
+    <div class="row"><span class="name">No data arrived</span><span class="what">Make sure you triggered an actual event in the other app <em>after</em> pasting the URL. Webhooks don't backfill — they only capture events that happen from that point forward.</span></div>
+    <div class="row"><span class="name">Fields missing</span><span class="what">The other app only sends what it sends. Check its docs for which fields are included — sometimes you need to enable "full payload" in its settings.</span></div>
+    <div class="row"><span class="name">URL expired</span><span class="what">Some platforms give you a temporary URL for testing that expires. Use your tool's permanent webhook URL (not the one-time test URL) in the other app's settings.</span></div>
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening. Recalling it now is what makes it stick.</p>
+    <details>
+      <summary>What is a webhook URL, in plain English?</summary>
+      <p><span class="answer">It's the address of a "doorbell" your automation tool is listening on.</span> When you paste it into another app, that app rings the bell — sends data instantly — the moment an event happens. No polling, no delay.</p>
+    </details>
+    <details>
+      <summary>You paste the webhook URL, trigger a test form submission, but no data shows up in Make. What's the most likely cause?</summary>
+      <p><span class="answer">You triggered the form before clicking "determine data structure" — or you used a temporary test URL that expired.</span> Paste the permanent webhook URL, click the "listen" button in Make first, then trigger the event in the other app.</p>
+    </details>
+    <details>
+      <summary>Your booking system isn't in Zapier's app list. A colleague says you need a developer. What's your first move?</summary>
+      <p><span class="answer">Check the booking system's settings for a "Webhooks" or "Integrations" section.</span> Most modern booking tools support webhooks as a standard fallback. If there's a webhook field, you can connect it yourself in minutes — no developer needed.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://zapier.com/blog/what-are-webhooks/">What Are Webhooks? — Zapier Blog</a> —
+    the clearest plain-English explainer available, with annotated diagrams. ~10 min.
+    See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — ask me anything.</strong> Tell me which two apps you're
+    trying to connect and I'll walk you through the exact steps: where to find the webhook
+    field in the sending app, which trigger module to use in Make or Zapier, and what the
+    data will look like when it arrives.
+  </div>
+
+  <p>Terms from this lesson — <em>trigger</em>, <em>action</em>, <em>automation</em> —
+  are defined in the <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
+
+  <nav>
+    <a href="a09-multi-step-safe-failure.html">← A9: Multi-Step &amp; Safe Failure</a>
+    <a href="a11-vibe-coding-mindset.html">Next → A11: The Vibe-Coding Mindset</a>
+  </nav>
+</div>
+</body>
+</html>

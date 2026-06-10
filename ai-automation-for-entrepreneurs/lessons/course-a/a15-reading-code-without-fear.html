@@ -3,80 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 13 · Reading Code Without Fear</title>
-<style>
-  :root {
-    --ink: #1a1a1a; --muted: #6b6b6b; --rule: #e2e0da;
-    --accent: #8a5a00; --paper: #fdfcf9; --good: #2f6b3a; --bad: #9a3b3b;
-    --box: #f3f0e8; --codebg: #1e1e23; --codeink: #e8e6df;
-  }
-  * { box-sizing: border-box; }
-  body {
-    background: var(--paper); color: var(--ink);
-    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
-    line-height: 1.6; margin: 0; padding: 3.5rem 1.5rem;
-  }
-  .page { max-width: 40rem; margin: 0 auto; }
-  .kicker { font-family: -apple-system, Helvetica, Arial, sans-serif;
-    text-transform: uppercase; letter-spacing: .14em; font-size: .72rem;
-    color: var(--accent); margin: 0 0 .5rem; }
-  h1 { font-size: 2.1rem; line-height: 1.08; margin: 0 0 .5rem; }
-  .lede { color: var(--muted); font-style: italic; font-size: 1.08rem; margin: 0 0 .5rem; }
-  .meta { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .76rem;
-    color: var(--muted); border-bottom: 2px solid var(--ink);
-    padding-bottom: 1rem; margin-bottom: 2rem; }
-  h2 { font-size: 1.3rem; margin: 2.6rem 0 .6rem; }
-  p { margin: 0 0 1rem; }
-  .analogy { background: var(--box); border-left: 3px solid var(--accent);
-    padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
-  .analogy p:last-child { margin-bottom: 0; }
-  .files { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-    font-size: .85rem; background: #fff; border: 1px solid var(--rule);
-    border-radius: 6px; padding: 1rem 1.2rem; margin: 1.5rem 0; }
-  .files .row { display: grid; grid-template-columns: 9rem 1fr; gap: .8rem;
-    padding: .35rem 0; border-bottom: 1px dashed var(--rule); }
-  .files .row:last-child { border-bottom: none; }
-  .files .name { color: var(--accent); }
-  .files .what { font-family: Georgia, serif; color: var(--muted); font-size: .9rem; }
-  pre { background: var(--codebg); color: var(--codeink); border-radius: 6px;
-    padding: 1rem 1.1rem; overflow-x: auto; font-size: .82rem; line-height: 1.5;
-    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; margin: 1.2rem 0; }
-  pre .c { color: #8aa6c1; } /* comment */
-  pre .k { color: #c98a5a; } /* keyword/tag */
-  pre .s { color: #9ec98a; } /* string */
-  .callout { background: var(--box); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.2rem 0; }
-  .callout strong { color: var(--accent); }
-  .test { border: 1px solid var(--rule); border-radius: 6px; padding: 1.2rem 1.3rem;
-    margin: 1.5rem 0; background: #fff; }
-  .test ol { margin: .5rem 0 0; padding-left: 1.3rem; }
-  .test li { margin-bottom: .5rem; }
-  .quiz { background: var(--box); border-radius: 6px; padding: 1.3rem 1.4rem; margin: 2rem 0; }
-  .quiz h2 { margin-top: 0; }
-  details { border-top: 1px solid var(--rule); padding: .8rem 0; }
-  details:last-child { border-bottom: 1px solid var(--rule); }
-  summary { cursor: pointer; font-weight: bold; }
-  details p { margin: .6rem 0 0; color: var(--muted); }
-  .answer { color: var(--good); font-weight: bold; }
-  .source { background: #fff; border: 1px dashed var(--accent); border-radius: 6px;
-    padding: 1rem 1.2rem; margin: 2rem 0; }
-  .source .kicker { margin-bottom: .3rem; }
-  .ask { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .9rem;
-    background: #1a1a1a; color: #f3f0e8; border-radius: 6px; padding: 1rem 1.2rem; margin: 2rem 0; }
-  nav { display: flex; justify-content: space-between; gap: 1rem; font-family: -apple-system, Helvetica, Arial, sans-serif;
-    font-size: .82rem; margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
-  a { color: var(--accent); }
-  @media print { body { padding: 0; background: #fff; } pre { background: #f4f4f4; color: #000; border: 1px solid #ccc; } .ask { background: #eee; color: #000; } }
-</style>
+<title>A15 · Reading Code Without Fear</title>
+<link rel="stylesheet" href="../lesson.css">
 </head>
 <body>
 <div class="page">
-  <p class="kicker">Module 5 · Escape the Final 20% · Lesson 13 of 18</p>
+  <p class="kicker">Course A · Module A4 Build · Lesson 15 of 17</p>
   <h1>Reading Code Without Fear</h1>
   <p class="lede">You don't need to write code to be powerful. You need to read just
   enough to find the part you want to change.</p>
-  <p class="meta">~14 min · Have your built app from Week 4 open · No writing code yet</p>
+  <p class="meta">~14 min · Have your built app from A14 open · No writing code yet</p>
 
-  <p>Last week you built and shipped a real app just by describing it. Amazing — and also
+  <p>You just built and shipped a real app by describing it. Amazing — and also
   the moment most non-technical founders get stuck. You asked for a change, the AI rewrote
   something, and now a button's broken and you have no idea why. That's <strong>comprehension
   debt</strong>: you own software you can't read. This lesson is the antidote. Your single
@@ -160,25 +98,25 @@
   </div>
 
   <div class="source">
-    <p class="kicker">Watch this next (primary source)</p>
+    <p class="kicker">Read this next (primary source)</p>
     <p style="margin:0">Read <a href="https://momen.app/blogs/best-ai-app-builders-2026">"Avoiding the Prototype Trap" (Momen)</a>
     — the clearest explanation of the comprehension-debt trap and why this exact skill keeps
-    you out of it. ~10 min. More in <a href="../RESOURCES.md">RESOURCES.md</a>.</p>
+    you out of it. ~10 min. More in <a href="../../RESOURCES.md">RESOURCES.md</a>.</p>
   </div>
 
   <div class="ask">
-    <strong>I'm your teacher — paste me your code.</strong> Open your Week-4 app, copy any
+    <strong>I'm your teacher — paste me your code.</strong> Open your A14 app, copy any
     file you don't understand, and send it to me. I'll translate it line by line in plain
     English and point at exactly where you'd make the change you want. That's the fastest way
     to turn "scary wall of code" into "oh, I see it."
   </div>
 
   <p>New words this lesson — <em>code</em>, <em>debugging</em>, <em>repository</em> — are in
-  the <a href="../reference/glossary.html">course glossary</a>. Keep it open.</p>
+  the <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
 
   <nav>
-    <a href="0012-build-and-ship-a-one-page-tool.html">← Lesson 12: Build &amp; Ship a One-Page Tool</a>
-    <a href="0014-debugging-with-ai.html">Next → Lesson 14: Debugging With AI</a>
+    <a href="a14-build-and-ship.html">← A14: Build &amp; Ship a One-Page Tool</a>
+    <a href="a16-debugging-with-ai.html">Next → A16: Debugging With AI</a>
   </nav>
 </div>
 </body>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B14 · Open Source</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course B · Module B2 Going Agentic · Lesson 14 of 18</p>
+  <h1>Open Source</h1>
+  <p class="lede">Stand on the shoulders of millions of builders — for free.</p>
+  <p class="meta">~12 min · No tools needed · Prereq: B13 (Session Logs)</p>
+
+  <p>Almost every serious piece of software you use — your database, your web framework,
+  the AI library powering your agents — was built in the open by thousands of volunteers
+  who chose to share their work with the world. That shared work is called
+  <strong>open source</strong>, and your single win from this lesson is learning how to
+  find it, evaluate it, and use it without feeling like an outsider. Millions of
+  builders already solved the problem you're staring at. Your job is to know how to borrow
+  the answer.</p>
+
+  <h2>What "open source" actually means</h2>
+  <div class="analogy">
+    <p>Think of a recipe book where every recipe is public, anyone can cook from it, anyone
+    can suggest a tweak, and anyone can reprint it — as long as they follow a few simple
+    rules. That's open source software. The <strong>code is the recipe</strong>; the
+    <strong>licence is the rules</strong> for reprinting it.</p>
+    <p>The rules are usually one of two flavours. <strong>Permissive licences</strong>
+    (like MIT or Apache) essentially say: "Use it for anything — commercial, personal,
+    modified — just keep our name in the credits." <strong>Copyleft licences</strong>
+    (like GPL) add one extra rule: "If you ship a modified version, your version must also
+    be open source." For most small-business use you'll rarely hit the GPL restriction,
+    but it's worth a quick check before you build a paid product on top of something.</p>
+  </div>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>Permissive (MIT, Apache, BSD)</h3>
+      <ul>
+        <li>Use in commercial products: yes</li>
+        <li>Modify freely: yes</li>
+        <li>Keep your own code private: yes</li>
+        <li>Required: credit the original authors</li>
+      </ul>
+    </div>
+    <div class="card bad">
+      <h3>Copyleft (GPL, AGPL)</h3>
+      <ul>
+        <li>Use and modify: yes</li>
+        <li>Ship a modified version: must open-source your version too</li>
+        <li>AGPL extends this to server-side use</li>
+        <li>Not a problem if you're not redistributing</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Finding and evaluating a project</h2>
+  <p>The main home for open source software is <a href="https://github.com">GitHub</a>.
+  A search there — or just asking your AI "what are the best open source libraries for
+  [task]" — will surface candidates quickly. Once you have a project page in front of you,
+  run this four-point check before you trust it:</p>
+  <div class="files">
+    <div class="row"><span class="name">Stars</span><span class="what">Other developers' votes of confidence. Thousands of stars is a good sign; dozens might mean a personal experiment.</span></div>
+    <div class="row"><span class="name">Recent activity</span><span class="what">When was the last commit? A project with no updates for two years may be abandoned. Look for recent releases.</span></div>
+    <div class="row"><span class="name">Open issues</span><span class="what">A few hundred is normal for a popular project. Thousands of open issues and none being closed is a warning sign.</span></div>
+    <div class="row"><span class="name">Licence</span><span class="what">Click the licence badge. Confirm it's MIT, Apache, or similar permissive text before you build on it commercially.</span></div>
+  </div>
+
+  <div class="callout">
+    <strong>The golden move:</strong> paste the project's README into your AI and ask
+    <em>"In one paragraph, what does this do? Is it still actively maintained? What licence
+    does it use, and are there any restrictions I should know about for a commercial product?"</em>
+    You get a plain-English evaluation in seconds.
+  </div>
+
+  <h2>Using a project vs contributing back</h2>
+  <p>For most entrepreneurs, the relationship with open source is simple:
+  <strong>you are a user</strong>. You install the package, you get the benefit, you follow
+  the licence terms. That is completely fine and completely normal — it's why the software
+  was published.</p>
+
+  <p>Occasionally you'll fix a bug or add a feature that would benefit others. If you do,
+  you can <strong>contribute back</strong> by opening a pull request — a proposed change
+  the project's maintainers can review and merge. You don't have to. But when you do, you
+  join the collaborative chain that made the software useful to you in the first place. It's
+  one of the genuinely warm parts of the tech world.</p>
+
+  <h2>How AI changes the equation</h2>
+  <p>A year ago, picking up an unfamiliar open source library meant hours of reading
+  documentation and stack-overflow hunting. Now you can paste the README (or a code snippet)
+  into your AI and say <em>"show me the simplest possible way to use this in my project."</em>
+  The AI will write the wiring code, explain what each part does, and flag anything that
+  looks risky. That lowers the barrier to using open source from "requires a developer
+  day" to "requires an afternoon." Millions of solved problems just became directly
+  accessible to you.</p>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening. Recalling it now is what makes it stick.</p>
+    <details>
+      <summary>You want to use a library licenced under MIT in a paid product you sell. Is that allowed?</summary>
+      <p><span class="answer">Yes.</span> MIT is a permissive licence. You can use it in commercial products and keep your own code private. Just keep the original copyright notice somewhere in your project.</p>
+    </details>
+    <details>
+      <summary>You find a perfect library on GitHub, but the last commit was three years ago and there are 800 unanswered issues. What do you do?</summary>
+      <p><span class="answer">Look for a maintained fork or a different library.</span> Abandoned projects don't get security patches. A popular project's README often links to the actively maintained successor; your AI can also suggest current alternatives.</p>
+    </details>
+    <details>
+      <summary>A developer friend says "just copy this GPL-licenced library into your product." Should you?</summary>
+      <p><span class="answer">Not without checking.</span> GPL requires that any product you distribute that contains GPL code must also be released as open source. If you're selling a closed-source SaaS, that's likely a problem. Ask the AI to explain the specific GPL version's terms, and when in doubt, find an MIT-licenced alternative.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://opensource.guide/">Open Source Guides (opensource.guide)</a> —
+    the canonical plain-English guide to understanding, using, and contributing to open
+    source software. Start with "How to Contribute to Open Source." ~15 min.
+    See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — bring me a project.</strong> Find any open source library
+    or tool that looks useful for what you're building, paste the GitHub URL or README here,
+    and I'll help you evaluate it, understand the licence, and show you the simplest way to
+    use it. That's the fastest path from "looks interesting" to "working in my project."
+  </div>
+
+  <p>New terms this lesson — <em>open source</em>, <em>licence</em>, <em>repository</em>,
+  <em>pull request</em> — are defined in the
+  <a href="../../reference/glossary.html">course glossary</a>.</p>
+
+  <nav>
+    <a href="b13-session-logs.html">← B13: Reading Session Logs</a>
+    <a href="b15-build-your-own-skill.html">Next → B15: Build Your Own Skill</a>
+  </nav>
+</div>
+</body>
+</html>

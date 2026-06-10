@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B7 · Send Emails</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course B · Module B1 Production · Lesson 7 of 18</p>
+  <h1>Send Emails</h1>
+  <p class="lede">Make your app send the right email at the right moment, on its own — without you lifting a finger.</p>
+  <p class="meta">~12 min · Have your app open · Prereq: B5 API Keys &amp; Secrets</p>
+
+  <p>Every production app sends emails: a receipt after purchase, a password-reset link,
+  a notification when something important happens. Done manually, these eat hours. Done
+  wrong, they land in spam. Done right, they run invisibly in the background and make
+  your product feel polished. Your single win: by the end you'll know the difference
+  between the two kinds of email, understand why Gmail won't cut it, and be ready to
+  wire an email API into your app in an afternoon.</p>
+
+  <h2>Transactional vs marketing email — two completely different jobs</h2>
+  <div class="cols">
+    <div class="card good">
+      <h3>Transactional email</h3>
+      <p>Triggered by something the user did. Order confirmation, password reset,
+      welcome on sign-up, payment receipt, "your file is ready" notification. The
+      user expects it immediately. <strong>This is what you build with an email API.</strong></p>
+    </div>
+    <div class="card bad">
+      <h3>Marketing email</h3>
+      <p>You decide when it goes out — newsletters, promotions, drip sequences. The
+      user may or may not want it. Requires an unsubscribe link by law in most
+      countries. Use a dedicated tool (Mailchimp, Kit, Loops) — <strong>not the same
+      API.</strong></p>
+    </div>
+  </div>
+  <p>Mixing them up creates legal and deliverability problems. Keep them separate:
+  email API for triggered messages your app sends, dedicated marketing tool for
+  broadcasts you send.</p>
+
+  <h2>Why you can't just send from Gmail</h2>
+  <div class="analogy">
+    <p>Imagine you wanted to ship 500 packages a day. You could carry them in your
+    car — technically possible, totally impractical, and the post office would flag
+    you pretty fast. Gmail is your car. An email API is a courier company with a
+    loading dock, a delivery guarantee, and a tracking number for every package.</p>
+  </div>
+
+  <p>The technical reality behind the analogy comes down to three things:</p>
+  <div class="files">
+    <div class="row"><span class="name">Deliverability</span><span class="what">Gmail accounts sending app-generated email get throttled or blacklisted. Dedicated providers have pre-warmed IP addresses with established reputations — your emails reach inboxes instead of spam.</span></div>
+    <div class="row"><span class="name">Sending domain</span><span class="what">Emails should come from <code>noreply@yourbusiness.com</code>, not a personal Gmail. Email APIs let you send from your own domain once you verify it.</span></div>
+    <div class="row"><span class="name">SPF &amp; DKIM</span><span class="what">Two short DNS records you add to your domain. They tell receiving mail servers "yes, this provider is allowed to send on my behalf" — cutting spam-folder risk dramatically. Your email provider gives you the exact records to copy-paste.</span></div>
+  </div>
+
+  <h2>Pick a provider and connect it like any other API key</h2>
+  <p>Three providers are dominant for transactional email. All three have a free
+  tier good enough to start with:</p>
+  <div class="files">
+    <div class="row"><span class="name">Resend</span><span class="what">Cleanest developer experience, built for modern frameworks (React email templates), generous free tier. Best starting point for new apps.</span></div>
+    <div class="row"><span class="name">Postmark</span><span class="what">Best deliverability reputation, strong analytics, slightly higher price. Good when email reliability is critical (receipts, legal notices).</span></div>
+    <div class="row"><span name="name">SendGrid</span><span class="what">Older, full-featured, handles transactional and marketing. Steeper learning curve but massive ecosystem.</span></div>
+  </div>
+
+  <p>The integration pattern is the same as any API (B5): you get an API key from
+  the provider's dashboard, store it in your environment variables (never hardcoded),
+  and call the provider's library with the recipient, subject, and body. Your AI
+  assistant can generate the full sending function from the provider's quickstart — just
+  paste the URL and ask.</p>
+
+  <div class="callout">
+    <strong>Templates: write once, reuse everywhere.</strong> Most email providers
+    let you create reusable templates — design the receipt email once, then your code
+    just fills in the blanks (<code>{{order_id}}</code>, <code>{{amount}}</code>) at
+    send time. Your AI can generate both the template HTML and the code that fills it in.
+    This is far cleaner than building email HTML inside your application code.
+  </div>
+
+  <h2>The event-to-email pattern</h2>
+  <p>Every transactional email follows the same shape: <em>something happens in your app</em>
+  → <em>your code calls the email API</em> → <em>user gets an email.</em> The "something
+  happens" is the trigger you learned about in Course A automations — a new user signs up,
+  a payment succeeds, a file finishes processing. Map these out before you build:</p>
+  <div class="steps">
+    <ol>
+      <li><strong>List your triggers.</strong> What events in your app should send an email? (Sign-up, purchase, password reset are the must-haves.)</li>
+      <li><strong>Write the email first.</strong> What should it say? Keep it short, clear, and actionable.</li>
+      <li><strong>Build the template</strong> in your email provider's dashboard.</li>
+      <li><strong>Add the API call</strong> to your app at the trigger point, passing in the user's address and any dynamic values.</li>
+      <li><strong>Test with a real address</strong> before going live — check both inbox and spam, on desktop and mobile.</li>
+    </ol>
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it is what makes it stick.</p>
+    <details>
+      <summary>A user hits "forgot password" and your app sends a reset link. Transactional or marketing email?</summary>
+      <p><span class="answer">Transactional.</span> It was triggered by the user's action, expected immediately, and contains information they specifically requested. Build it with an email API like Resend or Postmark — not your marketing tool.</p>
+    </details>
+    <details>
+      <summary>Your app sends from your Gmail and the emails keep landing in spam. What's the root cause?</summary>
+      <p><span class="answer">Gmail wasn't built for app-generated bulk sending.</span> It lacks a warmed sending reputation for this use, and you're missing the SPF and DKIM DNS records that tell receiving servers your email is legitimate. Switch to a dedicated email API and verify your domain.</p>
+    </details>
+    <details>
+      <summary>What is an email template and why does it make your code cleaner?</summary>
+      <p><span class="answer">A template is pre-written email HTML with placeholders for dynamic values like names or order numbers.</span> Your code just fills in the blanks at send time instead of building email HTML inline. This separates the email's design from your app logic and makes both easier to update.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://resend.com/docs">Resend Documentation</a> —
+    the introduction and quickstart walk through domain verification, API key setup, and
+    sending your first email in under ten minutes. Clear and non-technical enough to
+    follow alongside your AI assistant. See <a href="../../RESOURCES.md">RESOURCES.md</a>
+    for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — bring me your use case.</strong> Not sure which emails
+    your app actually needs to send? Confused about where in your code the API call
+    should go? Share what your app does and I'll map out your trigger-to-email flow
+    with you.
+  </div>
+
+  <p>New terms this lesson — <em>transactional email</em>, <em>deliverability</em>,
+  <em>SPF/DKIM</em>, <em>email template</em> — are in the
+  <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
+
+  <nav>
+    <a href="b06-auth.html">← B6: Auth</a>
+    <a href="b08-payments.html">Next → B8: Payments</a>
+  </nav>
+</div>
+</body>
+</html>

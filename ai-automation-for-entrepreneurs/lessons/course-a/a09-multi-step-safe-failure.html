@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A9 · Multi-Step &amp; Safe Failure</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course A · Module A3 No-Code Automation · Lesson 9 of 17</p>
+  <h1>Multi-Step &amp; Safe Failure</h1>
+  <p class="lede">One-step automations are fine. Two-step automations with a safety net are how you actually save an hour a day.</p>
+  <p class="meta">~14 min · Have Make or Zapier open · Prereq: A8 first automation built</p>
+
+  <p>Your first automation did one thing. Real business workflows do five — and sometimes
+  they hit a snag halfway through. This lesson's single win: by the end you'll know how to
+  chain steps together, add a branch that says "if X, do this; if not, do that," and build
+  in a <strong>human-in-the-loop checkpoint</strong> so the automation can never do something
+  embarrassing to a real customer without your eyes on it first.</p>
+
+  <h2>Chaining steps: one trigger, many actions</h2>
+  <p>A multi-step automation is just a recipe with more than one instruction.
+  The trigger fires once; every action after it runs in order.</p>
+
+  <div class="files">
+    <div class="row"><span class="name">Step 1</span><span class="what"><strong>Trigger</strong> — a new form submission arrives.</span></div>
+    <div class="row"><span class="name">Step 2</span><span class="what"><strong>Action</strong> — look up the contact in your CRM.</span></div>
+    <div class="row"><span class="name">Step 3</span><span class="what"><strong>Action</strong> — ask the AI to draft a personalised reply.</span></div>
+    <div class="row"><span class="name">Step 4</span><span class="what"><strong>Action</strong> — add a row to your tracking sheet with the draft attached.</span></div>
+  </div>
+
+  <p>Build one step at a time. Run the scenario after each addition. If step 2 breaks,
+  you know exactly where to look — you didn't add four things at once.</p>
+
+  <h2>Branching: if this, do that</h2>
+  <p>Most platforms call this a <strong>Router</strong> (Make) or a <strong>Filter / Path</strong>
+  (Zapier). It lets you split the flow based on a condition.</p>
+
+  <div class="analogy">
+    <p>Think of branching like a receptionist's decision tree: "If the enquiry says
+    <em>refund</em>, route it to the billing folder. If it says <em>new client</em>,
+    route it to onboarding. Anything else, put it in the general inbox."
+    One trigger, three destinations — no manual sorting.</p>
+  </div>
+
+  <p>Common branch conditions that are easy to set without code:</p>
+  <ul>
+    <li>A form field equals a specific word ("service type = consulting")</li>
+    <li>A number is above or below a threshold (order value &gt; $500)</li>
+    <li>An email subject contains a keyword ("urgent", "invoice")</li>
+  </ul>
+
+  <h2>Testing before you go live</h2>
+  <p>Never activate an automation on real, live data until you have tested it with a
+  fake example first. Every platform has a <strong>test / run-once mode</strong>.
+  Use it. The checklist:</p>
+
+  <div class="test">
+    <strong>Before activating, confirm:</strong>
+    <ol>
+      <li><strong>Does each step show a green check?</strong> A red icon means something is misconfigured — fix it before going live.</li>
+      <li><strong>Is the output what you expected?</strong> Check the actual data the automation produced, not just that it ran.</li>
+      <li><strong>Did it touch anything real?</strong> If step 3 sends an email, point it at yourself during tests, not a client.</li>
+      <li><strong>What happens if a field is blank?</strong> Feed the automation an intentionally incomplete record and see if it breaks gracefully.</li>
+    </ol>
+  </div>
+
+  <h2>Error handling and the human-in-the-loop checkpoint</h2>
+  <p>Two habits keep automations from running amok.</p>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>Error handling</h3>
+      <p>Set your platform's error-notification option so it emails or Slacks you the
+      moment a step fails — before you wonder why nothing happened for three days.
+      In Make: <strong>Scenario settings → Send a notification</strong>. In Zapier:
+      <strong>Zap history alerts</strong>.</p>
+    </div>
+    <div class="card good">
+      <h3>Human-in-the-loop</h3>
+      <p>For anything customer-facing, the automation <em>drafts or suggests</em> —
+      it never <em>sends</em>. Insert an approval step: the draft lands in a Slack
+      message, a Google Doc, or a draft email folder. A person approves, then it ships.
+      One extra click. Infinite peace of mind.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>The rule of thumb:</strong> if a mistake would make a customer confused,
+    unhappy, or charged incorrectly — add a human checkpoint. If a mistake just means
+    a wrong tag in an internal spreadsheet, it's safe to let it run fully automated.
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening. Recalling it now is what makes it stick.</p>
+    <details>
+      <summary>You want different emails to go to existing clients vs. new leads. What do you add?</summary>
+      <p><span class="answer">A branch (Router / Filter / Path).</span> You split the flow on a condition — for example, "contact exists in CRM = yes" goes one path; "no" goes another. One trigger, two tailored actions.</p>
+    </details>
+    <details>
+      <summary>Your automation ran but the AI draft landed in the wrong folder. What's your first debugging move?</summary>
+      <p><span class="answer">Open the run history and check the data at each step.</span> Most platforms show exactly what each step received and produced. Find the step where the folder field got the wrong value — that's where to fix the mapping.</p>
+    </details>
+    <details>
+      <summary>Why should a customer-facing automation always draft rather than send directly?</summary>
+      <p><span class="answer">Because a human-in-the-loop checkpoint is your safety net.</span> AI can misread context or get a name wrong. One approval click before sending means a mistake embarrasses no one. Fully automated sending is only safe once you've reviewed many error-free drafts.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://help.make.com/">Make Help Center</a> —
+    the official documentation covers multi-step scenarios, routers, filters, and error
+    handling with step-by-step screenshots. Start with "Scenarios" in the left nav. See
+    <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — ask me anything.</strong> Paste in a screenshot of your
+    scenario or describe the branch logic you're trying to build. I'll sketch out the
+    exact steps in plain English, including which condition field to use and where to
+    drop the human-checkpoint action.
+  </div>
+
+  <p>Key terms from this lesson — <em>trigger</em>, <em>action</em>,
+  <em>human-in-the-loop</em> — are defined in the
+  <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
+
+  <nav>
+    <a href="a08-first-automation.html">← A8: Build Your First Automation</a>
+    <a href="a10-webhooks.html">Next → A10: Webhooks</a>
+  </nav>
+</div>
+</body>
+</html>

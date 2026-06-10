@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A12 · Anatomy of an App</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course A · Module A4 Build · Lesson 12 of 17</p>
+  <h1>Anatomy of an App</h1>
+  <p class="lede">Six plain-English parts. Once you know their names and jobs, nothing in
+  Course B will be a fog.</p>
+  <p class="meta">~10 min · No tools needed · Prereq: A11 completed</p>
+
+  <p>When the AI builds you an app, it's assembling six standard parts — whether you can
+  see them or not. Right now those parts are invisible, so when something goes wrong (or a
+  developer uses a term) you have no map. This lesson's single win: you'll leave with a
+  clear mental map of every part of a web app, so Course B's hands-on work starts from
+  understanding, not guesswork.</p>
+
+  <h2>The six parts, in plain English</h2>
+
+  <div class="files">
+    <div class="row">
+      <span class="name">Frontend</span>
+      <span class="what"><strong>What users see and touch.</strong> Every button, form, screen, and color. When you open an app in your browser, you're looking at the frontend. Built with HTML, CSS, and JavaScript — but Lovable/Bolt generate all of that for you.</span>
+    </div>
+    <div class="row">
+      <span class="name">Backend</span>
+      <span class="what"><strong>The logic and rules, running on a server.</strong> When you click "Submit," something decides what to do with your data — validate it, call an AI, save it, send an email. That decision-making lives in the backend, out of sight.</span>
+    </div>
+    <div class="row">
+      <span class="name">Database</span>
+      <span class="what"><strong>Where data lives.</strong> All the users, orders, messages, and records your app needs to remember between visits. Think of it as a very structured spreadsheet that the backend can read and write instantly.</span>
+    </div>
+    <div class="row">
+      <span class="name">Hosting</span>
+      <span class="what"><strong>Where the app runs.</strong> Someone's computer has to be switched on, connected to the internet, and serving your app 24/7. That computer is a hosting provider — Vercel, Netlify, Supabase, or similar. Lovable handles this for you automatically.</span>
+    </div>
+    <div class="row">
+      <span class="name">APIs</span>
+      <span class="what"><strong>How apps talk to each other.</strong> When your app calls an AI model, checks a payment, or reads from another service, it's using an API — a standard doorway with a known address and format. You used this idea already when you built webhooks in A10.</span>
+    </div>
+    <div class="row">
+      <span class="name">Auth</span>
+      <span class="what"><strong>Logins and identity.</strong> The layer that decides who is allowed in and what they're allowed to do. Passwords, magic links, Google sign-in — all of it is "auth" (short for authentication). Don't build this yourself; use a service like Supabase Auth or Clerk.</span>
+    </div>
+  </div>
+
+  <h2>How they connect</h2>
+  <div class="analogy">
+    <p>Picture a restaurant. The <strong>frontend</strong> is the dining room — what guests
+    see and interact with. The <strong>backend</strong> is the kitchen — the rules and recipes
+    that turn an order into a meal. The <strong>database</strong> is the pantry — ingredients
+    stored and retrieved on demand. <strong>Hosting</strong> is the building itself — someone
+    owns and maintains it so the restaurant can exist at a fixed address. <strong>APIs</strong>
+    are the supplier deliveries — ingredients (data) arriving from the outside on a known
+    schedule via a known door. <strong>Auth</strong> is the front-of-house staff checking
+    reservations — verifying who gets in and where they sit.</p>
+    <p>Every web app, from a two-screen prototype to a full SaaS product, has all six. The
+    only thing that changes is how complex each one is.</p>
+  </div>
+
+  <h2>What this means for you as a builder</h2>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>What Lovable / Bolt handle</h3>
+      <ul>
+        <li>Frontend — generated from your description</li>
+        <li>Backend — basic logic wired up automatically</li>
+        <li>Hosting — deployed for you on save</li>
+        <li>Simple auth — available as a toggle</li>
+      </ul>
+    </div>
+    <div class="card bad">
+      <h3>What you add as you grow</h3>
+      <ul>
+        <li>Database — connect Supabase for persistent storage</li>
+        <li>APIs — wire in AI models, payments, external data</li>
+        <li>Auth — add user accounts when your tool goes multi-user</li>
+        <li>Custom backend logic — Course B goes deep here</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>The Course B preview:</strong> each of these six parts gets its own hands-on
+    lesson in Course B. You'll connect a real database, call a real API, and add auth to
+    a real app. This lesson is the map; Course B is the territory.
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it is what makes it stick.</p>
+    <details>
+      <summary>A user submits a form and the data disappears when they refresh. Which part is missing?</summary>
+      <p><span class="answer">The database.</span> Without a database, the backend has nowhere to store data persistently. The form works (frontend) and the logic runs (backend), but nothing is remembered between page loads.</p>
+    </details>
+    <details>
+      <summary>Your app calls the OpenAI API to generate text. Which part of the six is that call happening in?</summary>
+      <p><span class="answer">The backend — using an API.</span> The backend makes the call to an external service (OpenAI) through its API. The frontend just shows the result. Two parts working together.</p>
+    </details>
+    <details>
+      <summary>A colleague says your app "needs auth." What are they asking for, in plain English?</summary>
+      <p><span class="answer">Logins — a way to verify who each user is and what they're allowed to do.</span> Without auth, anyone with the URL can see everything. With auth, users sign in and the app knows who they are.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/How_the_Web_works">How the Web Works — MDN Web Docs</a> —
+    Mozilla's authoritative, plain-English walkthrough of what happens when a browser loads
+    a page: servers, clients, requests, and responses. The foundation everything in this
+    lesson rests on. ~15 min. See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — ask me anything.</strong> Which of these six parts
+    confuses you most? Describe a thing you want your app to do — storing user data,
+    gating content behind a login, calling an AI — and I'll tell you exactly which
+    part handles it and how Course B will teach you to build it.
+  </div>
+
+  <p>New words this lesson — <em>deploy</em>, <em>code</em>, <em>vibe coding</em> — are
+  defined in the <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
+
+  <nav>
+    <a href="a11-vibe-coding-mindset.html">← A11: The Vibe-Coding Mindset</a>
+    <a href="a13-build-brief.html">Next → A13: Write the Build Brief</a>
+  </nav>
+</div>
+</body>
+</html>

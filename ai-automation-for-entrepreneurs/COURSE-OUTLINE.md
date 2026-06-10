@@ -72,11 +72,13 @@ subagents) to build faster.
 *The gap between a cute prototype and software people pay for.*
 - **B1.1 GitHub & Worktrees** — version control as save-points + branches; working on things in parallel
 - **B1.2 Databases** — where your app's data actually lives; reading/changing it safely
-- **B1.3 Hosting & Infra** — getting it online for real; domains, environments
-- **B1.4 API Keys & Secrets** — connecting services *without leaking keys*
-- **B1.5 Auth** — letting real users log in
-- **B1.6 Payments** — taking money (Stripe)
-- ◆ **B1.7 (deep-dive) Security Basics** — what actually gets vibe-coded apps hacked
+- **B1.3 Integrate Data** — pull in & sync external data (imports, exports, connecting to other systems/APIs)
+- **B1.4 Hosting & Infra** — getting it online for real; domains, environments
+- **B1.5 API Keys & Secrets** — connecting services *without leaking keys*
+- **B1.6 Auth** — letting real users log in
+- **B1.7 Send Emails** — transactional email & notifications your app sends on its own
+- **B1.8 Payments** — taking money (Stripe)
+- ◆ **B1.9 (deep-dive) Security Basics** — what actually gets vibe-coded apps hacked
 - 🔴 **Live B1 (×2 — this is a 2-week module):** production clinic
 
 ### Module B2 — Going Agentic: Agents, MCP & Skills
@@ -100,6 +102,29 @@ subagents) to build faster.
 - **Glossary** *(built)* — canonical definitions, spans both courses
 - *(planned)* Prompt cheat-sheet · Build-brief template · Anatomy-of-an-app diagram · Anatomy-of-an-agent diagram · Automation pattern cards
 
+## File manifest (canonical — links depend on these exact names)
+
+Lessons live in `./lessons/course-a/` and `./lessons/course-b/`, share `./lessons/lesson.css`,
+and link to the previous/next lesson + the glossary. `◆` = optional deep-dive.
+
+**Course A** (`lessons/course-a/`, 17 lessons)
+`a01-what-ai-can-do` · `a02-ai-tool-landscape` · `a03-busywork-audit` ·
+`a04-anatomy-of-a-prompt` · `a05-prompt-library` · `a06-make-it-trustworthy` ·
+`a07-triggers-and-actions` · `a08-first-automation` · `a09-multi-step-safe-failure` ·
+`a10-webhooks` ◆ · `a11-vibe-coding-mindset` · `a12-anatomy-of-an-app` ·
+`a13-build-brief` · `a14-build-and-ship` · `a15-reading-code-without-fear` ·
+`a16-debugging-with-ai` ◆ · `a17-capstone`
+
+**Course B** (`lessons/course-b/`, 18 lessons)
+`b01-github-worktrees` · `b02-databases` · `b03-integrate-data` · `b04-hosting-infra` ·
+`b05-api-keys-secrets` · `b06-auth` · `b07-send-emails` · `b08-payments` ·
+`b09-security-basics` ◆ · `b10-anatomy-of-an-agent` · `b11-tools-mcp-skills` ·
+`b12-using-subagents` · `b13-session-logs` · `b14-open-source` ·
+`b15-build-your-own-skill` ◆ · `b16-choose-capstone` · `b17-build-sprint` · `b18-keep-it-alive`
+
+The last Course A lesson links forward to the first Course B lesson.
+
 ## How lessons get built
-Just-in-time, one at a time, in the zone of proximal development — not all at once.
 Core lessons first; deep-dives (`◆`) produced on demand for the ambitious track.
+Each lesson is one win, beautiful, printable, with a quiz, a primary-source citation,
+a "ask your teacher" prompt, and working prev/next + glossary links.

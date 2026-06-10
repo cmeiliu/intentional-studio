@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A6 · Make It Trustworthy</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course A · Module A2 Prompting · Lesson 6 of 17</p>
+  <h1>Make It Trustworthy</h1>
+  <p class="lede">Confident doesn't mean correct. Learn to design prompts that catch
+  wrong answers before they leave your desk.</p>
+  <p class="meta">~11 min · No tools needed · Prereq: A1 (the forgetful-intern model), A5 (your prompt library)</p>
+
+  <p>The forgetful intern from Lesson 1 has one dangerous habit: when they don't
+  know something, they don't say so. They produce a fluent, professional-sounding
+  answer that's simply wrong. This is called <strong>hallucination</strong>, and it
+  costs real money — a wrong statistic in a client proposal, a fake legal citation,
+  a made-up competitor fact. Your single win today: by the end you'll have four
+  concrete moves that stop confident-but-wrong answers before they cause damage.</p>
+
+  <h2>What hallucination actually is</h2>
+  <div class="analogy">
+    <p>Imagine your brilliant intern studied intensively by reading millions of documents —
+    but they did it two years ago and haven't checked the internet since. When you ask
+    for a specific number or a recent event, they don't say <em>"I'm not sure."</em>
+    They pick the most plausible-sounding answer from memory and state it as fact. They
+    genuinely don't know they're wrong.</p>
+    <p>That's not a bug the company forgot to fix. It's how the technology works —
+    pattern completion, not fact lookup. Knowing that, you design around it.</p>
+  </div>
+
+  <h2>Four moves that make output trustworthy</h2>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>1. Feed it the source</h3>
+      <p>Instead of asking the AI to recall a fact, paste the source into the prompt.
+      "Here is our pricing table: [paste]. Now draft the proposal." It can only
+      hallucinate facts it has to invent — give it the facts and there's nothing to invent.</p>
+    </div>
+    <div class="card good">
+      <h3>2. Ask it to cite or quote</h3>
+      <p>Add to your prompt: <em>"Quote directly from the document I provided. Do not add
+      information from outside it."</em> When you can see the quote, you can verify
+      the quote. Unverifiable claims disappear.</p>
+    </div>
+  </div>
+  <div class="cols">
+    <div class="card good">
+      <h3>3. Verify facts, numbers, dates yourself</h3>
+      <p>Treat every specific claim — a statistic, a date, a law reference, a competitor
+      detail — as a draft that needs one lookup. A quick search takes thirty seconds.
+      Sending a wrong number to a client can cost much more.</p>
+    </div>
+    <div class="card good">
+      <h3>4. Know when not to trust it at all</h3>
+      <p>For legal advice, medical guidance, financial projections, or anything where a
+      wrong answer has real consequences: use AI to draft structure and language, then
+      hand the substance to a qualified expert. Draft helper — not expert substitute.</p>
+    </div>
+  </div>
+
+  <h2>Red flags in any AI output</h2>
+  <div class="test">
+    <strong>Pause and verify whenever you see:</strong>
+    <ol>
+      <li><strong>A specific number</strong> — percentage, revenue figure, study result. If you didn't supply it, look it up.</li>
+      <li><strong>A named source</strong> — journal article, court case, regulation. Fake citations are common. Find the original.</li>
+      <li><strong>A recent event</strong> — anything after the model's training cutoff is guesswork. Check a live source.</li>
+      <li><strong>A confident answer to an ambiguous question</strong> — if you're not sure what the right answer even is, the AI's certainty should raise your suspicion, not lower it.</li>
+    </ol>
+  </div>
+
+  <div class="callout">
+    <strong>The safest single sentence to add to any prompt:</strong> <em>"If you are uncertain
+    about any fact, say so explicitly rather than guessing."</em> It won't catch everything —
+    the model still doesn't know what it doesn't know — but it reduces the most obvious
+    confident-guess answers noticeably.
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening. Recalling it now is what makes it stick.</p>
+    <details>
+      <summary>You ask AI to write a blog post about industry trends. It cites three statistics. What do you do?</summary>
+      <p><span class="answer">Verify each one before publishing.</span> Specific numbers the model generated from memory are high-risk hallucination targets. Find the original source for all three, or remove the claims you can't verify.</p>
+    </details>
+    <details>
+      <summary>What's the most reliable way to stop the model from inventing facts about your product?</summary>
+      <p><span class="answer">Paste the actual product facts into the prompt.</span> The model can only make up facts it has to invent. Paste your spec sheet, pricing table, or feature list directly into the context — it then reflects what you gave it, not what it guessed.</p>
+    </details>
+    <details>
+      <summary>A client asks you to draft a contract clause. Is AI the right tool for the final clause?</summary>
+      <p><span class="answer">No — use it for structure, not substance.</span> AI can draft the language and format, but legal text is exactly where a wrong-but-confident answer is catastrophic. Have a lawyer review the substance. "Draft helper, not expert substitute" is the rule.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://cloud.google.com/discover/what-is-prompt-engineering">What Is Prompt Engineering? — Google Cloud</a>.
+    The section on grounding and reducing hallucinations maps directly to the
+    "feed it the source" and "ask it to cite" moves above. ~8 min.
+    See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — bring me a real example.</strong> Paste an AI output
+    you're not sure whether to trust. I'll walk through it with you: which claims to
+    verify, which to cut, and how to rewrite the prompt so it's grounded next time.
+  </div>
+
+  <p>The words <em>hallucination</em>, <em>context</em>, and <em>prompt</em> are in
+  the <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
+
+  <nav>
+    <a href="a05-prompt-library.html">← A5: Your Prompt Library</a>
+    <a href="a07-triggers-and-actions.html">Next → A7: Triggers &amp; Actions</a>
+  </nav>
+</div>
+</body>
+</html>

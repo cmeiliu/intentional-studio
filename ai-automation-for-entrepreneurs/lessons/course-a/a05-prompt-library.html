@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A5 · Your Prompt Library</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course A · Module A2 Prompting · Lesson 5 of 17</p>
+  <h1>Your Prompt Library</h1>
+  <p class="lede">Stop rewriting the same prompt from memory. Save it once as a
+  template, and every future run takes thirty seconds.</p>
+  <p class="meta">~10 min · Have a notes app or doc open · Prereq: Lesson A3 (your chosen task)</p>
+
+  <p>You've already written a prompt that works. The problem is you'll write it
+  differently next time — slightly shorter, a different instruction — and get a worse result.
+  A <strong>prompt library</strong> solves that: you store the prompt that worked, mark the
+  parts that change each time with <strong>[BRACKETS]</strong>, and paste it forever.
+  That's the single win from this lesson: one recurring task turns into a fill-in-the-blank
+  template you never rebuild from scratch.</p>
+
+  <h2>Why templates beat memory every time</h2>
+  <div class="analogy">
+    <p>Think of a great recipe card. You don't rethink the whole dish each time — you
+    follow the same card and swap the <em>variable</em> ingredient for what's in season.
+    A prompt template works exactly the same way: the fixed instructions stay in the card;
+    only the [BRACKETED] slot changes per run.</p>
+    <p>Bonus: when a template stops working, you edit one place. Every future run
+    improves instantly — no hunting through chat history to remember how you phrased it.</p>
+  </div>
+
+  <h2>The bracket method</h2>
+  <p>Write your best prompt once. Then look at every word that changes from one use to the
+  next — a client name, a topic, a date, a tone — and wrap it in <code>[BRACKETS]</code>.
+  Those become your fill-in slots. Everything outside the brackets is locked, tested
+  instruction text.</p>
+
+  <pre><span class="c"># Template: Weekly project-status email</span>
+
+<span class="k">You are</span> a clear, professional assistant.
+
+Write a brief status email for a client.
+
+<span class="k">Project:</span> <span class="s">[PROJECT NAME]</span>
+<span class="k">This week:</span> <span class="s">[2–3 bullet points of what was completed]</span>
+<span class="k">Next week:</span> <span class="s">[1–2 planned steps]</span>
+<span class="k">Blockers:</span> <span class="s">[any issues, or "none"]</span>
+<span class="k">Tone:</span> <span class="s">[professional / warm / brief]</span>
+
+Keep it under 150 words. Use the client's first name: <span class="s">[CLIENT FIRST NAME]</span>.</pre>
+
+  <p>Every <code>[BRACKET]</code> is a decision made <em>once</em>. The surrounding
+  instructions — word count, tone, structure — never change. That's what makes the
+  output consistent.</p>
+
+  <h2>Where to keep your library</h2>
+  <div class="cols">
+    <div class="card good">
+      <h3>Works well</h3>
+      <ul>
+        <li>A Google Doc or Notion page titled "Prompt Library"</li>
+        <li>One section per task type (email, social, research, client)</li>
+        <li>Copy-paste directly from the doc into ChatGPT / Claude</li>
+        <li>Version notes: "v2 — added tone slot, works better"</li>
+      </ul>
+    </div>
+    <div class="card bad">
+      <h3>Watch out for</h3>
+      <ul>
+        <li>Keeping prompts only in chat history (you can't find them)</li>
+        <li>No version notes (you won't know which one worked)</li>
+        <li>One giant unsorted doc (add headers from day one)</li>
+        <li>Sharing a doc with credentials pasted into prompts</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Build one now — for the task you picked in A3</h2>
+  <p>Go back to the automation task you chose in Lesson 3. Write your best current
+  prompt for it. Then do three things:</p>
+  <div class="test">
+    <strong>Turn it into a template:</strong>
+    <ol>
+      <li><strong>Write the full prompt</strong> as you'd send it today, with real example data.</li>
+      <li><strong>Bracket the variables</strong> — circle every word that changes run to run, replace with <code>[DESCRIPTIVE LABEL]</code>.</li>
+      <li><strong>Test it</strong> — fill in the brackets with fresh data and run it. Does the output match what you got before?</li>
+      <li><strong>Save it</strong> — paste it into your library doc with a name and today's date.</li>
+    </ol>
+  </div>
+
+  <div class="callout">
+    <strong>Naming convention that saves you later:</strong> put the task type first —
+    <em>EMAIL — invoice reminder v1</em>, <em>SOCIAL — product launch v2</em>.
+    Sorting alphabetically groups all your email prompts together, all your social ones
+    together. Simple and effective from day one.
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening. Recalling it now is what makes it stick.</p>
+    <details>
+      <summary>What do the [BRACKETS] in a prompt template represent?</summary>
+      <p><span class="answer">The parts that change each time.</span> Brackets mark the variable slots — a client name, a topic, a date — so the stable instruction text around them never needs rewriting.</p>
+    </details>
+    <details>
+      <summary>You get a great result with a prompt. Two weeks later you can't reproduce it. What went wrong?</summary>
+      <p><span class="answer">You didn't save the exact prompt.</span> Small wording changes produce different outputs. The fix: copy the winning prompt straight into your library doc before closing the chat.</p>
+    </details>
+    <details>
+      <summary>Your "draft cold outreach email" template starts producing generic results. What's the fastest fix?</summary>
+      <p><span class="answer">Add more specific context slots.</span> Bracket out things like <code>[ONE SPECIFIC REASON WE'RE REACHING OUT]</code> and <code>[RECIPIENT'S INDUSTRY]</code> so you're forced to supply the details that make output feel personal. Generic prompt in, generic output out.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview">Prompt Engineering Overview — Anthropic</a>.
+    The canonical reference for writing reliable, reusable prompts. Section on
+    "be clear and direct" maps directly to the bracket-method above. ~10 min.
+    See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — show me your template.</strong> Paste the prompt you
+    built for your A3 task and I'll tell you which parts to bracket, which instructions
+    to tighten, and how to structure it so it still works six months from now.
+  </div>
+
+  <p>New words this lesson — <em>prompt</em>, <em>context</em>, <em>token</em> — are
+  defined in the <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
+
+  <nav>
+    <a href="a04-anatomy-of-a-prompt.html">← A4: Anatomy of a Reliable Prompt</a>
+    <a href="a06-make-it-trustworthy.html">Next → A6: Make It Trustworthy</a>
+  </nav>
+</div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A17 · Capstone A: Ship Your First Thing</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course A · Capstone · Lesson 17 of 17</p>
+  <h1>Capstone A: Ship Your First Thing</h1>
+  <p class="lede">Put it all together — one automation or one small app, running for real,
+  right now.</p>
+  <p class="meta">~30 min · All your Course A work nearby · Prereq: completed A3 or A4 modules</p>
+
+  <p>This is not a quiz. This is the moment you point everything you learned at a real problem
+  in your business and ship something. Not a demo, not a practice run — a working tool or
+  automation that does a useful job today. Your single win: by the end of this capstone you
+  will have <strong>shipped one thing</strong>, it will be running, and you will know exactly
+  what it does and what to do if it breaks. That's the whole Course A promise.</p>
+
+  <h2>Choose your path</h2>
+  <div class="cols">
+    <div class="card good">
+      <h3>Path 1 — Automation (Module A3)</h3>
+      <ul>
+        <li>A trigger-action workflow in Zapier, Make, or similar</li>
+        <li>Runs on its own when the trigger fires</li>
+        <li>Good for: recurring tasks you do weekly or more</li>
+        <li>Examples: inquiry triage, meeting-notes summary,
+          social post drafter from new content</li>
+        <li>Human checkpoint: review before anything reaches a customer</li>
+      </ul>
+    </div>
+    <div class="card good">
+      <h3>Path 2 — App (Module A4)</h3>
+      <ul>
+        <li>A one-page tool built and deployed with Lovable or Bolt</li>
+        <li>Accessible at a real public URL</li>
+        <li>Good for: a transform you do manually and often</li>
+        <li>Examples: client note cleaner, inquiry reply drafter,
+          proposal outline generator</li>
+        <li>Human checkpoint: you review every output before using it</li>
+      </ul>
+    </div>
+  </div>
+
+  <p>Pick the path that matches the problem you identified in your Course A work. If you
+  did both modules, pick the one where you have a clear "done" test ready. You can ship
+  the other one after — but ship one first.</p>
+
+  <h2>The assembly checklist</h2>
+  <p>Work through this before you call it done. Every item has a clear yes/no answer.
+  If you hit a "no," fix it before moving on — or make a conscious decision that it's
+  acceptable for v1 and write it down as a known gap.</p>
+
+  <div class="steps">
+    <strong>Capstone checklist — tick every box</strong>
+    <ol>
+      <li>
+        <strong>One narrow job.</strong>
+        State the job in one sentence with one verb. If it contains "and," scope it down.
+        Write the sentence here before you build or deploy.
+      </li>
+      <li>
+        <strong>Low risk if wrong.</strong>
+        If the output is incorrect, is the worst-case outcome annoying (fixable) or
+        catastrophic (irreversible)? If catastrophic, add a human review step before shipping.
+      </li>
+      <li>
+        <strong>Human in the loop where it touches customers.</strong>
+        Any output that reaches a customer — an email, a reply, a document they see — must
+        pass through a person's eyes before it goes. No exceptions in v1.
+      </li>
+      <li>
+        <strong>A concrete "done" test.</strong>
+        Describe one real input and the output you'd accept. Run it now. Does it pass?
+      </li>
+      <li>
+        <strong>You can explain how it works.</strong>
+        Could you describe to a colleague what happens between input and output? If not,
+        you own something you can't maintain. Spend 10 minutes with the AI translator
+        (Lesson 15) until you can.
+      </li>
+      <li>
+        <strong>You know how to turn it off.</strong>
+        For an automation: you can disable the trigger in under two minutes. For an app:
+        the URL can be unpublished or access removed. Know the off switch before it matters.
+      </li>
+      <li>
+        <strong>It is live.</strong>
+        Automation: the workflow is active and you've let one real trigger fire.
+        App: the public URL loads and passes your "done" test in a fresh browser.
+      </li>
+    </ol>
+  </div>
+
+  <div class="callout">
+    <strong>Done is better than perfect.</strong> A tool that does 80% of the job and is
+    running today is worth more than a flawless spec that ships next month. Write down the
+    20% gap — that's your v2 backlog. Ship what works.
+  </div>
+
+  <h2>Definition of done</h2>
+  <p>You're finished with Capstone A when all three of these are true:</p>
+
+  <div class="test">
+    <strong>Capstone A is complete when:</strong>
+    <ol>
+      <li>The tool or automation is live and running (not just "works on my machine").</li>
+      <li>You have run your real "done" test on the live version and it passed.</li>
+      <li>You can describe in two sentences what it does and what happens if it's wrong.</li>
+    </ol>
+  </div>
+
+  <h2>What's next: Course B</h2>
+  <p>You shipped something. Now the questions change. In Course B you'll take what you built
+  from prototype to something sturdier: how to use version control so you can always roll back,
+  how to work alongside AI coding agents on bigger features, how to read and trust the code
+  your AI generates at production scale, and how to build the agentic toolkit — AI that
+  decides its own steps rather than following a fixed recipe. Course A taught you to steer.
+  Course B teaches you to build the vehicle.</p>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it is what makes it stick.</p>
+    <details>
+      <summary>You built an automation that auto-replies to every new customer inquiry. Is it ready to ship as-is?</summary>
+      <p><span class="answer">No — it needs a human-in-the-loop checkpoint.</span> Auto-replies that reach customers without a human review step are a v1 anti-pattern. Something will go wrong — a misread tone, a wrong answer, an edge case — and it will reach the customer before you catch it. Draft the reply automatically; let a person approve and send.</p>
+    </details>
+    <details>
+      <summary>Your checklist item 5 ("you can explain how it works") feels awkward — do you really need it?</summary>
+      <p><span class="answer">Yes — it's your maintenance guarantee.</span> If you own a tool you can't explain, you can't fix it when it breaks, you can't tell a colleague how to cover for you, and you can't improve it safely. Ten minutes with the AI as translator (Lesson 15) converts "magic box" into something you actually own.</p>
+    </details>
+    <details>
+      <summary>What is the one difference between what you shipped in Course A and what Course B will build toward?</summary>
+      <p><span class="answer">Durability and scale.</span> Course A tools are prototypes: they work, but they're fragile, lack version control, and aren't designed for production load or team collaboration. Course B adds version control, production-grade reliability, and the agentic toolkit for more complex multi-step work.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://blog.mean.ceo/building-first-ai-feature/">Building Your First AI Feature: Non-Technical Founder's Guide — Mean CEO</a>.
+    A complementary perspective on scoping, shipping, and keeping a human in the loop for
+    your first AI feature — written for founders, not engineers. ~12 min. See
+    <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — tell me what you shipped.</strong> Describe your tool or
+    automation in two sentences: what it does and what happens if it's wrong. I'll confirm
+    whether your human-in-the-loop design is right for the risk level, and point you toward
+    the Course B lesson most relevant to where you want to take it next.
+  </div>
+
+  <p>Terms from this course — <em>automation</em>, <em>human-in-the-loop</em>,
+  <em>build brief</em>, <em>deploy</em>, <em>debugging</em> — are all in the
+  <a href="../../reference/glossary.html">course glossary</a>. Keep it as a reference as you
+  move into Course B.</p>
+
+  <nav>
+    <a href="a16-debugging-with-ai.html">← A16: Debugging With AI</a>
+    <a href="../course-b/b01-github-worktrees.html">Next → Course B · B1: GitHub &amp; Worktrees</a>
+  </nav>
+</div>
+</body>
+</html>

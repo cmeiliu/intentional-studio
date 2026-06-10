@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A11 · The Vibe-Coding Mindset</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course A · Module A4 Build · Lesson 11 of 17</p>
+  <h1>The Vibe-Coding Mindset</h1>
+  <p class="lede">You don't write code. You describe what you want, look at what you get,
+  and steer. That loop — done well — builds real software.</p>
+  <p class="meta">~13 min · No tools open yet · Prereq: A10 completed</p>
+
+  <p>The automations you've built so far connect existing apps. This module is different: you're
+  going to <em>build</em> something that didn't exist — a small custom tool for your specific
+  business. You don't need to write a line of code. Your single win: by the end of this lesson
+  you'll understand the loop that makes that possible, and you'll know the one principle that
+  separates apps people actually use from apps that just sit there looking like a chatbot.</p>
+
+  <h2>The loop: describe → generate → look → iterate</h2>
+  <p>Vibe coding is not a single prompt. It's a tight, repeating loop:</p>
+
+  <div class="steps">
+    <ol>
+      <li><strong>Describe</strong> — write a clear brief about what you want the app to do.
+      One job. Specific inputs and outputs. (Lesson 13 teaches this brief in full.)</li>
+      <li><strong>Generate</strong> — paste the brief into Lovable or Bolt. The AI builds a
+      first version in seconds.</li>
+      <li><strong>Look</strong> — open it. Click through it. Does it do the one job?
+      What's missing? What's wrong?</li>
+      <li><strong>Iterate</strong> — describe the next specific change. Generate. Look again.
+      Repeat until it's right.</li>
+    </ol>
+  </div>
+
+  <p>Each loop takes two to five minutes. A working first version usually takes five to eight
+  loops. Depth and polish come later — in Course B. This course's goal is a working tool you
+  can hand to someone.</p>
+
+  <h2>A clear brief beats a clever prompt</h2>
+  <p>The single biggest lever on output quality is not your word choice or your tone — it's
+  <strong>clarity about what the app does</strong>. Before you type anything into the builder,
+  answer these three questions on paper:</p>
+
+  <div class="test">
+    <strong>Brief quality check:</strong>
+    <ol>
+      <li><strong>Who uses it?</strong> Be specific. "My property manager" beats "someone."</li>
+      <li><strong>What is the one job?</strong> One verb, one object. "Draft a lease renewal notice." Not "help with leases."</li>
+      <li><strong>What goes in, what comes out?</strong> "User pastes a tenant name and a date. App outputs a ready-to-send email."</li>
+    </ol>
+  </div>
+
+  <p>You can refine the design through iteration. But if the AI doesn't know the one job, no
+  amount of iteration converges on the right thing. Write the brief first.</p>
+
+  <h2>Build results and buttons — not a blank chat box</h2>
+
+  <div class="analogy">
+    <p>Imagine hiring a new assistant and handing them a blank notebook with a pen.
+    <em>"Just, you know — help."</em> Helpful? Not really. Now imagine handing them a form:
+    "When a tenant misses rent, fill in this notice and put it in the out-tray." That they
+    can do immediately.</p>
+    <p>Your users are the same. A blank text box that says "Ask me anything" is an
+    assistant with a blank notebook. Nobody knows what to type, and nobody gets a result.</p>
+  </div>
+
+  <p>The principle: design for <strong>results, not conversations</strong>. Every screen
+  should have a button that <em>does the thing</em>.</p>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>Build this</h3>
+      <ul>
+        <li>"Draft this lease renewal" button</li>
+        <li>"Audit this permit checklist" button</li>
+        <li>"Summarise this call transcript" button</li>
+        <li>A form with specific fields → one clear output</li>
+      </ul>
+    </div>
+    <div class="card bad">
+      <h3>Avoid this</h3>
+      <ul>
+        <li>A general chat box with no context</li>
+        <li>"Ask me anything about your business"</li>
+        <li>Blank text areas with no instructions</li>
+        <li>Five features in v1 — users won't explore them</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Tools and honest expectations</h2>
+  <p>Two tools cover almost everything at this level: <strong>Lovable</strong> and
+  <strong>Bolt</strong>. Both let you describe an app and get a working version in your
+  browser within a minute. Both are free to start.</p>
+
+  <p>Set realistic expectations. The first build is a quick win — a working prototype in
+  an afternoon. It will look decent, handle the main case, and be something you can show
+  people. What it won't be: production-grade, fully tested, or ready for thousands of
+  users. That depth is what Course B is for. Right now, the goal is a working tool, not
+  a finished product.</p>
+
+  <div class="callout">
+    <strong>Remember:</strong> the loop never really ends. Even experienced builders iterate
+    constantly. The goal after A11 isn't to build something perfect — it's to get comfortable
+    with the loop. A working imperfect tool beats a perfect idea that never got built.
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it is what makes it stick.</p>
+    <details>
+      <summary>What are the four steps of the vibe-coding loop, in order?</summary>
+      <p><span class="answer">Describe → Generate → Look → Iterate.</span> The key is that it's a loop — you don't describe once and wait. You look at what you got, decide the next specific change, and go around again.</p>
+    </details>
+    <details>
+      <summary>Your client wants an AI tool to help their staff "with HR stuff." Before you open Lovable, what do you do?</summary>
+      <p><span class="answer">Write a clear brief first.</span> "HR stuff" is not a one-job brief. Narrow it: who uses it, what one task does it perform, what goes in, what comes out. Until that's clear, no tool can build the right thing.</p>
+    </details>
+    <details>
+      <summary>Why is a blank chat box usually the wrong design for a business tool?</summary>
+      <p><span class="answer">Users want results, not a text box.</span> A blank chat box puts the burden on the user to know what to ask and how to ask it. A button that does one specific thing delivers value immediately, with no learning curve.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://lovable.dev/guides/best-vibe-coding-tools-2026-build-apps-chatting">Best Vibe Coding Tools in 2026 — Lovable</a> —
+    a practical overview of the leading AI app builders, what each is best at, and how
+    the describe-and-iterate loop works in practice. ~12 min. See
+    <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — bring me your brief.</strong> What one-job tool would
+    actually save you time in your business? Write the three-question brief above and
+    send it to me. I'll tell you whether it's tight enough to generate something good,
+    and suggest the first prompt to use in Lovable or Bolt.
+  </div>
+
+  <p>New words this lesson — <em>vibe coding</em>, <em>build brief</em> — are defined in
+  the <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
+
+  <nav>
+    <a href="a10-webhooks.html">← A10: Webhooks</a>
+    <a href="a12-anatomy-of-an-app.html">Next → A12: Anatomy of an App</a>
+  </nav>
+</div>
+</body>
+</html>

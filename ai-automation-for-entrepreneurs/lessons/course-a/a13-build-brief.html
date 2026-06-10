@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A13 · Write the Build Brief</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course A · Module A4 Build · Lesson 13 of 17</p>
+  <h1>Write the Build Brief</h1>
+  <p class="lede">The one page you write before touching any AI builder is the page that
+  decides whether your build actually works.</p>
+  <p class="meta">~12 min · Paper or a blank doc · Prereq: A12 Anatomy of an App</p>
+
+  <p>Most first builds fail before the first prompt. Not because the AI tool is bad — because
+  the founder never decided exactly what they were making. They paste a vague idea, the AI
+  guesses, the result is 70% right but 30% wrong in ways that are hard to fix, and two hours
+  later they're rewriting everything. Your single win today: write a <strong>build brief</strong>
+  — a one-page plain-English spec — before you open the builder. It is the biggest lever
+  on output quality, and it takes 15 minutes.</p>
+
+  <h2>Why a brief, not a prompt?</h2>
+  <div class="analogy">
+    <p>A contractor who builds exactly what their client describes is only as good as
+    the description. Hand them "a nice kitchen" and you'll get a generic one. Hand them
+    "a galley kitchen for a caterer: 12 ft run, double sink left of the range, 6 burners,
+    no island" and you get something useful on day one.</p>
+    <p>Your build brief is the contractor's blueprint. The AI reads it once and makes
+    decisions for every line of code it writes. <strong>Vague brief → vague app →
+    expensive rework.</strong> Sharp brief → focused app → faster iteration.</p>
+  </div>
+
+  <h2>The five questions your brief must answer</h2>
+  <div class="cols">
+    <div class="card good">
+      <h3>Must answer</h3>
+      <ul>
+        <li><strong>Who is it for?</strong> One kind of user.</li>
+        <li><strong>The ONE job it does.</strong> One sentence, one verb.</li>
+        <li><strong>What goes in?</strong> The input (text, a form, a URL…).</li>
+        <li><strong>What comes out?</strong> The output (a table, an email, a score…).</li>
+        <li><strong>What does "done" look like?</strong> How you'll know it works.</li>
+      </ul>
+    </div>
+    <div class="card bad">
+      <h3>Leave out for now</h3>
+      <ul>
+        <li>User accounts &amp; login</li>
+        <li>Payment processing</li>
+        <li>Multiple features or tabs</li>
+        <li>Mobile app version</li>
+        <li>Anything you can add in version 2</li>
+      </ul>
+    </div>
+  </div>
+
+  <p>The "leave out" column isn't permanent — it's version 2. The number-one mistake in a
+  first build is scope creep before you have anything working. <strong>One narrow job, done
+  well, is a win.</strong> A half-finished multi-feature app is not.</p>
+
+  <h2>Fill in the template</h2>
+  <p>Copy this into a doc or paste it directly into your AI builder as the opening of your
+  prompt. Fill every blank before you proceed. If a blank feels hard, that difficulty is
+  useful — it means you haven't decided yet, and it's better to decide now than at 11 pm
+  staring at broken code.</p>
+
+  <div class="steps">
+    <strong>Build Brief — fill every field</strong>
+    <ol>
+      <li><strong>Tool name:</strong> ________________________</li>
+      <li><strong>Who uses it:</strong> (one type of person)
+        ________________________</li>
+      <li><strong>The one job it does:</strong> (one sentence, one verb — e.g., "takes a
+        raw client note and returns a formatted follow-up email draft")
+        ________________________</li>
+      <li><strong>Input:</strong> what the user types, pastes, or uploads to start
+        ________________________</li>
+      <li><strong>Output:</strong> exactly what appears on screen when it works
+        ________________________</li>
+      <li><strong>Done looks like:</strong> describe one test you can run right now — if
+        you paste [this specific example], you should see [this specific result]
+        ________________________</li>
+      <li><strong>Out of scope (v1):</strong> list anything you're deliberately
+        leaving out so the AI doesn't add it
+        ________________________</li>
+    </ol>
+  </div>
+
+  <div class="callout">
+    <strong>Scope test:</strong> read your "one job" sentence out loud. If it contains
+    the word "and," split it in two and pick one. <em>"Summarizes meeting notes and
+    sends them by email"</em> is two jobs. Pick the summary. Add email in v2 after
+    the summary works.
+  </div>
+
+  <h2>Example brief</h2>
+  <p>Here is a completed brief so you can see the bar to clear:</p>
+  <div class="test">
+    <strong>Example — completed build brief</strong>
+    <ol>
+      <li><strong>Tool name:</strong> Client Note Cleaner</li>
+      <li><strong>Who uses it:</strong> A solo consultant after a client call</li>
+      <li><strong>The one job:</strong> Takes a rough transcript or bullet-point note
+        and returns a clean, professional summary formatted for the client record</li>
+      <li><strong>Input:</strong> A text box where the user pastes raw notes
+        (50–500 words)</li>
+      <li><strong>Output:</strong> A formatted summary with three sections: Key
+        decisions, Next steps (owner + date), Open questions</li>
+      <li><strong>Done looks like:</strong> I paste "call w/ alex — he wants proposal by
+        fri, budget ~10k, worried about timeline" and I get a clean three-section
+        summary I could email a client without edits</li>
+      <li><strong>Out of scope (v1):</strong> saving past notes, user login, exporting
+        to PDF, email sending</li>
+    </ol>
+  </div>
+
+  <p>Notice: no login, no history, no email — just the one transform. That's exactly
+  what you paste into Lovable or Bolt next lesson. <strong>This brief is your A14
+  starting prompt.</strong></p>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it is what makes it stick.</p>
+    <details>
+      <summary>Your brief says: "generates invoices and emails them to clients." What's wrong, and how do you fix it?</summary>
+      <p><span class="answer">It contains two jobs.</span> "Generates invoices" and "emails them" are separate features. Pick one for v1 — most likely the generator, since that's the harder UI piece. Add email sending in v2 once the invoice form works.</p>
+    </details>
+    <details>
+      <summary>What's the purpose of the "out of scope" field?</summary>
+      <p><span class="answer">It tells the AI what NOT to build.</span> Without it, the builder may helpfully add login, history, or settings — all of which add complexity and breakage before you even have the core working. Explicit exclusions are as important as inclusions.</p>
+    </details>
+    <details>
+      <summary>Why is "Done looks like: it works correctly" a bad definition of done?</summary>
+      <p><span class="answer">It's untestable.</span> "Done" must be a concrete, runnable test: a specific input that produces a specific output you can check right now. Vague done-criteria mean you'll never know if you're finished — and neither will the AI when it evaluates its own output.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://docs.lovable.dev/prompting/prompting-one">Prompting best practices — Lovable Documentation</a>.
+    The official guide to writing prompts that produce focused, working apps — the same
+    principles as the build brief, applied inside the builder. ~10 min. See
+    <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — share your brief.</strong> Paste your filled-in build brief
+    and I'll tell you whether the scope is tight enough to build in one session, flag any
+    fields that are still vague, and suggest a concrete "done looks like" test if you're
+    stuck. Getting the brief right before you open the builder is worth 30 minutes of
+    back-and-forth.
+  </div>
+
+  <p>New words this lesson — <em>build brief</em>, <em>scope</em> — are defined in the
+  <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
+
+  <nav>
+    <a href="a12-anatomy-of-an-app.html">← A12: Anatomy of an App</a>
+    <a href="a14-build-and-ship.html">Next → A14: Build &amp; Ship a One-Page Tool</a>
+  </nav>
+</div>
+</body>
+</html>

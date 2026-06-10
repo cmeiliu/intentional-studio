@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A4 · Anatomy of a Reliable Prompt</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course A · Module A2 Prompting · Lesson 4 of 17</p>
+  <h1>Anatomy of a Reliable Prompt</h1>
+  <p class="lede">Lucky one-off results are accidents. A prompt built from five parts
+  works every time.</p>
+  <p class="meta">~12 min · Have a chat assistant open to test with · Prereq: Lessons A1–A3</p>
+
+  <p>You've probably had the experience: you ask an AI something, get a great answer, try
+  the same type of question a week later, and get something mediocre. The output isn't
+  random — <em>you changed the input</em>. A well-built prompt has five predictable parts.
+  Once you can write all five, you stop getting lucky and start getting consistent. That
+  single shift — from luck to system — is this lesson's win. And because the same five
+  parts apply whether you're writing a chat prompt, an automation step, or a build brief,
+  this skill underpins everything else in this course.</p>
+
+  <h2>The five parts</h2>
+
+  <div class="files">
+    <div class="row">
+      <span class="name">1 · Role</span>
+      <span class="what">Tell the AI who it is in this context. <em>"You are a friendly customer-service writer who works for a small e-commerce brand."</em> Role sets the voice, expertise, and judgment the model leans on. Omit it and you get a generic, hedged answer.</span>
+    </div>
+    <div class="row">
+      <span class="name">2 · Context</span>
+      <span class="what">Give it the background it can't know on its own — your product, your audience, the previous email in the thread. Remember the forgetful intern from A1: it has never seen your business. Context fixes that.</span>
+    </div>
+    <div class="row">
+      <span class="name">3 · Task</span>
+      <span class="what">One clear instruction. <em>"Write a 3-sentence follow-up email."</em> Not five instructions at once. If you want multiple things, send multiple prompts or number them. Ambiguity in the task is the most common reason for a mediocre result.</span>
+    </div>
+    <div class="row">
+      <span class="name">4 · Examples</span>
+      <span class="what">Show the model what "good" looks like. Paste one previous email in your voice, one sample output you liked, or a before/after pair. Examples do more work than long instructions — they show the standard rather than describing it.</span>
+    </div>
+    <div class="row">
+      <span class="name">5 · Output format</span>
+      <span class="what">Tell it exactly what to produce: length, structure, tone, what to include or skip. <em>"Under 100 words. Bullet points. No sign-off."</em> Without this, the model guesses — and its default is verbose.</span>
+    </div>
+  </div>
+
+  <p>You don't need all five for every prompt. A quick "summarize this email" needs only a
+  task. But any recurring prompt — one you'll use again and again — is worth building all
+  five. The parts you include are the parts you control; the parts you leave out are the
+  parts the model guesses.</p>
+
+  <h2>Weak prompt vs. strong prompt</h2>
+  <p>Here's the same job done both ways. The task: write a follow-up email after a sales call.</p>
+
+  <pre><span class="c"># Weak prompt — one line, no context</span>
+
+<span class="s">Write a follow-up email after a sales call.</span>
+
+
+<span class="c"># Strong prompt — all five parts</span>
+
+<span class="k">Role:</span> You are a warm, concise business-development writer for a boutique
+design studio that works with early-stage startups.
+
+<span class="k">Context:</span> I just had a 30-minute discovery call with Maya Chen, founder of
+a seed-stage fintech. She mentioned two pain points: inconsistent brand across
+decks and no design support for an upcoming fundraise.
+
+<span class="k">Task:</span> Write a follow-up email referencing those two pain points and
+proposing a short next step (a 20-minute scoping call).
+
+<span class="k">Example of our tone:</span> "Great talking through your roadmap today —
+the deck challenge you mentioned is exactly the kind of problem we fix fast."
+
+<span class="k">Output format:</span> Plain text, under 120 words, no formal sign-off, subject
+line included.</pre>
+
+  <div class="callout">
+    <strong>Notice what changed.</strong> The weak prompt produces a generic template the
+    model could write for any business. The strong prompt produces something that sounds
+    like <em>you</em>, references <em>this</em> prospect, and tells the model exactly how
+    long to go. Same tool. Same model. Completely different output — because the input
+    was specific.
+  </div>
+
+  <h2>This skill travels everywhere</h2>
+  <p>Every tool in this course takes a prompt:</p>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>Automations (Course A)</h3>
+      <ul>
+        <li>The AI step inside a Zapier or Make workflow <strong>is a prompt</strong></li>
+        <li>Better prompt → better drafted email, summary, or tag every time the flow runs</li>
+        <li>You'll paste your five-part prompt into the AI action step</li>
+      </ul>
+    </div>
+    <div class="card good">
+      <h3>Building apps (Course A)</h3>
+      <ul>
+        <li>Your first message to Lovable or Bolt <strong>is a prompt</strong></li>
+        <li>Better prompt → cleaner first build, fewer revision rounds</li>
+        <li>The build brief you write in A13 uses this exact structure</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="analogy">
+    <p>A prompt is a job posting. A vague job posting — "we need someone good with
+    computers" — attracts generic applicants. A specific one — role, requirements, examples
+    of the work, expected output — attracts exactly the right person. The AI responds
+    the same way: specificity in, specificity out.</p>
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening. Recalling it now is what makes it stick.</p>
+    <details>
+      <summary>You get a great AI result but the output is always three paragraphs when you want two sentences. Which part of the prompt is missing?</summary>
+      <p><span class="answer">Output format.</span> Without it, the model defaults to verbose. Adding "two sentences, plain text, no sign-off" — or whatever you actually want — locks the length on every run.</p>
+    </details>
+    <details>
+      <summary>Which of the five parts does the most work when you want the AI to match your brand voice?</summary>
+      <p><span class="answer">Examples.</span> Describing your voice in words ("warm but professional") is vague. Pasting one email in your actual voice shows the model the standard directly — and it calibrates to that.</p>
+    </details>
+    <details>
+      <summary>Your automation runs a prompt 200 times a month. You improve the prompt once. What happens?</summary>
+      <p><span class="answer">Every one of those 200 runs improves automatically.</span> That's the leverage of a well-structured prompt inside an automation — fix it once, every future output benefits. Sloppy prompt in a high-volume flow multiplies the sloppiness; a tight one multiplies the quality.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview">Prompt Engineering Overview — Anthropic</a>.
+    The canonical, non-technical reference for building reliable prompts. The "be clear and
+    direct" and "use examples" sections map directly to the five parts above. ~10 min.
+    See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — bring me a prompt.</strong> Take any prompt you use
+    regularly right now and paste it here. I'll identify which of the five parts are
+    missing, show you what adding them looks like for your specific task, and you can
+    test the improved version immediately.
+  </div>
+
+  <p>Key terms from this lesson — <em>prompt</em>, <em>context</em>, <em>token</em> — are
+  defined in the <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
+
+  <nav>
+    <a href="a03-busywork-audit.html">← A3: The Busywork Audit</a>
+    <a href="a05-prompt-library.html">Next → A5: Your Prompt Library</a>
+  </nav>
+</div>
+</body>
+</html>

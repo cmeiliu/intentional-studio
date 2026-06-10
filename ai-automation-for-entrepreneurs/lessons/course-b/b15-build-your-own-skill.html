@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B15 · Build Your Own Skill or MCP Server</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course B · Module B2 Going Agentic · Lesson 15 of 18</p>
+  <h1>Build Your Own Skill or MCP Server <span class="deep">deep dive</span></h1>
+  <p class="lede">Package your own expertise so any agent can use it.</p>
+  <p class="meta">~20 min · Have your project folder open · Prereq: B14 (Open Source)</p>
+
+  <p>At the very start of this course you ran <code>npx skills add</code> and installed the
+  <strong>mattpocock <code>teach</code> skill</strong> — a folder of instructions that gave
+  your AI a new capability with a single command. You used someone else's packaged expertise.
+  This lesson's single win is understanding how to package <em>your</em> expertise the same
+  way — so any agent on your machine (or your team's) can tap into it. By the end you'll
+  know the shape of a skill, when to build one versus something heavier called an MCP server,
+  and you'll have a clear path to building your first one.</p>
+
+  <h2>A skill is just a folder with instructions</h2>
+  <div class="analogy">
+    <p>Remember the <code>teach</code> skill you installed? Under the hood it's a folder
+    containing a file called <code>SKILL.md</code> — plain text that tells the AI what the
+    skill does, how to invoke it, and what steps to follow. That's it. No compilation, no
+    deployment, no infrastructure.</p>
+    <p>Think of it as a <strong>saved prompt with a name and a trigger</strong>. You give it
+    a name like <code>/onboard-client</code>, write out the steps you follow every time you
+    onboard a new client, and from that point on any agent session can run your exact
+    process just by invoking the skill name.</p>
+  </div>
+
+  <h2>The anatomy of a skill</h2>
+  <p>A skill lives in a <code>.claude/skills/your-skill-name/</code> folder. At minimum it
+  needs one file:</p>
+  <div class="files">
+    <div class="row"><span class="name">SKILL.md</span><span class="what">A plain-English description of the skill: what it does, when to use it, and step-by-step instructions the agent follows.</span></div>
+    <div class="row"><span class="name">README.md (optional)</span><span class="what">Human-readable docs for you or your team — what the skill does, how to invoke it, any prerequisites.</span></div>
+    <div class="row"><span class="name">templates/ (optional)</span><span class="what">Any example files, prompt snippets, or output samples the skill references during its steps.</span></div>
+  </div>
+
+  <p>Here is a minimal <code>SKILL.md</code> for a fictional "weekly-report" skill — just
+  to show you the shape:</p>
+  <pre><span class="c"># weekly-report skill</span>
+
+<span class="k">## What this does</span>
+<span class="s">Generates a formatted weekly progress report from bullet notes.</span>
+
+<span class="k">## When to use it</span>
+<span class="s">Run /weekly-report at the end of each work week.</span>
+
+<span class="k">## Steps</span>
+<span class="s">1. Ask the user to paste their raw bullet notes for the week.
+2. Organise into: Wins / Blockers / Next-week priorities.
+3. Write in plain, confident language — no jargon.
+4. Output as a ready-to-paste email.</span></pre>
+
+  <p>That's the whole thing. When you run <code>/weekly-report</code> in a Claude session,
+  the agent reads those instructions and follows them. Your expertise is now reusable
+  — by you, your VA, or any collaborator with access to the folder.</p>
+
+  <h2>Skill vs MCP server — when to build which</h2>
+  <p>A skill is the right tool when you want to <strong>package reusable instructions or
+  a multi-step process</strong>. But sometimes your agent needs to reach out and
+  <em>talk to a live system</em> — read from your database, query an API in real time,
+  trigger an action in your CRM. That's where an
+  <strong>MCP server</strong> comes in.</p>
+  <div class="cols">
+    <div class="card good">
+      <h3>Build a skill when…</h3>
+      <ul>
+        <li>You want to save a repeatable prompt or process</li>
+        <li>The expertise lives in your head (or your team's)</li>
+        <li>No live data connection needed</li>
+        <li>Example: onboarding checklist, report template, review process</li>
+      </ul>
+    </div>
+    <div class="card bad">
+      <h3>Build an MCP server when…</h3>
+      <ul>
+        <li>Your agent needs to read/write a live data source</li>
+        <li>You're connecting to an API that doesn't have a built-in tool</li>
+        <li>You need real-time information inside the agent session</li>
+        <li>Example: query your own database, push to your CRM, read live sensor data</li>
+      </ul>
+    </div>
+  </div>
+
+  <p>MCP stands for <strong>Model Context Protocol</strong> — an open standard that defines
+  how an agent talks to external tools. An MCP server is a small program that sits between
+  your agent and some data source or API, translating requests both ways. The quickstart
+  guide (linked below) shows the simplest possible version in about 50 lines of code — well
+  within reach with AI assistance.</p>
+
+  <div class="callout">
+    <strong>Start with a skill, not an MCP server.</strong> A skill costs you 20 minutes
+    and a text file. An MCP server costs you a few hours and a bit of code. Most reusable
+    expertise you have right now belongs in a skill. You'll know you've hit the limit when
+    the agent keeps asking you to paste in data you wish it could just fetch itself — that's
+    the moment to graduate to MCP.
+  </div>
+
+  <h2>You are closer than you think</h2>
+  <p>Every repeatable process you follow in your business — your client intake, your content
+  calendar, your product launch checklist — is exactly the material skills are made of. You've
+  been building this expertise for years. Packaging it takes an afternoon. Once it's packaged,
+  any agent session, any team member, any future hire can run your proven process with a
+  single command.</p>
+
+  <p>That's the genuine superpower here: you stop being the bottleneck on your own expertise.
+  The knowledge travels with the project folder, not just with you. It's one of the most
+  worthwhile things you can build.</p>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening. Recalling it now is what makes it stick.</p>
+    <details>
+      <summary>What is the minimum file needed to create a skill, and where does it live?</summary>
+      <p><span class="answer">A <code>SKILL.md</code> file</span> inside a folder named after your skill under <code>.claude/skills/</code>. It contains a plain-English description of what the skill does and the steps the agent should follow.</p>
+    </details>
+    <details>
+      <summary>Your agent needs to pull live order data from your Shopify store during a session. Skill or MCP server?</summary>
+      <p><span class="answer">MCP server.</span> A skill packages instructions — it can't make live API calls on its own. An MCP server acts as the bridge between the agent and a live data source like Shopify's API.</p>
+    </details>
+    <details>
+      <summary>You have a 7-step onboarding process you follow with every new client. Is this skill material?</summary>
+      <p><span class="answer">Absolutely yes.</span> A repeatable process made of instructions is exactly what skills are for. Write out the 7 steps in a SKILL.md, name the skill <code>/onboard-client</code>, and you can run your exact process from any agent session, and so can anyone on your team.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://modelcontextprotocol.io/quickstart">Model Context Protocol Quickstart (modelcontextprotocol.io)</a> —
+    the official guide to building your first MCP server, written for developers but short
+    enough to skim for the shape. ~15 min.
+    See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — let's build your first skill together.</strong> Tell me one
+    repeatable process you follow in your business — onboarding, reporting, content review,
+    anything. I'll help you turn it into a working <code>SKILL.md</code> you can install in
+    the next 20 minutes. Bring the process; I'll handle the formatting.
+  </div>
+
+  <p>New terms this lesson — <em>skill</em>, <em>MCP server</em>, <em>Model Context
+  Protocol</em> — are defined in the
+  <a href="../../reference/glossary.html">course glossary</a>.</p>
+
+  <nav>
+    <a href="b14-open-source.html">← B14: Open Source</a>
+    <a href="b16-choose-capstone.html">Next → B16: Choose Your Capstone</a>
+  </nav>
+</div>
+</body>
+</html>
