@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B4 · Hosting &amp; Infra</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course B · Module B1 Production · Lesson 4 of 18</p>
+  <h1>Hosting &amp; Infra</h1>
+  <p class="lede">Get your app onto the real internet, at your own web address —
+  and understand the invisible machinery keeping it there.</p>
+  <p class="meta">~13 min · Have your app's repository on GitHub · Prereq: B3 Integrate Data</p>
+
+  <p>Your app works on your laptop — or inside a builder tool's preview. That's not
+  the same as "on the internet." To reach real customers, your app needs to run on a
+  computer that's always on, at an address people can type into a browser. That's
+  <strong>hosting</strong>. The good news: for the kind of apps founders build today,
+  the platforms that handle hosting are largely automatic. Your single win: by the end
+  you'll understand the four things that turn a local project into a live web address,
+  and know which platforms do them for you.</p>
+
+  <h2>Hosting: the always-on computer serving your app</h2>
+  <div class="analogy">
+    <p>Your laptop is a great place to build — but you close the lid. When you close
+    the lid, your app disappears from the internet. <strong>Hosting</strong> means
+    putting your app on a computer that never closes its lid: a server sitting in a
+    data center, running 24 hours a day, ready to send your app's files to anyone
+    who visits your URL.</p>
+    <p>You don't own or maintain that server directly. You rent space on it (or,
+    more precisely, you deploy to a platform that rents it for you). Modern platforms
+    like Vercel and Netlify abstract all of the hardware management away.</p>
+  </div>
+
+  <div class="files">
+    <div class="row"><span class="name">Vercel</span><span class="what">Best-in-class for Next.js and React apps. Connects to GitHub — push a commit, it auto-deploys. Generous free tier.</span></div>
+    <div class="row"><span class="name">Netlify</span><span class="what">Similar to Vercel, excellent for static sites and serverless functions. Also auto-deploys from GitHub.</span></div>
+    <div class="row"><span class="name">Render</span><span class="what">Good for apps that need a persistent server process (not just static files). Also handles databases and background workers.</span></div>
+    <div class="row"><span class="name">Railway</span><span class="what">Fast and simple for full-stack apps. One-click deploys, generous free tier, great for getting something live quickly.</span></div>
+  </div>
+
+  <h2>Domains: your address on the internet</h2>
+  <p>When you first deploy to Vercel or Netlify, you get an auto-generated address
+  like <code>my-app-abc123.vercel.app</code>. That works for testing, but real
+  customers need a real address: <code>yourbusiness.com</code>.</p>
+
+  <p>A <strong>domain</strong> is that address. You buy it from a registrar
+  (Namecheap, Google Domains, Cloudflare) for roughly $10–15 per year, then
+  point it at your hosting platform. The platform gives you a couple of lines to
+  copy into your domain's DNS settings — your AI can walk you through the exact
+  steps in about fifteen minutes.</p>
+
+  <div class="callout">
+    <strong>HTTPS is not optional.</strong> Every hosting platform today gives you
+    a free SSL certificate automatically — the padlock in the browser that says
+    "this connection is secure." If you see your site on <code>http://</code> instead
+    of <code>https://</code>, fix it before you share the link with anyone. Browsers
+    show a warning and customers leave.
+  </div>
+
+  <h2>Environments: preview vs production</h2>
+  <p>One of the most important habits in production software is keeping a
+  <strong>preview environment</strong> separate from your live site. Modern hosting
+  platforms give you this automatically — every branch on GitHub gets its own
+  temporary URL to test against, before any change touches what real users see.</p>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>Preview environment</h3>
+      <ul>
+        <li>Deployed from a feature branch, not <code>main</code></li>
+        <li>Gets a temporary URL like <code>pr-42.my-app.vercel.app</code></li>
+        <li>Safe to break — no real users are there</li>
+        <li>Where you test every change before merging</li>
+        <li>Disappears when the branch is deleted</li>
+      </ul>
+    </div>
+    <div class="card bad">
+      <h3>Production environment</h3>
+      <ul>
+        <li>Deployed from <code>main</code> only</li>
+        <li>Lives at your real domain (<code>yourbusiness.com</code>)</li>
+        <li>Real customers are here — breakage has real cost</li>
+        <li>Should only receive changes that passed preview testing</li>
+        <li>Never push experimental code directly here</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>What platforms automate for you</h2>
+  <p>Before platforms like Vercel existed, "deploying" meant renting a server,
+  configuring a web server process, managing security patches, setting up SSL,
+  and writing deployment scripts. Each step was an afternoon. Today, this is what
+  happens automatically when you push to GitHub:</p>
+
+  <div class="steps">
+    <ol>
+      <li>Platform detects the new commit on your branch.</li>
+      <li>Runs your build command (<code>npm run build</code>) to compile the app.</li>
+      <li>Distributes the output across its global network so users everywhere get fast load times.</li>
+      <li>Issues or renews your SSL certificate automatically.</li>
+      <li>Flips traffic to the new version (with instant rollback if you need it).</li>
+    </ol>
+  </div>
+
+  <p>You get all of that by connecting your GitHub repository once. The lesson here is
+  not to learn how each step works — it's to appreciate what's being handled for you,
+  so you're not tempted to build something more complicated than you need.</p>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it is what makes it stick.</p>
+    <details>
+      <summary>Why isn't running your app on your laptop good enough for real customers?</summary>
+      <p><span class="answer">Because your laptop isn't always on and isn't publicly reachable.</span> When you close the lid, the app is gone. Hosting puts your app on a server that's always on, always connected, and accessible to anyone via a web address — independent of what your laptop is doing.</p>
+    </details>
+    <details>
+      <summary>You've just built a new checkout feature on a branch. What should you do before merging it to main?</summary>
+      <p><span class="answer">Test it on the preview environment — the temporary URL the platform generated for that branch.</span> Every change deserves a run on preview before it touches the production URL where real customers are. This is the whole point of the environment separation.</p>
+    </details>
+    <details>
+      <summary>What's the difference between a domain and hosting?</summary>
+      <p><span class="answer">A domain is the address (<code>yourbusiness.com</code>); hosting is the computer the app actually runs on.</span> The domain points at the hosting platform. You need both: the hosting serves the app, and the domain gives it a recognizable, permanent address.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://vercel.com/docs/getting-started-with-vercel">Getting Started with Vercel — Vercel Docs</a>.
+    The official guide walks you from zero to a live deployment, including connecting
+    a GitHub repo and setting up a custom domain. ~15 min.
+    See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — tell me where your app is right now.</strong> Is it
+    inside a builder tool? On a free subdomain? Not deployed at all? Tell me what
+    stack you're on and I'll give you the exact steps to get it onto your own domain
+    — usually less than an afternoon's work.
+  </div>
+
+  <p>New terms from this lesson — <em>deploy</em>, <em>domain</em>, <em>environment</em>,
+  <em>HTTPS</em> — are in the <a href="../../reference/glossary.html">course glossary</a>.
+  Keep it open as you go.</p>
+
+  <nav>
+    <a href="b03-integrate-data.html">← B3: Integrate Data</a>
+    <a href="b05-api-keys-secrets.html">Next → B5: API Keys &amp; Secrets</a>
+  </nav>
+</div>
+</body>
+</html>
