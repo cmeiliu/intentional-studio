@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B17 · Build Sprint</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course B · Module B3 Capstone · Lesson 17 of 18</p>
+  <h1>Build Sprint</h1>
+  <p class="lede">Assemble everything into one shipped thing.</p>
+  <p class="meta">~18 min · Your capstone brief from B16 open · Prereq: B16 (Choose Your Capstone)</p>
+
+  <p>You have a brief. You have the building blocks from Modules B1 and B2. The only thing
+  left is to assemble them into one working, deployed app — and not get stuck trying to
+  do it all at once. Your single win from this lesson: a sequenced assembly checklist that
+  takes you from blank project to "here's the URL" without losing your place, cutting
+  corners on safety, or burning money on a bug you could have caught in test mode.</p>
+
+  <h2>The assembly order matters</h2>
+  <div class="analogy">
+    <p>Building an app is like building a house. You pour the foundation before the walls,
+    walls before the roof. You don't tile the bathroom until the plumbing works. The order
+    isn't arbitrary — each layer depends on the one below. Skip the foundation, and the
+    whole thing needs to come down later.</p>
+    <p>The foundation here is <strong>hosting and environment</strong>. Auth and data come
+    next. Payments last — never wire up real money until every earlier layer is working and
+    tested in test mode.</p>
+  </div>
+
+  <h2>Sprint assembly checklist</h2>
+  <p>Work through these steps in order. Each step has a clear "done" state — don't move
+  forward until that state is true. Skipping ahead is how bugs get buried under layers of
+  new code that makes them impossible to find.</p>
+  <div class="steps">
+    <ol>
+      <li>
+        <strong>Set up your project and hosting.</strong>
+        Create a fresh repository. Connect it to your deployment platform (Vercel, Railway,
+        Render — whatever you chose in B4). Confirm the URL is live before writing a single
+        line of feature code. <em>Done: blank app loads at a real URL.</em>
+      </li>
+      <li>
+        <strong>Lock down your environment variables.</strong>
+        Add all secrets (API keys, database URLs, Stripe keys) to your hosting dashboard's
+        environment settings — never in the code. Confirm they load correctly in production.
+        <em>Done: app starts without hardcoded secrets.</em>
+      </li>
+      <li>
+        <strong>Wire up your data layer (if your capstone uses it).</strong>
+        Connect your database from B5. Run a simple read and a simple write. Confirm data
+        persists between page loads. <em>Done: create one test record, reload, see it there.</em>
+      </li>
+      <li>
+        <strong>Add auth (if your capstone uses it).</strong>
+        Use the auth provider you set up in B6. Confirm sign-up, log-in, and log-out all work
+        on the live URL. Do not build any logged-in features until this step passes.
+        <em>Done: a real email address can create an account and log in.</em>
+      </li>
+      <li>
+        <strong>Build the core feature.</strong>
+        Now — and only now — build the one job your app does. Keep the AI helping, keep commits
+        small, test after each meaningful change. If the scope starts expanding, park the new
+        idea in a list and stay focused. <em>Done: the single job your brief describes works end-to-end.</em>
+      </li>
+      <li>
+        <strong>Add payments in Stripe test mode (if your capstone uses them).</strong>
+        Use your Stripe test keys from B8. Walk through a full payment flow using Stripe's
+        test card numbers. Confirm the webhook fires and your app responds correctly.
+        <em>Done: a test payment completes without errors.</em>
+      </li>
+      <li>
+        <strong>Send a transactional email (if your capstone uses them).</strong>
+        Connect your email provider from B7. Trigger a real send — welcome email, receipt,
+        confirmation — and verify it lands in an inbox (check spam too).
+        <em>Done: you receive the automated email yourself.</em>
+      </li>
+      <li>
+        <strong>Human-in-the-loop review.</strong>
+        Walk through the full user journey yourself, from landing to completion, on the live URL.
+        Then ask one other person to do the same while you watch. Write down everything that
+        confuses or breaks them — fix the top three before going further.
+        <em>Done: someone else completes the core flow without your help.</em>
+      </li>
+      <li>
+        <strong>Switch to live mode (payments only).</strong>
+        Only after steps 1–8 pass: swap Stripe test keys for live keys. Make one real
+        transaction (even £0.50 to yourself) to confirm the full live flow works.
+        <em>Done: a real card completes a real payment.</em>
+      </li>
+    </ol>
+  </div>
+
+  <div class="callout">
+    <strong>Always test in test mode before taking real money.</strong> Stripe's test card
+    numbers let you simulate every payment scenario — successes, declines, webhooks firing,
+    refunds — without a single real charge. There is no excuse for skipping this step.
+    A bug in your payment flow discovered in test mode takes 20 minutes to fix. The same bug
+    discovered by a real customer takes your evening, damages trust, and may require a refund.
+  </div>
+
+  <h2>When the AI is helping vs when it's the right call to stop and think</h2>
+  <p>Use your AI for generating boilerplate, wiring up integrations, debugging error messages,
+  and writing the repetitive parts fast. Keep yourself in the loop for:</p>
+  <div class="test">
+    <strong>Always own these yourself:</strong>
+    <ol>
+      <li><strong>Any step that touches real customer data.</strong> Read what the code does before you run it — ask the AI to translate it if needed.</li>
+      <li><strong>The moment before you switch to live Stripe keys.</strong> Pause. Confirm every test scenario passed. Then flip the switch.</li>
+      <li><strong>Auth rules.</strong> Confirm which pages require login, which don't, and that you can't reach a protected page by typing the URL directly.</li>
+      <li><strong>Error handling.</strong> What does the user see if a payment fails? If the database is unreachable? A good error message is the difference between "something broke" and "something broke and the customer emailed you about it."</li>
+    </ol>
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening. Recalling it now is what makes it stick.</p>
+    <details>
+      <summary>You want to add a new feature mid-sprint that would be genuinely useful. What should you do?</summary>
+      <p><span class="answer">Write it down and park it for v2.</span> Mid-sprint scope expansion is the main reason capstones don't ship. If the new idea is genuinely good it will still be good next week — after v1 is live. Add it to a list, close the tab, keep building.</p>
+    </details>
+    <details>
+      <summary>Your payment flow works perfectly in test mode. Can you switch to live Stripe keys now?</summary>
+      <p><span class="answer">Only after completing the full human-in-the-loop review (step 8).</span> Test mode passing is necessary but not sufficient. A real person should have completed the core flow on the live URL without your help first. Then you flip to live keys.</p>
+    </details>
+    <details>
+      <summary>A friend says "just hardcode the API key in the app for now, you can move it later." What do you say?</summary>
+      <p><span class="answer">No — environment variables are non-negotiable.</span> "Later" almost never comes. A hardcoded key in a public repository can be found and abused in minutes. The five minutes it takes to use an environment variable is always worth it.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://docs.stripe.com/test-mode">Stripe Test Mode — Stripe Docs</a> —
+    the official reference for test card numbers, webhook simulation, and everything else
+    you need to validate your payment flow before going live. Bookmark it and keep it open
+    during step 6. See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — bring me your blockers.</strong> Stuck on a step in the
+    checklist? Copy the error message, describe where in the sequence you are, and I'll
+    help you move through it. The fastest way to get unstuck is a precise description of
+    exactly where the friction is — not "it doesn't work" but "step 6 fails with this
+    error on the live URL." I can debug anything you can describe.
+  </div>
+
+  <p>Key terms this lesson — <em>deploy</em>, <em>human-in-the-loop</em>, <em>debugging</em>,
+  <em>agent</em> — are defined in the
+  <a href="../../reference/glossary.html">course glossary</a>.</p>
+
+  <nav>
+    <a href="b16-choose-capstone.html">← B16: Choose Your Capstone</a>
+    <a href="b18-keep-it-alive.html">Next → B18: Keep It Alive</a>
+  </nav>
+</div>
+</body>
+</html>

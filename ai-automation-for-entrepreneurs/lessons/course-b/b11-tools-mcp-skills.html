@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B11 · Tools, MCP &amp; Skills</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course B · Module B2 Going Agentic · Lesson 11 of 18</p>
+  <h1>Tools, MCP &amp; Skills</h1>
+  <p class="lede">Three buzzwords — one idea: giving your agent the right superpowers for the job.</p>
+  <p class="meta">~12 min · Have your terminal open · Prereq: B10 Anatomy of an Agent</p>
+
+  <p>In B10 you learned that an agent needs "tools" — but nobody explains what that means in
+  practice, or why the words <em>MCP</em> and <em>skills</em> keep showing up alongside it.
+  By the end of this lesson you'll be able to decode all three — and, crucially, you already
+  have hands-on experience with one of them: the <code>teach</code> skill you installed right
+  at the start of this course. Your single win: understand what each layer does, so you can
+  confidently wire up an agent that actually reaches the outside world.</p>
+
+  <h2>Tools: specific abilities you grant</h2>
+  <p>A tool is a defined capability the model can call during its loop. You grant tools
+  deliberately — the agent can only do what you've unlocked. Common examples:</p>
+
+  <div class="files">
+    <div class="row"><span class="name">web_search</span><span class="what">Look something up on the internet in real time.</span></div>
+    <div class="row"><span class="name">send_email</span><span class="what">Compose and deliver an email via your email provider.</span></div>
+    <div class="row"><span class="name">read_file</span><span class="what">Open and read a file from your computer or cloud storage.</span></div>
+    <div class="row"><span class="name">query_database</span><span class="what">Run a read or write against your data store.</span></div>
+    <div class="row"><span class="name">run_code</span><span class="what">Execute a script and get the output back.</span></div>
+  </div>
+
+  <p>The model decides <em>when</em> to call a tool and <em>what</em> to pass it. The result
+  comes back like any other text and the model reads it, then decides what to do next.
+  You are always in control of which tools exist — that's your guardrail lever.</p>
+
+  <h2>MCP: the universal plug standard</h2>
+  <div class="analogy">
+    <p>Before USB, every device came with its own proprietary cable. Printers had one connector,
+    cameras had another, keyboards had yet another. Then USB arrived: one standard plug, any
+    device. <strong>MCP — Model Context Protocol — is USB for AI agents.</strong></p>
+    <p>Before MCP, connecting an agent to a new data source (your calendar, your CRM, a
+    database) required custom code each time. MCP defines a single open standard so that any
+    agent that speaks MCP can plug into any tool or data source that also speaks MCP — with no
+    custom wiring.</p>
+  </div>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>What MCP gives you</h3>
+      <ul>
+        <li>One integration, any agent — write the connector once</li>
+        <li>Growing ecosystem of ready-made MCP servers (GitHub, Slack, databases, APIs)</li>
+        <li>Standardized security model — you configure what's exposed</li>
+        <li>Works across Claude, other models, and frameworks</li>
+      </ul>
+    </div>
+    <div class="card bad">
+      <h3>What MCP is not</h3>
+      <ul>
+        <li>Not magic — you still decide which MCP servers to connect</li>
+        <li>Not a no-code platform — still some config required</li>
+        <li>Not automatic permission — you grant access intentionally</li>
+        <li>Not required for simple agents that use built-in tools only</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>In plain English:</strong> MCP means you can pick from a growing library of
+    pre-built connectors instead of building from scratch. Connect your agent to Google Drive,
+    Notion, your CRM, or your database by pointing at an MCP server — no custom glue code.
+  </div>
+
+  <h2>Skills: packaged expertise the agent loads on demand</h2>
+  <p>A <strong>skill</strong> is a bundle of instructions — a <code>SKILL.md</code> file plus
+  any supporting prompts — that tells an agent how to do something well. You've already used
+  one. When you ran <code>npx skills add</code> at the very start of this course and installed
+  the <code>teach</code> skill, you added a folder that contains a <code>SKILL.md</code> with
+  instructions on how the agent should behave as a teacher: the tone to use, the structure of
+  explanations, when to ask you questions back. The agent loads that file into its context and
+  suddenly "knows" how to teach.</p>
+
+  <div class="files">
+    <div class="row"><span class="name">SKILL.md</span><span class="what">The instructions file — plain English directions telling the agent how to approach a task. This is the whole skill.</span></div>
+    <div class="row"><span class="name">npx skills add</span><span class="what">The command to install a skill from the registry into your project.</span></div>
+    <div class="row"><span class="name">/teach (or any /command)</span><span class="what">How you invoke a skill once installed — a slash command that loads the relevant SKILL.md.</span></div>
+  </div>
+
+  <p>Skills are composable: one agent can have several. A "research-and-write" agent might
+  load a <em>research</em> skill (thorough sourcing, skepticism) and a <em>write</em> skill
+  (your brand voice, paragraph length). Each skill loads its instructions into context at the
+  right moment.</p>
+
+  <h2>How the three layers stack</h2>
+  <div class="files">
+    <div class="row"><span class="name">Skills</span><span class="what">Teach the agent <em>how to think</em> about a domain — expertise via instructions.</span></div>
+    <div class="row"><span class="name">Tools</span><span class="what">Let the agent <em>act</em> — specific capabilities it can call in the loop.</span></div>
+    <div class="row"><span class="name">MCP</span><span class="what">The <em>plumbing standard</em> that connects tools to outside systems without custom wiring.</span></div>
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it now is what makes it stick.</p>
+    <details>
+      <summary>You want your agent to look up contacts in your CRM. Is that a tool, MCP, or a skill?</summary>
+      <p><span class="answer">A tool — specifically, one delivered via an MCP server.</span> "Query CRM" is a capability (a tool). If your CRM has an MCP server, you connect it via MCP so you don't have to write the connector yourself. Tool is the <em>what</em>; MCP is the <em>how it's wired up</em>.</p>
+    </details>
+    <details>
+      <summary>What did the 'teach' skill you installed actually add to your project?</summary>
+      <p><span class="answer">A folder containing a SKILL.md file</span> — plain-English instructions telling the agent how to behave as a teacher. When you invoke the skill, the agent loads those instructions into its context. No code, just structured guidance.</p>
+    </details>
+    <details>
+      <summary>Why does MCP matter to a non-engineer entrepreneur?</summary>
+      <p><span class="answer">Because it means pre-built connectors exist for most common tools.</span> Instead of paying a developer to wire your agent to Google Drive or Notion, you find (or run) an MCP server for that service and point your agent at it. The standard eliminates the custom plumbing cost.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://modelcontextprotocol.io/">Model Context Protocol — official site</a>.
+    The open standard behind MCP: what it is, how servers work, and the growing registry of
+    ready-made connectors. Skim the introduction — it's written for humans, not just engineers.
+    See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — ask me anything.</strong> Wondering whether a specific tool
+    or system you use has an MCP server already? Or want help thinking through which tools
+    to grant your first agent? Describe your setup and I'll give you a concrete starting point.
+  </div>
+
+  <p>Terms from this lesson — <em>agent</em>, <em>context</em>, <em>action</em> — are in the
+  <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
+
+  <nav>
+    <a href="b10-anatomy-of-an-agent.html">← B10: Anatomy of an Agent</a>
+    <a href="b12-using-subagents.html">Next → B12: Using Subagents</a>
+  </nav>
+</div>
+</body>
+</html>

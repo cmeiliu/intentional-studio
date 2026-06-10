@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B9 · Security Basics</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course B · Module B1 Production · Lesson 9 of 18</p>
+  <h1>Security Basics <span class="deep">deep dive</span></h1>
+  <p class="lede">A handful of silent mistakes account for most vibe-coded app breaches. Learn to spot them before you ship.</p>
+  <p class="meta">~18 min · Have your app and its environment variables open · Prereq: B5 API Keys, B6 Auth, B8 Payments</p>
+
+  <p>Security feels abstract until your database gets wiped, your API key runs up a
+  $4,000 bill, or a stranger reads every customer's private data. The uncomfortable
+  truth about AI-generated apps is that the AI writes functional code — but it rarely
+  writes <em>defensive</em> code unprompted. It doesn't know that your database rules
+  let anyone read everything, or that an API key is sitting in a public file. You
+  have to check. Your single win: by the end you'll know the four silent vulnerabilities
+  that catch vibe-coded apps most often, and you'll have a concrete pre-launch checklist
+  to work through before your app goes live.</p>
+
+  <h2>The four silent vulnerabilities</h2>
+  <p>These four problems are "silent" because the app works perfectly in development —
+  nothing crashes, no warning appears. The damage only shows up when someone finds and
+  exploits them.</p>
+
+  <div class="cols">
+    <div class="card bad">
+      <h3>1 · Exposed API keys</h3>
+      <p>An API key checked into a public GitHub repo, or hardcoded into
+      client-side JavaScript, is visible to anyone — and bots scan GitHub
+      constantly. Within minutes of a key appearing publicly, it can be used
+      to rack up charges, send spam, or exfiltrate data in your name. See B5
+      for the right pattern: environment variables only, never in code.</p>
+    </div>
+    <div class="card bad">
+      <h3>2 · Database with no access rules</h3>
+      <p>Most AI-scaffolded projects spin up a database where any authenticated
+      — or worse, unauthenticated — request can read or write any row. Your
+      customer's orders, messages, and profile data are visible to every other
+      customer. Supabase calls these Row Level Security (RLS) policies;
+      Firebase has Security Rules. They default to <em>open</em>. You must
+      turn them on.</p>
+    </div>
+  </div>
+  <div class="cols">
+    <div class="card bad">
+      <h3>3 · Trusting user input blindly</h3>
+      <p>When your app takes text from a user and passes it directly into a
+      database query or an AI prompt without any checks, an attacker can
+      craft input that does something completely different — deleting data,
+      extracting records, or hijacking the AI's instructions. The fix is
+      usually small: validate and sanitize input on the server side, and use
+      your database library's parameterized queries instead of raw string
+      concatenation. Ask your AI to review every place user input touches the
+      database or an API call.</p>
+    </div>
+    <div class="card bad">
+      <h3>4 · Admin pages with no auth</h3>
+      <p>It's common to build an admin panel quickly — a page to view all
+      users, delete records, send test emails — and forget to protect it.
+      If the route exists and isn't behind an auth check, it's publicly
+      accessible to anyone who guesses or finds the URL. Check every
+      internal route: does it verify that the requester is logged in <em>and</em>
+      has the right role?</p>
+    </div>
+  </div>
+
+  <div class="analogy">
+    <p>Think of your app as a building. Authentication (B6) is the front door lock.
+    Database access rules are the internal doors — between the lobby and the server room,
+    between one tenant's office and another's. An API key is the master key to the whole
+    building. Trusting user input blindly is like a staff member who follows any
+    instruction written on a sticky note, even one left by a stranger.</p>
+    <p>You can have a great front door and still be wide open inside. Security is layers,
+    not a single lock.</p>
+  </div>
+
+  <h2>Pre-launch security checklist</h2>
+  <p>Work through this before every launch — or before sharing a URL publicly for the
+  first time. It takes under an hour on a typical vibe-coded app and catches most of
+  the common issues.</p>
+  <div class="test">
+    <strong>Pre-launch security checklist</strong>
+    <ol>
+      <li><strong>Grep your repo for secrets.</strong> Search the codebase for the
+      words <code>sk_</code>, <code>pk_</code>, <code>secret</code>, <code>password</code>,
+      <code>api_key</code>. If any of those appear as literal values in code files
+      (not in <code>.env</code>), move them to environment variables immediately.</li>
+      <li><strong>Check your <code>.gitignore</code>.</strong> Confirm your
+      <code>.env</code> file is listed there. Run <code>git status</code> and verify no
+      <code>.env</code> file appears in the list of files to be committed.</li>
+      <li><strong>Review database access rules.</strong> If you're using Supabase,
+      open the RLS section and confirm policies are enabled on every table that holds
+      user data. If Firebase, read your Security Rules file. If you're not sure, ask
+      your AI: <em>"Show me the access rules on my database tables and tell me if any
+      table is readable without authentication."</em></li>
+      <li><strong>List every route that takes user input.</strong> For each one, ask
+      your AI: <em>"Does this route sanitize input before using it in a database query
+      or an API call? If not, fix it."</em></li>
+      <li><strong>List every admin or internal route.</strong> Visit each one while
+      logged out. If you can see it, it needs an auth check.</li>
+      <li><strong>Check for overly permissive CORS.</strong> If your backend API
+      accepts requests from any origin (<code>*</code>), tighten it to your specific
+      frontend domain before going live.</li>
+      <li><strong>Verify error messages don't leak internals.</strong> Stack traces,
+      database schema details, and file paths should never appear in responses visible
+      to users. In production mode, show a generic error message and log the details
+      privately.</li>
+    </ol>
+  </div>
+
+  <h2>When to ask an expert</h2>
+  <p>The checklist above handles the most common issues. But some situations call for
+  a real security review by a professional:</p>
+  <div class="files">
+    <div class="row"><span class="name">Handling payments</span><span class="what">If you go beyond Stripe Checkout into custom card flows, have a security engineer review the implementation before going live.</span></div>
+    <div class="row"><span class="name">Storing health or legal data</span><span class="what">HIPAA, GDPR, and similar regulations carry fines and legal liability. An expert review is not optional if you're in these domains.</span></div>
+    <div class="row"><span class="name">Before a meaningful fundraise or acquisition</span><span class="what">Investors and acquirers routinely run security due diligence. Getting ahead of it is far cheaper than fixing it under pressure.</span></div>
+    <div class="row"><span class="name">Anything over ~1,000 users</span><span class="what">At low user counts, a breach is painful. At scale, it's existential. The cost of a one-day security audit is almost always worth it at this point.</span></div>
+  </div>
+
+  <div class="callout">
+    <strong>Ask your AI to play attacker.</strong> Once your app is running, prompt it:
+    <em>"You are a security researcher. Review this codebase for vulnerabilities — focus
+    on exposed secrets, unauthenticated routes, database access, and unsanitized user
+    input. List every issue you find with its severity."</em> It won't catch everything
+    a human expert would, but it catches a surprising amount — and it's free.
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it is what makes it stick.</p>
+    <details>
+      <summary>Your Supabase database has a "profiles" table with user data. You haven't configured any RLS policies. Who can read it?</summary>
+      <p><span class="answer">Anyone — including unauthenticated users.</span> Supabase tables default to open when RLS is not enabled. Any request, authenticated or not, that knows the table name can read every row. Turn on RLS and define policies that restrict reads to the row's owner or to authenticated users with the right role.</p>
+    </details>
+    <details>
+      <summary>A user submits a form with the value: <code>'; DROP TABLE orders; --</code>. What kind of attack is this, and what's the defence?</summary>
+      <p><span class="answer">SQL injection.</span> The attacker is trying to sneak a destructive database command inside your query by closing the intended string early. The defence is to use parameterized queries (your database library's built-in method of passing values separately from the query text) — the value is then treated as data, never as executable SQL.</p>
+    </details>
+    <details>
+      <summary>You notice your API key for OpenAI has appeared in a public GitHub commit. What do you do first?</summary>
+      <p><span class="answer">Revoke the key immediately in the OpenAI dashboard — before doing anything else.</span> A key in a public repo is compromised the moment it lands there. Rotation is the only fix; git history rewrites don't help because bots cache commits in seconds. Then create a fresh key, store it in your environment variables, and add <code>.env</code> to <code>.gitignore</code>.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://owasp.org/www-project-top-ten/">OWASP Top Ten</a> —
+    the security industry's canonical list of the most critical web application
+    vulnerabilities, maintained by a nonprofit. You don't need to read every item in
+    depth — scan the category names and descriptions. You'll recognise several from this
+    lesson. It's the same list professional security engineers use as their baseline.
+    See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — paste me your checklist results.</strong> Work through
+    the seven-point checklist above, then tell me what you found: which items you're
+    confident about, which feel unclear, and any issues the AI audit surfaced. I'll
+    help you prioritise and fix before you go live.
+  </div>
+
+  <p>New terms this lesson — <em>SQL injection</em>, <em>Row Level Security</em>,
+  <em>CORS</em>, <em>parameterized query</em>, <em>OWASP</em> — are in the
+  <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
+
+  <nav>
+    <a href="b08-payments.html">← B8: Payments</a>
+    <a href="b10-anatomy-of-an-agent.html">Next → B10: Anatomy of an Agent</a>
+  </nav>
+</div>
+</body>
+</html>

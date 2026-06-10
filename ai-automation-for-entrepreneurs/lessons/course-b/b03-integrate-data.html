@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B3 · Integrate Data</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course B · Module B1 Production · Lesson 3 of 18</p>
+  <h1>Integrate Data</h1>
+  <p class="lede">Pull in and sync data from the other systems your business already
+  runs on — so nothing lives in a silo.</p>
+  <p class="meta">~14 min · Have a list of the tools your business uses today · Prereq: B2 Databases</p>
+
+  <p>Your new app doesn't live in isolation. Your business already runs on a CRM,
+  a payment processor, a spreadsheet, an email platform — and your customers expect
+  everything to stay in sync. Manually copying data between systems is how errors
+  creep in and hours disappear. Your single win today: by the end you'll understand
+  the three main ways data moves between apps, and know which one to reach for at
+  each stage of your build.</p>
+
+  <h2>The API: the door every modern app leaves open</h2>
+  <p>In Course A you met the idea of an API — the "waiter" that carries requests
+  between your app and another service. Let's make it concrete.</p>
+
+  <div class="analogy">
+    <p>Every serious software service — Stripe, HubSpot, Google Sheets, Mailchimp —
+    has a set of <strong>doors</strong> in its back wall. Each door is labeled:
+    "get all customers," "create an invoice," "update a contact." You knock on a door
+    by sending an HTTP request with the right address and a key that proves you're
+    allowed in. The service opens the door and hands you back data (or confirms it
+    did the thing).</p>
+    <p>Those doors, taken together, are the <strong>API</strong>. You don't need to
+    know how the service works inside — just which door to knock on and what it
+    will hand you back.</p>
+  </div>
+
+  <p>When your app calls Stripe to charge a card, it's knocking on Stripe's
+  "create charge" door. When it calls your CRM to log a new contact, it's knocking
+  on a "create contact" door. The AI can write all of this code for you — you just
+  need to know which service you want to talk to and what you want it to do.</p>
+
+  <h2>Three ways to move data: import, sync, event</h2>
+  <div class="files">
+    <div class="row"><span class="name">CSV import / export</span><span class="what">The simplest move: download a spreadsheet from one system, upload it to another. Good for a one-time migration or occasional manual refresh. No code needed.</span></div>
+    <div class="row"><span class="name">Scheduled sync</span><span class="what">A script (or no-code tool like Zapier) that runs every hour or every night: "fetch all new orders from Stripe and write them to my database." Keeps data fresh automatically.</span></div>
+    <div class="row"><span class="name">Webhook (event-driven)</span><span class="what">The other service calls <em>you</em> the moment something happens — no waiting for the schedule. Stripe fires a webhook the instant a payment completes; your app gets the data in real time.</span></div>
+  </div>
+
+  <p>Start with CSV import when you're just moving a one-off dataset. Move to scheduled
+  sync when you need regular freshness. Use webhooks when you need to react
+  <em>immediately</em> — a payment confirmation, a signup, a cancellation.</p>
+
+  <h2>One-way vs two-way sync</h2>
+  <p>Before building any integration, decide the direction of truth:</p>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>One-way sync</h3>
+      <p>Data flows in one direction only. Your CRM is the source of truth; your app
+      reads from it but never writes back. Simple, predictable, easy to debug. Start
+      here whenever possible.</p>
+    </div>
+    <div class="card bad">
+      <h3>Two-way sync</h3>
+      <p>Both systems can change the data and must stay in agreement. Powerful but
+      far harder: what happens when both sides change the same record at the same time?
+      That's a <em>conflict</em>, and you need a rule to resolve it. Only build this
+      when the business genuinely needs it.</p>
+    </div>
+  </div>
+
+  <h2>Keeping data fresh and avoiding duplicates</h2>
+  <p>Two things go wrong most often in integrations: data goes stale (the sync breaks
+  silently and nobody notices) and records get duplicated (the sync runs twice and
+  writes the same row twice).</p>
+
+  <div class="test">
+    <strong>Build these four habits in from the start:</strong>
+    <ol>
+      <li><strong>Use a unique key.</strong> Every record should have a field that proves
+      it's that specific thing — an order ID from Stripe, a contact ID from your CRM.
+      Before writing a record, check whether that ID already exists. If it does, update;
+      if it doesn't, create. This pattern is called <em>upsert</em> and prevents duplicates
+      automatically.</li>
+      <li><strong>Log every sync run.</strong> Write a timestamp and a count ("synced 14
+      records at 03:00") somewhere you can check. A sync that ran and found nothing is
+      fine; a sync that never ran at all looks identical from the outside until you check
+      the log.</li>
+      <li><strong>Alert on failure.</strong> Set up a simple notification (email, Slack) if
+      the sync job errors. Silent failures are the worst kind.</li>
+      <li><strong>Test with real data, carefully.</strong> Run the integration against a
+      small batch first. Check what landed in your database before turning on the full
+      firehose.</li>
+    </ol>
+  </div>
+
+  <div class="callout">
+    <strong>No-code tools (Zapier, Make) are your fastest path to a first integration.</strong>
+    For most "fetch data from A, write it to B" jobs, a Zap or a Make scenario is faster
+    than code and easier to debug. You can always replace it with code later once you've
+    confirmed the pattern works. Don't over-engineer early.
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it is what makes it stick.</p>
+    <details>
+      <summary>You want to show a customer's payment status in your app the moment Stripe processes their payment. Import, scheduled sync, or webhook?</summary>
+      <p><span class="answer">Webhook.</span> "The moment it happens" is the definition of event-driven. A scheduled sync would introduce a delay (up to an hour if the sync runs hourly). A webhook fires in real time — Stripe calls your app immediately when the payment completes.</p>
+    </details>
+    <details>
+      <summary>Your nightly sync has been running for two weeks. You check the database and find the same 50 orders duplicated three times each. What did you forget to build?</summary>
+      <p><span class="answer">An upsert check — checking whether the record's unique ID already exists before writing.</span> Without this, each sync run creates new rows instead of updating existing ones. The fix: before inserting, look up the order's Stripe ID; if it's already there, update the row instead of adding a new one.</p>
+    </details>
+    <details>
+      <summary>What's the main risk of a two-way sync that a one-way sync doesn't have?</summary>
+      <p><span class="answer">Conflicts — two systems changing the same record simultaneously with no agreed rule for which one wins.</span> One-way sync has a single source of truth, so the direction of authority is always clear. Two-way syncs require a conflict-resolution strategy and are significantly harder to debug.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview">An Overview of HTTP — MDN Web Docs</a>.
+    The plain-English primer on how data moves across the web — the foundation that
+    every API call, webhook, and sync relies on. ~12 min.
+    See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — tell me which systems you need to connect.</strong>
+    List the tools your business runs on (CRM, payments, email, spreadsheets) and I'll
+    map out the cleanest integration path for your specific situation — whether that's
+    a Zap, a webhook, or a direct API call your AI can write for you.
+  </div>
+
+  <p>New terms from this lesson — <em>API</em>, <em>webhook</em>, <em>sync</em>,
+  <em>upsert</em> — are in the <a href="../../reference/glossary.html">course glossary</a>.
+  Keep it open as you go.</p>
+
+  <nav>
+    <a href="b02-databases.html">← B2: Databases</a>
+    <a href="b04-hosting-infra.html">Next → B4: Hosting &amp; Infra</a>
+  </nav>
+</div>
+</body>
+</html>
