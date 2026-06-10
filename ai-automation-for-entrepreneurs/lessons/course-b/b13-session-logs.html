@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B13 · Reading Session Logs</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course B · Module B2 Going Agentic · Lesson 13 of 18</p>
+  <h1>Reading Session Logs</h1>
+  <p class="lede">The transcript of every step your agent took is already on disk. Learning to read it turns a black box into something you can supervise and fix.</p>
+  <p class="meta">~12 min · Have a terminal open · Prereq: B12 Using Subagents</p>
+
+  <p>You deployed an agent. It ran. But what exactly did it do? If you can't answer that, you
+  don't really own it — you just hope it did the right thing. Session logs are your answer.
+  Claude Code writes a complete transcript of every session to disk automatically: the goal
+  you set, every tool it called, every result it got back, every piece of reasoning it did
+  in between. Your single win: by the end of this lesson you'll know where to find that file,
+  how to read it, and how to use it to find exactly where things went sideways — the same
+  debugging loop you learned in Course A, now applied to agents.</p>
+
+  <h2>What a session log contains</h2>
+  <p>A session log is a line-by-line record of the agent's full loop. Each entry is one
+  of these four types:</p>
+
+  <div class="files">
+    <div class="row"><span class="name">Goal / prompt</span><span class="what">The original instruction you gave — exactly as the agent received it. The starting point for any audit.</span></div>
+    <div class="row"><span class="name">Reasoning</span><span class="what">The model's "thinking" before it acts — what it decided to do next and why. This is where you spot misunderstandings early.</span></div>
+    <div class="row"><span class="name">Tool call</span><span class="what">Which tool it called and what arguments it passed. <strong>This is the action audit line</strong> — the exact thing it did to the outside world.</span></div>
+    <div class="row"><span class="name">Tool result</span><span class="what">What came back. Did the search return good results? Did the file write succeed? The result shapes every step that follows.</span></div>
+  </div>
+
+  <p>Claude Code stores sessions as <code>.jsonl</code> files (one JSON object per line)
+  under <code>~/.claude/projects/&lt;your-project&gt;/</code>. You can open them in any text
+  editor, or pipe them through a formatter to make them readable.</p>
+
+  <pre><span class="c"># Find your session files</span>
+<span class="k">ls</span> ~/.claude/projects/
+
+<span class="c"># Pretty-print the latest session log</span>
+<span class="k">cat</span> ~/.claude/projects/<span class="s">&lt;project&gt;</span>/<span class="s">&lt;session&gt;</span>.jsonl \
+  | <span class="k">python3</span> -m json.tool</pre>
+
+  <h2>Reading a log to find where it went wrong</h2>
+  <p>This is the debugging loop from Course A, applied to agents. Same posture — start at
+  the point of failure and work backwards:</p>
+
+  <div class="steps">
+    <ol>
+      <li><strong>Find the wrong output.</strong> Where did the agent produce something you
+      didn't want — or stop before it should have?</li>
+      <li><strong>Find that moment in the log.</strong> Scan backwards from the end. Look for
+      the tool call or reasoning entry right before things went off.</li>
+      <li><strong>Read the result that preceded it.</strong> What did the tool return?
+      A bad search result, an empty file, an error message? That result fed the next decision.</li>
+      <li><strong>Trace back to the root.</strong> Was the tool call itself wrong (bad
+      arguments)? Was the reasoning step flawed (misread the result)? Was the original goal
+      too vague? That's your fix point.</li>
+    </ol>
+  </div>
+
+  <div class="analogy">
+    <p>A session log is like flight-recorder data. After an incident, investigators don't
+    guess — they read the tape: altitude, heading, control inputs, cockpit conversation,
+    one second at a time, working from the moment of failure backwards to the cause. You're
+    doing the same thing. The log is your tape.</p>
+  </div>
+
+  <h2>Auditing tool calls for safety</h2>
+  <p>Tool calls are the lines in the log you must review for any agent that touches live
+  data — a database, email, or external API. Before you declare an agent safe to run
+  unsupervised, go through at least one full session log and ask for every tool call:</p>
+
+  <div class="test">
+    <strong>For each tool call in the log, check:</strong>
+    <ol>
+      <li><strong>Did it call the right tool?</strong> Not a broader, more destructive one
+      than needed.</li>
+      <li><strong>Were the arguments right?</strong> The correct file, the right recipient,
+      the intended record — not a wildcard that touched more than you expected.</li>
+      <li><strong>Was the action reversible?</strong> Reads are safe; writes and sends are
+      not. For irreversible actions, was there a human checkpoint before it fired?</li>
+      <li><strong>Did it stop when it should have?</strong> The loop ends on task completion,
+      not when it runs out of things to try.</li>
+    </ol>
+  </div>
+
+  <div class="callout">
+    <strong>Logs turn "trust me" into "I can verify."</strong> An agent without logs is a
+    black box — you accept whatever it did on faith. An agent whose logs you read regularly
+    is a supervised employee. That's the difference between deploying nervously and deploying
+    confidently. Read at least the first three sessions of any new agent before you leave it
+    to run alone.
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it now is what makes it stick.</p>
+    <details>
+      <summary>Your agent sent an email to the wrong address. Where in the session log do you look first?</summary>
+      <p><span class="answer">The tool call entry for <code>send_email</code> — specifically the arguments it passed.</span> That line will show you exactly what address the agent passed to the tool. Then look one entry earlier at the reasoning step: where did it get that address from? Was it pulled from a bad search result, a misread file, or an ambiguous goal? Trace back from the call to the root.</p>
+    </details>
+    <details>
+      <summary>Where does Claude Code store session log files?</summary>
+      <p><span class="answer">Under <code>~/.claude/projects/&lt;project-name&gt;/</code> as <code>.jsonl</code> files</span> — one JSON object per line, one file per session. You can open them in any text editor or format them with a JSON tool.</p>
+    </details>
+    <details>
+      <summary>Why should you audit tool calls specifically, rather than just reading the final output?</summary>
+      <p><span class="answer">Because the final output only tells you what the agent produced — not what it did along the way.</span> A tool call is an action on the outside world: it sent an email, deleted a record, ran a query. The final answer can look correct while a tool call mid-run did something unintended. Auditing tool calls is how you catch side-effects, not just bad answers.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://docs.anthropic.com/en/docs/claude-code/monitoring-usage">Monitoring usage — Claude Code Docs</a>.
+    The official reference for session storage paths, OpenTelemetry integration, and the
+    event log format. Start with the session storage section — it shows you exactly where
+    your <code>.jsonl</code> files live and what each field means.
+    See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — paste me a log entry.</strong> Find a session log from
+    an agent run you're not sure about, copy a few lines in, and I'll walk you through
+    exactly what they mean and where to look for the root cause. Reading logs gets fast
+    after you've done it a handful of times with a guide.
+  </div>
+
+  <p>Terms from this lesson — <em>debugging</em>, <em>agent</em>, <em>human-in-the-loop</em>,
+  <em>action</em> — are in the
+  <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
+
+  <nav>
+    <a href="b12-using-subagents.html">← B12: Using Subagents</a>
+    <a href="b14-open-source.html">Next → B14: Open Source</a>
+  </nav>
+</div>
+</body>
+</html>
