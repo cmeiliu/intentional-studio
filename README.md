@@ -27,6 +27,19 @@ npm run dev
 
 Then visit <http://localhost:3000>.
 
+## Simulation lanes
+
+Start the local Next.js server, then run the example Pebbled lane:
+
+```bash
+npm run dev
+npm run sim -- intentional-studio-homepage
+```
+
+Simulation evidence is written under `.sim-out/`. The runner uses system Chrome
+and defaults to `http://127.0.0.1:3000`; override with `SIM_BASE_URL` or
+`--base-url` when the dev server is on another port.
+
 ## Backend
 
 The funnel stores sessions and bookings in the `pebbled-lead-gen` Neon database.

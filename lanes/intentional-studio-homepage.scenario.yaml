@@ -1,0 +1,37 @@
+schema: pebbled.scenario.v1
+id: intentional-studio-homepage
+title: Intentional Studio homepage smoke
+persona:
+  id: synthetic-founder
+  label: Synthetic founder evaluating the studio
+  data:
+    name: Synthetic Founder
+    email: founder@example.test
+goal: Confirm the homepage loads, presents the studio offer, and reaches the intake flow.
+app:
+  startPath: /
+defaults:
+  timeoutMs: 5000
+tags: [smoke, nextjs]
+steps:
+  - id: open-home
+    label: Open the homepage
+    action: goto
+    path: /
+    expect:
+      text: Intentional Studio
+      selectorVisible: '.hero-card img'
+  - id: confirm-services
+    label: Confirm the services section is present
+    action: assertText
+    text: Workshops & coaching
+  - id: start-intake
+    label: Start the intake flow
+    action: click
+    selector: 'a[href="/start"].topnav-cta'
+    expect:
+      urlIncludes: /start
+  - id: confirm-start
+    label: Confirm the intake page is visible
+    action: assertText
+    text: Where are you stuck
