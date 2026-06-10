@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glossary · AI Workflow Automation</title>
+<style>
+  :root {
+    --ink: #1a1a1a; --muted: #6b6b6b; --rule: #e2e0da;
+    --accent: #8a5a00; --paper: #fdfcf9; --avoid: #9a3b3b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    line-height: 1.5; margin: 0; padding: 4rem 1.5rem;
+  }
+  .page { max-width: 40rem; margin: 0 auto; }
+  header { border-bottom: 2px solid var(--ink); padding-bottom: 1rem; margin-bottom: 2rem; }
+  .kicker { font-family: -apple-system, Helvetica, Arial, sans-serif;
+    text-transform: uppercase; letter-spacing: .14em; font-size: .72rem;
+    color: var(--accent); margin: 0 0 .4rem; }
+  h1 { font-size: 1.9rem; line-height: 1.1; margin: 0; }
+  .lede { color: var(--muted); font-style: italic; margin: .6rem 0 0; }
+  h2 { font-family: -apple-system, Helvetica, Arial, sans-serif;
+    font-size: .82rem; text-transform: uppercase; letter-spacing: .1em;
+    color: var(--muted); border-bottom: 1px solid var(--rule);
+    padding-bottom: .35rem; margin: 2.6rem 0 1.2rem; }
+  dl { margin: 0; }
+  dt { font-weight: bold; font-size: 1.05rem; margin-top: 1.4rem; }
+  dt:first-of-type { margin-top: 0; }
+  dd { margin: .25rem 0 0; }
+  .avoid { font-family: -apple-system, Helvetica, Arial, sans-serif;
+    font-size: .76rem; color: var(--avoid); margin-top: .3rem; }
+  .avoid::before { content: "avoid: "; font-style: italic; color: var(--muted); }
+  footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule);
+    font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .78rem;
+    color: var(--muted); }
+  a { color: var(--accent); }
+  @media print {
+    body { padding: 0; background: #fff; }
+    h2 { break-after: avoid; } dt { break-after: avoid; }
+    dd, dl > div { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <p class="kicker">Reference · Canonical Language</p>
+    <h1>Glossary</h1>
+    <p class="lede">The shared, plain-English vocabulary for this course. Every lesson
+    uses these words to mean exactly these things. Keep it nearby.</p>
+  </header>
+
+  <h2>Talking to AI</h2>
+  <dl>
+    <div>
+      <dt>AI model (LLM)</dt>
+      <dd>A program that predicts likely text from the text you give it. Think of it
+      as a fast, confident, well-read intern with no memory of yesterday and no live
+      access to your accounts unless you connect it.</dd>
+      <p class="avoid">the AI, the algorithm, the robot</p>
+    </div>
+    <div>
+      <dt>Prompt</dt>
+      <dd>The instructions you give an AI model — the request plus any context, examples,
+      and desired format. A good prompt is reusable, not a lucky one-off.</dd>
+      <p class="avoid">question, command, query</p>
+    </div>
+    <div>
+      <dt>Context</dt>
+      <dd>The background information you hand the model inside the prompt (a document,
+      your brand voice, last email) so its answer fits your situation.</dd>
+      <p class="avoid">background, the info</p>
+    </div>
+    <div>
+      <dt>Hallucination</dt>
+      <dd>When a model states something false with full confidence. The single biggest
+      risk for business use — always verify facts, dates, and numbers.</dd>
+      <p class="avoid">mistake, bug, glitch</p>
+    </div>
+    <div>
+      <dt>Token</dt>
+      <dd>The unit AI tools count for length and price — roughly ¾ of a word. Matters
+      because longer prompts and outputs cost more and have limits.</dd>
+      <p class="avoid">word, character, credit</p>
+    </div>
+  </dl>
+
+  <h2>Automating work</h2>
+  <dl>
+    <div>
+      <dt>Automation</dt>
+      <dd>A workflow that runs on its own: "when X happens, do Y" — without you clicking
+      anything each time.</dd>
+      <p class="avoid">script, bot, integration</p>
+    </div>
+    <div>
+      <dt>Trigger</dt>
+      <dd>The event that starts an automation — a new email, a form submission, a new
+      row in a sheet. The "when X happens" half.</dd>
+      <p class="avoid">start, event, hook</p>
+    </div>
+    <div>
+      <dt>Action</dt>
+      <dd>What the automation does in response to a trigger — send a reply, add a row,
+      summarize text with AI. The "do Y" half.</dd>
+      <p class="avoid">step, task, function</p>
+    </div>
+    <div>
+      <dt>No-code tool</dt>
+      <dd>A platform (e.g. Zapier, Make) where you build automations by connecting
+      apps visually, with no programming.</dd>
+      <p class="avoid">software, app, the platform</p>
+    </div>
+    <div>
+      <dt>Human-in-the-loop</dt>
+      <dd>A checkpoint where a person reviews or approves before the automation acts —
+      your safety valve for anything customer-facing or risky.</dd>
+      <p class="avoid">manual check, approval</p>
+    </div>
+    <div>
+      <dt>Agent</dt>
+      <dd>An AI setup that decides which steps to take to reach a goal, rather than
+      following a fixed "when X do Y" path. More powerful, harder to control — use only
+      when a fixed automation can't do the job.</dd>
+      <p class="avoid">AI, assistant, bot</p>
+    </div>
+  </dl>
+
+  <footer>
+    AI Workflow Automation for Non-Technical Entrepreneurs · This glossary is canonical:
+    if a lesson and this page disagree, this page wins. Suggest edits to your instructor.
+  </footer>
+</div>
+</body>
+</html>
