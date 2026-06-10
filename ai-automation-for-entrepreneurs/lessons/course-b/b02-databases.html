@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B2 · Databases</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course B · Module B1 Production · Lesson 2 of 18</p>
+  <h1>Databases</h1>
+  <p class="lede">Understand where your app's data actually lives — and look at it
+  without breaking anything.</p>
+  <p class="meta">~13 min · Have your app's database dashboard open if possible · Prereq: B1 GitHub &amp; Worktrees</p>
+
+  <p>Your app is more than screens and buttons. Behind every form submission, every
+  user account, every order — there is a database storing the real thing. Most
+  founders treat it as a black box and hope the AI wired it up correctly. That's
+  fine for a prototype, but not for production. Your single win today: by the end
+  you'll be able to open your database, read what's in it, and understand its structure
+  well enough to spot a problem before it becomes a customer complaint.</p>
+
+  <h2>A database is a smart spreadsheet your app reads and writes</h2>
+  <div class="analogy">
+    <p>Picture a set of Google Sheets, except instead of you opening them, your app opens
+    them automatically every time someone clicks a button. A user signs up — a new row
+    appears in the "users" sheet. They place an order — a new row appears in the "orders"
+    sheet. They update their address — that row changes. Your app is constantly reading
+    and writing to these sheets in the background.</p>
+    <p>That "smart spreadsheet system" is the database. The individual sheets are called
+    <strong>tables</strong>. The columns are <strong>fields</strong>. Each row is a
+    <strong>record</strong>.</p>
+  </div>
+
+  <div class="files">
+    <div class="row"><span class="name">Table</span><span class="what">One sheet of related data — <code>users</code>, <code>orders</code>, <code>products</code>. Each table has one job.</span></div>
+    <div class="row"><span class="name">Column (field)</span><span class="what">A named piece of data — <code>email</code>, <code>created_at</code>, <code>total_price</code>. The column's type (text, number, date) is enforced.</span></div>
+    <div class="row"><span class="name">Row (record)</span><span class="what">One entry in a table — one user, one order, one product listing.</span></div>
+    <div class="row"><span class="name">ID</span><span class="what">A unique number or code every row gets automatically. The way tables link to each other — an order row stores the user's ID, not their whole profile.</span></div>
+  </div>
+
+  <p>Notice that last point about IDs. Tables <em>refer to</em> each other rather than
+  duplicating data. An order doesn't store the customer's name and email — it stores
+  their user ID, and the app looks up the rest when needed. This is called a
+  <strong>relational</strong> database, and it's what Supabase, PlanetScale, and most
+  app-builder backends give you by default.</p>
+
+  <h2>Your app builder already gave you a database</h2>
+  <p>If you built your app in Course A with a tool like <strong>Supabase</strong>,
+  <strong>Lovable</strong>, or <strong>Replit</strong>, a Postgres database was created for
+  you automatically. You can see it — and that's the most useful thing you can do today.</p>
+
+  <div class="callout">
+    <strong>Supabase Table Editor</strong> gives you a spreadsheet-style view of every
+    table in your database. You can read rows, edit individual cells, and even add or
+    delete records — all without writing a line of code. This is your primary tool for
+    understanding what's in there and for fixing data problems when they come up.
+  </div>
+
+  <p>The place to start is always <strong>reading</strong>, not writing. Open the Table
+  Editor, look at the rows your app has created, and ask yourself: does this look right?
+  Are there rows I'd expect that aren't there? Are there unexpected nulls (empty fields)
+  where there should be data? This kind of quick visual check catches whole categories
+  of bugs that would otherwise take hours to diagnose through code.</p>
+
+  <h2>Editing data safely — and why backups matter</h2>
+  <p>You can edit rows directly in the database dashboard. This is sometimes the fastest
+  way to fix a customer problem ("their account is stuck in a bad state — let me
+  manually correct that field"). But it bypasses all the checks your app code normally
+  runs, so a wrong edit can leave data in an inconsistent state.</p>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>✓ Safe to do directly</h3>
+      <ul>
+        <li>Correcting a typo in a text field</li>
+        <li>Marking a test record as deleted</li>
+        <li>Adding a missing value to an optional field</li>
+        <li>Querying and reading data to understand it</li>
+      </ul>
+    </div>
+    <div class="card bad">
+      <h3>✗ Do through the app, not directly</h3>
+      <ul>
+        <li>Changing a user's password (use the auth system)</li>
+        <li>Moving money or adjusting balances</li>
+        <li>Deleting rows that other tables reference by ID</li>
+        <li>Anything your app's code does validation on</li>
+      </ul>
+    </div>
+  </div>
+
+  <p>The fail-safe for all of this is a <strong>backup</strong>. Supabase takes
+  automatic daily backups on paid plans. Before any significant manual edit on a
+  live database, confirm a recent backup exists — or trigger one manually first.
+  That way a bad edit is annoying rather than catastrophic.</p>
+
+  <h2>One SQL command worth knowing</h2>
+  <p>You don't need to learn SQL (the language databases speak), but one command
+  will serve you well in every debugging session:</p>
+  <pre><span class="k">SELECT</span> * <span class="k">FROM</span> <span class="s">orders</span>
+<span class="k">WHERE</span> <span class="s">user_id</span> = <span class="c">4821</span>
+<span class="k">ORDER BY</span> <span class="s">created_at</span> <span class="k">DESC</span>
+<span class="k">LIMIT</span> <span class="c">10</span>;</pre>
+  <p>Read it aloud: <em>"Show me all columns from the orders table, for the user with
+  ID 4821, newest first, ten rows maximum."</em> That's it. Paste this into Supabase's
+  SQL editor, swap in the table name and the ID, and you can inspect any user's
+  records in about thirty seconds. Your AI tool can write the exact query for your
+  schema — just describe what you're looking for in plain English.</p>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it is what makes it stick.</p>
+    <details>
+      <summary>A customer says their order isn't showing up in the app. What's the first thing you should do?</summary>
+      <p><span class="answer">Open the database and look at the orders table for their user ID.</span> Before changing any code, check whether the row actually exists — it might be a data problem (the record was never created or was created with the wrong user ID) rather than a display bug. Read first, then diagnose.</p>
+    </details>
+    <details>
+      <summary>What's the difference between a table and a row?</summary>
+      <p><span class="answer">A table is the whole sheet — for example, all orders; a row is a single entry in that sheet — one specific order.</span> Tables hold all records of one type; each row is one instance of that type.</p>
+    </details>
+    <details>
+      <summary>Why does the orders table store a user_id instead of copying the user's full name and email into every order row?</summary>
+      <p><span class="answer">To avoid duplicating data.</span> If a user changes their email, you'd have to update every order row. Storing just the ID means the user's profile is the single source of truth — orders just point to it. This is the relational model.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://supabase.com/docs/guides/database/overview">Database Overview — Supabase Docs</a>.
+    The clearest plain-English introduction to the database that most AI-built apps
+    use. Covers tables, rows, the SQL editor, and the Table Editor UI. ~10 min.
+    See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — bring me your schema.</strong> Open your Supabase Table
+    Editor (or equivalent), take a screenshot or copy the table names, and tell me what
+    your app does. I'll help you read the structure, spot anything unusual, and write
+    the exact query to find whatever you're looking for.
+  </div>
+
+  <p>New terms from this lesson — <em>database</em>, <em>table</em>, <em>record</em>,
+  <em>SQL</em> — are in the <a href="../../reference/glossary.html">course glossary</a>.
+  Keep it open as you go.</p>
+
+  <nav>
+    <a href="b01-github-worktrees.html">← B1: GitHub &amp; Worktrees</a>
+    <a href="b03-integrate-data.html">Next → B3: Integrate Data</a>
+  </nav>
+</div>
+</body>
+</html>

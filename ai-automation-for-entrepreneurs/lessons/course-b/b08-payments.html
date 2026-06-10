@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B8 · Payments with Stripe</title>
+<link rel="stylesheet" href="../lesson.css">
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course B · Module B1 Production · Lesson 8 of 18</p>
+  <h1>Payments with Stripe</h1>
+  <p class="lede">Take money online without ever touching a credit-card number yourself.</p>
+  <p class="meta">~14 min · Have your app open · Prereq: B5 API Keys &amp; Secrets, B6 Auth</p>
+
+  <p>Nothing makes a prototype real faster than charging for it. But handling card
+  payments yourself means touching sensitive financial data, staying compliant with PCI
+  security standards, and building fraud protection from scratch. Stripe exists so you
+  never do any of that. Your single win here: by the end you'll understand how Stripe
+  sits between your app and the card networks, how to test without real money, and exactly
+  how your app learns that someone has paid — so you can unlock the right thing at the
+  right moment.</p>
+
+  <h2>The golden rule: you never touch card data</h2>
+  <div class="analogy">
+    <p>Think of Stripe as an armored cash courier. When a customer pays, they hand their
+    card details directly to the courier — the card number never passes through your
+    hands at all. The courier confirms the payment is good and hands you a receipt. You
+    act on the receipt; you never see the card.</p>
+    <p>That's not just a convenience — it's the architecture. Because the card data goes
+    straight to Stripe's servers, you're never responsible for storing or securing it.
+    Stripe carries PCI compliance so you don't have to.</p>
+  </div>
+
+  <h2>One-time checkout vs subscriptions</h2>
+  <p>Stripe handles both main billing shapes cleanly. Know which one you're building
+  before you start:</p>
+  <div class="cols">
+    <div class="card good">
+      <h3>One-time payment</h3>
+      <p>Customer pays once and gets access. Use Stripe Checkout — a pre-built,
+      hosted payment page. You redirect the customer there, Stripe takes the
+      payment, and redirects them back to your app when done. The least code you
+      can possibly write for a real payment.</p>
+    </div>
+    <div class="card good">
+      <h3>Subscription</h3>
+      <p>Customer pays a recurring amount (monthly, annually). Stripe handles
+      the billing schedule, failed payment retries, and pro-rated upgrades.
+      You define the price plans in the Stripe dashboard; your code just creates
+      a subscription and Stripe takes it from there.</p>
+    </div>
+  </div>
+  <p>Both flows start the same way: you get a Stripe API key (see B5), add Stripe's
+  library, and your AI assistant can generate the integration from the Stripe quickstart
+  docs. Paste the URL and ask — it's among the best-documented APIs in the world.</p>
+
+  <h2>Test mode: fake cards before real money</h2>
+  <p>Stripe gives every account two completely separate modes: <strong>test</strong> and
+  <strong>live</strong>. In test mode, nothing is real. You use Stripe's published fake
+  card numbers to simulate every scenario — successful payment, declined card, expired
+  card, 3D Secure challenge — and no actual charges ever occur.</p>
+  <div class="files">
+    <div class="row"><span class="name">4242 4242 4242 4242</span><span class="what">Stripe's standard test card. Any future expiry, any CVC. Always succeeds.</span></div>
+    <div class="row"><span class="name">4000 0000 0000 0002</span><span class="what">Always declined. Use this to test how your app handles a failed payment.</span></div>
+    <div class="row"><span class="name">4000 0025 0000 3155</span><span class="what">Triggers a 3D Secure authentication challenge — simulates the extra "confirm in your banking app" step.</span></div>
+  </div>
+  <p>Work entirely in test mode until everything behaves exactly as expected. Flipping
+  to live mode is a one-line environment-variable change (B5). Your test API key and
+  live API key are different values — keep them in separate environment variables and
+  never mix them up.</p>
+
+  <div class="callout">
+    <strong>The test-mode dashboard is your best debugging tool.</strong> Every test
+    payment shows up in your Stripe dashboard under test mode — you can see exactly what
+    happened, why a payment succeeded or failed, and replay webhook events. Open it
+    alongside your app while you're building.
+  </div>
+
+  <h2>Webhooks: how your app learns "they paid"</h2>
+  <p>Here's the moment most first-time builders get confused. After a customer pays,
+  Stripe needs to tell your app about it. It does this with a <strong>webhook</strong>:
+  Stripe sends an HTTP request to a URL you specify, carrying a payload that says
+  <em>"payment_intent.succeeded for customer Maya, $49."</em></p>
+  <p>Your app listens at that URL, reads the event, and acts on it: unlock the premium
+  tier, create the order in the database, send a confirmation email (B7). Without the
+  webhook, your app has no reliable way to know payment happened — it's the single
+  most important connection in the whole flow.</p>
+  <div class="steps">
+    <ol>
+      <li><strong>Create a webhook endpoint</strong> in your app — a URL like
+      <code>/api/stripe-webhook</code> that accepts POST requests from Stripe.</li>
+      <li><strong>Register the URL</strong> in your Stripe dashboard under Webhooks,
+      and choose which events to listen for (start with <code>payment_intent.succeeded</code>
+      and <code>customer.subscription.deleted</code>).</li>
+      <li><strong>Verify the signature.</strong> Stripe signs every webhook with your
+      webhook secret (another key to store in environment variables). Always verify it
+      before trusting the payload — this prevents anyone from faking a "they paid" event.</li>
+      <li><strong>Act on the event</strong> — update the database, send the email, unlock
+      the feature. Then respond with a <code>200 OK</code> so Stripe knows you received it.</li>
+      <li><strong>Test locally</strong> with the Stripe CLI — it can forward live webhook
+      events to your laptop during development without deploying.</li>
+    </ol>
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it is what makes it stick.</p>
+    <details>
+      <summary>Why does using Stripe Checkout mean you're not responsible for PCI compliance?</summary>
+      <p><span class="answer">Because the card details go directly to Stripe's servers — they never pass through or get stored on yours.</span> Stripe is the one handling sensitive card data and maintaining PCI compliance. You only ever receive a confirmation that payment succeeded.</p>
+    </details>
+    <details>
+      <summary>You charge a customer and want your app to immediately upgrade their account. What's the right way to trigger that?</summary>
+      <p><span class="answer">A webhook.</span> After payment, Stripe sends a <code>payment_intent.succeeded</code> event to your webhook URL. Your app handles that event and upgrades the account. Don't rely on a redirect URL alone — the customer might close the browser before it fires.</p>
+    </details>
+    <details>
+      <summary>You're testing checkout and want to simulate a declined card. What do you do?</summary>
+      <p><span class="answer">Use Stripe's test card number 4000 0000 0000 0002</span> (always declines) in test mode. No real money involved, but your app sees exactly the same declined response it would in production — so you can build and test the failure path properly.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://docs.stripe.com/payments">Stripe Payments Documentation</a> —
+    the quickstart guides walk from zero to a working checkout in under thirty minutes,
+    with clear explanations for every step. Start with "Build a payments page" for a
+    one-time payment, or "Set up a subscription" if that's your model. See
+    <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — bring me your billing model.</strong> One-time product?
+    Monthly subscription with a free tier? Usage-based pricing? Describe how your app
+    should charge and I'll sketch the exact Stripe flow and the two or three events your
+    webhook needs to handle.
+  </div>
+
+  <p>New terms this lesson — <em>payment gateway</em>, <em>webhook</em>, <em>PCI compliance</em>,
+  <em>test mode</em>, <em>subscription</em> — are in the
+  <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
+
+  <nav>
+    <a href="b07-send-emails.html">← B7: Send Emails</a>
+    <a href="b09-security-basics.html">Next → B9: Security Basics</a>
+  </nav>
+</div>
+</body>
+</html>
