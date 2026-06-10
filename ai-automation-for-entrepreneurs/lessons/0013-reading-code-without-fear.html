@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 13 · Reading Code Without Fear</title>
+<style>
+  :root {
+    --ink: #1a1a1a; --muted: #6b6b6b; --rule: #e2e0da;
+    --accent: #8a5a00; --paper: #fdfcf9; --good: #2f6b3a; --bad: #9a3b3b;
+    --box: #f3f0e8; --codebg: #1e1e23; --codeink: #e8e6df;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    line-height: 1.6; margin: 0; padding: 3.5rem 1.5rem;
+  }
+  .page { max-width: 40rem; margin: 0 auto; }
+  .kicker { font-family: -apple-system, Helvetica, Arial, sans-serif;
+    text-transform: uppercase; letter-spacing: .14em; font-size: .72rem;
+    color: var(--accent); margin: 0 0 .5rem; }
+  h1 { font-size: 2.1rem; line-height: 1.08; margin: 0 0 .5rem; }
+  .lede { color: var(--muted); font-style: italic; font-size: 1.08rem; margin: 0 0 .5rem; }
+  .meta { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .76rem;
+    color: var(--muted); border-bottom: 2px solid var(--ink);
+    padding-bottom: 1rem; margin-bottom: 2rem; }
+  h2 { font-size: 1.3rem; margin: 2.6rem 0 .6rem; }
+  p { margin: 0 0 1rem; }
+  .analogy { background: var(--box); border-left: 3px solid var(--accent);
+    padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+  .analogy p:last-child { margin-bottom: 0; }
+  .files { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: .85rem; background: #fff; border: 1px solid var(--rule);
+    border-radius: 6px; padding: 1rem 1.2rem; margin: 1.5rem 0; }
+  .files .row { display: grid; grid-template-columns: 9rem 1fr; gap: .8rem;
+    padding: .35rem 0; border-bottom: 1px dashed var(--rule); }
+  .files .row:last-child { border-bottom: none; }
+  .files .name { color: var(--accent); }
+  .files .what { font-family: Georgia, serif; color: var(--muted); font-size: .9rem; }
+  pre { background: var(--codebg); color: var(--codeink); border-radius: 6px;
+    padding: 1rem 1.1rem; overflow-x: auto; font-size: .82rem; line-height: 1.5;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; margin: 1.2rem 0; }
+  pre .c { color: #8aa6c1; } /* comment */
+  pre .k { color: #c98a5a; } /* keyword/tag */
+  pre .s { color: #9ec98a; } /* string */
+  .callout { background: var(--box); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.2rem 0; }
+  .callout strong { color: var(--accent); }
+  .test { border: 1px solid var(--rule); border-radius: 6px; padding: 1.2rem 1.3rem;
+    margin: 1.5rem 0; background: #fff; }
+  .test ol { margin: .5rem 0 0; padding-left: 1.3rem; }
+  .test li { margin-bottom: .5rem; }
+  .quiz { background: var(--box); border-radius: 6px; padding: 1.3rem 1.4rem; margin: 2rem 0; }
+  .quiz h2 { margin-top: 0; }
+  details { border-top: 1px solid var(--rule); padding: .8rem 0; }
+  details:last-child { border-bottom: 1px solid var(--rule); }
+  summary { cursor: pointer; font-weight: bold; }
+  details p { margin: .6rem 0 0; color: var(--muted); }
+  .answer { color: var(--good); font-weight: bold; }
+  .source { background: #fff; border: 1px dashed var(--accent); border-radius: 6px;
+    padding: 1rem 1.2rem; margin: 2rem 0; }
+  .source .kicker { margin-bottom: .3rem; }
+  .ask { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .9rem;
+    background: #1a1a1a; color: #f3f0e8; border-radius: 6px; padding: 1rem 1.2rem; margin: 2rem 0; }
+  nav { display: flex; justify-content: space-between; gap: 1rem; font-family: -apple-system, Helvetica, Arial, sans-serif;
+    font-size: .82rem; margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
+  a { color: var(--accent); }
+  @media print { body { padding: 0; background: #fff; } pre { background: #f4f4f4; color: #000; border: 1px solid #ccc; } .ask { background: #eee; color: #000; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Module 5 · Escape the Final 20% · Lesson 13 of 18</p>
+  <h1>Reading Code Without Fear</h1>
+  <p class="lede">You don't need to write code to be powerful. You need to read just
+  enough to find the part you want to change.</p>
+  <p class="meta">~14 min · Have your built app from Week 4 open · No writing code yet</p>
+
+  <p>Last week you built and shipped a real app just by describing it. Amazing — and also
+  the moment most non-technical founders get stuck. You asked for a change, the AI rewrote
+  something, and now a button's broken and you have no idea why. That's <strong>comprehension
+  debt</strong>: you own software you can't read. This lesson is the antidote. Your single
+  win: by the end you'll open the code your AI generated, and instead of panic, you'll think
+  <em>"ah — the part I want is probably right here."</em> That's the whole skill. Not writing.
+  <strong>Locating.</strong></p>
+
+  <h2>Code is just labeled instructions</h2>
+  <div class="analogy">
+    <p>Imagine a recipe card. You don't need to be a chef to read one — you can scan it and
+    point at "this is the ingredients, this is the oven temperature, this is the step where
+    it goes wrong." Code is the same: <strong>labeled instructions a computer follows
+    top to bottom.</strong> Scary-looking, but readable.</p>
+    <p>Your job isn't to cook from scratch. It's to find the line that says "350°F" when the
+    cake's burning, and change it.</p>
+  </div>
+
+  <h2>The three rooms of a typical app</h2>
+  <p>Almost every small web app the AI builds you has three kinds of files. Learn these
+  three words and the folder stops being a wall of mystery:</p>
+  <div class="files">
+    <div class="row"><span class="name">.html</span><span class="what">The <strong>structure</strong> — what's on the page (headings, buttons, boxes).</span></div>
+    <div class="row"><span class="name">.css</span><span class="what">The <strong>style</strong> — how it looks (colors, fonts, spacing).</span></div>
+    <div class="row"><span class="name">.js</span><span class="what">The <strong>behavior</strong> — what happens when you click (the logic).</span></div>
+  </div>
+  <p>Broken color or layout? Look in <strong>CSS</strong>. Wrong words or a missing button?
+  <strong>HTML</strong>. Click does nothing or the wrong thing? <strong>JavaScript</strong>.
+  That single triage rule will route you to the right file 90% of the time.</p>
+
+  <h2>Reading a snippet — out loud, in plain English</h2>
+  <p>Here's a real button from a generated app. Don't decode every symbol. Read it like
+  the recipe card — find the nouns and the verbs:</p>
+  <pre><span class="c">&lt;!-- HTML: the structure --&gt;</span>
+<span class="k">&lt;button</span> id=<span class="s">"draftBtn"</span><span class="k">&gt;</span>Draft this email<span class="k">&lt;/button&gt;</span>
+
+<span class="c">// JavaScript: the behavior</span>
+<span class="k">when</span> someone clicks <span class="s">"draftBtn"</span>:
+    message = <span class="s">"Write a friendly reminder about an overdue invoice"</span>
+    send message to the AI
+    show the reply on the page</pre>
+  <p>You just read code. The button is labeled <code>draftBtn</code>; the behavior block
+  says <em>when that button is clicked, send this message to the AI and show the reply.</em>
+  Want a warmer email? You can see exactly which line of text to change — the one in quotes.
+  <strong>That's the win.</strong> You don't edit blind; you edit the line you found.</p>
+
+  <div class="callout">
+    <strong>The golden move:</strong> when the AI hands you code, ask it
+    <em>"explain this file to me in plain English, line by line, like I'm not a programmer."</em>
+    Reading <em>with</em> the AI as your translator is the fastest way to build real comprehension —
+    and it's free.
+  </div>
+
+  <h2>Your 4-step "find the part" method</h2>
+  <div class="test">
+    <strong>When you want to change something:</strong>
+    <ol>
+      <li><strong>Name what you see.</strong> Is it a look, a word, or a behavior? → picks the file (CSS / HTML / JS).</li>
+      <li><strong>Search for the words.</strong> Use Find (Ctrl/Cmd-F) for text you can see on screen — like the button's label. It lives right next to the code you want.</li>
+      <li><strong>Read that bit out loud</strong> in plain English (ask the AI to translate if stuck).</li>
+      <li><strong>Change one thing, then look.</strong> One change at a time, then refresh and check. Never change five things at once.</li>
+    </ol>
+  </div>
+  <p>Notice this is the same posture as everything else in this course: small step, look at
+  the result, adjust. A tight feedback loop beats understanding everything up front.</p>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it is what makes it stick.</p>
+    <details>
+      <summary>Your app's "Submit" button is bright green and you want it blue. Which file?</summary>
+      <p><span class="answer">CSS.</span> Color is how it <em>looks</em> — that's style. The structure and behavior don't change at all.</p>
+    </details>
+    <details>
+      <summary>The button text should say "Generate" but reads "Genrate". Which file?</summary>
+      <p><span class="answer">HTML.</span> The words on the page are part of the page's structure/content. Find the typo, fix the one word.</p>
+    </details>
+    <details>
+      <summary>Clicking "Draft" does absolutely nothing. Best first move?</summary>
+      <p><span class="answer">Look in the JavaScript — and ask the AI to explain it.</span> A click that does nothing is a behavior problem. Don't guess across the whole project; route to JS and have the AI translate the relevant block.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Watch this next (primary source)</p>
+    <p style="margin:0">Read <a href="https://momen.app/blogs/best-ai-app-builders-2026">"Avoiding the Prototype Trap" (Momen)</a>
+    — the clearest explanation of the comprehension-debt trap and why this exact skill keeps
+    you out of it. ~10 min. More in <a href="../RESOURCES.md">RESOURCES.md</a>.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — paste me your code.</strong> Open your Week-4 app, copy any
+    file you don't understand, and send it to me. I'll translate it line by line in plain
+    English and point at exactly where you'd make the change you want. That's the fastest way
+    to turn "scary wall of code" into "oh, I see it."
+  </div>
+
+  <p>New words this lesson — <em>code</em>, <em>debugging</em>, <em>repository</em> — are in
+  the <a href="../reference/glossary.html">course glossary</a>. Keep it open.</p>
+
+  <nav>
+    <a href="0012-build-and-ship-a-one-page-tool.html">← Lesson 12: Build &amp; Ship a One-Page Tool</a>
+    <a href="0014-debugging-with-ai.html">Next → Lesson 14: Debugging With AI</a>
+  </nav>
+</div>
+</body>
+</html>
