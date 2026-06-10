@@ -17,11 +17,11 @@ they can't read.
 - Each learner **ships one capstone** — an automation or a small app — running for real by course end.
 
 ## Constraints
-- **Audience:** non-technical — no prior coding. Comfortable with everyday SaaS.
-- **Time:** busy founders. Target ~3–4 hrs/week, **6 weeks**. Lessons stay 10–15 min.
-- **Delivery:** hybrid — self-paced HTML lessons + one live build/Q&A session per week.
-- **Budget:** free / low-cost tiers where possible; flag when a paid tier is needed (AI build credits especially).
-- **Code depth is bounded:** "just enough to not get stuck." Empowerment over mastery — read, debug, and ship, not computer-science fundamentals.
+- **Audience:** mixed cohort. Course A welcomes any entrepreneur (non-technical, comfortable with everyday SaaS); Course B serves the ambitious going pro. Every module has core lessons + optional deep-dives.
+- **Delivery:** **two stackable courses** — A "Automate & Build" (foundational, ~4–5 wks) then B "Ship Real Software with AI Agents" (advanced, ~4–5 wks). Hybrid: self-paced HTML lessons + one live build/Q&A session per week.
+- **Time:** ~3–4 hrs/week core; deep-dives add on top. Lessons stay 10–15 min.
+- **Budget:** free / low-cost tiers where possible; flag paid tiers (AI build credits, hosting, Stripe especially).
+- **Code depth scales by course:** Course A is "just enough to not get stuck"; Course B goes into real production concerns (auth, databases, payments, infra) and the agentic toolkit (MCP, skills, subagents) — still builder-level, not a CS degree.
 
 ## In scope (newly added)
 - "Vibe coding": building software by describing it to an AI (Lovable / Bolt / v0 / Replit).
