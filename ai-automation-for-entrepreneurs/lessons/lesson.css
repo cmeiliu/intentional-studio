@@ -1,6 +1,6 @@
 /* Shared lesson stylesheet — AI for Entrepreneurs.
    Tufte-inspired: clean serif body, generous margins, prints well.
-   Every lesson links to this with <link rel="stylesheet" href="../lesson.css">. */
+   Inlined into each lesson so every file is self-contained and renders anywhere. */
 :root {
   --ink:#1a1a1a; --muted:#6b6b6b; --rule:#e2e0da; --accent:#8a5a00;
   --paper:#fdfcf9; --good:#2f6b3a; --bad:#9a3b3b; --box:#f3f0e8;
