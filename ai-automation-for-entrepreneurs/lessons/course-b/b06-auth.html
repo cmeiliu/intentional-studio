@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B6 · Auth: Real Logins</title>
+<style>
+/* Shared lesson stylesheet — AI for Entrepreneurs.
+   Tufte-inspired: clean serif body, generous margins, prints well.
+   Inlined into each lesson so every file is self-contained and renders anywhere. */
+:root {
+  --ink:#1a1a1a; --muted:#6b6b6b; --rule:#e2e0da; --accent:#8a5a00;
+  --paper:#fdfcf9; --good:#2f6b3a; --bad:#9a3b3b; --box:#f3f0e8;
+  --avoid:#9a3b3b; --codebg:#1e1e23; --codeink:#e8e6df;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  line-height: 1.6; margin: 0; padding: 3.5rem 1.5rem; }
+.page { max-width: 40rem; margin: 0 auto; }
+.kicker { font-family: -apple-system, Helvetica, Arial, sans-serif;
+  text-transform: uppercase; letter-spacing: .14em; font-size: .72rem;
+  color: var(--accent); margin: 0 0 .5rem; }
+h1 { font-size: 2.1rem; line-height: 1.08; margin: 0 0 .5rem; }
+.lede { color: var(--muted); font-style: italic; font-size: 1.08rem; margin: 0 0 .5rem; }
+.meta { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .76rem;
+  color: var(--muted); border-bottom: 2px solid var(--ink);
+  padding-bottom: 1rem; margin-bottom: 2rem; }
+.deep { display: inline-block; font-family: -apple-system, Helvetica, Arial, sans-serif;
+  font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; background: var(--box);
+  color: var(--accent); border: 1px solid var(--rule); border-radius: 999px;
+  padding: .15rem .6rem; margin-left: .5rem; vertical-align: middle; }
+h2 { font-size: 1.3rem; margin: 2.6rem 0 .6rem; }
+h3 { margin: 1.4rem 0 .4rem; }
+p { margin: 0 0 1rem; }
+code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .88em;
+  background: var(--box); padding: .1rem .35rem; border-radius: 4px; }
+.analogy { background: var(--box); border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+.analogy p:last-child { margin-bottom: 0; }
+.callout { background: var(--box); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.2rem 0; }
+.callout strong { color: var(--accent); }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+.card { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.1rem; background: #fff; }
+.card h3 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .8rem;
+  text-transform: uppercase; letter-spacing: .08em; margin: 0 0 .6rem; }
+.card.good h3 { color: var(--good); } .card.bad h3 { color: var(--bad); }
+.card ul { margin: 0; padding-left: 1.1rem; } .card li { margin-bottom: .4rem; }
+.files { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .85rem;
+  background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.5rem 0; }
+.files .row { display: grid; grid-template-columns: 9rem 1fr; gap: .8rem;
+  padding: .35rem 0; border-bottom: 1px dashed var(--rule); }
+.files .row:last-child { border-bottom: none; }
+.files .name { color: var(--accent); }
+.files .what { font-family: Georgia, serif; color: var(--muted); font-size: .9rem; }
+pre { background: var(--codebg); color: var(--codeink); border-radius: 6px;
+  padding: 1rem 1.1rem; overflow-x: auto; font-size: .82rem; line-height: 1.5;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; margin: 1.2rem 0; }
+pre .c { color: #8aa6c1; } pre .k { color: #c98a5a; } pre .s { color: #9ec98a; }
+.test { border: 1px solid var(--rule); border-radius: 6px; padding: 1.2rem 1.3rem;
+  margin: 1.5rem 0; background: #fff; }
+.test ol { margin: .5rem 0 0; padding-left: 1.3rem; } .test li { margin-bottom: .5rem; }
+.steps { margin: 1.2rem 0; padding-left: 1.3rem; } .steps li { margin-bottom: .6rem; }
+.quiz { background: var(--box); border-radius: 6px; padding: 1.3rem 1.4rem; margin: 2rem 0; }
+.quiz h2 { margin-top: 0; }
+details { border-top: 1px solid var(--rule); padding: .8rem 0; }
+details:last-child { border-bottom: 1px solid var(--rule); }
+summary { cursor: pointer; font-weight: bold; }
+details p { margin: .6rem 0 0; color: var(--muted); }
+.answer { color: var(--good); font-weight: bold; }
+.source { background: #fff; border: 1px dashed var(--accent); border-radius: 6px;
+  padding: 1rem 1.2rem; margin: 2rem 0; }
+.source .kicker { margin-bottom: .3rem; }
+.ask { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .9rem;
+  background: #1a1a1a; color: #f3f0e8; border-radius: 6px; padding: 1rem 1.2rem; margin: 2rem 0; }
+.ask a { color: #e0b76a; }
+nav { display: flex; justify-content: space-between; gap: 1rem;
+  font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .82rem;
+  margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
+nav a { max-width: 48%; }
+a { color: var(--accent); }
+@media (max-width: 34rem) { .cols { grid-template-columns: 1fr; } }
+@media print { body { padding: 0; background: #fff; }
+  pre { background: #f4f4f4; color: #000; border: 1px solid #ccc; }
+  .ask { background: #eee; color: #000; } .ask a { color: var(--accent); } }
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course B · Module B1 Production · Lesson 6 of 18</p>
+  <h1>Auth: Real Logins</h1>
+  <p class="lede">Real users need real logins. This lesson shows you how to add them safely — without building any login security yourself.</p>
+  <p class="meta">~13 min · Have your app open · Prereq: B5 API Keys &amp; Secrets</p>
+
+  <p>The moment you move from a private prototype to an app real people use, you need
+  <strong>authentication</strong> — a way for users to prove who they are and get in. Get it
+  wrong and strangers can see each other's data, or worse. Get it right and it takes
+  an afternoon, not a week. Your single win here: by the end you'll understand the
+  two halves of auth, know the golden rule that keeps you safe, and be ready to wire up
+  a provider so logins just work.</p>
+
+  <h2>Two halves: identity and permissions</h2>
+  <p>People use "auth" as one word, but it covers two different jobs:</p>
+  <div class="cols">
+    <div class="card good">
+      <h3>Authentication — "Who are you?"</h3>
+      <p>The login step. The user proves their identity with a password, a Google
+      account, or a magic link. Your app gets back a confirmed answer: <em>this is
+      Maya, user ID 4821.</em></p>
+    </div>
+    <div class="card good">
+      <h3>Authorization — "What can you do?"</h3>
+      <p>Once you know who they are, you decide what they're allowed to see or touch.
+      A free user can't reach the premium dashboard. An admin can delete records; a
+      regular user can't.</p>
+    </div>
+  </div>
+  <p>Both matter. Most early-stage apps get authentication working and then forget
+  authorization entirely — which is how free users end up reading paying customers'
+  invoices. Plan for both from day one.</p>
+
+  <h2>The golden rule: never store passwords yourself</h2>
+  <div class="analogy">
+    <p>Imagine you're running a members-only club. You could build your own vault,
+    print membership cards, and guard the door yourself. Or you could hand all of
+    that to a specialist security company that does nothing else, has passed every
+    audit, and carries the liability if something goes wrong.</p>
+    <p>Storing passwords is the vault. <strong>Never build your own vault.</strong>
+    The specialist companies are called <em>auth providers</em>, and using one is
+    the right call every time — no matter how good your AI coding is.</p>
+  </div>
+
+  <p>When you store a password yourself, you're responsible if your database leaks.
+  An auth provider stores a cryptographic hash (a scrambled fingerprint) on servers
+  designed for exactly this purpose, and they handle password resets, brute-force
+  protection, rate limiting, and compliance. You get all of that for free by not
+  rolling your own.</p>
+
+  <h2>Pick a provider and wire it in</h2>
+  <p>Three providers dominate the indie and startup space. All three have a generous
+  free tier and take less than a day to integrate:</p>
+  <div class="files">
+    <div class="row"><span class="name">Clerk</span><span class="what">Best developer experience, drop-in UI components for sign-up/sign-in, generous free tier. Great for Next.js and React apps.</span></div>
+    <div class="row"><span class="name">Supabase Auth</span><span class="what">Built into Supabase — ideal if you're already using Supabase as your database. One platform, one dashboard.</span></div>
+    <div class="row"><span class="name">Auth0</span><span class="what">Enterprise-grade, huge feature set, steeper learning curve. Good if you need advanced enterprise SSO later.</span></div>
+  </div>
+
+  <p>All three follow the same basic flow: you register your app, get an API key
+  (see B5), add their library to your code, and replace your hand-rolled login
+  form with their component. Your AI assistant can generate the wiring from the
+  provider's quickstart docs — paste the URL in and ask it to follow the guide.</p>
+
+  <div class="callout">
+    <strong>Social login (Google, Apple) in plain English:</strong> instead of asking
+    users to create yet another password, you let them tap "Continue with Google."
+    Google confirms their identity and sends your app a token — a signed note saying
+    <em>"yes, this is them."</em> You never see their Google password. Users love it
+    because they have one fewer password to forget; you love it because Google handles
+    the security. Every major auth provider wires this up in a few clicks.
+  </div>
+
+  <h2>Sessions: how your app remembers you</h2>
+  <p>Once a user logs in, your app needs to remember them as they click around — that's
+  a <strong>session</strong>. Think of it like a wristband at a music festival: you prove
+  your ticket once at the gate, get a wristband, and every tent you walk into checks the
+  wristband instead of your ticket.</p>
+  <p>The wristband in web apps is a <strong>token</strong> — a short encrypted string your
+  browser stores and sends along with every request. Your auth provider creates and
+  validates the token; you just check "is there a valid token?" before showing protected
+  pages. Sessions expire (the wristband has an end time), forcing a re-login after some
+  period of inactivity. Your provider handles all of this automatically.</p>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it is what makes it stick.</p>
+    <details>
+      <summary>A free user on your app can somehow reach the paying-customers-only dashboard. Which half of auth is broken?</summary>
+      <p><span class="answer">Authorization.</span> Authentication confirmed who they are; authorization controls what they can access. The rule that says "free users can't see this page" is missing or misconfigured.</p>
+    </details>
+    <details>
+      <summary>Why is using an auth provider safer than storing passwords in your own database?</summary>
+      <p><span class="answer">Because you'd be responsible for securing them — and auth providers are specialists who store only cryptographic hashes, carry the compliance burden, and handle brute-force protection and resets automatically. You get all that for free by not rolling your own.</span></p>
+    </details>
+    <details>
+      <summary>A user logs in, browses five pages, then comes back an hour later without logging in again. What's making that possible?</summary>
+      <p><span class="answer">A session token.</span> After login, the provider issues a short encrypted token stored in the browser. Every page checks for a valid token instead of asking for the password again. The session eventually expires and forces a fresh login.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://clerk.com/docs">Clerk Documentation</a> —
+    start with the quickstart for your framework. It's the clearest end-to-end walkthrough
+    of how a modern auth provider connects to a real app, even if you end up choosing a
+    different provider. See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — bring me your specific situation.</strong> Not sure whether
+    Clerk or Supabase Auth fits your stack? Confused about where the "check the token"
+    code goes in your app? Paste your question or your current code and I'll walk through
+    it with you directly.
+  </div>
+
+  <p>New terms this lesson — <em>authentication</em>, <em>authorization</em>, <em>session</em>,
+  <em>token</em>, <em>social login</em> — are in the
+  <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
+
+  <nav>
+    <a href="b05-api-keys-secrets.html">← B5: API Keys &amp; Secrets</a>
+    <a href="b07-send-emails.html">Next → B7: Send Emails</a>
+  </nav>
+</div>
+</body>
+</html>

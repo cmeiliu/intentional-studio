@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A3 · The Busywork Audit (+ Build Wishlist)</title>
+<style>
+/* Shared lesson stylesheet — AI for Entrepreneurs.
+   Tufte-inspired: clean serif body, generous margins, prints well.
+   Inlined into each lesson so every file is self-contained and renders anywhere. */
+:root {
+  --ink:#1a1a1a; --muted:#6b6b6b; --rule:#e2e0da; --accent:#8a5a00;
+  --paper:#fdfcf9; --good:#2f6b3a; --bad:#9a3b3b; --box:#f3f0e8;
+  --avoid:#9a3b3b; --codebg:#1e1e23; --codeink:#e8e6df;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  line-height: 1.6; margin: 0; padding: 3.5rem 1.5rem; }
+.page { max-width: 40rem; margin: 0 auto; }
+.kicker { font-family: -apple-system, Helvetica, Arial, sans-serif;
+  text-transform: uppercase; letter-spacing: .14em; font-size: .72rem;
+  color: var(--accent); margin: 0 0 .5rem; }
+h1 { font-size: 2.1rem; line-height: 1.08; margin: 0 0 .5rem; }
+.lede { color: var(--muted); font-style: italic; font-size: 1.08rem; margin: 0 0 .5rem; }
+.meta { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .76rem;
+  color: var(--muted); border-bottom: 2px solid var(--ink);
+  padding-bottom: 1rem; margin-bottom: 2rem; }
+.deep { display: inline-block; font-family: -apple-system, Helvetica, Arial, sans-serif;
+  font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; background: var(--box);
+  color: var(--accent); border: 1px solid var(--rule); border-radius: 999px;
+  padding: .15rem .6rem; margin-left: .5rem; vertical-align: middle; }
+h2 { font-size: 1.3rem; margin: 2.6rem 0 .6rem; }
+h3 { margin: 1.4rem 0 .4rem; }
+p { margin: 0 0 1rem; }
+code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .88em;
+  background: var(--box); padding: .1rem .35rem; border-radius: 4px; }
+.analogy { background: var(--box); border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+.analogy p:last-child { margin-bottom: 0; }
+.callout { background: var(--box); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.2rem 0; }
+.callout strong { color: var(--accent); }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+.card { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.1rem; background: #fff; }
+.card h3 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .8rem;
+  text-transform: uppercase; letter-spacing: .08em; margin: 0 0 .6rem; }
+.card.good h3 { color: var(--good); } .card.bad h3 { color: var(--bad); }
+.card ul { margin: 0; padding-left: 1.1rem; } .card li { margin-bottom: .4rem; }
+.files { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .85rem;
+  background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.5rem 0; }
+.files .row { display: grid; grid-template-columns: 9rem 1fr; gap: .8rem;
+  padding: .35rem 0; border-bottom: 1px dashed var(--rule); }
+.files .row:last-child { border-bottom: none; }
+.files .name { color: var(--accent); }
+.files .what { font-family: Georgia, serif; color: var(--muted); font-size: .9rem; }
+pre { background: var(--codebg); color: var(--codeink); border-radius: 6px;
+  padding: 1rem 1.1rem; overflow-x: auto; font-size: .82rem; line-height: 1.5;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; margin: 1.2rem 0; }
+pre .c { color: #8aa6c1; } pre .k { color: #c98a5a; } pre .s { color: #9ec98a; }
+.test { border: 1px solid var(--rule); border-radius: 6px; padding: 1.2rem 1.3rem;
+  margin: 1.5rem 0; background: #fff; }
+.test ol { margin: .5rem 0 0; padding-left: 1.3rem; } .test li { margin-bottom: .5rem; }
+.steps { margin: 1.2rem 0; padding-left: 1.3rem; } .steps li { margin-bottom: .6rem; }
+.quiz { background: var(--box); border-radius: 6px; padding: 1.3rem 1.4rem; margin: 2rem 0; }
+.quiz h2 { margin-top: 0; }
+details { border-top: 1px solid var(--rule); padding: .8rem 0; }
+details:last-child { border-bottom: 1px solid var(--rule); }
+summary { cursor: pointer; font-weight: bold; }
+details p { margin: .6rem 0 0; color: var(--muted); }
+.answer { color: var(--good); font-weight: bold; }
+.source { background: #fff; border: 1px dashed var(--accent); border-radius: 6px;
+  padding: 1rem 1.2rem; margin: 2rem 0; }
+.source .kicker { margin-bottom: .3rem; }
+.ask { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .9rem;
+  background: #1a1a1a; color: #f3f0e8; border-radius: 6px; padding: 1rem 1.2rem; margin: 2rem 0; }
+.ask a { color: #e0b76a; }
+nav { display: flex; justify-content: space-between; gap: 1rem;
+  font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .82rem;
+  margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
+nav a { max-width: 48%; }
+a { color: var(--accent); }
+@media (max-width: 34rem) { .cols { grid-template-columns: 1fr; } }
+@media print { body { padding: 0; background: #fff; }
+  pre { background: #f4f4f4; color: #000; border: 1px solid #ccc; }
+  .ask { background: #eee; color: #000; } .ask a { color: var(--accent); } }
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course A · Module A1 Foundations · Lesson 3 of 17</p>
+  <h1>The Busywork Audit (+ Build Wishlist)</h1>
+  <p class="lede">Leave this lesson with one workflow to automate and one tool to build —
+  your north stars for the rest of this course.</p>
+  <p class="meta">~15 min · Have a blank doc or notebook open · Prereq: Lessons A1 and A2</p>
+
+  <p>Every lesson from here on aims at something <em>real in your business</em>. That means
+  you need a target before we go further. This lesson is hands-on: you'll list your recurring
+  tasks, score them on a quick three-factor formula, and walk out with two picks — one
+  workflow to automate and one small tool to build. Those two picks travel with you through
+  the entire course.</p>
+
+  <h2>Part 1: The automation audit</h2>
+  <p>Open a blank document. Give yourself five minutes to list every task you did last week
+  that you've done before — the recurring stuff. Don't filter yet. Aim for at least eight
+  items. Then score each one on three dimensions:</p>
+
+  <div class="test">
+    <strong>Score each task 1–3 on each dimension (1 = low, 3 = high):</strong>
+    <ol>
+      <li><strong>Frequency.</strong> How often does this happen? (1 = monthly, 2 = weekly, 3 = daily or near-daily.)</li>
+      <li><strong>Tedium.</strong> How much does it drain you? A task you secretly enjoy scores low here.</li>
+      <li><strong>Rule-based-ness.</strong> Could you explain it to a new hire in ten minutes? (1 = lots of judgment required, 3 = clear steps every time.)</li>
+    </ol>
+    <p style="margin:.8rem 0 0">Multiply the three numbers for a score out of 27. The highest scorer is your <strong>automation target</strong>.</p>
+  </div>
+
+  <p>A task that scores 18 or above is a strong candidate. One that scores under 9 probably
+  needs too much human judgment and isn't worth touching yet. That's fine — you're picking the
+  best first step, not automating everything at once.</p>
+
+  <div class="callout">
+    <strong>One narrow job.</strong> Don't automate an entire department in one go. The
+    entrepreneurs who succeed start with one step in one workflow — say, "copy the text from
+    each new enquiry email into a Google Sheet." That modest win builds confidence, surfaces
+    surprises, and takes a day instead of a month.
+  </div>
+
+  <h2>Part 2: The build wishlist</h2>
+  <p>Separate from automation, think about a small tool you wish existed. Not an enterprise
+  platform — something specific to your business that no off-the-shelf app quite does.
+  Common examples:</p>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>Good "build" ideas</h3>
+      <ul>
+        <li>A one-page proposal calculator clients fill in themselves</li>
+        <li>An internal FAQ tool your team types questions into</li>
+        <li>A form that generates a first-draft brief from client answers</li>
+        <li>A simple job tracker visible to the whole team</li>
+      </ul>
+    </div>
+    <div class="card bad">
+      <h3>Save for later</h3>
+      <ul>
+        <li>A full CRM replacement (too big for a first build)</li>
+        <li>Anything needing user accounts and payments (too complex early)</li>
+        <li>A full marketing website (better tools exist for that)</li>
+        <li>Anything a free app already does well</li>
+      </ul>
+    </div>
+  </div>
+
+  <p>Write one sentence: <em>"I wish there was a tool that ____."</em> That sentence becomes
+  your build brief in the later modules.</p>
+
+  <h2>Part 3: Apply the safety check</h2>
+  <p>Before you commit to either pick, run one final question from Lesson A1's Automatable
+  Task Test: <strong>what happens if it goes wrong?</strong></p>
+
+  <div class="test">
+    <strong>Is your automation target safe to start?</strong>
+    <ol>
+      <li><strong>Is a human reviewing the output before it reaches a customer?</strong> If yes, the risk is low — keep it.</li>
+      <li><strong>Is it touching money, contracts, or legal commitments?</strong> If yes, add a human-in-the-loop checkpoint before automating fully.</li>
+      <li><strong>Is the worst case a minor annoyance?</strong> Duplicate entry, slightly wrong summary, an extra email? Then start. You can fix it fast.</li>
+    </ol>
+  </div>
+
+  <p>You don't need a perfect, risk-free workflow. You need a <em>recoverable</em> one.
+  Almost every first automation qualifies, as long as a person sees the output before
+  it matters.</p>
+
+  <div class="analogy">
+    <p>Think of your first automation as a trial employee. You wouldn't send a brand-new
+    hire to close a deal alone on day one. You'd have them draft the email while you review
+    it. Same idea: keep a human in the loop at first, then reduce oversight as trust builds.</p>
+  </div>
+
+  <h2>Your two picks</h2>
+  <p>Write these down now — you'll reference them in every subsequent lesson:</p>
+
+  <div class="files">
+    <div class="row">
+      <span class="name">Automate:</span>
+      <span class="what">The highest-scoring task from your audit. One specific workflow step, not an entire process.</span>
+    </div>
+    <div class="row">
+      <span class="name">Build:</span>
+      <span class="what">Your "I wish this existed" sentence. One narrow tool, one job it does.</span>
+    </div>
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening. Recalling it now is what makes it stick.</p>
+    <details>
+      <summary>A task scores 3 on frequency, 2 on tedium, and 1 on rule-based-ness. Should you automate it first?</summary>
+      <p><span class="answer">Probably not yet.</span> It scores 6 out of 27 — the low rule-based-ness means there's too much judgment involved for an AI workflow to handle reliably. Look for a task with a higher rule-based-ness score first.</p>
+    </details>
+    <details>
+      <summary>You want to automate sending contract follow-ups. A wrong message could annoy a client. What's your safety move?</summary>
+      <p><span class="answer">Add a human-in-the-loop checkpoint.</span> Have the automation draft the message and drop it into a "needs approval" queue rather than sending automatically. You review, then send. Full automation can come once you trust the output.</p>
+    </details>
+    <details>
+      <summary>Why pick just ONE automation target and ONE build idea, not five of each?</summary>
+      <p><span class="answer">Because finishing one builds more momentum than starting five.</span> Multiple partial projects teach you nothing about the full cycle. One completed automation — even a simple one — shows you the whole loop and gives you something working in days.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://blog.mean.ceo/building-first-ai-feature/">"Building Your First AI Feature" (Mean CEO blog)</a> — practical guidance on starting with one narrow job and keeping a human review step, written for founders rather than engineers. ~8 min. See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — share your two picks.</strong> Tell me your automation
+    target and your build idea and I'll gut-check both: is the automation scoped narrowly
+    enough? Is the build idea realistic for a first project? I'll flag anything that's
+    likely to stall and suggest a tighter version if needed.
+  </div>
+
+  <p>Key terms from this lesson — <em>automation</em>, <em>human-in-the-loop</em>,
+  <em>trigger</em>, <em>action</em> — are in the
+  <a href="../../reference/glossary.html">course glossary</a>. Keep it open as you go.</p>
+
+  <nav>
+    <a href="a02-ai-tool-landscape.html">← A2: The AI Tool Landscape</a>
+    <a href="a04-anatomy-of-a-prompt.html">Next → A4: Anatomy of a Reliable Prompt</a>
+  </nav>
+</div>
+</body>
+</html>

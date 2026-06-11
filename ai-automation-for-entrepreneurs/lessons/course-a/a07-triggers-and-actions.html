@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A7 · Triggers &amp; Actions</title>
+<style>
+/* Shared lesson stylesheet — AI for Entrepreneurs.
+   Tufte-inspired: clean serif body, generous margins, prints well.
+   Inlined into each lesson so every file is self-contained and renders anywhere. */
+:root {
+  --ink:#1a1a1a; --muted:#6b6b6b; --rule:#e2e0da; --accent:#8a5a00;
+  --paper:#fdfcf9; --good:#2f6b3a; --bad:#9a3b3b; --box:#f3f0e8;
+  --avoid:#9a3b3b; --codebg:#1e1e23; --codeink:#e8e6df;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  line-height: 1.6; margin: 0; padding: 3.5rem 1.5rem; }
+.page { max-width: 40rem; margin: 0 auto; }
+.kicker { font-family: -apple-system, Helvetica, Arial, sans-serif;
+  text-transform: uppercase; letter-spacing: .14em; font-size: .72rem;
+  color: var(--accent); margin: 0 0 .5rem; }
+h1 { font-size: 2.1rem; line-height: 1.08; margin: 0 0 .5rem; }
+.lede { color: var(--muted); font-style: italic; font-size: 1.08rem; margin: 0 0 .5rem; }
+.meta { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .76rem;
+  color: var(--muted); border-bottom: 2px solid var(--ink);
+  padding-bottom: 1rem; margin-bottom: 2rem; }
+.deep { display: inline-block; font-family: -apple-system, Helvetica, Arial, sans-serif;
+  font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; background: var(--box);
+  color: var(--accent); border: 1px solid var(--rule); border-radius: 999px;
+  padding: .15rem .6rem; margin-left: .5rem; vertical-align: middle; }
+h2 { font-size: 1.3rem; margin: 2.6rem 0 .6rem; }
+h3 { margin: 1.4rem 0 .4rem; }
+p { margin: 0 0 1rem; }
+code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .88em;
+  background: var(--box); padding: .1rem .35rem; border-radius: 4px; }
+.analogy { background: var(--box); border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+.analogy p:last-child { margin-bottom: 0; }
+.callout { background: var(--box); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.2rem 0; }
+.callout strong { color: var(--accent); }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+.card { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.1rem; background: #fff; }
+.card h3 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .8rem;
+  text-transform: uppercase; letter-spacing: .08em; margin: 0 0 .6rem; }
+.card.good h3 { color: var(--good); } .card.bad h3 { color: var(--bad); }
+.card ul { margin: 0; padding-left: 1.1rem; } .card li { margin-bottom: .4rem; }
+.files { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .85rem;
+  background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.5rem 0; }
+.files .row { display: grid; grid-template-columns: 9rem 1fr; gap: .8rem;
+  padding: .35rem 0; border-bottom: 1px dashed var(--rule); }
+.files .row:last-child { border-bottom: none; }
+.files .name { color: var(--accent); }
+.files .what { font-family: Georgia, serif; color: var(--muted); font-size: .9rem; }
+pre { background: var(--codebg); color: var(--codeink); border-radius: 6px;
+  padding: 1rem 1.1rem; overflow-x: auto; font-size: .82rem; line-height: 1.5;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; margin: 1.2rem 0; }
+pre .c { color: #8aa6c1; } pre .k { color: #c98a5a; } pre .s { color: #9ec98a; }
+.test { border: 1px solid var(--rule); border-radius: 6px; padding: 1.2rem 1.3rem;
+  margin: 1.5rem 0; background: #fff; }
+.test ol { margin: .5rem 0 0; padding-left: 1.3rem; } .test li { margin-bottom: .5rem; }
+.steps { margin: 1.2rem 0; padding-left: 1.3rem; } .steps li { margin-bottom: .6rem; }
+.quiz { background: var(--box); border-radius: 6px; padding: 1.3rem 1.4rem; margin: 2rem 0; }
+.quiz h2 { margin-top: 0; }
+details { border-top: 1px solid var(--rule); padding: .8rem 0; }
+details:last-child { border-bottom: 1px solid var(--rule); }
+summary { cursor: pointer; font-weight: bold; }
+details p { margin: .6rem 0 0; color: var(--muted); }
+.answer { color: var(--good); font-weight: bold; }
+.source { background: #fff; border: 1px dashed var(--accent); border-radius: 6px;
+  padding: 1rem 1.2rem; margin: 2rem 0; }
+.source .kicker { margin-bottom: .3rem; }
+.ask { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .9rem;
+  background: #1a1a1a; color: #f3f0e8; border-radius: 6px; padding: 1rem 1.2rem; margin: 2rem 0; }
+.ask a { color: #e0b76a; }
+nav { display: flex; justify-content: space-between; gap: 1rem;
+  font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .82rem;
+  margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
+nav a { max-width: 48%; }
+a { color: var(--accent); }
+@media (max-width: 34rem) { .cols { grid-template-columns: 1fr; } }
+@media print { body { padding: 0; background: #fff; }
+  pre { background: #f4f4f4; color: #000; border: 1px solid #ccc; }
+  .ask { background: #eee; color: #000; } .ask a { color: var(--accent); } }
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course A · Module A3 No-Code Automation · Lesson 7 of 17</p>
+  <h1>Triggers &amp; Actions</h1>
+  <p class="lede">Every automation ever built — from a Fortune 500 pipeline to
+  a two-step Zapier zap — is the same two-word sentence.</p>
+  <p class="meta">~10 min · No account needed yet · Prereq: A3 (your chosen task)</p>
+
+  <p>You're about to enter the most practical module in the course. But before you build
+  anything, you need to understand the one grammar rule behind every automation in
+  existence: <strong>when X happens, do Y.</strong> That's it. Every workflow tool, every
+  no-code platform, every elaborate pipeline is just variations on that sentence. This
+  lesson's single win: once you see the pattern, you'll be able to look at any repetitive
+  task in your business and immediately sketch an automation for it.</p>
+
+  <h2>Trigger: the "when X happens" half</h2>
+  <div class="analogy">
+    <p>A trigger is the event that wakes your automation up. Nothing runs until the trigger
+    fires. Think of it like a motion-sensor light — the light doesn't care about logic; it
+    just waits for movement.</p>
+    <p>Until there's movement (the trigger), nothing happens. The moment there is, the
+    automation runs.</p>
+  </div>
+
+  <div class="files">
+    <div class="row"><span class="name">New email</span><span class="what">A message arrives in a specific inbox or matches a filter.</span></div>
+    <div class="row"><span class="name">Form submitted</span><span class="what">Someone fills out a Typeform, Google Form, or website contact form.</span></div>
+    <div class="row"><span class="name">New spreadsheet row</span><span class="what">A row is added to a Google Sheet or Airtable base.</span></div>
+    <div class="row"><span class="name">Calendar event</span><span class="what">A meeting is booked, cancelled, or starts in X minutes.</span></div>
+    <div class="row"><span class="name">Schedule</span><span class="what">Every day at 9 am, every Monday, the first of the month.</span></div>
+  </div>
+
+  <h2>Action: the "do Y" half</h2>
+  <p>An action is what the automation does the moment the trigger fires. With AI in the
+  loop, your actions can do much more than route data — they can think about it first.</p>
+
+  <div class="files">
+    <div class="row"><span class="name">Summarize</span><span class="what">Take a long email or document and pull out the key points.</span></div>
+    <div class="row"><span class="name">Draft a reply</span><span class="what">Write a first-pass response in your tone and send (or queue) it.</span></div>
+    <div class="row"><span class="name">Classify</span><span class="what">Sort an item into a category — "urgent / not urgent", "lead type", "topic".</span></div>
+    <div class="row"><span class="name">Add to a sheet</span><span class="what">Write structured data (name, summary, label) into a spreadsheet row.</span></div>
+    <div class="row"><span class="name">Post to Slack</span><span class="what">Send a message to a channel — "New lead: [name], interested in [product]."</span></div>
+    <div class="row"><span class="name">Send an email</span><span class="what">Fire off a reply, notification, or follow-up automatically.</span></div>
+  </div>
+
+  <h2>Connecting two apps with no code</h2>
+  <p>Tools like <strong>Zapier</strong> and <strong>Make</strong> are the plumbing. They
+  connect thousands of apps — Gmail, Slack, Sheets, Notion, Typeform, Stripe — without
+  you writing a line of code. You pick a trigger app, pick an action app, and draw the
+  connection. That's a <em>zap</em> (Zapier) or a <em>scenario</em> (Make).</p>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>Zapier</h3>
+      <ul>
+        <li>Largest app library (7,000+)</li>
+        <li>Easiest for first-timers</li>
+        <li>Free tier: 100 tasks/month</li>
+        <li>Best for: simple 2-step automations</li>
+      </ul>
+    </div>
+    <div class="card good">
+      <h3>Make (formerly Integromat)</h3>
+      <ul>
+        <li>Visual flowchart builder</li>
+        <li>More powerful multi-step logic</li>
+        <li>Free tier: 1,000 operations/month</li>
+        <li>Best for: branching, loops, complex flows</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Start with a template.</strong> Both Zapier and Make offer hundreds of
+    ready-made automation templates. Instead of building from a blank screen, browse
+    templates for your trigger app (e.g. "Gmail") and pick the one closest to your
+    use case. Modify the prompt inside it. You'll ship something working in under 30
+    minutes the first time.
+  </div>
+
+  <h2>A template end to end</h2>
+  <p>Here's what a simple automation looks like, written as a plain-English sentence first,
+  then mapped to the tool:</p>
+  <div class="test">
+    <strong>Plain-English version:</strong>
+    <ol>
+      <li><strong>Trigger:</strong> A new row is added to my "Leads" Google Sheet.</li>
+      <li><strong>AI action:</strong> Summarize the lead's notes in one sentence and classify them as "hot / warm / cold" based on what they wrote.</li>
+      <li><strong>Output action:</strong> Post a Slack message to <code>#sales</code> with the name, classification, and one-sentence summary.</li>
+    </ol>
+  </div>
+  <p>In Zapier, that's three steps. Step 1 is the trigger (Google Sheets — New Row). Step 2
+  is an AI action (Zapier's built-in ChatGPT/Claude action, or a webhook to the model of your
+  choice). Step 3 is the output action (Slack — Send Channel Message). You filled in no code
+  — only your prompt, your sheet columns, and your channel name.</p>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening. Recalling it now is what makes it stick.</p>
+    <details>
+      <summary>What is a trigger? Give an example from your own business.</summary>
+      <p><span class="answer">A trigger is the event that starts the automation.</span> Common examples: a new form submission from your website, a new row added to an order tracker, an inbound email to your support address. It's the "when X happens" half — nothing runs until this event fires.</p>
+    </details>
+    <details>
+      <summary>Your automation should draft a reply every time a contact form is filled out. What's the trigger and what's the action?</summary>
+      <p><span class="answer">Trigger: new form submission. Action: AI drafts a reply (and optionally sends it or queues it for review).</span> The trigger watches the form; the action does the work. Keep them separate in your head and building the zap becomes obvious.</p>
+    </details>
+    <details>
+      <summary>Why start from a template rather than a blank automation?</summary>
+      <p><span class="answer">Templates give you a working skeleton — trigger, action, and field mappings already wired up.</span> You customize the AI prompt inside rather than making all the connection decisions yourself. Faster, and far fewer first-run errors.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://zapier.com/resources">Zapier Resources &amp; Learning Center</a>.
+    The "How Zapier Works" guides explain trigger-action workflows with real app examples.
+    Browse the resources matching your trigger app. See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — describe your task.</strong> Tell me the recurring task you
+    picked in A3 — what kicks it off, what you do, where the result ends up — and I'll map
+    it to a trigger, an AI action, and an output action. You'll have a blueprint to build
+    from in A8.
+  </div>
+
+  <p>Terms introduced this lesson — <em>trigger</em>, <em>action</em>, <em>automation</em>,
+  <em>no-code tool</em> — are all in the <a href="../../reference/glossary.html">course
+  glossary</a>.</p>
+
+  <nav>
+    <a href="a06-make-it-trustworthy.html">← A6: Make It Trustworthy</a>
+    <a href="a08-first-automation.html">Next → A8: Build Your First Automation</a>
+  </nav>
+</div>
+</body>
+</html>

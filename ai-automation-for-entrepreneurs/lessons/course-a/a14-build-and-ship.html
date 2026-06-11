@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A14 · Build &amp; Ship a One-Page Tool</title>
+<style>
+/* Shared lesson stylesheet — AI for Entrepreneurs.
+   Tufte-inspired: clean serif body, generous margins, prints well.
+   Inlined into each lesson so every file is self-contained and renders anywhere. */
+:root {
+  --ink:#1a1a1a; --muted:#6b6b6b; --rule:#e2e0da; --accent:#8a5a00;
+  --paper:#fdfcf9; --good:#2f6b3a; --bad:#9a3b3b; --box:#f3f0e8;
+  --avoid:#9a3b3b; --codebg:#1e1e23; --codeink:#e8e6df;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  line-height: 1.6; margin: 0; padding: 3.5rem 1.5rem; }
+.page { max-width: 40rem; margin: 0 auto; }
+.kicker { font-family: -apple-system, Helvetica, Arial, sans-serif;
+  text-transform: uppercase; letter-spacing: .14em; font-size: .72rem;
+  color: var(--accent); margin: 0 0 .5rem; }
+h1 { font-size: 2.1rem; line-height: 1.08; margin: 0 0 .5rem; }
+.lede { color: var(--muted); font-style: italic; font-size: 1.08rem; margin: 0 0 .5rem; }
+.meta { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .76rem;
+  color: var(--muted); border-bottom: 2px solid var(--ink);
+  padding-bottom: 1rem; margin-bottom: 2rem; }
+.deep { display: inline-block; font-family: -apple-system, Helvetica, Arial, sans-serif;
+  font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; background: var(--box);
+  color: var(--accent); border: 1px solid var(--rule); border-radius: 999px;
+  padding: .15rem .6rem; margin-left: .5rem; vertical-align: middle; }
+h2 { font-size: 1.3rem; margin: 2.6rem 0 .6rem; }
+h3 { margin: 1.4rem 0 .4rem; }
+p { margin: 0 0 1rem; }
+code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .88em;
+  background: var(--box); padding: .1rem .35rem; border-radius: 4px; }
+.analogy { background: var(--box); border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+.analogy p:last-child { margin-bottom: 0; }
+.callout { background: var(--box); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.2rem 0; }
+.callout strong { color: var(--accent); }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+.card { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.1rem; background: #fff; }
+.card h3 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .8rem;
+  text-transform: uppercase; letter-spacing: .08em; margin: 0 0 .6rem; }
+.card.good h3 { color: var(--good); } .card.bad h3 { color: var(--bad); }
+.card ul { margin: 0; padding-left: 1.1rem; } .card li { margin-bottom: .4rem; }
+.files { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .85rem;
+  background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.5rem 0; }
+.files .row { display: grid; grid-template-columns: 9rem 1fr; gap: .8rem;
+  padding: .35rem 0; border-bottom: 1px dashed var(--rule); }
+.files .row:last-child { border-bottom: none; }
+.files .name { color: var(--accent); }
+.files .what { font-family: Georgia, serif; color: var(--muted); font-size: .9rem; }
+pre { background: var(--codebg); color: var(--codeink); border-radius: 6px;
+  padding: 1rem 1.1rem; overflow-x: auto; font-size: .82rem; line-height: 1.5;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; margin: 1.2rem 0; }
+pre .c { color: #8aa6c1; } pre .k { color: #c98a5a; } pre .s { color: #9ec98a; }
+.test { border: 1px solid var(--rule); border-radius: 6px; padding: 1.2rem 1.3rem;
+  margin: 1.5rem 0; background: #fff; }
+.test ol { margin: .5rem 0 0; padding-left: 1.3rem; } .test li { margin-bottom: .5rem; }
+.steps { margin: 1.2rem 0; padding-left: 1.3rem; } .steps li { margin-bottom: .6rem; }
+.quiz { background: var(--box); border-radius: 6px; padding: 1.3rem 1.4rem; margin: 2rem 0; }
+.quiz h2 { margin-top: 0; }
+details { border-top: 1px solid var(--rule); padding: .8rem 0; }
+details:last-child { border-bottom: 1px solid var(--rule); }
+summary { cursor: pointer; font-weight: bold; }
+details p { margin: .6rem 0 0; color: var(--muted); }
+.answer { color: var(--good); font-weight: bold; }
+.source { background: #fff; border: 1px dashed var(--accent); border-radius: 6px;
+  padding: 1rem 1.2rem; margin: 2rem 0; }
+.source .kicker { margin-bottom: .3rem; }
+.ask { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .9rem;
+  background: #1a1a1a; color: #f3f0e8; border-radius: 6px; padding: 1rem 1.2rem; margin: 2rem 0; }
+.ask a { color: #e0b76a; }
+nav { display: flex; justify-content: space-between; gap: 1rem;
+  font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .82rem;
+  margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
+nav a { max-width: 48%; }
+a { color: var(--accent); }
+@media (max-width: 34rem) { .cols { grid-template-columns: 1fr; } }
+@media print { body { padding: 0; background: #fff; }
+  pre { background: #f4f4f4; color: #000; border: 1px solid #ccc; }
+  .ask { background: #eee; color: #000; } .ask a { color: var(--accent); } }
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course A · Module A4 Build · Lesson 14 of 17</p>
+  <h1>Build &amp; Ship a One-Page Tool</h1>
+  <p class="lede">Generate your tool, preview it, and put it live on the real internet at a
+  public URL — your first "I made real software" moment.</p>
+  <p class="meta">~20 min · Have your A13 build brief ready to paste · Prereq: A13 Write the Build Brief</p>
+
+  <p>You've planned what to build. Now you build it. This lesson is hands-on from the first
+  paragraph: you'll open Lovable or Bolt, paste your brief, generate a working first version,
+  iterate in small steps, and then deploy it to a real public URL that you can share with
+  anyone. Your single win: by the end of this lesson you will have <strong>shipped a piece
+  of software you made</strong> — not a template someone else built, not a prototype that only
+  runs on your laptop. A live tool at a real address.</p>
+
+  <h2>Pick your builder</h2>
+  <p>Two tools do this job well for non-technical founders right now. Either works for this
+  lesson — pick one and stay with it.</p>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>Lovable (lovable.dev)</h3>
+      <ul>
+        <li>Strong on polished UI out of the box</li>
+        <li>Built-in deploy with one click</li>
+        <li>Free tier for experimenting; paid credits for longer sessions</li>
+        <li>Best for tools that look client-ready from day one</li>
+      </ul>
+    </div>
+    <div class="card good">
+      <h3>Bolt (bolt.new)</h3>
+      <ul>
+        <li>Fast generation, strong on React apps</li>
+        <li>Generous free tier to start</li>
+        <li>Deploy via Netlify drop or StackBlitz</li>
+        <li>Best for prototyping quickly when looks matter less than function</li>
+      </ul>
+    </div>
+  </div>
+
+  <p>Both tools meter your usage in <strong>credits</strong>. You spend credits each time the AI
+  generates or rewrites code. This matters: large, vague requests burn more credits than small,
+  specific ones. Keeping your requests narrow is good engineering <em>and</em> good economics.</p>
+
+  <h2>Build in small steps — not one giant prompt</h2>
+  <div class="analogy">
+    <p>Think of the builder like a skilled contractor you're directing over the phone. You
+    wouldn't say "build the whole house" in one call and wait a week. You'd say "pour the
+    foundation," walk over and check it, then say "frame the walls." Small steps, eyes on
+    the result after each one.</p>
+    <p>Same rule here. One specific request → check the preview → next request.
+    <strong>The tighter the loop, the less you have to undo.</strong></p>
+  </div>
+
+  <h2>The build-and-ship steps</h2>
+
+  <div class="steps">
+    <strong>Follow these in order — don't skip ahead</strong>
+    <ol>
+      <li>
+        <strong>Open the builder and start a new project.</strong>
+        Lovable: click "New Project." Bolt: go to bolt.new. You get a blank canvas.
+      </li>
+      <li>
+        <strong>Paste your build brief as the first prompt.</strong>
+        Copy your entire A13 brief — all seven fields — and paste it as your opening message.
+        Do not add extra requests yet. Send and wait.
+      </li>
+      <li>
+        <strong>Preview what it generated.</strong>
+        The builder shows a live preview. Click through every element. Does the input
+        work? Does the output appear? Write down what's wrong before you say anything to
+        the AI.
+      </li>
+      <li>
+        <strong>Iterate with one request at a time.</strong>
+        Fix the most important problem first. One sentence, specific: <em>"The output text
+        is not appearing after I click the button. Fix only that."</em> Check again.
+        Repeat. Never ask for two changes in one message.
+      </li>
+      <li>
+        <strong>Test with a real example from your brief.</strong>
+        Use the exact "done looks like" test you wrote in A13. Paste your real input.
+        Does the output match what you described? If yes, you're done with v1.
+        If not, one more targeted fix.
+      </li>
+      <li>
+        <strong>Deploy to a public URL.</strong>
+        Lovable: click "Deploy" (top right) — your app gets a
+        <code>*.lovable.app</code> address instantly. Bolt: click "Deploy to Netlify"
+        or use the StackBlitz share link. Either way you get a real HTTPS URL.
+      </li>
+      <li>
+        <strong>Test on the live URL.</strong>
+        Open the public URL in a fresh browser tab — not the preview. Run your "done"
+        test again. If it passes: you shipped.
+      </li>
+    </ol>
+  </div>
+
+  <div class="callout">
+    <strong>Credit discipline:</strong> before you send any message to the builder, read it and
+    ask: "is this one change or two?" If it's two, send two separate messages. A focused request
+    takes fewer tokens, produces less broken code, and is easier to undo if it goes wrong.
+    Vague or multi-part requests are the fastest way to burn your credit quota on rework.
+  </div>
+
+  <h2>When the first version isn't quite right</h2>
+  <p>It almost never comes out perfect. That is fine — it is expected. Here's the triage order:</p>
+
+  <div class="files">
+    <div class="row"><span class="name">Core job broken</span><span class="what">The input/output doesn't work at all → one focused fix prompt, or revert and re-paste the brief.</span></div>
+    <div class="row"><span class="name">Output wrong</span><span class="what">The text or data is off → describe exactly what you got vs. what you wanted, in one sentence.</span></div>
+    <div class="row"><span class="name">Looks wrong</span><span class="what">Cosmetic issues (color, layout) → address after the core job works. Never prioritize looks over function in v1.</span></div>
+    <div class="row"><span class="name">Something new needed</span><span class="what">You want to add a feature → write it in a new brief field first, then ask. Scope creep is still a risk inside the builder.</span></div>
+  </div>
+
+  <p>If after three targeted fix attempts the same thing is still broken, stop. Lesson 16 covers
+  the debugging loop properly. For now: celebrate what works, note what doesn't, and move on.
+  A tool that does 90% of the job is infinitely more useful than a perfect spec with no tool.</p>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it is what makes it stick.</p>
+    <details>
+      <summary>Why do you paste the entire A13 brief as the first prompt, rather than writing a new short prompt?</summary>
+      <p><span class="answer">Because the brief already contains all the decisions.</span> Who it's for, the one job, the input, the output, what done means, what to leave out — those are exactly the facts the builder needs to generate a focused first version. Rewriting a shorter prompt just risks losing precision you already worked to define.</p>
+    </details>
+    <details>
+      <summary>You ask the builder "make it look better and also fix the button." What's wrong with that?</summary>
+      <p><span class="answer">It's two changes in one request.</span> When two things change at once and something breaks, you don't know which change caused it. Send one message per change, check the preview, then send the next one.</p>
+    </details>
+    <details>
+      <summary>Your app works perfectly in the builder preview but throws an error at the live URL. First move?</summary>
+      <p><span class="answer">Re-deploy, then re-test.</span> Sometimes the preview runs a slightly different version than what was deployed. Click Deploy again to push the latest version, then check the live URL fresh. If it still errors, that's a debugging job for Lesson 16.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://docs.lovable.dev/tips-tricks/best-practice">Best practices — Lovable Documentation</a>.
+    The official guide to getting consistent, high-quality results: plan before you prompt,
+    build by component, use real content. Directly applicable to what you just did. ~10 min.
+    See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — share the URL.</strong> Paste your live app link and tell me
+    the one thing that isn't quite right yet. I'll give you the exact one-sentence prompt to
+    fix it. That back-and-forth is the fastest way to learn how to steer a builder precisely.
+  </div>
+
+  <p>New words this lesson — <em>deploy</em>, <em>vibe coding</em>, <em>comprehension debt</em>
+  — are defined in the <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
+
+  <nav>
+    <a href="a13-build-brief.html">← A13: Write the Build Brief</a>
+    <a href="a15-reading-code-without-fear.html">Next → A15: Reading Code Without Fear</a>
+  </nav>
+</div>
+</body>
+</html>
