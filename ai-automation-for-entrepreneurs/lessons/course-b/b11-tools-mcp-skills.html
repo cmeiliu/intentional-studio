@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>B11 · Tools, MCP &amp; Skills</title>
+<title>B11 · Tools, CLI, MCP &amp; Skills</title>
 <style>
 /* Shared lesson stylesheet — AI for Entrepreneurs.
    Tufte-inspired: clean serif body, generous margins, prints well.
@@ -88,16 +88,17 @@ a { color: var(--accent); }
 <body>
 <div class="page">
   <p class="kicker">Course B · Module B2 Going Agentic · Lesson 11 of 18</p>
-  <h1>Tools, MCP &amp; Skills</h1>
-  <p class="lede">Three buzzwords — one idea: giving your agent the right superpowers for the job.</p>
-  <p class="meta">~12 min · Have your terminal open · Prereq: B10 Anatomy of an Agent</p>
+  <h1>Tools, CLI, MCP &amp; Skills</h1>
+  <p class="lede">Four ways to give your agent superpowers — and how to know which one a job needs.</p>
+  <p class="meta">~13 min · Have your terminal open · Prereq: B10 Anatomy of an Agent</p>
 
   <p>In B10 you learned that an agent needs "tools" — but nobody explains what that means in
-  practice, or why the words <em>MCP</em> and <em>skills</em> keep showing up alongside it.
-  By the end of this lesson you'll be able to decode all three — and, crucially, you already
-  have hands-on experience with one of them: the <code>teach</code> skill you installed right
-  at the start of this course. Your single win: understand what each layer does, so you can
-  confidently wire up an agent that actually reaches the outside world.</p>
+  practice, or why the words <em>CLI</em>, <em>MCP</em>, and <em>skills</em> keep showing up
+  alongside it. By the end of this lesson you'll be able to decode all four — and, crucially,
+  you already have hands-on experience with two of them: at the very start of this course you
+  installed the <code>teach</code> <strong>skill</strong> by typing a <strong>CLI</strong>
+  command (<code>npx skills add</code>). Your single win: understand what each layer does and
+  when to reach for it, so you can confidently wire up an agent that reaches the outside world.</p>
 
   <h2>Tools: specific abilities you grant</h2>
   <p>A tool is a defined capability the model can call during its loop. You grant tools
@@ -114,6 +115,21 @@ a { color: var(--accent); }
   <p>The model decides <em>when</em> to call a tool and <em>what</em> to pass it. The result
   comes back like any other text and the model reads it, then decides what to do next.
   You are always in control of which tools exist — that's your guardrail lever.</p>
+
+  <h2>CLI: let the agent use the command line</h2>
+  <p>A <strong>CLI</strong> (command-line interface) is the text-based way to control software
+  by <em>typing commands</em> instead of clicking buttons. It looks intimidating to humans — but
+  for an agent it's one of the biggest superpowers of all. Almost every serious tool on a
+  computer has a command line, and the moment you give an agent a terminal, that <em>entire
+  universe of existing tools</em> becomes usable with no special integration to build.</p>
+  <div class="analogy">
+    <p>Think of the CLI as handing the agent the same keyboard a developer uses. Suddenly it can
+    do what a developer does by typing: save to <code>git</code>, deploy a site, resize a folder
+    of images, run tests, install a package.</p>
+    <p>You've already done this. <code>npx skills add</code> was a CLI command — you typed it, but
+    an agent could run that exact line itself. This is literally how coding agents like Claude
+    Code work: they're given a terminal and they drive real tools the way a person would.</p>
+  </div>
 
   <h2>MCP: the universal plug standard</h2>
   <div class="analogy">
@@ -173,11 +189,23 @@ a { color: var(--accent); }
   (your brand voice, paragraph length). Each skill loads its instructions into context at the
   right moment.</p>
 
-  <h2>How the three layers stack</h2>
+  <h2>How the four compare</h2>
   <div class="files">
-    <div class="row"><span class="name">Skills</span><span class="what">Teach the agent <em>how to think</em> about a domain — expertise via instructions.</span></div>
-    <div class="row"><span class="name">Tools</span><span class="what">Let the agent <em>act</em> — specific capabilities it can call in the loop.</span></div>
-    <div class="row"><span class="name">MCP</span><span class="what">The <em>plumbing standard</em> that connects tools to outside systems without custom wiring.</span></div>
+    <div class="row"><span class="name">Skills</span><span class="what"><em>Expertise</em> — instructions that teach the agent HOW to think about a task. <strong>Reach for it when:</strong> you want consistent, high-quality judgment.</span></div>
+    <div class="row"><span class="name">Tools</span><span class="what">A single defined <em>ability</em> the agent can call. <strong>Reach for it when:</strong> the agent needs to DO one specific thing.</span></div>
+    <div class="row"><span class="name">CLI</span><span class="what">The agent runs <em>existing terminal commands</em>. <strong>Reach for it when:</strong> a capable command-line tool already exists and you want power fast.</span></div>
+    <div class="row"><span class="name">MCP</span><span class="what">A <em>universal standard</em> that plugs tools and data into any agent. <strong>Reach for it when:</strong> you want a clean, reusable, permissioned connection to a system.</span></div>
+  </div>
+
+  <div class="callout">
+    <strong>CLI vs MCP — the key contrast:</strong> both connect an agent to the outside world,
+    but differently. A <strong>CLI</strong> is immediate and enormously powerful — the agent
+    borrows tools that already exist — but it's free-form: little structure, and it runs real
+    commands on your machine, so guardrails matter. <strong>MCP</strong> is more deliberate — a
+    structured, permissioned connector someone has built — safer and reusable, but only useful
+    if an MCP server for that system exists. Rule of thumb: reach for a <strong>CLI</strong> when
+    the tool is already there and you want power now; reach for <strong>MCP</strong> when you
+    want a clean, repeatable, controlled connection.
   </div>
 
   <div class="quiz">
@@ -195,6 +223,10 @@ a { color: var(--accent); }
       <summary>Why does MCP matter to a non-engineer entrepreneur?</summary>
       <p><span class="answer">Because it means pre-built connectors exist for most common tools.</span> Instead of paying a developer to wire your agent to Google Drive or Notion, you find (or run) an MCP server for that service and point your agent at it. The standard eliminates the custom plumbing cost.</p>
     </details>
+    <details>
+      <summary>Your agent needs to resize a few hundred images, and a command-line tool for that already exists. Fastest path — CLI or MCP?</summary>
+      <p><span class="answer">Give the agent CLI access and let it run that tool.</span> When a capable command-line tool already exists, the agent can just use it — nothing to build. You'd reach for MCP instead when you want a standardized, permissioned connection you'll reuse across many agents and systems.</p>
+    </details>
   </div>
 
   <div class="source">
@@ -211,7 +243,7 @@ a { color: var(--accent); }
     to grant your first agent? Describe your setup and I'll give you a concrete starting point.
   </div>
 
-  <p>Terms from this lesson — <em>agent</em>, <em>context</em>, <em>action</em> — are in the
+  <p>Terms from this lesson — <em>tool</em>, <em>CLI</em>, <em>MCP</em>, <em>skill</em> — are in the
   <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
 
   <nav>

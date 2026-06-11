@@ -83,7 +83,7 @@ subagents) to build faster.
 
 ### Module B2 — Going Agentic: Agents, MCP & Skills
 - **B2.1 Anatomy of an Agent** — model + tools + memory + the loop
-- **B2.2 Tools, MCP & Skills** — how an agent gets superpowers; what MCP is; what a skill is *(the thing we installed in lesson 0)*
+- **B2.2 Tools, CLI, MCP & Skills** — the four ways an agent gets superpowers; CLI vs MCP compared; what a skill is *(the thing we installed in lesson 0)*
 - **B2.3 Using Subagents** — delegating work to parallel agents
 - **B2.4 Reading Session Logs** — seeing what the agent did; debugging *its* behavior
 - **B2.5 Open Source** — what it is, finding it, standing on others' work
