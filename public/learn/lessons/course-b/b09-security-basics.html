@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B9 · Security Basics</title>
+<style>
+/* Shared lesson stylesheet — AI for Entrepreneurs.
+   Tufte-inspired: clean serif body, generous margins, prints well.
+   Inlined into each lesson so every file is self-contained and renders anywhere. */
+:root {
+  --ink:#1a1a1a; --muted:#6b6b6b; --rule:#e2e0da; --accent:#8a5a00;
+  --paper:#fdfcf9; --good:#2f6b3a; --bad:#9a3b3b; --box:#f3f0e8;
+  --avoid:#9a3b3b; --codebg:#1e1e23; --codeink:#e8e6df;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  line-height: 1.6; margin: 0; padding: 3.5rem 1.5rem; }
+.page { max-width: 40rem; margin: 0 auto; }
+.kicker { font-family: -apple-system, Helvetica, Arial, sans-serif;
+  text-transform: uppercase; letter-spacing: .14em; font-size: .72rem;
+  color: var(--accent); margin: 0 0 .5rem; }
+h1 { font-size: 2.1rem; line-height: 1.08; margin: 0 0 .5rem; }
+.lede { color: var(--muted); font-style: italic; font-size: 1.08rem; margin: 0 0 .5rem; }
+.meta { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .76rem;
+  color: var(--muted); border-bottom: 2px solid var(--ink);
+  padding-bottom: 1rem; margin-bottom: 2rem; }
+.deep { display: inline-block; font-family: -apple-system, Helvetica, Arial, sans-serif;
+  font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; background: var(--box);
+  color: var(--accent); border: 1px solid var(--rule); border-radius: 999px;
+  padding: .15rem .6rem; margin-left: .5rem; vertical-align: middle; }
+h2 { font-size: 1.3rem; margin: 2.6rem 0 .6rem; }
+h3 { margin: 1.4rem 0 .4rem; }
+p { margin: 0 0 1rem; }
+code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .88em;
+  background: var(--box); padding: .1rem .35rem; border-radius: 4px; }
+.analogy { background: var(--box); border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+.analogy p:last-child { margin-bottom: 0; }
+.callout { background: var(--box); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.2rem 0; }
+.callout strong { color: var(--accent); }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+.card { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.1rem; background: #fff; }
+.card h3 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .8rem;
+  text-transform: uppercase; letter-spacing: .08em; margin: 0 0 .6rem; }
+.card.good h3 { color: var(--good); } .card.bad h3 { color: var(--bad); }
+.card ul { margin: 0; padding-left: 1.1rem; } .card li { margin-bottom: .4rem; }
+.files { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .85rem;
+  background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.5rem 0; }
+.files .row { display: grid; grid-template-columns: 9rem 1fr; gap: .8rem;
+  padding: .35rem 0; border-bottom: 1px dashed var(--rule); }
+.files .row:last-child { border-bottom: none; }
+.files .name { color: var(--accent); }
+.files .what { font-family: Georgia, serif; color: var(--muted); font-size: .9rem; }
+pre { background: var(--codebg); color: var(--codeink); border-radius: 6px;
+  padding: 1rem 1.1rem; overflow-x: auto; font-size: .82rem; line-height: 1.5;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; margin: 1.2rem 0; }
+pre .c { color: #8aa6c1; } pre .k { color: #c98a5a; } pre .s { color: #9ec98a; }
+.test { border: 1px solid var(--rule); border-radius: 6px; padding: 1.2rem 1.3rem;
+  margin: 1.5rem 0; background: #fff; }
+.test ol { margin: .5rem 0 0; padding-left: 1.3rem; } .test li { margin-bottom: .5rem; }
+.steps { margin: 1.2rem 0; padding-left: 1.3rem; } .steps li { margin-bottom: .6rem; }
+.quiz { background: var(--box); border-radius: 6px; padding: 1.3rem 1.4rem; margin: 2rem 0; }
+.quiz h2 { margin-top: 0; }
+details { border-top: 1px solid var(--rule); padding: .8rem 0; }
+details:last-child { border-bottom: 1px solid var(--rule); }
+summary { cursor: pointer; font-weight: bold; }
+details p { margin: .6rem 0 0; color: var(--muted); }
+.answer { color: var(--good); font-weight: bold; }
+.source { background: #fff; border: 1px dashed var(--accent); border-radius: 6px;
+  padding: 1rem 1.2rem; margin: 2rem 0; }
+.source .kicker { margin-bottom: .3rem; }
+.ask { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .9rem;
+  background: #1a1a1a; color: #f3f0e8; border-radius: 6px; padding: 1rem 1.2rem; margin: 2rem 0; }
+.ask a { color: #e0b76a; }
+nav { display: flex; justify-content: space-between; gap: 1rem;
+  font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .82rem;
+  margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
+nav a { max-width: 48%; }
+a { color: var(--accent); }
+@media (max-width: 34rem) { .cols { grid-template-columns: 1fr; } }
+@media print { body { padding: 0; background: #fff; }
+  pre { background: #f4f4f4; color: #000; border: 1px solid #ccc; }
+  .ask { background: #eee; color: #000; } .ask a { color: var(--accent); } }
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course B · Module B1 Production · Lesson 9 of 18</p>
+  <h1>Security Basics <span class="deep">deep dive</span></h1>
+  <p class="lede">A handful of silent mistakes account for most vibe-coded app breaches. Learn to spot them before you ship.</p>
+  <p class="meta">~18 min · Have your app and its environment variables open · Prereq: B5 API Keys, B6 Auth, B8 Payments</p>
+
+  <p>Security feels abstract until your database gets wiped, your API key runs up a
+  $4,000 bill, or a stranger reads every customer's private data. The uncomfortable
+  truth about AI-generated apps is that the AI writes functional code — but it rarely
+  writes <em>defensive</em> code unprompted. It doesn't know that your database rules
+  let anyone read everything, or that an API key is sitting in a public file. You
+  have to check. Your single win: by the end you'll know the four silent vulnerabilities
+  that catch vibe-coded apps most often, and you'll have a concrete pre-launch checklist
+  to work through before your app goes live.</p>
+
+  <h2>The four silent vulnerabilities</h2>
+  <p>These four problems are "silent" because the app works perfectly in development —
+  nothing crashes, no warning appears. The damage only shows up when someone finds and
+  exploits them.</p>
+
+  <div class="cols">
+    <div class="card bad">
+      <h3>1 · Exposed API keys</h3>
+      <p>An API key checked into a public GitHub repo, or hardcoded into
+      client-side JavaScript, is visible to anyone — and bots scan GitHub
+      constantly. Within minutes of a key appearing publicly, it can be used
+      to rack up charges, send spam, or exfiltrate data in your name. See B5
+      for the right pattern: environment variables only, never in code.</p>
+    </div>
+    <div class="card bad">
+      <h3>2 · Database with no access rules</h3>
+      <p>Most AI-scaffolded projects spin up a database where any authenticated
+      — or worse, unauthenticated — request can read or write any row. Your
+      customer's orders, messages, and profile data are visible to every other
+      customer. Supabase calls these Row Level Security (RLS) policies;
+      Firebase has Security Rules. They default to <em>open</em>. You must
+      turn them on.</p>
+    </div>
+  </div>
+  <div class="cols">
+    <div class="card bad">
+      <h3>3 · Trusting user input blindly</h3>
+      <p>When your app takes text from a user and passes it directly into a
+      database query or an AI prompt without any checks, an attacker can
+      craft input that does something completely different — deleting data,
+      extracting records, or hijacking the AI's instructions. The fix is
+      usually small: validate and sanitize input on the server side, and use
+      your database library's parameterized queries instead of raw string
+      concatenation. Ask your AI to review every place user input touches the
+      database or an API call.</p>
+    </div>
+    <div class="card bad">
+      <h3>4 · Admin pages with no auth</h3>
+      <p>It's common to build an admin panel quickly — a page to view all
+      users, delete records, send test emails — and forget to protect it.
+      If the route exists and isn't behind an auth check, it's publicly
+      accessible to anyone who guesses or finds the URL. Check every
+      internal route: does it verify that the requester is logged in <em>and</em>
+      has the right role?</p>
+    </div>
+  </div>
+
+  <div class="analogy">
+    <p>Think of your app as a building. Authentication (B6) is the front door lock.
+    Database access rules are the internal doors — between the lobby and the server room,
+    between one tenant's office and another's. An API key is the master key to the whole
+    building. Trusting user input blindly is like a staff member who follows any
+    instruction written on a sticky note, even one left by a stranger.</p>
+    <p>You can have a great front door and still be wide open inside. Security is layers,
+    not a single lock.</p>
+  </div>
+
+  <h2>Pre-launch security checklist</h2>
+  <p>Work through this before every launch — or before sharing a URL publicly for the
+  first time. It takes under an hour on a typical vibe-coded app and catches most of
+  the common issues.</p>
+  <div class="test">
+    <strong>Pre-launch security checklist</strong>
+    <ol>
+      <li><strong>Grep your repo for secrets.</strong> Search the codebase for the
+      words <code>sk_</code>, <code>pk_</code>, <code>secret</code>, <code>password</code>,
+      <code>api_key</code>. If any of those appear as literal values in code files
+      (not in <code>.env</code>), move them to environment variables immediately.</li>
+      <li><strong>Check your <code>.gitignore</code>.</strong> Confirm your
+      <code>.env</code> file is listed there. Run <code>git status</code> and verify no
+      <code>.env</code> file appears in the list of files to be committed.</li>
+      <li><strong>Review database access rules.</strong> If you're using Supabase,
+      open the RLS section and confirm policies are enabled on every table that holds
+      user data. If Firebase, read your Security Rules file. If you're not sure, ask
+      your AI: <em>"Show me the access rules on my database tables and tell me if any
+      table is readable without authentication."</em></li>
+      <li><strong>List every route that takes user input.</strong> For each one, ask
+      your AI: <em>"Does this route sanitize input before using it in a database query
+      or an API call? If not, fix it."</em></li>
+      <li><strong>List every admin or internal route.</strong> Visit each one while
+      logged out. If you can see it, it needs an auth check.</li>
+      <li><strong>Check for overly permissive CORS.</strong> If your backend API
+      accepts requests from any origin (<code>*</code>), tighten it to your specific
+      frontend domain before going live.</li>
+      <li><strong>Verify error messages don't leak internals.</strong> Stack traces,
+      database schema details, and file paths should never appear in responses visible
+      to users. In production mode, show a generic error message and log the details
+      privately.</li>
+    </ol>
+  </div>
+
+  <h2>When to ask an expert</h2>
+  <p>The checklist above handles the most common issues. But some situations call for
+  a real security review by a professional:</p>
+  <div class="files">
+    <div class="row"><span class="name">Handling payments</span><span class="what">If you go beyond Stripe Checkout into custom card flows, have a security engineer review the implementation before going live.</span></div>
+    <div class="row"><span class="name">Storing health or legal data</span><span class="what">HIPAA, GDPR, and similar regulations carry fines and legal liability. An expert review is not optional if you're in these domains.</span></div>
+    <div class="row"><span class="name">Before a meaningful fundraise or acquisition</span><span class="what">Investors and acquirers routinely run security due diligence. Getting ahead of it is far cheaper than fixing it under pressure.</span></div>
+    <div class="row"><span class="name">Anything over ~1,000 users</span><span class="what">At low user counts, a breach is painful. At scale, it's existential. The cost of a one-day security audit is almost always worth it at this point.</span></div>
+  </div>
+
+  <div class="callout">
+    <strong>Ask your AI to play attacker.</strong> Once your app is running, prompt it:
+    <em>"You are a security researcher. Review this codebase for vulnerabilities — focus
+    on exposed secrets, unauthenticated routes, database access, and unsanitized user
+    input. List every issue you find with its severity."</em> It won't catch everything
+    a human expert would, but it catches a surprising amount — and it's free.
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it is what makes it stick.</p>
+    <details>
+      <summary>Your Supabase database has a "profiles" table with user data. You haven't configured any RLS policies. Who can read it?</summary>
+      <p><span class="answer">Anyone — including unauthenticated users.</span> Supabase tables default to open when RLS is not enabled. Any request, authenticated or not, that knows the table name can read every row. Turn on RLS and define policies that restrict reads to the row's owner or to authenticated users with the right role.</p>
+    </details>
+    <details>
+      <summary>A user submits a form with the value: <code>'; DROP TABLE orders; --</code>. What kind of attack is this, and what's the defence?</summary>
+      <p><span class="answer">SQL injection.</span> The attacker is trying to sneak a destructive database command inside your query by closing the intended string early. The defence is to use parameterized queries (your database library's built-in method of passing values separately from the query text) — the value is then treated as data, never as executable SQL.</p>
+    </details>
+    <details>
+      <summary>You notice your API key for OpenAI has appeared in a public GitHub commit. What do you do first?</summary>
+      <p><span class="answer">Revoke the key immediately in the OpenAI dashboard — before doing anything else.</span> A key in a public repo is compromised the moment it lands there. Rotation is the only fix; git history rewrites don't help because bots cache commits in seconds. Then create a fresh key, store it in your environment variables, and add <code>.env</code> to <code>.gitignore</code>.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://owasp.org/www-project-top-ten/">OWASP Top Ten</a> —
+    the security industry's canonical list of the most critical web application
+    vulnerabilities, maintained by a nonprofit. You don't need to read every item in
+    depth — scan the category names and descriptions. You'll recognise several from this
+    lesson. It's the same list professional security engineers use as their baseline.
+    See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — paste me your checklist results.</strong> Work through
+    the seven-point checklist above, then tell me what you found: which items you're
+    confident about, which feel unclear, and any issues the AI audit surfaced. I'll
+    help you prioritise and fix before you go live.
+  </div>
+
+  <p>New terms this lesson — <em>SQL injection</em>, <em>Row Level Security</em>,
+  <em>CORS</em>, <em>parameterized query</em>, <em>OWASP</em> — are in the
+  <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
+
+  <nav>
+    <a href="b08-payments.html">← B8: Payments</a>
+    <a href="b10-anatomy-of-an-agent.html">Next → B10: Anatomy of an Agent</a>
+  </nav>
+</div>
+</body>
+</html>

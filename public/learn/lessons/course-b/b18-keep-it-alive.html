@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B18 · Keep It Alive &amp; Know Your Limits</title>
+<style>
+/* Shared lesson stylesheet — AI for Entrepreneurs.
+   Tufte-inspired: clean serif body, generous margins, prints well.
+   Inlined into each lesson so every file is self-contained and renders anywhere. */
+:root {
+  --ink:#1a1a1a; --muted:#6b6b6b; --rule:#e2e0da; --accent:#8a5a00;
+  --paper:#fdfcf9; --good:#2f6b3a; --bad:#9a3b3b; --box:#f3f0e8;
+  --avoid:#9a3b3b; --codebg:#1e1e23; --codeink:#e8e6df;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  line-height: 1.6; margin: 0; padding: 3.5rem 1.5rem; }
+.page { max-width: 40rem; margin: 0 auto; }
+.kicker { font-family: -apple-system, Helvetica, Arial, sans-serif;
+  text-transform: uppercase; letter-spacing: .14em; font-size: .72rem;
+  color: var(--accent); margin: 0 0 .5rem; }
+h1 { font-size: 2.1rem; line-height: 1.08; margin: 0 0 .5rem; }
+.lede { color: var(--muted); font-style: italic; font-size: 1.08rem; margin: 0 0 .5rem; }
+.meta { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .76rem;
+  color: var(--muted); border-bottom: 2px solid var(--ink);
+  padding-bottom: 1rem; margin-bottom: 2rem; }
+.deep { display: inline-block; font-family: -apple-system, Helvetica, Arial, sans-serif;
+  font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; background: var(--box);
+  color: var(--accent); border: 1px solid var(--rule); border-radius: 999px;
+  padding: .15rem .6rem; margin-left: .5rem; vertical-align: middle; }
+h2 { font-size: 1.3rem; margin: 2.6rem 0 .6rem; }
+h3 { margin: 1.4rem 0 .4rem; }
+p { margin: 0 0 1rem; }
+code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .88em;
+  background: var(--box); padding: .1rem .35rem; border-radius: 4px; }
+.analogy { background: var(--box); border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+.analogy p:last-child { margin-bottom: 0; }
+.callout { background: var(--box); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.2rem 0; }
+.callout strong { color: var(--accent); }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+.card { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.1rem; background: #fff; }
+.card h3 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .8rem;
+  text-transform: uppercase; letter-spacing: .08em; margin: 0 0 .6rem; }
+.card.good h3 { color: var(--good); } .card.bad h3 { color: var(--bad); }
+.card ul { margin: 0; padding-left: 1.1rem; } .card li { margin-bottom: .4rem; }
+.files { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .85rem;
+  background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.5rem 0; }
+.files .row { display: grid; grid-template-columns: 9rem 1fr; gap: .8rem;
+  padding: .35rem 0; border-bottom: 1px dashed var(--rule); }
+.files .row:last-child { border-bottom: none; }
+.files .name { color: var(--accent); }
+.files .what { font-family: Georgia, serif; color: var(--muted); font-size: .9rem; }
+pre { background: var(--codebg); color: var(--codeink); border-radius: 6px;
+  padding: 1rem 1.1rem; overflow-x: auto; font-size: .82rem; line-height: 1.5;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; margin: 1.2rem 0; }
+pre .c { color: #8aa6c1; } pre .k { color: #c98a5a; } pre .s { color: #9ec98a; }
+.test { border: 1px solid var(--rule); border-radius: 6px; padding: 1.2rem 1.3rem;
+  margin: 1.5rem 0; background: #fff; }
+.test ol { margin: .5rem 0 0; padding-left: 1.3rem; } .test li { margin-bottom: .5rem; }
+.steps { margin: 1.2rem 0; padding-left: 1.3rem; } .steps li { margin-bottom: .6rem; }
+.quiz { background: var(--box); border-radius: 6px; padding: 1.3rem 1.4rem; margin: 2rem 0; }
+.quiz h2 { margin-top: 0; }
+details { border-top: 1px solid var(--rule); padding: .8rem 0; }
+details:last-child { border-bottom: 1px solid var(--rule); }
+summary { cursor: pointer; font-weight: bold; }
+details p { margin: .6rem 0 0; color: var(--muted); }
+.answer { color: var(--good); font-weight: bold; }
+.source { background: #fff; border: 1px dashed var(--accent); border-radius: 6px;
+  padding: 1rem 1.2rem; margin: 2rem 0; }
+.source .kicker { margin-bottom: .3rem; }
+.ask { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .9rem;
+  background: #1a1a1a; color: #f3f0e8; border-radius: 6px; padding: 1rem 1.2rem; margin: 2rem 0; }
+.ask a { color: #e0b76a; }
+nav { display: flex; justify-content: space-between; gap: 1rem;
+  font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .82rem;
+  margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
+nav a { max-width: 48%; }
+a { color: var(--accent); }
+@media (max-width: 34rem) { .cols { grid-template-columns: 1fr; } }
+@media print { body { padding: 0; background: #fff; }
+  pre { background: #f4f4f4; color: #000; border: 1px solid #ccc; }
+  .ask { background: #eee; color: #000; } .ask a { color: var(--accent); } }
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course B · Module B3 Capstone · Lesson 18 of 18</p>
+  <h1>Keep It Alive &amp; Know Your Limits</h1>
+  <p class="lede">Run your app, watch it, and know when to call a real developer.</p>
+  <p class="meta">~15 min · Your shipped capstone open · Prereq: B17 (Build Sprint)</p>
+
+  <p>Shipping is not the end — it's the beginning of a new and simpler job: keeping the
+  lights on and knowing when to ask for help. Most entrepreneurs who build with AI get
+  this backwards. They over-engineer the monitoring and under-invest in the judgment to
+  know when to hand off. Your single win from this final lesson: a clear mental model for
+  watching costs, handling breakages, recognising your limits, and continuing to build
+  from here — confidently, and without pretending you need to do it all alone.</p>
+
+  <h2>Watching your costs</h2>
+  <p>A live app costs money in ways that can quietly compound if you don't watch them.
+  None of these will bankrupt you overnight — but they are worth reviewing once a month
+  rather than once a shock bill arrives:</p>
+  <div class="files">
+    <div class="row"><span class="name">AI credits</span><span class="what">Claude, GPT, or whichever model powers your features. Set a spending limit in the provider dashboard. Know your per-call cost so a traffic spike doesn't land as a surprise invoice.</span></div>
+    <div class="row"><span class="name">Hosting</span><span class="what">Vercel, Railway, Render, Supabase free tiers are generous — but check what triggers a paid tier (traffic, storage, build minutes). Set a billing alert.</span></div>
+    <div class="row"><span class="name">Email</span><span class="what">Resend, Postmark, and similar services charge per message over a free tier. A bug that sends duplicate emails can spike your bill fast — monitor your send counts.</span></div>
+    <div class="row"><span class="name">Stripe fees</span><span class="what">Stripe charges a percentage of each transaction. Not a "cost" you control, but know your margin before you price. Also watch for failed-payment retry fees.</span></div>
+  </div>
+
+  <div class="callout">
+    <strong>The two-minute monthly check:</strong> once a month, log in to your AI provider,
+    your hosting dashboard, your email provider, and Stripe. Look at the cost chart. If any
+    line is trending up faster than your revenue, investigate before the next bill.
+    That's the whole monitoring practice for a small app.
+  </div>
+
+  <h2>What to do when something breaks</h2>
+  <p>Things will break. That is not a failure — it is the normal operating condition of any
+  live software. What matters is how fast you recover. Follow this order every time:</p>
+  <div class="steps">
+    <ol>
+      <li>
+        <strong>Revert first, diagnose second.</strong>
+        If something broke after a recent change, roll back to the last working version
+        (your git history makes this a single command). Get the app working again, then
+        investigate the cause. Never debug on a broken live app if you can avoid it.
+      </li>
+      <li>
+        <strong>Check the logs.</strong>
+        Your hosting platform shows server logs in real time. Your browser's developer tools
+        show client-side errors. The error message is almost always there — you just have to
+        look. Copy the exact error text before you do anything else.
+      </li>
+      <li>
+        <strong>Ask the AI with the exact error.</strong>
+        Paste the error message, the file it points to, and a short description of what you
+        changed. The AI will identify the likely cause and suggest a fix. Vague descriptions
+        get vague answers — the more precise you are, the faster you move.
+      </li>
+      <li>
+        <strong>If you're stuck after 30 minutes, call a developer.</strong>
+        Not as a defeat — as a skill. Knowing when to escalate is one of the most valuable
+        judgments a founder can make.
+      </li>
+    </ol>
+  </div>
+
+  <h2>The genuinely empowering skill of knowing your limits</h2>
+  <div class="analogy">
+    <p>A non-technical founder who knows their limits is more valuable — to their business,
+    to their team, to their customers — than one who pretends they don't have any. Knowing
+    your limits doesn't mean being passive. It means you know when the right next move is
+    to hire a freelance developer for a day, post in a community, or hand a scoped problem
+    to someone with deeper expertise.</p>
+    <p>You now know enough to write a precise brief for that developer. You can describe the
+    problem in technical terms, point at the relevant files, and tell them exactly what
+    "fixed" looks like. That brief cuts their time in half and yours in cost.
+    <strong>That is the skill.</strong> You don't need to fix every bug yourself —
+    you need to be able to hand it off well.</p>
+  </div>
+
+  <h2>What to build next — and where to keep learning</h2>
+  <p>You've shipped one real app. Here is how to continue building from here:</p>
+  <div class="test">
+    <strong>A roadmap for what comes next:</strong>
+    <ol>
+      <li><strong>Add one thing to your capstone v2.</strong> The list of ideas you parked during the sprint — revisit it. Pick one, scope it the same way you scoped the capstone, ship it. Iteration is the whole practice.</li>
+      <li><strong>Automate one more workflow.</strong> Go back to the automations from Course A. Now that you can build apps, you can also build the tools those automations talk to.</li>
+      <li><strong>Build a skill for one process you run every week.</strong> You learned how in B15. Packaged expertise compounds — your future self will thank you.</li>
+      <li><strong>Find your community.</strong> The people building with AI as non-technical founders are the most generous community in tech right now. See <a href="../../RESOURCES.md">RESOURCES.md</a> for forums, newsletters, and communities worth joining.</li>
+      <li><strong>Teach someone else.</strong> Nothing cements understanding like explaining it. Find one entrepreneur who is where you were at the start of Course A and walk them through the first three lessons. You'll discover exactly how much you now know.</li>
+    </ol>
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening. Recalling it now is what makes it stick.</p>
+    <details>
+      <summary>Your email provider bill is three times higher than last month and you didn't add any new features. What's the first thing you check?</summary>
+      <p><span class="answer">Check your email send logs for duplicate sends or a loop.</span> A bug that triggers the same email multiple times per event is the most common cause of an unexpected email spike. Look at the logs first — you'll almost certainly see the pattern immediately.</p>
+    </details>
+    <details>
+      <summary>You've been debugging a broken authentication flow for 45 minutes, the AI's suggestions aren't landing, and users are locked out. What do you do?</summary>
+      <p><span class="answer">Revert to the last working version to restore access, then hire a developer for a scoped fix.</span> User-facing breakage that you can't resolve in 30 minutes is the moment to escalate. Revert first (get users back in), then hand a precise brief to a developer. Spending another two hours guessing is the wrong call.</p>
+    </details>
+    <details>
+      <summary>A developer friend says "you'll always need a developer to run a real app." How do you respond?</summary>
+      <p><span class="answer">Not for the day-to-day — but yes, sometimes, and that's fine.</span> You can handle monitoring, cost watching, minor fixes, and iteration yourself. You now know enough to write a precise brief when you do need expert help. That's not dependency — that's judgment. The goal was never to replace developers; it was to stop being afraid of building.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://blog.mean.ceo/building-first-ai-feature/">"Building Your First AI Feature" (mean.ceo)</a> —
+    a thoughtful guide to the founder mindset around shipping and maintaining AI-powered
+    features, including when to own it and when to hand off. A good place to land after
+    finishing this course. See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — and I want to hear what you built.</strong> Tell me what your
+    capstone does, what the hardest part was, and what you want to build next. This whole
+    course was designed around the premise that non-technical founders can build real
+    software — and you just proved it. That conversation is worth having.
+  </div>
+
+  <p>You came into this program without a technical background and you are leaving it having
+  automated workflows, built and shipped a real app with auth or data or payments, and — most
+  importantly — with the judgment to know what to build next and when to ask for help.
+  That is genuinely rare, and it compounds. Everything you build from here gets faster.
+  Congratulations — go ship something.</p>
+
+  <p>Every term from both courses lives in the
+  <a href="../../reference/glossary.html">course glossary</a> — keep it as a reference
+  long after the course is done.</p>
+
+  <nav>
+    <a href="b17-build-sprint.html">← B17: Build Sprint</a>
+    <a href="../../reference/glossary.html">Course glossary →</a>
+  </nav>
+</div>
+</body>
+</html>

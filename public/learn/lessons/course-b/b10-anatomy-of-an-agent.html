@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B10 · Anatomy of an Agent</title>
+<style>
+/* Shared lesson stylesheet — AI for Entrepreneurs.
+   Tufte-inspired: clean serif body, generous margins, prints well.
+   Inlined into each lesson so every file is self-contained and renders anywhere. */
+:root {
+  --ink:#1a1a1a; --muted:#6b6b6b; --rule:#e2e0da; --accent:#8a5a00;
+  --paper:#fdfcf9; --good:#2f6b3a; --bad:#9a3b3b; --box:#f3f0e8;
+  --avoid:#9a3b3b; --codebg:#1e1e23; --codeink:#e8e6df;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  line-height: 1.6; margin: 0; padding: 3.5rem 1.5rem; }
+.page { max-width: 40rem; margin: 0 auto; }
+.kicker { font-family: -apple-system, Helvetica, Arial, sans-serif;
+  text-transform: uppercase; letter-spacing: .14em; font-size: .72rem;
+  color: var(--accent); margin: 0 0 .5rem; }
+h1 { font-size: 2.1rem; line-height: 1.08; margin: 0 0 .5rem; }
+.lede { color: var(--muted); font-style: italic; font-size: 1.08rem; margin: 0 0 .5rem; }
+.meta { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .76rem;
+  color: var(--muted); border-bottom: 2px solid var(--ink);
+  padding-bottom: 1rem; margin-bottom: 2rem; }
+.deep { display: inline-block; font-family: -apple-system, Helvetica, Arial, sans-serif;
+  font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; background: var(--box);
+  color: var(--accent); border: 1px solid var(--rule); border-radius: 999px;
+  padding: .15rem .6rem; margin-left: .5rem; vertical-align: middle; }
+h2 { font-size: 1.3rem; margin: 2.6rem 0 .6rem; }
+h3 { margin: 1.4rem 0 .4rem; }
+p { margin: 0 0 1rem; }
+code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .88em;
+  background: var(--box); padding: .1rem .35rem; border-radius: 4px; }
+.analogy { background: var(--box); border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+.analogy p:last-child { margin-bottom: 0; }
+.callout { background: var(--box); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.2rem 0; }
+.callout strong { color: var(--accent); }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+.card { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.1rem; background: #fff; }
+.card h3 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .8rem;
+  text-transform: uppercase; letter-spacing: .08em; margin: 0 0 .6rem; }
+.card.good h3 { color: var(--good); } .card.bad h3 { color: var(--bad); }
+.card ul { margin: 0; padding-left: 1.1rem; } .card li { margin-bottom: .4rem; }
+.files { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .85rem;
+  background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.5rem 0; }
+.files .row { display: grid; grid-template-columns: 9rem 1fr; gap: .8rem;
+  padding: .35rem 0; border-bottom: 1px dashed var(--rule); }
+.files .row:last-child { border-bottom: none; }
+.files .name { color: var(--accent); }
+.files .what { font-family: Georgia, serif; color: var(--muted); font-size: .9rem; }
+pre { background: var(--codebg); color: var(--codeink); border-radius: 6px;
+  padding: 1rem 1.1rem; overflow-x: auto; font-size: .82rem; line-height: 1.5;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; margin: 1.2rem 0; }
+pre .c { color: #8aa6c1; } pre .k { color: #c98a5a; } pre .s { color: #9ec98a; }
+.test { border: 1px solid var(--rule); border-radius: 6px; padding: 1.2rem 1.3rem;
+  margin: 1.5rem 0; background: #fff; }
+.test ol { margin: .5rem 0 0; padding-left: 1.3rem; } .test li { margin-bottom: .5rem; }
+.steps { margin: 1.2rem 0; padding-left: 1.3rem; } .steps li { margin-bottom: .6rem; }
+.quiz { background: var(--box); border-radius: 6px; padding: 1.3rem 1.4rem; margin: 2rem 0; }
+.quiz h2 { margin-top: 0; }
+details { border-top: 1px solid var(--rule); padding: .8rem 0; }
+details:last-child { border-bottom: 1px solid var(--rule); }
+summary { cursor: pointer; font-weight: bold; }
+details p { margin: .6rem 0 0; color: var(--muted); }
+.answer { color: var(--good); font-weight: bold; }
+.source { background: #fff; border: 1px dashed var(--accent); border-radius: 6px;
+  padding: 1rem 1.2rem; margin: 2rem 0; }
+.source .kicker { margin-bottom: .3rem; }
+.ask { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .9rem;
+  background: #1a1a1a; color: #f3f0e8; border-radius: 6px; padding: 1rem 1.2rem; margin: 2rem 0; }
+.ask a { color: #e0b76a; }
+nav { display: flex; justify-content: space-between; gap: 1rem;
+  font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .82rem;
+  margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
+nav a { max-width: 48%; }
+a { color: var(--accent); }
+@media (max-width: 34rem) { .cols { grid-template-columns: 1fr; } }
+@media print { body { padding: 0; background: #fff; }
+  pre { background: #f4f4f4; color: #000; border: 1px solid #ccc; }
+  .ask { background: #eee; color: #000; } .ask a { color: var(--accent); } }
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course B · Module B2 Going Agentic · Lesson 10 of 18</p>
+  <h1>Anatomy of an Agent</h1>
+  <p class="lede">A chatbot answers. An agent acts. Here's the difference — and the four
+  parts that make it possible.</p>
+  <p class="meta">~13 min · No tools needed · Prereq: B9 Security Basics</p>
+
+  <p>In Course A you built "when X happens, do Y" automations: fixed recipes, every step
+  decided in advance. Powerful — but they can't improvise. An <strong>agent</strong> is
+  different: you give it a goal and it decides, step by step, how to reach it. That shift
+  is the whole point of Module B2. Your single win in this lesson: by the end you'll be
+  able to name the four parts of any agent and explain what each one does — which means
+  you'll know exactly what to configure, what to constrain, and where things can go wrong.</p>
+
+  <h2>The four parts</h2>
+  <p>Strip away every framework and buzzword and every agent has exactly four components.
+  Think of them like the parts of a skilled employee:</p>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>1 · The Model</h3>
+      <p>The brain. A large language model (like Claude) that reads the situation and
+      decides what to do next. Swap the model and the whole agent's "personality"
+      and capability changes.</p>
+    </div>
+    <div class="card good">
+      <h3>2 · Tools</h3>
+      <p>The hands. Specific abilities granted to the model — search the web, read a
+      file, call your CRM, send a Slack message. The agent can only act on the world
+      through the tools you give it. No tool = no action.</p>
+    </div>
+  </div>
+  <div class="cols">
+    <div class="card good">
+      <h3>3 · Memory / Context</h3>
+      <p>What it knows right now. This includes the original goal, all the steps it has
+      taken so far, the results it got back, and any documents or data you've handed it.
+      Context fills up — this is why agents don't run forever on one task.</p>
+    </div>
+    <div class="card good">
+      <h3>4 · The Loop</h3>
+      <p>The engine. The agent repeats a four-beat cycle — <strong>decide</strong> what
+      to do, <strong>act</strong> (call a tool), <strong>observe</strong> the result,
+      <strong>repeat</strong> — until the goal is met or it gives up. This loop is what
+      makes it agentic rather than a single one-shot reply.</p>
+    </div>
+  </div>
+
+  <h2>How this differs from a Course-A automation</h2>
+  <div class="analogy">
+    <p>A fixed automation is like a vending machine: press B4, get a bag of crisps, every
+    time, no surprises. Great for predictable, repeating tasks.</p>
+    <p>An agent is like a competent assistant: give them a goal ("find me the best flight
+    under £400 and book it"), and they'll search, compare, hit unexpected pages, backtrack,
+    and figure it out — making small decisions the whole way. You didn't script every step;
+    they did.</p>
+    <p>That's the power. It's also the risk.</p>
+  </div>
+
+  <div class="files">
+    <div class="row"><span class="name">Fixed automation</span><span class="what">Trigger → predefined steps → result. Fast, predictable, no surprises. Perfect for repeating tasks with a known shape.</span></div>
+    <div class="row"><span class="name">Agent</span><span class="what">Goal → the agent chooses its own steps → result. Handles novelty and multi-step problems — but can go off-script.</span></div>
+  </div>
+
+  <h2>The promise and the risk</h2>
+  <p>The loop is what unlocks power: an agent can handle tasks that branch, hit dead ends,
+  and need mid-course correction — things a fixed automation can't do. But the same
+  loop creates two risks you need to plan for:</p>
+
+  <div class="deep">
+    <p><strong>Going off the rails.</strong> The agent decides its own steps. A poorly scoped
+    goal — or a missing constraint — can lead it down an expensive, wrong, or even
+    destructive path. (Imagine an agent told to "clean up the database" without being told
+    which records are safe to delete.)</p>
+    <p><strong>Context overflow.</strong> Every step consumes context. A long-running agent
+    will eventually hit its limit and either stall or start forgetting earlier steps.</p>
+  </div>
+
+  <div class="callout">
+    <strong>Guardrails are not optional.</strong> Every well-run agent has at least one:
+    a scope constraint (only touch files in this folder), a human checkpoint (ask me before
+    sending), or a hard stop (try at most 10 steps). You'll build these into every agent
+    you deploy. The next lessons show you how.
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it now is what makes it stick.</p>
+    <details>
+      <summary>An agent is given the goal "draft and send the weekly newsletter." It can write, but it sends nothing. Which of the four parts is missing?</summary>
+      <p><span class="answer">Tools.</span> The model can decide to send, but without a
+      "send email" tool actually granted to it, there is no hand to act. The brain without
+      hands can plan all it likes.</p>
+    </details>
+    <details>
+      <summary>What is the decide → act → observe → repeat cycle called, and why does it matter?</summary>
+      <p><span class="answer">The loop.</span> It matters because it's what separates
+      an agent from a one-shot chatbot reply. The loop lets an agent tackle multi-step
+      problems by updating its plan each time it sees a new result — including recovering
+      from dead ends.</p>
+    </details>
+    <details>
+      <summary>You build a "clean up old leads" agent with no guardrails. What's the concrete risk?</summary>
+      <p><span class="answer">It might delete leads you meant to keep</span> — or loop
+      expensively, or take unintended side-actions. Without a scope constraint or human
+      checkpoint, the agent's own definition of "clean up" may not match yours.
+      Always add at least one hard constraint before running an agent on live data.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://www.anthropic.com/research/building-effective-agents">Building Effective Agents — Anthropic Research</a>.
+    Anthropic's own guide to the patterns that work (and the common mistakes). Written for
+    builders, readable by non-engineers — especially the "when to use agents vs. workflows"
+    section. See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — ask me anything.</strong> Not sure whether your use case
+    calls for a fixed automation or an agent? Describe the task and I'll give you a straight
+    recommendation. That's the judgment call this lesson is designed to sharpen.
+  </div>
+
+  <p>Key terms from this lesson — <em>agent</em>, <em>context</em>, <em>hallucination</em>,
+  <em>human-in-the-loop</em> — are defined in the
+  <a href="../../reference/glossary.html">course glossary</a>.</p>
+
+  <nav>
+    <a href="b09-security-basics.html">← B9: Security Basics</a>
+    <a href="b11-tools-mcp-skills.html">Next → B11: Tools, CLI, MCP &amp; Skills</a>
+  </nav>
+</div>
+</body>
+</html>

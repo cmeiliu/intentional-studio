@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B12 · Using Subagents</title>
+<style>
+/* Shared lesson stylesheet — AI for Entrepreneurs.
+   Tufte-inspired: clean serif body, generous margins, prints well.
+   Inlined into each lesson so every file is self-contained and renders anywhere. */
+:root {
+  --ink:#1a1a1a; --muted:#6b6b6b; --rule:#e2e0da; --accent:#8a5a00;
+  --paper:#fdfcf9; --good:#2f6b3a; --bad:#9a3b3b; --box:#f3f0e8;
+  --avoid:#9a3b3b; --codebg:#1e1e23; --codeink:#e8e6df;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  line-height: 1.6; margin: 0; padding: 3.5rem 1.5rem; }
+.page { max-width: 40rem; margin: 0 auto; }
+.kicker { font-family: -apple-system, Helvetica, Arial, sans-serif;
+  text-transform: uppercase; letter-spacing: .14em; font-size: .72rem;
+  color: var(--accent); margin: 0 0 .5rem; }
+h1 { font-size: 2.1rem; line-height: 1.08; margin: 0 0 .5rem; }
+.lede { color: var(--muted); font-style: italic; font-size: 1.08rem; margin: 0 0 .5rem; }
+.meta { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .76rem;
+  color: var(--muted); border-bottom: 2px solid var(--ink);
+  padding-bottom: 1rem; margin-bottom: 2rem; }
+.deep { display: inline-block; font-family: -apple-system, Helvetica, Arial, sans-serif;
+  font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; background: var(--box);
+  color: var(--accent); border: 1px solid var(--rule); border-radius: 999px;
+  padding: .15rem .6rem; margin-left: .5rem; vertical-align: middle; }
+h2 { font-size: 1.3rem; margin: 2.6rem 0 .6rem; }
+h3 { margin: 1.4rem 0 .4rem; }
+p { margin: 0 0 1rem; }
+code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .88em;
+  background: var(--box); padding: .1rem .35rem; border-radius: 4px; }
+.analogy { background: var(--box); border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+.analogy p:last-child { margin-bottom: 0; }
+.callout { background: var(--box); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.2rem 0; }
+.callout strong { color: var(--accent); }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+.card { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.1rem; background: #fff; }
+.card h3 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .8rem;
+  text-transform: uppercase; letter-spacing: .08em; margin: 0 0 .6rem; }
+.card.good h3 { color: var(--good); } .card.bad h3 { color: var(--bad); }
+.card ul { margin: 0; padding-left: 1.1rem; } .card li { margin-bottom: .4rem; }
+.files { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .85rem;
+  background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.5rem 0; }
+.files .row { display: grid; grid-template-columns: 9rem 1fr; gap: .8rem;
+  padding: .35rem 0; border-bottom: 1px dashed var(--rule); }
+.files .row:last-child { border-bottom: none; }
+.files .name { color: var(--accent); }
+.files .what { font-family: Georgia, serif; color: var(--muted); font-size: .9rem; }
+pre { background: var(--codebg); color: var(--codeink); border-radius: 6px;
+  padding: 1rem 1.1rem; overflow-x: auto; font-size: .82rem; line-height: 1.5;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; margin: 1.2rem 0; }
+pre .c { color: #8aa6c1; } pre .k { color: #c98a5a; } pre .s { color: #9ec98a; }
+.test { border: 1px solid var(--rule); border-radius: 6px; padding: 1.2rem 1.3rem;
+  margin: 1.5rem 0; background: #fff; }
+.test ol { margin: .5rem 0 0; padding-left: 1.3rem; } .test li { margin-bottom: .5rem; }
+.steps { margin: 1.2rem 0; padding-left: 1.3rem; } .steps li { margin-bottom: .6rem; }
+.quiz { background: var(--box); border-radius: 6px; padding: 1.3rem 1.4rem; margin: 2rem 0; }
+.quiz h2 { margin-top: 0; }
+details { border-top: 1px solid var(--rule); padding: .8rem 0; }
+details:last-child { border-bottom: 1px solid var(--rule); }
+summary { cursor: pointer; font-weight: bold; }
+details p { margin: .6rem 0 0; color: var(--muted); }
+.answer { color: var(--good); font-weight: bold; }
+.source { background: #fff; border: 1px dashed var(--accent); border-radius: 6px;
+  padding: 1rem 1.2rem; margin: 2rem 0; }
+.source .kicker { margin-bottom: .3rem; }
+.ask { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .9rem;
+  background: #1a1a1a; color: #f3f0e8; border-radius: 6px; padding: 1rem 1.2rem; margin: 2rem 0; }
+.ask a { color: #e0b76a; }
+nav { display: flex; justify-content: space-between; gap: 1rem;
+  font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .82rem;
+  margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
+nav a { max-width: 48%; }
+a { color: var(--accent); }
+@media (max-width: 34rem) { .cols { grid-template-columns: 1fr; } }
+@media print { body { padding: 0; background: #fff; }
+  pre { background: #f4f4f4; color: #000; border: 1px solid #ccc; }
+  .ask { background: #eee; color: #000; } .ask a { color: var(--accent); } }
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course B · Module B2 Going Agentic · Lesson 12 of 18</p>
+  <h1>Using Subagents</h1>
+  <p class="lede">Big jobs go faster when you split them up and run the pieces in parallel.</p>
+  <p class="meta">~11 min · Nothing to open yet · Prereq: B11 Tools, CLI, MCP &amp; Skills</p>
+
+  <p>A single agent doing a long, complex job is like one person trying to research, write,
+  proofread, and format a report all at once. It works — but it's slow, the context fills up
+  with everything from every stage, and one misfired step can tangle the whole run. The
+  alternative is <strong>subagents</strong>: fresh, focused helpers that each own one scoped
+  piece of the job. Your single win: by the end you'll understand when to delegate to
+  subagents, and what the orchestration pattern looks like — so you can hand off parallel work
+  without losing oversight.</p>
+
+  <h2>What a subagent actually is</h2>
+  <p>A subagent is just another agent — a model, tools, context, and a loop — that you
+  spin up to handle a specific, bounded task. What makes it a <em>subagent</em> is context:
+  it was launched by a <strong>main (orchestrator) agent</strong> rather than directly by you,
+  and it reports its result back to that orchestrator when done.</p>
+
+  <div class="analogy">
+    <p>Think of a project manager who has three team members: a researcher, a writer, and a
+    fact-checker. The PM doesn't do all three jobs herself — she delegates, waits for the
+    results, and then assembles the final deliverable. The researcher, writer, and fact-checker
+    are her subagents. Each works in their own lane; none is distracted by the others' work.
+    The PM is the orchestrator.</p>
+  </div>
+
+  <h2>Three reasons to use them</h2>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>Parallel work</h3>
+      <p>Multiple subagents run at the same time. Researching three topics in parallel takes
+      the same wall-clock time as researching one. For anything with independent pieces, this
+      is a straightforward speed win.</p>
+    </div>
+    <div class="card good">
+      <h3>Clean context per task</h3>
+      <p>Each subagent starts fresh — its context window contains only the task it was given,
+      not the entire history of the parent job. This keeps reasoning sharp and prevents the
+      "context contamination" where early steps confuse later ones.</p>
+    </div>
+  </div>
+  <div class="cols">
+    <div class="card good">
+      <h3>Specialization</h3>
+      <p>You can configure each subagent differently — give the researcher a web-search tool
+      and a skeptical research skill, give the writer your brand-voice skill and a draft
+      template. Right tools, right instructions, for each role.</p>
+    </div>
+    <div class="card bad">
+      <h3>When it's overkill</h3>
+      <p>Short, linear tasks — draft one email, answer one question — don't need subagents.
+      The overhead of spawning and coordinating them costs more than it saves. If the whole
+      job fits in a single agent's context and runs in under a minute, keep it simple.</p>
+    </div>
+  </div>
+
+  <h2>The orchestration pattern</h2>
+  <p>Orchestration is just the word for the main agent managing the subagents. Here's how
+  it flows in plain English:</p>
+
+  <div class="steps">
+    <ol>
+      <li><strong>Receive the goal.</strong> You give the orchestrator a high-level objective:
+      "Produce a competitive analysis of these five companies."</li>
+      <li><strong>Break it down.</strong> The orchestrator decides which pieces can be split
+      off. In this case: five parallel research subagents, one per company.</li>
+      <li><strong>Delegate.</strong> It launches each subagent with a scoped task and the
+      specific tools it needs (web search, read competitor site).</li>
+      <li><strong>Collect results.</strong> When all five subagents finish, the orchestrator
+      reads their outputs — all five research summaries.</li>
+      <li><strong>Synthesize.</strong> The orchestrator (or a dedicated "writer" subagent)
+      combines the five summaries into the final report.</li>
+    </ol>
+  </div>
+
+  <div class="callout">
+    <strong>You are still in charge.</strong> The orchestrator is just another agent you
+    configure. You define the goal, the allowed tools, and any human-review checkpoints.
+    Subagents don't acquire permissions you didn't grant; they inherit only what you
+    authorized for the job. Scope each subagent tightly.
+  </div>
+
+  <div class="deep">
+    <p><strong>A note on cost.</strong> Every subagent uses tokens — the model's unit of work.
+    Running five parallel subagents uses roughly five times the tokens of one agent doing the
+    same work sequentially. For time-sensitive tasks the trade-off is usually worth it; for
+    simple jobs it isn't. Check your usage after your first multi-agent run.</p>
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it now is what makes it stick.</p>
+    <details>
+      <summary>What is the main practical difference between an orchestrator and a subagent?</summary>
+      <p><span class="answer">Role, not technology.</span> Both are ordinary agents. The orchestrator receives the high-level goal, breaks it down, and delegates pieces. A subagent receives a scoped task from the orchestrator and returns a result. You could run the same agent as an orchestrator in one job and as a subagent in another.</p>
+    </details>
+    <details>
+      <summary>Why does each subagent get a "clean context"? Why does that matter?</summary>
+      <p><span class="answer">Because subagents start fresh — they only see their own scoped task, not the full history of the parent job.</span> This matters because a cluttered context causes the model to lose track or get confused by irrelevant earlier steps. A focused context means sharper, faster reasoning for that specific piece.</p>
+    </details>
+    <details>
+      <summary>You need to draft one short follow-up email. Should you use subagents?</summary>
+      <p><span class="answer">No — overkill.</span> A single short task fits easily in one agent's context and takes seconds. The overhead of spawning, configuring, and coordinating subagents would take longer than just running one agent straight through. Subagents pay off on jobs with multiple independent pieces that benefit from parallelism or specialization.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://docs.anthropic.com/en/docs/claude-code/sub-agents">Create custom subagents — Claude Code Docs</a>.
+    The official guide to defining and deploying subagents in Claude Code: how to write the
+    agent definition file, set descriptions, and control which tools each subagent gets.
+    See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — ask me anything.</strong> Have a multi-step project in mind
+    that might benefit from subagents? Describe it and I'll sketch out an orchestration plan:
+    how many subagents, what each one does, and where the human checkpoint should go.
+  </div>
+
+  <p>Key terms — <em>agent</em>, <em>context</em>, <em>human-in-the-loop</em> — are in the
+  <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
+
+  <nav>
+    <a href="b11-tools-mcp-skills.html">← B11: Tools, CLI, MCP &amp; Skills</a>
+    <a href="b13-session-logs.html">Next → B13: Reading Session Logs</a>
+  </nav>
+</div>
+</body>
+</html>

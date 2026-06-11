@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A16 · Debugging With AI</title>
+<style>
+/* Shared lesson stylesheet — AI for Entrepreneurs.
+   Tufte-inspired: clean serif body, generous margins, prints well.
+   Inlined into each lesson so every file is self-contained and renders anywhere. */
+:root {
+  --ink:#1a1a1a; --muted:#6b6b6b; --rule:#e2e0da; --accent:#8a5a00;
+  --paper:#fdfcf9; --good:#2f6b3a; --bad:#9a3b3b; --box:#f3f0e8;
+  --avoid:#9a3b3b; --codebg:#1e1e23; --codeink:#e8e6df;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  line-height: 1.6; margin: 0; padding: 3.5rem 1.5rem; }
+.page { max-width: 40rem; margin: 0 auto; }
+.kicker { font-family: -apple-system, Helvetica, Arial, sans-serif;
+  text-transform: uppercase; letter-spacing: .14em; font-size: .72rem;
+  color: var(--accent); margin: 0 0 .5rem; }
+h1 { font-size: 2.1rem; line-height: 1.08; margin: 0 0 .5rem; }
+.lede { color: var(--muted); font-style: italic; font-size: 1.08rem; margin: 0 0 .5rem; }
+.meta { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .76rem;
+  color: var(--muted); border-bottom: 2px solid var(--ink);
+  padding-bottom: 1rem; margin-bottom: 2rem; }
+.deep { display: inline-block; font-family: -apple-system, Helvetica, Arial, sans-serif;
+  font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; background: var(--box);
+  color: var(--accent); border: 1px solid var(--rule); border-radius: 999px;
+  padding: .15rem .6rem; margin-left: .5rem; vertical-align: middle; }
+h2 { font-size: 1.3rem; margin: 2.6rem 0 .6rem; }
+h3 { margin: 1.4rem 0 .4rem; }
+p { margin: 0 0 1rem; }
+code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .88em;
+  background: var(--box); padding: .1rem .35rem; border-radius: 4px; }
+.analogy { background: var(--box); border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+.analogy p:last-child { margin-bottom: 0; }
+.callout { background: var(--box); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.2rem 0; }
+.callout strong { color: var(--accent); }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+.card { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.1rem; background: #fff; }
+.card h3 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .8rem;
+  text-transform: uppercase; letter-spacing: .08em; margin: 0 0 .6rem; }
+.card.good h3 { color: var(--good); } .card.bad h3 { color: var(--bad); }
+.card ul { margin: 0; padding-left: 1.1rem; } .card li { margin-bottom: .4rem; }
+.files { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .85rem;
+  background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.5rem 0; }
+.files .row { display: grid; grid-template-columns: 9rem 1fr; gap: .8rem;
+  padding: .35rem 0; border-bottom: 1px dashed var(--rule); }
+.files .row:last-child { border-bottom: none; }
+.files .name { color: var(--accent); }
+.files .what { font-family: Georgia, serif; color: var(--muted); font-size: .9rem; }
+pre { background: var(--codebg); color: var(--codeink); border-radius: 6px;
+  padding: 1rem 1.1rem; overflow-x: auto; font-size: .82rem; line-height: 1.5;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; margin: 1.2rem 0; }
+pre .c { color: #8aa6c1; } pre .k { color: #c98a5a; } pre .s { color: #9ec98a; }
+.test { border: 1px solid var(--rule); border-radius: 6px; padding: 1.2rem 1.3rem;
+  margin: 1.5rem 0; background: #fff; }
+.test ol { margin: .5rem 0 0; padding-left: 1.3rem; } .test li { margin-bottom: .5rem; }
+.steps { margin: 1.2rem 0; padding-left: 1.3rem; } .steps li { margin-bottom: .6rem; }
+.quiz { background: var(--box); border-radius: 6px; padding: 1.3rem 1.4rem; margin: 2rem 0; }
+.quiz h2 { margin-top: 0; }
+details { border-top: 1px solid var(--rule); padding: .8rem 0; }
+details:last-child { border-bottom: 1px solid var(--rule); }
+summary { cursor: pointer; font-weight: bold; }
+details p { margin: .6rem 0 0; color: var(--muted); }
+.answer { color: var(--good); font-weight: bold; }
+.source { background: #fff; border: 1px dashed var(--accent); border-radius: 6px;
+  padding: 1rem 1.2rem; margin: 2rem 0; }
+.source .kicker { margin-bottom: .3rem; }
+.ask { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .9rem;
+  background: #1a1a1a; color: #f3f0e8; border-radius: 6px; padding: 1rem 1.2rem; margin: 2rem 0; }
+.ask a { color: #e0b76a; }
+nav { display: flex; justify-content: space-between; gap: 1rem;
+  font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .82rem;
+  margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
+nav a { max-width: 48%; }
+a { color: var(--accent); }
+@media (max-width: 34rem) { .cols { grid-template-columns: 1fr; } }
+@media print { body { padding: 0; background: #fff; }
+  pre { background: #f4f4f4; color: #000; border: 1px solid #ccc; }
+  .ask { background: #eee; color: #000; } .ask a { color: var(--accent); } }
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course A · Module A4 Build · Lesson 16 of 17</p>
+  <h1>Debugging With AI <span class="deep">deep dive</span></h1>
+  <p class="lede">Fix what's broken without burning credits going in circles.</p>
+  <p class="meta">~18 min · Have your A14 app open with something not quite right · Prereq: A15 Reading Code Without Fear</p>
+
+  <p>You shipped something. Then you changed something. Now it's broken and you've sent three
+  messages to the AI asking it to fix the thing, and each time it "fixes" it something else
+  breaks, and you're watching your credit meter tick down. That cycle has a name —
+  <strong>the debugging doom loop</strong> — and it is the number-one credit sink for
+  non-technical builders. Your single win today: a four-step debugging process that breaks the
+  loop. Once you have it, a broken app stops being frightening and starts being a solvable
+  puzzle.</p>
+
+  <h2>Why the loop happens</h2>
+  <div class="analogy">
+    <p>Imagine phoning a mechanic and saying "my car is making a noise." They guess: spark
+    plugs. You pay, pick it up, still making the noise. You call back: "it's still making the
+    noise." They guess: timing belt. Still making the noise. You're paying for guesses,
+    not diagnosis.</p>
+    <p>Now imagine saying: "There's a high-pitched whine from the front-right wheel only when
+    braking above 30 mph, and it started the day after I hit a pothole." That's a diagnosis.
+    The mechanic goes straight to the wheel bearing. <strong>Debugging is the same skill:
+    describe the problem precisely enough that the fix is obvious.</strong></p>
+  </div>
+
+  <h2>The four-step debugging loop</h2>
+
+  <div class="steps">
+    <strong>Run this loop once per problem — not once per message</strong>
+    <ol>
+      <li>
+        <strong>Read the error message first.</strong>
+        Don't immediately paste the error into the AI. Read it yourself. The message usually
+        names a file, a line number, or a function. Find the word that looks like a location
+        and write it down. Even if you don't understand the rest, that location is gold.
+      </li>
+      <li>
+        <strong>Isolate the one thing that changed.</strong>
+        Ask yourself: "What was the last change I made before this broke?" That change is almost
+        always the cause. If you made several changes at once (you were warned), revert to the
+        last working version and make one change at a time from there.
+      </li>
+      <li>
+        <strong>Paste the error WITH context to the AI.</strong>
+        Don't just paste the error. Include: (a) the exact error message, (b) the file or
+        section it came from, (c) the one change you made before it broke, and (d) what you
+        expected to happen. Four facts, one message.
+      </li>
+      <li>
+        <strong>Apply one fix, then test immediately.</strong>
+        The AI will suggest a change. Make exactly that change — nothing else. Refresh and test.
+        Did it fix the error? If yes, you're done. If a new error appears, run the loop again
+        from step 1 with the new error. Never apply two suggested fixes at once.
+      </li>
+    </ol>
+  </div>
+
+  <h2>How to describe a bug precisely</h2>
+  <p>The quality of the fix depends almost entirely on the quality of the bug description. Use
+  this structure every time:</p>
+
+  <div class="test">
+    <strong>Bug description template</strong>
+    <ol>
+      <li><strong>What I expected:</strong> [e.g., "Clicking 'Draft Reply' should show generated text below the button"]</li>
+      <li><strong>What actually happened:</strong> [e.g., "Nothing appears — the button just turns grey for a moment then nothing"]</li>
+      <li><strong>Error message (exact copy-paste):</strong> [e.g., "TypeError: Cannot read properties of undefined (reading 'choices') at line 42"]</li>
+      <li><strong>The last change I made:</strong> [e.g., "I added a second prompt variable called systemPrompt in the JavaScript file"]</li>
+      <li><strong>What I have NOT changed:</strong> [e.g., "The HTML and CSS are untouched — only the JS changed"]</li>
+    </ol>
+  </div>
+
+  <p>Notice item 5: telling the AI what <em>didn't</em> change is as useful as telling it what
+  did. It rules out half the codebase instantly.</p>
+
+  <h2>When to revert vs. push on</h2>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>Push on when</h3>
+      <ul>
+        <li>The error message points to a specific line</li>
+        <li>You know exactly what changed</li>
+        <li>The fix is one small thing</li>
+        <li>The rest of the app still works</li>
+        <li>You're on the first or second fix attempt</li>
+      </ul>
+    </div>
+    <div class="card bad">
+      <h3>Revert when</h3>
+      <ul>
+        <li>You've made three fix attempts and it's still broken</li>
+        <li>The AI keeps re-introducing the same error</li>
+        <li>Multiple things broke from one change</li>
+        <li>You can't name what changed before it broke</li>
+        <li>The credit meter is running and you're just guessing</li>
+      </ul>
+    </div>
+  </div>
+
+  <p>Reverting is not failure. It is the fastest path back to a working tool. In Lovable, use
+  the version history sidebar. In Bolt, the undo history covers recent generations. The moment
+  you find yourself saying "I'll just try one more thing" for the fourth time, revert instead
+  and start the loop from a clean state.</p>
+
+  <div class="callout">
+    <strong>The golden rule:</strong> one change at a time, always. This applies before the bug
+    happens (it prevents most bugs) and during the fix (it means you always know what worked).
+    Founders who burn the most credits are the ones who send five-part requests and then can't
+    trace which change caused the problem. Keep the loop tight and the fixes are almost always fast.
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it is what makes it stick.</p>
+    <details>
+      <summary>You paste an error message with no other context and the AI gives you a fix that breaks something else. What did you leave out?</summary>
+      <p><span class="answer">Context: what you expected, what actually happened, and what changed last.</span> The AI is guessing at the cause without that information — which is why its fix is itself a guess. The four-part bug description (expected / actual / error / last change) is what turns a guess into a diagnosis.</p>
+    </details>
+    <details>
+      <summary>After three failed fix attempts on the same bug, what should you do?</summary>
+      <p><span class="answer">Revert to the last working version.</span> Three failed attempts means either the bug is more systemic than a one-line fix, or the AI is going in circles. Reverting costs nothing; a fourth speculative fix costs credits and may leave the codebase in a worse state than when you started.</p>
+    </details>
+    <details>
+      <summary>Why is "what I have NOT changed" a useful thing to tell the AI?</summary>
+      <p><span class="answer">It rules out large sections of the codebase immediately.</span> If you tell the AI the HTML and CSS are untouched, it knows to look only in the JavaScript. That narrows the search space and produces a more targeted fix with fewer follow-on breakages.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://momen.app/blogs/best-ai-app-builders-2026">Best AI App Builders in 2026: Avoiding the Prototype Trap — Momen</a>.
+    The clearest description of the "endless debugging doom loop / burning credits" trap and
+    the structural reasons it happens. Read the section on credit burn and iteration strategy.
+    ~10 min. See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — paste me the error.</strong> Copy the exact error message, tell
+    me the last thing you changed, and describe what you expected to happen. I'll walk you
+    through the four-step loop on your specific bug and explain why the fix works so you
+    can apply the same reasoning next time.
+  </div>
+
+  <p>Terms from this lesson — <em>debugging</em>, <em>comprehension debt</em>,
+  <em>git / repository</em> — are defined in the
+  <a href="../../reference/glossary.html">course glossary</a>. Keep it open.</p>
+
+  <nav>
+    <a href="a15-reading-code-without-fear.html">← A15: Reading Code Without Fear</a>
+    <a href="a17-capstone.html">Next → A17: Capstone A</a>
+  </nav>
+</div>
+</body>
+</html>
