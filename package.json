@@ -10,7 +10,8 @@
     "db:migrate": "tsx --env-file=.env.local scripts/db-migrate.ts",
     "db:check": "tsx --env-file=.env.local scripts/db-check.ts",
     "sim": "node scripts/run-sim.mjs",
-    "pebbled-sim": "node scripts/pebbled-sim.mjs"
+    "pebbled-sim": "node scripts/pebbled-sim.mjs",
+    "sync:learn": "node scripts/sync-learn.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.75.0",

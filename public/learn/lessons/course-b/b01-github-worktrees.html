@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B1 · GitHub &amp; Worktrees</title>
+<style>
+/* Shared lesson stylesheet — AI for Entrepreneurs.
+   Tufte-inspired: clean serif body, generous margins, prints well.
+   Inlined into each lesson so every file is self-contained and renders anywhere. */
+:root {
+  --ink:#1a1a1a; --muted:#6b6b6b; --rule:#e2e0da; --accent:#8a5a00;
+  --paper:#fdfcf9; --good:#2f6b3a; --bad:#9a3b3b; --box:#f3f0e8;
+  --avoid:#9a3b3b; --codebg:#1e1e23; --codeink:#e8e6df;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  line-height: 1.6; margin: 0; padding: 3.5rem 1.5rem; }
+.page { max-width: 40rem; margin: 0 auto; }
+.kicker { font-family: -apple-system, Helvetica, Arial, sans-serif;
+  text-transform: uppercase; letter-spacing: .14em; font-size: .72rem;
+  color: var(--accent); margin: 0 0 .5rem; }
+h1 { font-size: 2.1rem; line-height: 1.08; margin: 0 0 .5rem; }
+.lede { color: var(--muted); font-style: italic; font-size: 1.08rem; margin: 0 0 .5rem; }
+.meta { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .76rem;
+  color: var(--muted); border-bottom: 2px solid var(--ink);
+  padding-bottom: 1rem; margin-bottom: 2rem; }
+.deep { display: inline-block; font-family: -apple-system, Helvetica, Arial, sans-serif;
+  font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; background: var(--box);
+  color: var(--accent); border: 1px solid var(--rule); border-radius: 999px;
+  padding: .15rem .6rem; margin-left: .5rem; vertical-align: middle; }
+h2 { font-size: 1.3rem; margin: 2.6rem 0 .6rem; }
+h3 { margin: 1.4rem 0 .4rem; }
+p { margin: 0 0 1rem; }
+code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .88em;
+  background: var(--box); padding: .1rem .35rem; border-radius: 4px; }
+.analogy { background: var(--box); border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+.analogy p:last-child { margin-bottom: 0; }
+.callout { background: var(--box); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.2rem 0; }
+.callout strong { color: var(--accent); }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+.card { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.1rem; background: #fff; }
+.card h3 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .8rem;
+  text-transform: uppercase; letter-spacing: .08em; margin: 0 0 .6rem; }
+.card.good h3 { color: var(--good); } .card.bad h3 { color: var(--bad); }
+.card ul { margin: 0; padding-left: 1.1rem; } .card li { margin-bottom: .4rem; }
+.files { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .85rem;
+  background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.5rem 0; }
+.files .row { display: grid; grid-template-columns: 9rem 1fr; gap: .8rem;
+  padding: .35rem 0; border-bottom: 1px dashed var(--rule); }
+.files .row:last-child { border-bottom: none; }
+.files .name { color: var(--accent); }
+.files .what { font-family: Georgia, serif; color: var(--muted); font-size: .9rem; }
+pre { background: var(--codebg); color: var(--codeink); border-radius: 6px;
+  padding: 1rem 1.1rem; overflow-x: auto; font-size: .82rem; line-height: 1.5;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; margin: 1.2rem 0; }
+pre .c { color: #8aa6c1; } pre .k { color: #c98a5a; } pre .s { color: #9ec98a; }
+.test { border: 1px solid var(--rule); border-radius: 6px; padding: 1.2rem 1.3rem;
+  margin: 1.5rem 0; background: #fff; }
+.test ol { margin: .5rem 0 0; padding-left: 1.3rem; } .test li { margin-bottom: .5rem; }
+.steps { margin: 1.2rem 0; padding-left: 1.3rem; } .steps li { margin-bottom: .6rem; }
+.quiz { background: var(--box); border-radius: 6px; padding: 1.3rem 1.4rem; margin: 2rem 0; }
+.quiz h2 { margin-top: 0; }
+details { border-top: 1px solid var(--rule); padding: .8rem 0; }
+details:last-child { border-bottom: 1px solid var(--rule); }
+summary { cursor: pointer; font-weight: bold; }
+details p { margin: .6rem 0 0; color: var(--muted); }
+.answer { color: var(--good); font-weight: bold; }
+.source { background: #fff; border: 1px dashed var(--accent); border-radius: 6px;
+  padding: 1rem 1.2rem; margin: 2rem 0; }
+.source .kicker { margin-bottom: .3rem; }
+.ask { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .9rem;
+  background: #1a1a1a; color: #f3f0e8; border-radius: 6px; padding: 1rem 1.2rem; margin: 2rem 0; }
+.ask a { color: #e0b76a; }
+nav { display: flex; justify-content: space-between; gap: 1rem;
+  font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .82rem;
+  margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
+nav a { max-width: 48%; }
+a { color: var(--accent); }
+@media (max-width: 34rem) { .cols { grid-template-columns: 1fr; } }
+@media print { body { padding: 0; background: #fff; }
+  pre { background: #f4f4f4; color: #000; border: 1px solid #ccc; }
+  .ask { background: #eee; color: #000; } .ask a { color: var(--accent); } }
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course B · Module B1 Production · Lesson 1 of 18</p>
+  <h1>GitHub &amp; Worktrees</h1>
+  <p class="lede">Never fear breaking your app again — you'll have save points,
+  full undo history, and a way to work on two things at once.</p>
+  <p class="meta">~13 min · Have your Course A project open · Prereq: A17 Capstone A</p>
+
+  <p>At the end of Course A you shipped something real — and then probably held your
+  breath every time the AI rewrote a file. That fear is rational: one wrong change and
+  the app stops working, and you have no clean copy to go back to. That ends here.
+  Your single win in this lesson: by the end you'll understand Git and GitHub well enough
+  to <strong>always have a safe way back</strong>, and to experiment freely knowing nothing
+  is ever permanently broken.</p>
+
+  <h2>Git: automatic save points for your project</h2>
+  <div class="analogy">
+    <p>Think of a video game with unlimited manual saves. Every time you reach a good
+    checkpoint, you hit Save. If the next dungeon kills you, you reload — you never lose
+    the whole run. <strong>Git is that for your code.</strong></p>
+    <p>Each save is called a <strong>commit</strong>. A commit is a labeled snapshot: "working
+    homepage," "added contact form," "payment flow done." Your full project history is a
+    stack of these snapshots going back to day one. You can jump back to any of them in
+    seconds.</p>
+  </div>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>✓ What a commit gives you</h3>
+      <ul>
+        <li>A permanent record of every change, who made it, and when</li>
+        <li>One-command undo — roll back to any earlier snapshot</li>
+        <li>A message in plain English ("fixed broken checkout button")</li>
+        <li>Proof of what the app looked like before the AI rewrote things</li>
+      </ul>
+    </div>
+    <div class="card bad">
+      <h3>✗ Without commits</h3>
+      <ul>
+        <li>One bad AI change can destroy hours of work</li>
+        <li>No record of what changed or why</li>
+        <li>The only undo is Ctrl-Z — until you close the file</li>
+        <li>Collaborating means emailing zip files and praying</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Branches: safe copies to try something new</h2>
+  <p>Imagine you want to redesign your homepage — but you're not sure it'll work, and you
+  don't want to wreck the version your customers see right now. A <strong>branch</strong>
+  solves this exactly.</p>
+  <p>A branch is a parallel copy of your project. You make one, experiment freely on it,
+  and when you're happy you <em>merge</em> it back into the main copy. If the experiment
+  fails, you delete the branch and your main copy is completely untouched. The AI can
+  suggest "create a branch called <code>new-homepage</code>" and do it for you — you
+  just need to know why it matters.</p>
+
+  <div class="callout">
+    <strong>The rule of thumb:</strong> any time you're about to try something new or the
+    AI is about to do a big rewrite, make a branch first. It takes about five seconds
+    and costs you nothing except peace of mind — which is worth everything.
+  </div>
+
+  <h2>GitHub: the cloud home for your project</h2>
+  <p>Git lives on your computer. <strong>GitHub</strong> is where your project lives
+  <em>on the internet</em> — a permanent, backed-up, shareable copy. Think of it as
+  Dropbox for code, except it understands every commit and branch in your history.</p>
+  <p>When your AI coding tool (Cursor, Replit, v0, Lovable, etc.) says "push to GitHub,"
+  it is uploading your latest commits to that cloud home. Benefits you get automatically:</p>
+  <div class="files">
+    <div class="row"><span class="name">Backup</span><span class="what">Even if your laptop dies, your project is safe in the cloud.</span></div>
+    <div class="row"><span class="name">History</span><span class="what">Every commit you ever made is stored, searchable, and restorable.</span></div>
+    <div class="row"><span class="name">Sharing</span><span class="what">A contractor or AI tool can see your code without you emailing files.</span></div>
+    <div class="row"><span class="name">Deploy</span><span class="what">Platforms like Vercel watch your GitHub repo and auto-publish when you push.</span></div>
+  </div>
+
+  <h2>Worktrees: two things at once, no confusion</h2>
+  <p>Here's a problem you'll hit as your app grows: you're in the middle of building a
+  new feature, but a bug just broke something for customers and you need to fix it
+  <em>right now</em> — without losing all your half-finished feature work.</p>
+  <p>The standard answer is to stash your work, switch branches, fix the bug, switch back,
+  and unstash. That's fiddly. A <strong>worktree</strong> is a better answer: it lets Git
+  check out a second branch into a <em>second folder</em> on your computer, so both
+  branches exist as live folders simultaneously. You fix the bug in one folder, ship it,
+  then walk back to the other folder and carry on with the feature — no juggling, no
+  switching, no lost work.</p>
+  <p>Your AI tool can set this up for you. Tell it: <em>"Create a worktree for the
+  <code>hotfix</code> branch so I can work on it without losing my <code>feature/signup</code>
+  work."</em> It will run the one-line command. You just need to understand what the
+  two folders represent.</p>
+
+  <div class="test">
+    <strong>The mental model for worktrees:</strong>
+    <ol>
+      <li><strong>Main folder</strong> — your <code>feature/signup</code> branch, half-built, safe where it is.</li>
+      <li><strong>Second folder</strong> — your <code>hotfix</code> branch, checked out fresh, ready to edit.</li>
+      <li>Fix the bug in the second folder. Commit. Push. Deploy.</li>
+      <li>Walk back to the first folder. Carry on. Nothing was touched.</li>
+    </ol>
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening — recalling it is what makes it stick.</p>
+    <details>
+      <summary>The AI rewrites your checkout page and now nothing works. How do you recover?</summary>
+      <p><span class="answer">Roll back to the last good commit.</span> Because you committed before the rewrite, Git has a labeled snapshot of exactly what was working. You tell the AI "revert to commit X" or check out that commit — the broken version disappears and the good one is restored instantly.</p>
+    </details>
+    <details>
+      <summary>What is the difference between Git and GitHub?</summary>
+      <p><span class="answer">Git is the save-points system that runs on your computer; GitHub is the cloud service where those save points are stored, backed up, and shared.</span> You can use Git entirely offline — but without pushing to GitHub, a lost laptop means lost history.</p>
+    </details>
+    <details>
+      <summary>A customer reports a broken payment button while you're halfway through redesigning the dashboard. What's the worktree move?</summary>
+      <p><span class="answer">Check out the fix as a worktree in a separate folder.</span> Your half-finished dashboard work stays exactly where it is in its folder. You fix the payment bug in the second folder, commit, push, and deploy. Then you walk back to the dashboard folder — nothing changed, nothing lost.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://docs.github.com/en/get-started/start-your-journey/about-github-and-git">About GitHub and Git — GitHub Docs</a>.
+    The official plain-English introduction: what Git is, what GitHub adds, and how the
+    two fit together. ~8 min. See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — ask me anything.</strong> Not sure where your project's
+    Git history actually is? Not clear on when to make a branch versus just committing?
+    Paste your situation and I'll walk through the exact steps for your specific app and
+    tool. This is the kind of thing that takes two minutes to explain and saves hours
+    of panic later.
+  </div>
+
+  <p>New terms from this lesson — <em>commit</em>, <em>branch</em>, <em>repository</em>,
+  <em>deploy</em> — are in the <a href="../../reference/glossary.html">course glossary</a>.
+  Keep it open as you go.</p>
+
+  <nav>
+    <a href="../course-a/a17-capstone.html">← Course A · A17: Capstone A</a>
+    <a href="b02-databases.html">Next → B2: Databases</a>
+  </nav>
+</div>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A8 · Build Your First Automation</title>
+<style>
+/* Shared lesson stylesheet — AI for Entrepreneurs.
+   Tufte-inspired: clean serif body, generous margins, prints well.
+   Inlined into each lesson so every file is self-contained and renders anywhere. */
+:root {
+  --ink:#1a1a1a; --muted:#6b6b6b; --rule:#e2e0da; --accent:#8a5a00;
+  --paper:#fdfcf9; --good:#2f6b3a; --bad:#9a3b3b; --box:#f3f0e8;
+  --avoid:#9a3b3b; --codebg:#1e1e23; --codeink:#e8e6df;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  line-height: 1.6; margin: 0; padding: 3.5rem 1.5rem; }
+.page { max-width: 40rem; margin: 0 auto; }
+.kicker { font-family: -apple-system, Helvetica, Arial, sans-serif;
+  text-transform: uppercase; letter-spacing: .14em; font-size: .72rem;
+  color: var(--accent); margin: 0 0 .5rem; }
+h1 { font-size: 2.1rem; line-height: 1.08; margin: 0 0 .5rem; }
+.lede { color: var(--muted); font-style: italic; font-size: 1.08rem; margin: 0 0 .5rem; }
+.meta { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .76rem;
+  color: var(--muted); border-bottom: 2px solid var(--ink);
+  padding-bottom: 1rem; margin-bottom: 2rem; }
+.deep { display: inline-block; font-family: -apple-system, Helvetica, Arial, sans-serif;
+  font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; background: var(--box);
+  color: var(--accent); border: 1px solid var(--rule); border-radius: 999px;
+  padding: .15rem .6rem; margin-left: .5rem; vertical-align: middle; }
+h2 { font-size: 1.3rem; margin: 2.6rem 0 .6rem; }
+h3 { margin: 1.4rem 0 .4rem; }
+p { margin: 0 0 1rem; }
+code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .88em;
+  background: var(--box); padding: .1rem .35rem; border-radius: 4px; }
+.analogy { background: var(--box); border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+.analogy p:last-child { margin-bottom: 0; }
+.callout { background: var(--box); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.2rem 0; }
+.callout strong { color: var(--accent); }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+.card { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.1rem; background: #fff; }
+.card h3 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .8rem;
+  text-transform: uppercase; letter-spacing: .08em; margin: 0 0 .6rem; }
+.card.good h3 { color: var(--good); } .card.bad h3 { color: var(--bad); }
+.card ul { margin: 0; padding-left: 1.1rem; } .card li { margin-bottom: .4rem; }
+.files { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .85rem;
+  background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.5rem 0; }
+.files .row { display: grid; grid-template-columns: 9rem 1fr; gap: .8rem;
+  padding: .35rem 0; border-bottom: 1px dashed var(--rule); }
+.files .row:last-child { border-bottom: none; }
+.files .name { color: var(--accent); }
+.files .what { font-family: Georgia, serif; color: var(--muted); font-size: .9rem; }
+pre { background: var(--codebg); color: var(--codeink); border-radius: 6px;
+  padding: 1rem 1.1rem; overflow-x: auto; font-size: .82rem; line-height: 1.5;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; margin: 1.2rem 0; }
+pre .c { color: #8aa6c1; } pre .k { color: #c98a5a; } pre .s { color: #9ec98a; }
+.test { border: 1px solid var(--rule); border-radius: 6px; padding: 1.2rem 1.3rem;
+  margin: 1.5rem 0; background: #fff; }
+.test ol { margin: .5rem 0 0; padding-left: 1.3rem; } .test li { margin-bottom: .5rem; }
+.steps { margin: 1.2rem 0; padding-left: 1.3rem; } .steps li { margin-bottom: .6rem; }
+.quiz { background: var(--box); border-radius: 6px; padding: 1.3rem 1.4rem; margin: 2rem 0; }
+.quiz h2 { margin-top: 0; }
+details { border-top: 1px solid var(--rule); padding: .8rem 0; }
+details:last-child { border-bottom: 1px solid var(--rule); }
+summary { cursor: pointer; font-weight: bold; }
+details p { margin: .6rem 0 0; color: var(--muted); }
+.answer { color: var(--good); font-weight: bold; }
+.source { background: #fff; border: 1px dashed var(--accent); border-radius: 6px;
+  padding: 1rem 1.2rem; margin: 2rem 0; }
+.source .kicker { margin-bottom: .3rem; }
+.ask { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .9rem;
+  background: #1a1a1a; color: #f3f0e8; border-radius: 6px; padding: 1rem 1.2rem; margin: 2rem 0; }
+.ask a { color: #e0b76a; }
+nav { display: flex; justify-content: space-between; gap: 1rem;
+  font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .82rem;
+  margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
+nav a { max-width: 48%; }
+a { color: var(--accent); }
+@media (max-width: 34rem) { .cols { grid-template-columns: 1fr; } }
+@media print { body { padding: 0; background: #fff; }
+  pre { background: #f4f4f4; color: #000; border: 1px solid #ccc; }
+  .ask { background: #eee; color: #000; } .ask a { color: var(--accent); } }
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course A · Module A3 No-Code Automation · Lesson 8 of 17</p>
+  <h1>Build Your First Automation</h1>
+  <p class="lede">Reading about automations is fine. Shipping one that runs without
+  you is the thing that changes how you work.</p>
+  <p class="meta">~20 min · Have Zapier or Make open and logged in · Prereq: A7 (triggers &amp; actions)</p>
+
+  <p>You understand triggers and actions. You've seen the template. Now you're going to
+  build a real one — something that will run on its own after you close the laptop. This
+  lesson's single win: by the end, you will have a live automation that watches for an
+  event, does something useful with AI, and delivers a result — without you touching it.
+  Small scope, real ship. That first run is the thing.</p>
+
+  <h2>Pick your combination</h2>
+  <p>Choose one row from each column. Simpler is better for your first build — you can layer
+  complexity later. The goal is a working loop, not an impressive one.</p>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>Pick a trigger</h3>
+      <ul>
+        <li>New email in Gmail / Outlook</li>
+        <li>New form submission (Typeform, Google Forms)</li>
+        <li>New row in Google Sheets / Airtable</li>
+      </ul>
+    </div>
+    <div class="card good">
+      <h3>Pick an AI action</h3>
+      <ul>
+        <li>Summarize to 2–3 bullet points</li>
+        <li>Draft a reply in my tone</li>
+        <li>Classify as [category A / B / C]</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="files">
+    <div class="row"><span class="name">Then deliver to</span><span class="what">Post to a Slack channel · Add a row in Google Sheets · Send an email</span></div>
+  </div>
+
+  <h2>Build it — step by step</h2>
+  <div class="steps">
+    <ol>
+      <li>
+        <strong>Start from a template, not a blank screen.</strong>
+        In Zapier: go to <em>Templates</em> and search for your trigger app (e.g. "Gmail +
+        ChatGPT" or "Typeform + Slack"). In Make: use the Template library. Pick the closest
+        match and open it. You're modifying, not inventing.
+      </li>
+      <li>
+        <strong>Connect your trigger app.</strong>
+        Authorize the app (Gmail, Sheets, etc.) and tell it which inbox, sheet, or form to
+        watch. Test the trigger — Zapier/Make will pull in a real recent record so you can see
+        the data flowing.
+      </li>
+      <li>
+        <strong>Set up the AI action.</strong>
+        In the AI step, paste your prompt template from A5. Map the trigger fields into the
+        brackets — e.g. replace <code>[EMAIL BODY]</code> with the trigger's "Body" field.
+        Keep the prompt short and specific. One job per automation.
+      </li>
+      <li>
+        <strong>Set up the output action.</strong>
+        Connect the destination (Slack, Sheets, email). Map the AI's output into the right
+        fields — e.g. the AI's reply text goes into the Slack message body.
+      </li>
+      <li>
+        <strong>Test it with real data before turning it on.</strong>
+        Use the built-in "Test" button to run the whole chain with a real sample. Read the
+        output. Is the AI doing what you asked? Is it landing in the right place?
+      </li>
+      <li>
+        <strong>Turn it on. Watch the first live run.</strong>
+        Enable the automation, then trigger it for real — send a test email, submit the form,
+        add the row. Watch it run. Confirm the output landed. You're done.
+      </li>
+    </ol>
+  </div>
+
+  <div class="callout">
+    <strong>Add a human-in-the-loop for your first version.</strong> Route the AI output to
+    a Slack channel or a Google Sheet for review before it touches a customer. Once you've
+    seen it run correctly a dozen times, remove the checkpoint if you're confident. Trust is
+    earned in runs, not promised in setup.
+  </div>
+
+  <h2>Test before you trust</h2>
+  <div class="test">
+    <strong>Before you declare it live:</strong>
+    <ol>
+      <li><strong>Did the trigger fire on a real event?</strong> (Not just a test sample — an actual new email, form, or row.)</li>
+      <li><strong>Did the AI output make sense?</strong> Read it. Would you have written something close to this yourself?</li>
+      <li><strong>Did the output land in the right place?</strong> Right Slack channel, right sheet, right email address.</li>
+      <li><strong>What happens if the input is weird?</strong> Try a short, blank, or unusual submission and watch what the AI does.</li>
+    </ol>
+  </div>
+
+  <p>A zap that breaks on edge-case input isn't broken — it's unfinished. Fixing the prompt
+  or adding a filter step is normal. Iteration is the job.</p>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening. Recalling it now is what makes it stick.</p>
+    <details>
+      <summary>Why start from a template instead of a blank automation?</summary>
+      <p><span class="answer">Templates wire up the trigger and action connections for you.</span> The fiddly part of a first build isn't the AI prompt — it's connecting the apps correctly and mapping the right data fields. A template handles that, leaving you to focus on the prompt.</p>
+    </details>
+    <details>
+      <summary>Your automation sends a drafted reply directly to the customer. It goes out wrong twice. What should you have built instead?</summary>
+      <p><span class="answer">A human-in-the-loop checkpoint.</span> Route the draft to a Slack message or a Sheets review queue first. Read it, approve, then send. Remove that checkpoint only after you've seen it run correctly enough times to trust it.</p>
+    </details>
+    <details>
+      <summary>The AI action step produces a blank output on some runs. First thing to check?</summary>
+      <p><span class="answer">Whether the trigger data field you mapped into the prompt is sometimes empty.</span> If the prompt says "summarize [EMAIL BODY]" but some emails have no body (just a subject line), the AI has nothing to work with. Add a filter step that skips blank inputs, or update the prompt to handle them.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://zapier.com/templates">Zapier Template Library</a>.
+    Browse by the app you're using as a trigger — you'll find pre-built AI workflows that
+    take under 30 minutes to adapt and ship. See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — get unstuck fast.</strong> Paste the trigger you picked, the
+    AI prompt you're using, and what the output is doing wrong. I'll tell you exactly where
+    the chain is breaking and how to fix it. Most first-build problems are one prompt
+    tweak or one field-mapping fix away from working.
+  </div>
+
+  <p>Terms from this lesson — <em>automation</em>, <em>trigger</em>, <em>action</em>,
+  <em>human-in-the-loop</em>, <em>no-code tool</em> — are in the
+  <a href="../../reference/glossary.html">course glossary</a>.</p>
+
+  <nav>
+    <a href="a07-triggers-and-actions.html">← A7: Triggers &amp; Actions</a>
+    <a href="a09-multi-step-safe-failure.html">Next → A9: Multi-Step &amp; Safe Failure</a>
+  </nav>
+</div>
+</body>
+</html>

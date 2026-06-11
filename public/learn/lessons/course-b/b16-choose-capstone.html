@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B16 · Choose Your Capstone</title>
+<style>
+/* Shared lesson stylesheet — AI for Entrepreneurs.
+   Tufte-inspired: clean serif body, generous margins, prints well.
+   Inlined into each lesson so every file is self-contained and renders anywhere. */
+:root {
+  --ink:#1a1a1a; --muted:#6b6b6b; --rule:#e2e0da; --accent:#8a5a00;
+  --paper:#fdfcf9; --good:#2f6b3a; --bad:#9a3b3b; --box:#f3f0e8;
+  --avoid:#9a3b3b; --codebg:#1e1e23; --codeink:#e8e6df;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  line-height: 1.6; margin: 0; padding: 3.5rem 1.5rem; }
+.page { max-width: 40rem; margin: 0 auto; }
+.kicker { font-family: -apple-system, Helvetica, Arial, sans-serif;
+  text-transform: uppercase; letter-spacing: .14em; font-size: .72rem;
+  color: var(--accent); margin: 0 0 .5rem; }
+h1 { font-size: 2.1rem; line-height: 1.08; margin: 0 0 .5rem; }
+.lede { color: var(--muted); font-style: italic; font-size: 1.08rem; margin: 0 0 .5rem; }
+.meta { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .76rem;
+  color: var(--muted); border-bottom: 2px solid var(--ink);
+  padding-bottom: 1rem; margin-bottom: 2rem; }
+.deep { display: inline-block; font-family: -apple-system, Helvetica, Arial, sans-serif;
+  font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; background: var(--box);
+  color: var(--accent); border: 1px solid var(--rule); border-radius: 999px;
+  padding: .15rem .6rem; margin-left: .5rem; vertical-align: middle; }
+h2 { font-size: 1.3rem; margin: 2.6rem 0 .6rem; }
+h3 { margin: 1.4rem 0 .4rem; }
+p { margin: 0 0 1rem; }
+code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .88em;
+  background: var(--box); padding: .1rem .35rem; border-radius: 4px; }
+.analogy { background: var(--box); border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+.analogy p:last-child { margin-bottom: 0; }
+.callout { background: var(--box); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.2rem 0; }
+.callout strong { color: var(--accent); }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+.card { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.1rem; background: #fff; }
+.card h3 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .8rem;
+  text-transform: uppercase; letter-spacing: .08em; margin: 0 0 .6rem; }
+.card.good h3 { color: var(--good); } .card.bad h3 { color: var(--bad); }
+.card ul { margin: 0; padding-left: 1.1rem; } .card li { margin-bottom: .4rem; }
+.files { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .85rem;
+  background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.2rem; margin: 1.5rem 0; }
+.files .row { display: grid; grid-template-columns: 9rem 1fr; gap: .8rem;
+  padding: .35rem 0; border-bottom: 1px dashed var(--rule); }
+.files .row:last-child { border-bottom: none; }
+.files .name { color: var(--accent); }
+.files .what { font-family: Georgia, serif; color: var(--muted); font-size: .9rem; }
+pre { background: var(--codebg); color: var(--codeink); border-radius: 6px;
+  padding: 1rem 1.1rem; overflow-x: auto; font-size: .82rem; line-height: 1.5;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; margin: 1.2rem 0; }
+pre .c { color: #8aa6c1; } pre .k { color: #c98a5a; } pre .s { color: #9ec98a; }
+.test { border: 1px solid var(--rule); border-radius: 6px; padding: 1.2rem 1.3rem;
+  margin: 1.5rem 0; background: #fff; }
+.test ol { margin: .5rem 0 0; padding-left: 1.3rem; } .test li { margin-bottom: .5rem; }
+.steps { margin: 1.2rem 0; padding-left: 1.3rem; } .steps li { margin-bottom: .6rem; }
+.quiz { background: var(--box); border-radius: 6px; padding: 1.3rem 1.4rem; margin: 2rem 0; }
+.quiz h2 { margin-top: 0; }
+details { border-top: 1px solid var(--rule); padding: .8rem 0; }
+details:last-child { border-bottom: 1px solid var(--rule); }
+summary { cursor: pointer; font-weight: bold; }
+details p { margin: .6rem 0 0; color: var(--muted); }
+.answer { color: var(--good); font-weight: bold; }
+.source { background: #fff; border: 1px dashed var(--accent); border-radius: 6px;
+  padding: 1rem 1.2rem; margin: 2rem 0; }
+.source .kicker { margin-bottom: .3rem; }
+.ask { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .9rem;
+  background: #1a1a1a; color: #f3f0e8; border-radius: 6px; padding: 1rem 1.2rem; margin: 2rem 0; }
+.ask a { color: #e0b76a; }
+nav { display: flex; justify-content: space-between; gap: 1rem;
+  font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: .82rem;
+  margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
+nav a { max-width: 48%; }
+a { color: var(--accent); }
+@media (max-width: 34rem) { .cols { grid-template-columns: 1fr; } }
+@media print { body { padding: 0; background: #fff; }
+  pre { background: #f4f4f4; color: #000; border: 1px solid #ccc; }
+  .ask { background: #eee; color: #000; } .ask a { color: var(--accent); } }
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="kicker">Course B · Module B3 Capstone · Lesson 16 of 18</p>
+  <h1>Choose Your Capstone</h1>
+  <p class="lede">Pick one real app with one real production concern.</p>
+  <p class="meta">~15 min · Blank doc or notepad ready · Prereq: B15 (Build Your Own Skill)</p>
+
+  <p>Every course that ends with "now go build something" fails unless "something" is
+  specific. Vague ambitions don't ship. Your single win from this lesson: by the end
+  you'll have written a one-paragraph build brief with a name, a narrow job, at least one
+  real production concern (auth, real data, or payments), and a crisp definition of done.
+  That brief is your launchpad for the next two lessons.</p>
+
+  <h2>What makes a good capstone</h2>
+  <div class="analogy">
+    <p>Think of a good capstone the way a good knife is good: one sharp edge used for
+    one job, not a Swiss Army blade that tries to do everything. The best small apps
+    solve one narrow problem so cleanly that someone reaches for them every week.
+    Wide scope is the number-one reason first builds never ship.</p>
+    <p>The other ingredient: at least one real production concern. If your app has
+    <strong>no auth, no live data, and no payments</strong>, it's a prototype — useful
+    for learning but not something you'd hand to a customer with confidence. Crossing that
+    line, even once, is what separates a demo from a product.</p>
+  </div>
+
+  <div class="cols">
+    <div class="card good">
+      <h3>Good capstone candidates</h3>
+      <ul>
+        <li>A simple client portal where customers log in and see their project status</li>
+        <li>A one-product checkout page that takes real payments</li>
+        <li>An internal tool that reads from your own database and outputs a weekly report</li>
+        <li>A waitlist app that captures emails and notifies you on signups</li>
+      </ul>
+    </div>
+    <div class="card bad">
+      <h3>Scope traps to avoid</h3>
+      <ul>
+        <li>"A platform where users can…" — more than one user job = two capstones</li>
+        <li>Anything that needs a mobile app before it's useful</li>
+        <li>Builds where "done" depends on another person finishing something first</li>
+        <li>A full e-commerce store — too many moving parts for a capstone sprint</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>The three production concerns</h2>
+  <p>You don't need all three. You need at least one. This is what makes the build real
+  rather than a toy — and it's what this course has been preparing you for:</p>
+  <div class="files">
+    <div class="row"><span class="name">Auth</span><span class="what">Users can create an account and log in. Their data is theirs. Covered in B6.</span></div>
+    <div class="row"><span class="name">Real data</span><span class="what">The app reads from or writes to a live database — not a hard-coded demo. Covered in B5.</span></div>
+    <div class="row"><span class="name">Payments</span><span class="what">Real money moves through Stripe. You've tested it in test mode before going live. Covered in B8.</span></div>
+  </div>
+
+  <h2>Write your capstone brief</h2>
+  <p>Use this checklist to draft your brief before moving to B17. A brief that passes all
+  six checks is ready to build. One that fails any of the first four needs another pass —
+  going wider or shallower here costs you a week of wasted sprint, not an afternoon of
+  planning.</p>
+  <div class="test">
+    <strong>Capstone brief checklist:</strong>
+    <ol>
+      <li><strong>Name &amp; one-sentence pitch.</strong> What is it called and what is the one job it does?</li>
+      <li><strong>Who uses it?</strong> One type of user (you, a customer, a team member). Not "everyone."</li>
+      <li><strong>Production concern.</strong> Which of the three does it include — auth, real data, or payments?</li>
+      <li><strong>Scope ceiling.</strong> What is explicitly <em>out</em> of scope for v1? Write it down.</li>
+      <li><strong>Low risk if wrong.</strong> If the first version ships with a bug, is it annoying or catastrophic? If catastrophic, narrow the scope further.</li>
+      <li><strong>Definition of done.</strong> Write the one sentence that means "I can hand this URL to a real person and feel good about it."</li>
+    </ol>
+  </div>
+
+  <div class="callout">
+    <strong>The rule of one:</strong> one user type, one job, one production concern, one
+    definition of done. Every time a capstone fails it's because someone broke the rule of
+    one. You can always build v2. Ship v1 first.
+  </div>
+
+  <div class="quiz">
+    <h2>Check yourself</h2>
+    <p style="margin-top:0;color:var(--muted);font-style:italic">Answer before opening. Recalling it now is what makes it stick.</p>
+    <details>
+      <summary>Your idea: "A dashboard where clients can log in, see invoices, pay online, submit support tickets, and download files." Is this a good capstone?</summary>
+      <p><span class="answer">Too wide.</span> That's four separate jobs (view invoices, pay, support, download). Pick one — "clients can log in and pay outstanding invoices" is a strong, shippable capstone. The others are v2 and v3.</p>
+    </details>
+    <details>
+      <summary>Your app stores no user data and takes no payment — it just shows a hard-coded price list. Does it qualify as a capstone?</summary>
+      <p><span class="answer">No — it's a prototype.</span> Without at least one production concern (auth, live data, or payments) you're not crossing the line from demo to product. Add one real concern — even a simple login or a live data pull — and it qualifies.</p>
+    </details>
+    <details>
+      <summary>Why write a scope ceiling (what's explicitly out of scope) before you start building?</summary>
+      <p><span class="answer">To prevent scope creep during the build sprint.</span> When a good idea surfaces mid-build — "oh, I should also add X" — you can park it on a list instead of derailing v1. The scope ceiling is a commitment device, not a limitation.</p>
+    </details>
+  </div>
+
+  <div class="source">
+    <p class="kicker">Read this next (primary source)</p>
+    <p style="margin:0"><a href="https://blog.mean.ceo/building-first-ai-feature/">"Building Your First AI Feature" (mean.ceo)</a> —
+    a practical walkthrough of scoping and shipping a focused AI-powered feature in a real
+    product, written for non-technical founders. ~10 min.
+    See <a href="../../RESOURCES.md">RESOURCES.md</a> for more.</p>
+  </div>
+
+  <div class="ask">
+    <strong>I'm your teacher — bring me your idea.</strong> Describe the app you're
+    thinking of building — even in rough bullet form — and I'll help you sharpen it into
+    a brief that passes the checklist above. The ten minutes we spend scoping will save you
+    days of re-work in the sprint. Bring the messy version; I'll help you cut it clean.
+  </div>
+
+  <p>Key terms this lesson — <em>build brief</em>, <em>deploy</em>, <em>human-in-the-loop</em>
+  — are defined in the <a href="../../reference/glossary.html">course glossary</a>.</p>
+
+  <nav>
+    <a href="b15-build-your-own-skill.html">← B15: Build Your Own Skill</a>
+    <a href="b17-build-sprint.html">Next → B17: Build Sprint</a>
+  </nav>
+</div>
+</body>
+</html>
