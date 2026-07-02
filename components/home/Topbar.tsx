@@ -28,7 +28,13 @@ export function Topbar() {
           <a href="/guides">Guides</a>
           <a href="/answers">Answers</a>
           <a href="/learn">Learn</a>
-          <a href="/start" className="topnav-cta">
+          {/* Short-term: the /start funnel is paused, so route "Get in
+              touch" straight to email. Subject prefilled to make the reply
+              easy to spot. */}
+          <a
+            href="mailto:mei@intentional.studio?subject=Let's%20work%20together"
+            className="topnav-cta"
+          >
             Get in touch →
           </a>
         </nav>
