@@ -135,7 +135,10 @@ Propose exactly 3 pebbles. Use the return_pebble_projects tool with this exact s
 }`;
 
   const response = await client.messages.create({
-    model: process.env.ANTHROPIC_INTAKE_MODEL ?? DEFAULT_INTAKE_MODEL,
+    // `||` (not `??`) so an env var that's defined-but-empty
+    // (`ANTHROPIC_INTAKE_MODEL=`) falls back to the default instead of
+    // sending `model: ""`, which the API rejects with a 400.
+    model: process.env.ANTHROPIC_INTAKE_MODEL || DEFAULT_INTAKE_MODEL,
     max_tokens: 2048,
     system: [
       {
@@ -216,7 +219,10 @@ Propose exactly 3 pebbles. Use the return_pebble_projects tool with this exact s
 }`;
 
   const stream = client.messages.stream({
-    model: process.env.ANTHROPIC_INTAKE_MODEL ?? DEFAULT_INTAKE_MODEL,
+    // `||` (not `??`) so an env var that's defined-but-empty
+    // (`ANTHROPIC_INTAKE_MODEL=`) falls back to the default instead of
+    // sending `model: ""`, which the API rejects with a 400.
+    model: process.env.ANTHROPIC_INTAKE_MODEL || DEFAULT_INTAKE_MODEL,
     max_tokens: 2048,
     system: [
       {

@@ -1,7 +1,8 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { streamPebbles, type PebbleProject } from "@/lib/anthropic";
+import { upsertOnboardingSession } from "@/lib/onboarding/db";
 import { scrapeSite } from "@/lib/scrape";
-import { readSessionWithId, writeSession } from "@/lib/session";
+import { readSessionWithId } from "@/lib/session";
 
 /**
  * PEBB-200: classify a thrown error into an operator-facing message + a
@@ -152,8 +153,9 @@ export async function GET(): Promise<Response> {
   }
 
   // Snapshot the inputs while we still have a sync context. The streaming
-  // body below detaches into its own async generator.
-  const { url, bottleneck, email, createdAt } = session;
+  // body below detaches into its own async generator, where the request
+  // cookie store is no longer writable.
+  const { id, url, bottleneck, email, createdAt } = session;
 
   const encoder = new TextEncoder();
   const stream = new ReadableStream<Uint8Array>({
@@ -201,12 +203,23 @@ export async function GET(): Promise<Response> {
         // page loads (`/projects`) see the same data without re-generating.
         // Use `final` rather than `collected` to be defensive about any
         // pebbles surfaced via the end-of-stream tail emission.
-        await writeSession({
+        //
+        // Write straight to the DB by session id rather than via
+        // writeSession(): we're inside the ReadableStream body here, after
+        // the SSE response headers are already committed, so mutating the
+        // cookie store (which writeSession does) throws in Next.js and
+        // aborts before `emit("complete")`. The cookie was already set by
+        // /api/start/begin, so there's nothing to re-set.
+        const now = Date.now();
+        await upsertOnboardingSession({
+          id,
           url,
           bottleneck,
-          email,
+          email: email ?? null,
           projects: final,
-          createdAt,
+          prioritized: [],
+          created_at: createdAt,
+          updated_at: now,
         });
 
         emit("complete", { type: "complete", count: final.length });
