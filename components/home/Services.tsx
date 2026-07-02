@@ -8,7 +8,7 @@ const services = [
     roman: "I.",
     pill: "AI Training",
     name: "AI training workshops & coaching",
-    desc: "Practical AI training for teams just starting with AI, and for teams that have already stalled. We run hands-on, not slideware.",
+    desc: "Practical AI training for teams just getting started, and for teams that already stalled. Hands-on, not slideware.",
     list: [
       "Half-day exec primers",
       "Engineering bootcamps (Claude Code, Cursor, agents)",
@@ -18,7 +18,7 @@ const services = [
     foot: {
       pre: "From ",
       em: "$3,500",
-      post: " · 1–2 weeks",
+      post: " · 1-2 weeks",
       links: [
         { href: "/ai-training", label: "AI training details →" },
         {
@@ -33,7 +33,7 @@ const services = [
     roman: "II.",
     pill: "Custom Apps",
     name: "Custom AI apps & agents",
-    desc: "Custom AI apps and internal tools built to the shape of your team. Dashboards, agents, automation suites, and workflow software.",
+    desc: "Custom AI apps and internal tools built to fit your team. Dashboards, agents, and automation that actually runs.",
     list: [
       "Claude / OpenAI-powered apps",
       "Internal dashboards & ops tools",
@@ -43,7 +43,7 @@ const services = [
     foot: {
       pre: "From ",
       em: "$12,000",
-      post: " · 3–6 weeks",
+      post: " · 3-6 weeks",
       links: [
         { href: "/custom-apps", label: "Custom app details →" },
         {
@@ -58,14 +58,14 @@ const services = [
     roman: "III.",
     pill: "Identity",
     name: "Brand & website",
-    desc: "For companies whose work has outgrown their public face. Designed and engineered by the same person — me — start to finish.",
+    desc: "For companies whose work has outgrown how they look online. I design and build the whole thing, start to finish.",
     list: [
       "Marketing & landing redesigns",
       "Framer Motion · Next.js · Tailwind",
       "Brand systems that scale",
       "Copy that doesn't sound like a robot",
     ],
-    foot: { pre: "From ", em: "$8,000", post: " · 2–4 weeks", links: [] },
+    foot: { pre: "From ", em: "$8,000", post: " · 2-4 weeks", links: [] },
   },
 ];
 
@@ -79,12 +79,12 @@ export function Services() {
             What I work on
           </p>
           <h2 className="section-title">
-            Three rooms, <em>one studio</em>.
+            Three ways I can <em>help</em>.
           </h2>
           <p className="section-sub">
-            AI training often turns into custom apps, and custom apps usually
-            need clearer words around them. Pick the door that sounds most like
-            your problem - we&apos;ll figure out the rest together.
+            AI training often turns into custom apps, and those apps usually
+            need clearer words around them. Pick whichever sounds most like your
+            problem and we&apos;ll sort out the rest.
           </p>
         </Reveal>
 

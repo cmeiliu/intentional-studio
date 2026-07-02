@@ -28,11 +28,11 @@ import {
 } from "@/lib/motion";
 
 /**
- * useReveal — drives a scroll-triggered reveal, with a safety net.
+ * useReveal - drives a scroll-triggered reveal, with a safety net.
  *
  * On a normal browser it reveals when the element scrolls into view (pure
  * scroll-reveal, no arbitrary timers). But if IntersectionObserver can't work
- * — JS-disabled SSR, or a zero-height/headless viewport — it reveals
+ * - JS-disabled SSR, or a zero-height/headless viewport - it reveals
  * immediately so content is never left permanently hidden. That guard is what
  * keeps "hidden by default, shown by JS" from ever producing a blank page.
  */
@@ -55,7 +55,7 @@ function useReveal() {
 }
 
 /**
- * Reveal — a single element that fades/rises in when scrolled into view.
+ * Reveal - a single element that fades/rises in when scrolled into view.
  * Honors prefers-reduced-motion (renders visible, no transform).
  */
 export function Reveal({
@@ -92,7 +92,7 @@ export function Reveal({
 }
 
 /**
- * Stagger — a container whose direct <Reveal>/motion children cascade in.
+ * Stagger - a container whose direct <Reveal>/motion children cascade in.
  */
 export function Stagger({
   children,
@@ -152,7 +152,7 @@ export function StaggerItem({
 }
 
 /**
- * WordReveal — splits text into words that rise in one after another.
+ * WordReveal - splits text into words that rise in one after another.
  * Renders the signature hero headline. `html` allows inline <em>/<br>.
  */
 export function WordReveal({
@@ -198,7 +198,7 @@ export function WordReveal({
 }
 
 /**
- * Magnetic — element subtly pulls toward the cursor and springs back.
+ * Magnetic - element subtly pulls toward the cursor and springs back.
  * Used on the hero CTAs. Disabled under reduced-motion.
  */
 export function Magnetic({
@@ -250,7 +250,7 @@ export function Magnetic({
 }
 
 /**
- * Counter — counts a number up from 0 when scrolled into view.
+ * Counter - counts a number up from 0 when scrolled into view.
  * Preserves prefix/suffix (e.g. "13", "+"). Reduced-motion shows final value.
  */
 export function Counter({
@@ -297,7 +297,7 @@ export function Counter({
 }
 
 /**
- * TiltCard — spring-damped 3D tilt toward the cursor. Replaces the old
+ * TiltCard - spring-damped 3D tilt toward the cursor. Replaces the old
  * linear mouse-tilt on the hero card with something weighted and smooth.
  */
 export function TiltCard({

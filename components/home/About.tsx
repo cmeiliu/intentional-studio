@@ -26,23 +26,21 @@ export function About() {
         <div className="about-grid">
           <Reveal className="about-prose">
             <p className="lede">
-              The model isn&apos;t the bottleneck anymore — your team is. Most
-              companies have tried ChatGPT, watched a demo, maybe paid for a few
-              seats, and then quietly went back to doing things the old way.
-              That&apos;s the gap I work in.
+              The model isn&apos;t your bottleneck. Your team is. Most companies
+              tried ChatGPT, watched a demo, bought a few seats, and quietly went
+              back to the old way of doing things. That gap is where I work.
             </p>
             <p>
-              Thirteen years in startup product and operating roles, specializing
-              in data, AI, and ML — most recently at Binance.US, with earlier
-              stops building product and growth functions from zero. Northwestern,
-              Econ &amp; Legal Studies, magna cum laude. I started Intentional
-              Studio because the AI work I kept getting pulled into deserved a real
-              home.
+              Thirteen years in startup product and operating roles, mostly in
+              data, AI, and ML. Most recently at Binance.US, and before that
+              building product and growth teams from scratch. Northwestern, Econ
+              &amp; Legal Studies, magna cum laude. I started Intentional Studio
+              because the AI work I kept getting pulled into deserved a real home.
             </p>
             <p>
-              I take three to four engagements a quarter, do them well, and try
-              not to oversell anything. If we&apos;re not the right fit, I&apos;ll
-              say so on the first call.
+              I take three or four engagements a quarter and do them well. I
+              won&apos;t oversell you. If we&apos;re not a fit, I&apos;ll tell you
+              on the first call.
             </p>
 
             <ul className="recognition">
