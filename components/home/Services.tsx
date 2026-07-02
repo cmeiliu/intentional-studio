@@ -27,9 +27,9 @@ const services: Service[] = [
       "Custom playbooks for your workflows",
     ],
     foot: {
-      pre: "From ",
-      em: "$3,500",
-      post: " · 1-2 weeks",
+      pre: "",
+      em: "",
+      post: "1-2 weeks",
       links: [],
     },
   },
@@ -46,9 +46,9 @@ const services: Service[] = [
       "End-to-end automation (think Zapier, but real)",
     ],
     foot: {
-      pre: "From ",
-      em: "$12,000",
-      post: " · 3-6 weeks",
+      pre: "",
+      em: "",
+      post: "3-6 weeks",
       links: [],
     },
   },
@@ -57,14 +57,14 @@ const services: Service[] = [
     roman: "III.",
     pill: "Identity",
     name: "Brand & website",
-    desc: "For companies whose work has outgrown how they look online. I design and build the whole thing, start to finish.",
+    desc: "For companies whose work has outgrown how they look online. We design and build it end to end.",
     list: [
       "Marketing & landing redesigns",
       "Framer Motion · Next.js · Tailwind",
       "Brand systems that scale",
       "Copy that doesn't sound like a robot",
     ],
-    foot: { pre: "From ", em: "$8,000", post: " · 2-4 weeks", links: [] },
+    foot: { pre: "", em: "", post: "2-4 weeks", links: [] },
   },
 ];
 
@@ -75,10 +75,10 @@ export function Services() {
         <Reveal className="section-head section-head-center">
           <p className="eyebrow eyebrow-maroon">
             <span className="eyebrow-line" />
-            What I work on
+            What we do
           </p>
           <h2 className="section-title">
-            Three ways I can <em>help</em>.
+            Three ways we can <em>help</em>.
           </h2>
           <p className="section-sub">
             AI training often turns into custom apps, and those apps usually
