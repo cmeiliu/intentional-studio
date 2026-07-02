@@ -371,6 +371,14 @@ sup { font-size: 0.55em; vertical-align: super; }
 }
 .btn-ghost:hover { background: var(--ink); color: var(--cream); }
 
+.hero-reassure {
+  margin-top: -22px;
+  margin-bottom: 34px;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+}
+
 .hero-tags { display: flex; gap: 10px; flex-wrap: wrap; }
 .tag {
   display: inline-flex;
@@ -824,6 +832,73 @@ sup { font-size: 0.55em; vertical-align: super; }
   padding-bottom: 1px;
 }
 .work-footer a:hover { border-color: var(--maroon); }
+
+/* ---------- CLIENTS / TESTIMONIALS ---------- */
+.section-clients {
+  background: var(--cream);
+  border-top: 1px solid var(--rule);
+}
+
+.quote-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 900px) { .quote-grid { grid-template-columns: 1fr; } }
+
+.quote-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 30px;
+  min-height: 300px;
+  padding: 34px 30px;
+  background: var(--cream-warm);
+  border: 1px solid var(--rule);
+  border-radius: var(--rad-lg);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s, border-color 0.35s;
+}
+.quote-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 44px -24px rgba(0, 0, 0, 0.18);
+  border-color: var(--turquoise-deep);
+}
+
+.quote-body {
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: 0.002em;
+}
+.quote-body em {
+  color: var(--maroon);
+  font-style: italic;
+  font-weight: 500;
+}
+.quote-open { margin-right: -0.12em; }
+
+.quote-attr {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 22px;
+  border-top: 1px solid var(--rule);
+}
+.quote-name {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  font-weight: 500;
+}
+.quote-meta {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+}
 
 /* ---------- PROCESS ---------- */
 .section-process {
