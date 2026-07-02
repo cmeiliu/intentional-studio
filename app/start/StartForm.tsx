@@ -216,7 +216,7 @@ export function StartForm() {
             value={bottleneck}
             onChange={(e) => setBottleneck(e.target.value)}
             disabled={submitting}
-            placeholder="Be specific. The more you say, the sharper the pebbles."
+            placeholder="Be specific. The more you say, the sharper the ideas."
             className="w-full px-4 py-3 bg-cream-2 border border-ink/15 rounded-lg text-ink placeholder:text-ink-muted focus:outline-none focus:border-burgundy-deep transition-colors resize-none disabled:opacity-60"
           />
         </div>
@@ -233,7 +233,7 @@ export function StartForm() {
           disabled={submitting}
           className="inline-flex items-center justify-center px-7 py-4 rounded-full bg-burgundy-deep text-cream-0 hover:bg-burgundy-darkest disabled:opacity-60 disabled:cursor-not-allowed transition-colors text-base font-medium"
         >
-          {phase === "idle" && (error ? "Try again" : "Show me my pebbles")}
+          {phase === "idle" && (error ? "Try again" : "Show me what to build")}
           {phase === "begin" && "Reading your site…"}
           {phase === "streaming" && "Generating…"}
           {phase === "done" && "Done — redirecting…"}
@@ -321,12 +321,12 @@ function useStatusMessage({
       const warmup = [
         "Looking for the slowest parts of your week…",
         "Mapping what your bottleneck actually feeds into…",
-        "Sketching the first pebble…",
+        "Sketching the first idea…",
       ];
       return warmup[warmupIdx % warmup.length];
     }
-    if (pebbleCount === 1) return "Pebble 1 ready — drafting the next one…";
-    if (pebbleCount === 2) return "Pebble 2 ready — wrapping the last one…";
+    if (pebbleCount === 1) return "Idea 1 ready — drafting the next one…";
+    if (pebbleCount === 2) return "Idea 2 ready — wrapping the last one…";
     return "Almost there…";
   }
 
@@ -355,7 +355,7 @@ function PebbleCard({
       <div className="flex items-baseline justify-between gap-3">
         <h3 className="serif text-lg text-ink m-0">
           <span className="text-xs font-mono text-ink-muted uppercase tracking-wider mr-2">
-            Pebble {index + 1}
+            Idea {index + 1}
           </span>
           {pebble.title}
         </h3>
@@ -381,7 +381,7 @@ function PebbleSkeleton({ index }: { index: number }) {
     <div className="border border-ink/15 bg-cream-1 rounded-lg p-4 space-y-2 animate-pulse">
       <div className="flex items-baseline gap-2">
         <span className="text-xs font-mono text-ink-muted/60 uppercase tracking-wider">
-          Pebble {index + 1}
+          Idea {index + 1}
         </span>
         <div className="h-4 w-2/5 bg-ink/10 rounded" />
       </div>
