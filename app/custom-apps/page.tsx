@@ -341,6 +341,9 @@ export default function CustomAppsPage() {
                   important process easier to run.
                 </p>
                 <div className="flex flex-wrap gap-3">
+                  <Link href="/ai-agents" className="btn btn-ghost">
+                    See AI agent builds &rarr;
+                  </Link>
                   <Link
                     href="/guides/custom-ai-apps-for-business"
                     className="btn btn-ghost"

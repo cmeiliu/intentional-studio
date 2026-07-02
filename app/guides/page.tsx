@@ -221,6 +221,9 @@ export default function GuidesPage() {
                 <Link href="/start" className="btn btn-primary">
                   Start the intake
                 </Link>
+                <Link href="/ai-agents" className="btn btn-ghost">
+                  See AI agents &rarr;
+                </Link>
               </div>
             </div>
           </section>

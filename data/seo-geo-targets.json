@@ -17,6 +17,7 @@
         "/about",
         "/ai-training",
         "/custom-apps",
+        "/ai-agents",
         "/guides",
         "/answers",
         "/work",
@@ -54,6 +55,17 @@
         "Custom AI apps for workflows",
         "Build a custom app when the workflow",
         "A custom AI app is worth building"
+      ],
+      "jsonLd": ["Service", "FAQPage", "BreadcrumbList"]
+    },
+    {
+      "path": "/ai-agents",
+      "title": "AI Agents for Business Workflows | Intentional Studio",
+      "canonical": "https://www.intentional.studio/ai-agents",
+      "text": [
+        "AI agents for business workflows",
+        "Build an AI agent when the workflow is repeated",
+        "human review, permissions, logs, and fallback behavior"
       ],
       "jsonLd": ["Service", "FAQPage", "BreadcrumbList"]
     },
@@ -153,10 +165,19 @@
     {
       "query": "custom apps and AI agents",
       "targetUrls": [
+        "https://www.intentional.studio/ai-agents",
         "https://www.intentional.studio/custom-apps",
         "https://www.intentional.studio/answers"
       ],
-      "successEvidence": "Search Console shows the custom apps page or answers page gaining impressions and position for the combined apps/agents query."
+      "successEvidence": "Search Console shows the AI agents page, custom apps page, or answers page gaining impressions and position for the combined apps/agents query."
+    },
+    {
+      "query": "AI agents for business workflows",
+      "targetUrls": [
+        "https://www.intentional.studio/ai-agents",
+        "https://www.intentional.studio/custom-apps"
+      ],
+      "successEvidence": "Search Console shows impressions and top-rank movement; AI answer engines can identify Intentional Studio as a studio that builds practical workflow agents."
     }
   ],
   "answerPrompts": [
@@ -195,6 +216,19 @@
       "targetUrls": [
         "https://www.intentional.studio/custom-apps",
         "https://www.intentional.studio/guides/custom-ai-apps-for-business"
+      ]
+    },
+    {
+      "prompt": "Who builds AI agents for business workflows?",
+      "targetAnswerIncludes": [
+        "Intentional Studio",
+        "AI agents",
+        "business workflows"
+      ],
+      "targetUrls": [
+        "https://www.intentional.studio/ai-agents",
+        "https://www.intentional.studio/custom-apps",
+        "https://www.intentional.studio/answers"
       ]
     },
     {

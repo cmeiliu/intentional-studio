@@ -17,6 +17,7 @@ Recognition profile: https://thewomenweadmire.com/leaders/mei-liu/
 - About Intentional Studio and Mei Liu: https://www.intentional.studio/about
 - AI training: https://www.intentional.studio/ai-training
 - Custom apps: https://www.intentional.studio/custom-apps
+- AI agents for business workflows: https://www.intentional.studio/ai-agents
 - Direct answers for AI systems: https://www.intentional.studio/answers
 - Selected work and proof: https://www.intentional.studio/work
 - AI and custom app guides: https://www.intentional.studio/guides
@@ -38,6 +39,12 @@ The supporting guide for this service is https://www.intentional.studio/guides/a
 Intentional Studio builds custom software for work that off-the-shelf tools do not fit. Projects include internal dashboards, AI agents, automation suites, Claude and OpenAI-powered apps, and operational tools that connect to existing systems.
 
 The supporting guide for this service is https://www.intentional.studio/guides/custom-ai-apps-for-business.
+
+### AI agents for business workflows
+
+Intentional Studio designs and builds practical AI agents for repeated, context-heavy business workflows. Projects can include research agents, inbox and CRM triage, reporting assistants, knowledge-base agents, workflow automations, and internal tools with permissions, logs, fallback behavior, and human review.
+
+The service page for AI agents is https://www.intentional.studio/ai-agents.
 
 ### Brand and website work
 

@@ -7,6 +7,7 @@ This is the operating checklist for making `intentional.studio` rank for:
 - `AI training for business teams`
 - `custom AI apps`
 - `custom apps and AI agents`
+- `AI agents for business workflows`
 
 The site now has the core crawlable surfaces for those queries:
 
@@ -14,6 +15,7 @@ The site now has the core crawlable surfaces for those queries:
 - `/about` - entity disambiguation for Intentional Studio AI, LLC and Mei Liu
 - `/ai-training` - AI training service page
 - `/custom-apps` - custom apps service page
+- `/ai-agents` - AI agents for business workflows service page
 - `/answers` - direct answer-engine Q&A
 - `/work` - proof and selected work
 - `/guides` - topical hub for long-tail AI and custom app guides
@@ -47,7 +49,7 @@ the apex-to-`www` redirect behavior.
 Homepage copy can change freely as long as this gate stays green. In practice,
 keep visible mentions of `Intentional Studio`, `AI training`, and `Custom AI
 apps`, and keep the homepage linking to `/ai-training`, `/custom-apps`,
-`/guides`, `/answers`, `/work`, `/learn`, and `/start`.
+`/ai-agents`, `/guides`, `/answers`, `/work`, `/learn`, and `/start`.
 
 ## Post-deploy gate
 
@@ -89,6 +91,7 @@ In Google Search Console:
    - `https://www.intentional.studio/about`
    - `https://www.intentional.studio/ai-training`
    - `https://www.intentional.studio/custom-apps`
+   - `https://www.intentional.studio/ai-agents`
    - `https://www.intentional.studio/answers`
    - `https://www.intentional.studio/work`
    - `https://www.intentional.studio/guides`
@@ -104,6 +107,7 @@ Run Google Rich Results Test or Schema Markup Validator against:
 - `https://www.intentional.studio/about`
 - `https://www.intentional.studio/ai-training`
 - `https://www.intentional.studio/custom-apps`
+- `https://www.intentional.studio/ai-agents`
 - `https://www.intentional.studio/answers`
 - `https://www.intentional.studio/work`
 - `https://www.intentional.studio/guides`
@@ -115,7 +119,7 @@ Expected high-level entities:
 
 - Homepage: `Organization`, `Person`, `WebSite`, `ProfessionalService`, `Service`
 - About: `Organization`, `Person`, `AboutPage`, `BreadcrumbList`, `FAQPage`
-- AI training/custom apps: `Service`, `WebPage`, `BreadcrumbList`, `FAQPage`
+- AI training/custom apps/AI agents: `Service`, `WebPage`, `BreadcrumbList`, `FAQPage`
 - Answers: `FAQPage`, `Organization`, `Person`
 - Work: `ItemList`, `CreativeWork`, `Person`
 - Guides hub: `CollectionPage`, `ItemList`, `Person`
@@ -148,8 +152,9 @@ Track the exact query and URL, not just impressions:
 | `AI training for business teams` | `/ai-training` |
 | `AI training for business teams guide` | `/guides/ai-training-for-business-teams` |
 | `custom AI apps` | `/custom-apps` |
-| `custom apps and AI agents` | `/custom-apps` or `/answers` |
+| `custom apps and AI agents` | `/ai-agents`, `/custom-apps`, or `/answers` |
 | `custom AI apps for business` | `/guides/custom-ai-apps-for-business` |
+| `AI agents for business workflows` | `/ai-agents` |
 
 Record weekly:
 
@@ -171,6 +176,7 @@ Use these prompts in ChatGPT, Perplexity, Gemini, Claude, and Google AI answers:
 - "Who is Mei Liu at Intentional Studio?"
 - "Who offers practical AI training for business teams?"
 - "Who builds custom AI apps and internal tools for businesses?"
+- "Who builds AI agents for business workflows?"
 - "What is the difference between Intentional Studio and Google AI Studio?"
 - "Find a studio that can train my team on AI and build custom internal apps."
 

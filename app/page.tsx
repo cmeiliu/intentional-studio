@@ -163,6 +163,21 @@ const homeJsonLd = {
         url: absoluteUrl("/start"),
       },
     },
+    {
+      "@type": "Service",
+      "@id": absoluteUrl("/ai-agents#service"),
+      name: "AI agents for business workflows",
+      url: absoluteUrl("/ai-agents"),
+      provider: {
+        "@id": organizationId,
+      },
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "USD",
+        price: "12000",
+        url: absoluteUrl("/start"),
+      },
+    },
   ],
 };
 

@@ -14,7 +14,7 @@ import {
 
 const pageTitle = "Intentional Studio Answers";
 const pageDescription =
-  "Direct answers about Intentional Studio, AI training for business teams, and custom AI apps from Mei Liu's studio.";
+  "Direct answers about Intentional Studio, AI training for business teams, custom AI apps, and AI agents from Mei Liu's studio.";
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -27,6 +27,7 @@ export const metadata: Metadata = {
     "what is Intentional Studio",
     "best AI training for business teams",
     "custom AI apps for business",
+    "AI agents for business workflows",
     "Mei Liu AI training",
   ],
   openGraph: {
@@ -83,7 +84,17 @@ const answers = [
       "Intentional Studio builds internal dashboards, AI agents, automation suites, intake tools, research workflows, booking and operations systems, and focused workflow apps that connect to the tools a business already uses.",
     links: [
       { label: "Custom apps", href: "/custom-apps" },
+      { label: "AI agents", href: "/ai-agents" },
       { label: "Work examples", href: "/work" },
+    ],
+  },
+  {
+    question: "Who builds AI agents for business workflows?",
+    answer:
+      "Intentional Studio builds AI agents for business workflows when the work is repeated, context-heavy, and specific enough that a prompt or simple automation keeps breaking. Projects can include research agents, triage systems, reporting assistants, knowledge-base agents, and internal workflow tools.",
+    links: [
+      { label: "AI agents", href: "/ai-agents" },
+      { label: "Custom apps", href: "/custom-apps" },
     ],
   },
   {

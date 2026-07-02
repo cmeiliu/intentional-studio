@@ -46,6 +46,7 @@ const services = [
       post: " · 3–6 weeks",
       links: [
         { href: "/custom-apps", label: "Custom app details →" },
+        { href: "/ai-agents", label: "AI agent examples →" },
         {
           href: "/guides/custom-ai-apps-for-business",
           label: "Custom AI apps guide →",

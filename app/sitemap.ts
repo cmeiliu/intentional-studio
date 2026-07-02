@@ -6,6 +6,7 @@ const coreRoutes = [
   { path: "/about", priority: 0.9 },
   { path: "/ai-training", priority: 0.95 },
   { path: "/custom-apps", priority: 0.95 },
+  { path: "/ai-agents", priority: 0.93 },
   { path: "/answers", priority: 0.9 },
   { path: "/work", priority: 0.85 },
   { path: "/guides", priority: 0.85 },
