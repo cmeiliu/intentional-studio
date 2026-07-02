@@ -1,6 +1,9 @@
 {
   "canonicalOrigin": "https://www.intentional.studio",
   "apexHost": "intentional.studio",
+  "canonicalRedirectOrigins": [
+    "https://intentional-studio.vercel.app"
+  ],
   "externalEntityUrls": [
     "https://github.com/cmeiliu/",
     "https://www.linkedin.com/in/mei-liu-512",

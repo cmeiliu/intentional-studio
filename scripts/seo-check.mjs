@@ -10,6 +10,7 @@ const targets = JSON.parse(
 );
 const CANONICAL_ORIGIN = targets.canonicalOrigin;
 const APEX_HOST = targets.apexHost;
+const CANONICAL_REDIRECT_ORIGINS = targets.canonicalRedirectOrigins ?? [];
 
 const baseUrl = process.env.SEO_CHECK_BASE_URL || DEFAULT_BASE_URL;
 const liveMode = new URL(baseUrl).hostname === "www.intentional.studio";
@@ -229,6 +230,26 @@ async function checkApexRedirect() {
   }
 }
 
+async function checkCanonicalHostRedirects() {
+  if (!liveMode) return;
+
+  for (const origin of CANONICAL_REDIRECT_ORIGINS) {
+    const source = new URL("/start", origin).toString();
+    const expected = `${CANONICAL_ORIGIN}/start`;
+    const res = await fetch(source, {
+      method: "HEAD",
+      redirect: "manual",
+    });
+    if (![301, 308].includes(res.status)) {
+      fail(`canonical host redirect: expected 301/308 for ${source}, got ${res.status}`);
+    }
+    const location = res.headers.get("location") ?? "";
+    if (location !== expected) {
+      fail(`canonical host redirect: expected ${expected}, got ${location}`);
+    }
+  }
+}
+
 async function main() {
   const results = [];
   for (const route of routes) {
@@ -239,6 +260,7 @@ async function main() {
   await checkLlmsTxt();
   await checkHeaders();
   await checkApexRedirect();
+  await checkCanonicalHostRedirects();
 
   console.log(`SEO/GEO check passed for ${baseUrl}`);
   for (const result of results) {

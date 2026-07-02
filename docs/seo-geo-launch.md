@@ -44,7 +44,9 @@ npm run dev -- --hostname 127.0.0.1 --port 3000
 
 The check verifies titles, canonicals, JSON-LD, entity references, sitemap,
 robots, `llms.txt`, headers, homepage links to the SEO/GEO landing pages, and
-the apex-to-`www` redirect behavior.
+the apex-to-`www` redirect behavior. In live production mode, it also verifies
+that alternate public deployment hosts redirect into `https://www.intentional.studio`
+instead of serving duplicate indexed pages.
 
 Homepage copy can change freely as long as this gate stays green. In practice,
 keep the homepage H1 as `Intentional Studio helps businesses actually use AI.`,
@@ -72,6 +74,10 @@ to:
 ```text
 https://www.intentional.studio/ai-training
 ```
+
+It also verifies that `https://intentional-studio.vercel.app/start` redirects
+to `https://www.intentional.studio/start`, because that Vercel host has appeared
+in search results and should consolidate into the canonical domain.
 
 If the production check warns that Vercel returned `307`, the canonical
 location is still correct, but the domain redirect should be switched to a

@@ -28,6 +28,11 @@ Also submit:
 
 - `https://www.intentional.studio/sitemap.xml`
 
+Inspect this alternate host URL and confirm Google sees a redirect to the
+canonical domain, not an indexable duplicate:
+
+- `https://intentional-studio.vercel.app/start`
+
 After indexing, track the query `intentional studio` weekly in Search Console:
 
 - Average position
