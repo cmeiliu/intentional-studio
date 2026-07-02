@@ -253,7 +253,7 @@ export default function LearnPage() {
           </div>
         </header>
 
-      <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-12 md:px-10 md:py-16">
+      <main className="mx-auto w-full max-w-5xl flex-1 px-6 pb-12 pt-28 md:px-10 md:pb-16 md:pt-32">
         <p className="eyebrow eyebrow-turquoise">
           <span className="eyebrow-line" />
           Self-paced · Preview
@@ -263,9 +263,7 @@ export default function LearnPage() {
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-2">
           Two self-paced courses on automating real work and shipping software
-          with AI. Lessons open in a new tab and link to each other (previous,
-          next, glossary). This is a working preview, so content is still being
-          refined.
+          with AI.
         </p>
 
         <div className="mt-6 flex flex-wrap gap-3">
@@ -338,13 +336,6 @@ export default function LearnPage() {
           </section>
         ))}
 
-        <p className="mt-12 text-sm text-ink-muted">
-          Lessons open in a new tab and link to each other (previous, next,
-          glossary). This is a working preview, so content is still being
-          refined. The full outline lives in the repo&rsquo;s{" "}
-          <code className="rounded bg-cream-2 px-1.5 py-0.5">ai-automation-for-entrepreneurs/</code>{" "}
-          workspace.
-        </p>
         </main>
       </div>
     </>
