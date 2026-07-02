@@ -21,7 +21,10 @@ export function Contact() {
             come back with how we&apos;d approach it.
           </StaggerItem>
           <StaggerItem>
-            <a href="mailto:mei@intentional.studio" className="contact-email">
+            <a
+              href="mailto:mei@intentional.studio?subject=Let's%20work%20together"
+              className="contact-email"
+            >
               mei<em>@</em>intentional.studio
             </a>
           </StaggerItem>
