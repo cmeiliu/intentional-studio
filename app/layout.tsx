@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, JetBrains_Mono, Newsreader } from "next/font/google";
 import Script from "next/script";
 import { PostHogProvider } from "./PostHogProvider";
+import { Aurora } from "@/components/home/Aurora";
 import "./globals.css";
 
 const geist = Geist({
@@ -43,14 +44,7 @@ export default function RootLayout({
       className={`${geist.variable} ${newsreader.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
-        <div className="aurora" aria-hidden="true">
-          <div className="orb o1" />
-          <div className="orb o2" />
-          <div className="orb o3" />
-          <div className="orb o4" />
-          <div className="orb o5" />
-          <div className="orb o6" />
-        </div>
+        <Aurora />
         <div className="grain" aria-hidden="true" />
         <PostHogProvider>
           <div className="app-stage flex min-h-[100dvh] flex-col">
