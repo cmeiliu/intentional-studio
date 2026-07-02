@@ -150,7 +150,7 @@ export function StartForm() {
   const showPebbles = pebbles.length > 0;
 
   // PEBB-215: status line that gives the operator concrete signal of
-  // what's happening during the ~10–15s stream. Synced to real stream
+  // what's happening during the ~10-15s stream. Synced to real stream
   // state (pebbles.length, phase) where possible, with a soft pre-pebble
   // cycle for the warmup window before any pebble has arrived. Voice
   // stays restrained — no spinner copy, no "AI magic" cuteness.
@@ -247,7 +247,7 @@ export function StartForm() {
           <div className="text-sm text-burgundy-deep border border-burgundy/30 bg-burgundy-pale rounded-lg px-4 py-3 space-y-1">
             <p>{error}</p>
             <p className="text-ink-2">
-              Your answers are still here — tweak if you&rsquo;d like, then try again.
+              Your answers are still here. Tweak if you&rsquo;d like, then try again.
             </p>
           </div>
         )}
@@ -259,7 +259,7 @@ export function StartForm() {
           {phase === "idle" && (error ? "Try again" : "Show me what to build")}
           {phase === "begin" && "Reading your site…"}
           {phase === "streaming" && "Generating…"}
-          {phase === "done" && "Done — redirecting…"}
+          {phase === "done" && "Done, redirecting…"}
           {phase === "error" && "Try again"}
         </button>
         <p className="text-xs text-ink-muted">
@@ -336,7 +336,7 @@ function useStatusMessage({
   }
 
   if (phase === "done") {
-    return "All three ready — opening your list…";
+    return "All three ready. Opening your list…";
   }
 
   if (phase === "streaming") {
@@ -348,8 +348,8 @@ function useStatusMessage({
       ];
       return warmup[warmupIdx % warmup.length];
     }
-    if (pebbleCount === 1) return "Idea 1 ready — drafting the next one…";
-    if (pebbleCount === 2) return "Idea 2 ready — wrapping the last one…";
+    if (pebbleCount === 1) return "Idea 1 ready. Drafting the next one…";
+    if (pebbleCount === 2) return "Idea 2 ready. Wrapping the last one…";
     return "Almost there…";
   }
 

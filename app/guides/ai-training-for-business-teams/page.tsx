@@ -22,31 +22,31 @@ const essentials = [
   {
     name: "Task judgment",
     detail:
-      "People need to know which work belongs in AI, which work needs human judgment, and which work should stay outside the tool.",
+      "People need to spot which work belongs in AI, which work needs a human call, and which work should never touch the tool.",
   },
   {
     name: "Prompt systems",
     detail:
-      "Teams need reusable ways to brief the model, include context, request formats, and make expectations explicit.",
+      "Teams need reusable ways to brief the model: supply context, name the format they want, and spell out what good looks like.",
   },
   {
     name: "Review habits",
     detail:
-      "Good training teaches people how to check claims, inspect sources, compare outputs, and catch confident errors before work ships.",
+      "Train people to check claims, inspect sources, and compare outputs so confident errors get caught before work ships.",
   },
   {
     name: "Workflow design",
     detail:
-      "The real value appears when prompts, docs, approvals, handoffs, and automations become one repeatable way of working.",
+      "The payoff comes when prompts, docs, approvals, handoffs, and automations settle into one repeatable way of working.",
   },
 ];
 
 const signals = [
-  "The team has ChatGPT, Claude, or Cursor seats but uses them inconsistently.",
+  "Your team has ChatGPT, Claude, or Cursor seats but uses them in fits and starts.",
   "Leaders want AI adoption, but no one has agreed what good use looks like.",
-  "One or two people have strong AI habits that have not spread across the team.",
-  "The company is considering automation before the workflow is clearly understood.",
-  "People are worried about accuracy, privacy, voice, or review quality.",
+  "One or two people have sharp AI habits that have not spread to anyone else.",
+  "You are weighing automation before anyone can explain the workflow clearly.",
+  "People worry about accuracy, privacy, brand voice, or review quality.",
 ];
 
 const faqs = [
@@ -245,7 +245,7 @@ export default function AiTrainingGuidePage() {
               </p>
               <div className="mt-5 grid gap-10 lg:grid-cols-[1fr_0.72fr]">
                 <h1 className="h2 text-ink">
-                  AI training for business teams that need{" "}
+                  AI training for business teams that builds{" "}
                   <span className="ital text-burgundy-deep">
                     usable judgment
                   </span>
@@ -253,9 +253,9 @@ export default function AiTrainingGuidePage() {
                 </h1>
                 <div className="self-end text-lg leading-relaxed text-ink-2">
                   <p>
-                    AI training for business teams is worth doing when people
-                    have access to powerful tools but do not yet share the same
-                    habits, standards, prompts, or review process.
+                    AI training for business teams earns its keep when people
+                    have powerful tools but no shared habits, standards, prompts,
+                    or way to review the output.
                   </p>
                   <div className="mt-8 flex flex-wrap gap-3">
                     <Link href="/ai-training" className="btn btn-primary">
@@ -283,17 +283,17 @@ export default function AiTrainingGuidePage() {
                 </div>
                 <div className="space-y-5 text-base leading-relaxed text-ink-2">
                   <p>
-                    The best AI training is not a tour of features. It teaches
-                    people how to decide what to ask, how to include context,
-                    how to check the answer, and how to move the work back into
-                    the business without creating a quality problem.
+                    Good AI training skips the feature tour. It teaches people
+                    how to decide what to ask, how to feed the model context,
+                    how to check the answer, and how to hand the work back to the
+                    business without introducing a quality problem.
                   </p>
                   <p>
                     Intentional Studio treats training as the first layer of AI
-                    adoption. The goal is not to make everyone a prompt
-                    hobbyist. The goal is to give the team enough shared
-                    judgment to know what belongs in a prompt, what belongs in a
-                    playbook, and what deserves a custom app.
+                    adoption. The point is not to turn everyone into a prompt
+                    hobbyist. It is to give the team enough shared judgment to
+                    know what belongs in a prompt, what belongs in a playbook,
+                    and what deserves a custom app.
                   </p>
                 </div>
               </div>
@@ -307,7 +307,7 @@ export default function AiTrainingGuidePage() {
                     Decision signals
                   </p>
                   <h2 className="section-title">
-                    AI training is the right first move when these are true.
+                    AI training is the right first move when these ring true.
                   </h2>
                 </div>
                 <ul className="grid gap-4 md:grid-cols-2">
@@ -331,12 +331,11 @@ export default function AiTrainingGuidePage() {
                     What to teach
                   </p>
                   <h2 className="section-title">
-                    A useful workshop turns vague enthusiasm into repeatable
-                    work.
+                    A good workshop turns vague enthusiasm into repeatable work.
                   </h2>
                   <p className="section-sub">
-                    The details change by team, but the core curriculum should
-                    always cover these four layers.
+                    Specifics shift from team to team. The core curriculum
+                    always covers these four layers.
                   </p>
                 </div>
                 <div className="grid gap-4 md:grid-cols-2">
@@ -368,16 +367,16 @@ export default function AiTrainingGuidePage() {
                 </div>
                 <div className="space-y-5 text-base leading-relaxed text-ink-2">
                   <p>
-                    A team can waste a lot of money automating a process it
-                    does not understand. Training gives the team a safer way to
-                    learn where AI helps, where review is needed, and where the
-                    repeated work is stable enough for software.
+                    Automating a process you do not understand is a fast way to
+                    burn money. Training is the safer route: the team learns
+                    where AI helps, where a human has to review, and where the
+                    repeated work is stable enough to hand to software.
                   </p>
                   <p>
-                    Once a workflow shows up again and again, a custom AI app
-                    may become the better answer: a dashboard, agent,
-                    automation suite, intake tool, or internal workflow app that
-                    removes manual handoffs.
+                    Once a workflow keeps showing up, a custom AI app often
+                    becomes the better answer. Think dashboard, agent, automation
+                    suite, intake tool, or internal workflow app that kills the
+                    manual handoffs.
                   </p>
                   <div className="flex flex-wrap gap-3">
                     <Link href="/custom-apps" className="btn btn-ghost">
@@ -399,7 +398,7 @@ export default function AiTrainingGuidePage() {
                     Common questions
                   </p>
                   <h2 className="section-title section-title-light">
-                    Plain answers about AI training for teams.
+                    Straight answers about AI training for teams.
                   </h2>
                 </div>
                 <dl className="grid gap-4 md:grid-cols-2">
@@ -429,10 +428,11 @@ export default function AiTrainingGuidePage() {
                   Want this for your team?
                 </p>
                 <h2 className="contact-title">
-                  Bring the work. I&apos;ll shape the training around it.
+                  Bring the work. I&apos;ll build the training around it.
                 </h2>
                 <p className="contact-sub">
-                  Send the team, the tools, and the workflow that feels stuck.
+                  Tell me the team, the tools, and the workflow that keeps
+                  getting stuck.
                 </p>
                 <Link href="/start" className="btn btn-primary">
                   Plan AI training

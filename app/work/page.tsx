@@ -52,51 +52,70 @@ export const metadata: Metadata = {
 
 const projects = [
   {
+    name: "Pebbled",
+    year: "2026",
+    type: "AI platform",
+    href: "https://pebbled.ai",
+    summary:
+      "The platform behind this studio. A recorded scoping call becomes requirements, tickets, and a working app.",
+    outcome:
+      "Turns a founder's biggest bottleneck into custom software, built mostly by agents and finished by hand.",
+    stack: ["Next.js 16", "React 19", "Anthropic SDK", "Neon"],
+    keywords: ["AI platform", "custom AI apps", "AI agents", "automation"],
+  },
+  {
     name: "Binance.US Skill Suite",
     year: "2026",
     type: "AI workflow tooling",
     href: "https://github.com/cmeiliu/binance-us-skills",
     summary:
-      "A skill family for OpenClaw, Codex, and Claude Code that gives a crypto exchange research team an AI-native briefing workflow.",
+      "Five installable skills for OpenClaw, Codex, and Claude Code that walk a crypto exchange's users from first look to funded account.",
     outcome:
-      "Turned recurring research and briefing work into a reusable agentic toolkit with production-grade Claude tooling.",
+      "Turned recurring research and account work into a reusable set of agent skills.",
     stack: ["Python", "Claude Code", "Agents", "OpenClaw"],
     keywords: ["AI agents", "research workflow", "Claude Code", "custom AI tooling"],
   },
   {
-    name: "LipSmacking Foodie Tours",
+    name: "Lip Smacking Foodie Tours",
     year: "2026",
     type: "Custom operations apps",
     summary:
-      "Three connected apps for a Las Vegas food tour operator: a bookings dashboard, guide operations console, and email automation engine pulling from Rezdy.",
+      "Restaurant outreach automation for a Las Vegas food-tour operator. It reads the Rezdy manifest, parses dietary notes and celebrations with Claude, and drafts a per-restaurant email for approval.",
     outcome:
-      "Moved operational work out of disconnected manual systems and into focused tools built around the way the team runs tours.",
-    stack: ["Python", "React", "Rezdy API", "Automation"],
-    keywords: ["custom apps", "internal tools", "operations dashboard", "automation"],
+      "Daily outreach moved out of manual email and into an approval flow the team runs from a Google Sheet.",
+    stack: ["Python", "Claude", "Rezdy", "Gmail API"],
+    keywords: ["custom apps", "internal tools", "operations", "automation"],
   },
   {
-    name: "Hiring Insight Manager",
-    year: "2025",
-    type: "Custom internal tool",
-    href: "https://github.com/cmeiliu/hiring-insight-manager",
-    summary:
-      "A hiring intelligence dashboard that replaces spreadsheet reviews and shallow ATS reports with answers hiring managers can use.",
-    outcome:
-      "Gave recruiting and hiring teams a clearer way to inspect pipeline quality, bottlenecks, and the questions behind hiring decisions.",
-    stack: ["TypeScript", "React", "Dashboard"],
-    keywords: ["custom dashboard", "internal tool", "hiring analytics", "business intelligence"],
-  },
-  {
-    name: "YourNegotiations.com",
+    name: "Camp Spin Off",
     year: "2026",
-    type: "Website redesign",
-    href: "https://github.com/cmeiliu/yournegotiations-redesign",
+    type: "Custom booking app",
     summary:
-      "A full UI and copy rebuild for a negotiation training company whose website needed to match the quality of the teaching.",
+      "A reserve-a-spot flow for a youth camp: intent forms, instant confirmations, and a PayPal deposit that locks in the registration.",
     outcome:
-      "Rebuilt the public face with clearer positioning, a sharper visual system, and a modern Next.js implementation.",
-    stack: ["TypeScript", "Next.js", "Framer Motion", "Copy"],
-    keywords: ["website redesign", "training company", "Next.js", "positioning"],
+      "Families book at midnight and the team wakes up to confirmed spots they never had to type.",
+    stack: ["Next.js", "EmailJS", "PayPal"],
+    keywords: ["custom apps", "booking flow", "payments", "automation"],
+  },
+  {
+    name: "Northside Exteriors",
+    year: "2026",
+    type: "Custom AI tool",
+    summary:
+      "A photo-to-quote tool for a home-services company. Describe the quote you send a hundred times a week once, then let it draft each new one from a photo.",
+    outcome: "Quotes go out before lunch instead of after hours.",
+    stack: ["Next.js", "Claude", "Vision"],
+    keywords: ["custom AI apps", "vision", "home services", "automation"],
+  },
+  {
+    name: "Step Inside My World",
+    year: "2026",
+    type: "Brand and website",
+    summary:
+      "A personal-brand website with a custom identity and front-end, designed and built end to end.",
+    outcome: "Made to feel like the person behind it, not a template.",
+    stack: ["Next.js", "TypeScript", "Vercel"],
+    keywords: ["website redesign", "brand", "Next.js", "personal brand"],
   },
 ];
 
@@ -170,7 +189,7 @@ export default function WorkPage() {
               <span className="eyebrow-line" />
               Work by Intentional Studio
             </p>
-            <div className="mt-5 grid gap-10 lg:grid-cols-[1fr_0.72fr]">
+            <div className="mt-6 grid gap-10 lg:grid-cols-[1fr_0.72fr] lg:items-start">
               <div>
                 <h1 className="h2 text-ink">
                   Proof that the studio ships{" "}
@@ -180,7 +199,7 @@ export default function WorkPage() {
                   .
                 </h1>
               </div>
-              <div className="self-end text-lg leading-relaxed text-ink-2">
+              <div className="text-lg leading-relaxed text-ink-2 lg:pt-2">
                 <p>
                   Most client work is private. These examples show the pattern:
                   find the workflow, make the system concrete, and leave behind

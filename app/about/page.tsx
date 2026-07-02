@@ -61,17 +61,17 @@ const faqs = [
   {
     question: "What is Intentional Studio?",
     answer:
-      "Intentional Studio is the public name of Intentional Studio AI, LLC, Mei Liu's AI training and custom app studio for businesses that want practical AI adoption, internal tools, agents, automation, and clearer websites.",
+      "Intentional Studio is the public name of Intentional Studio AI, LLC, Mei Liu's AI training and custom app studio. It helps businesses put AI to work through training, agents, internal tools, automation, and clearer websites.",
   },
   {
     question: "Who runs Intentional Studio?",
     answer:
-      "Intentional Studio is run by Mei Liu, a product and operations leader with 13+ years across startups, data, AI, and machine learning, including recent work at Binance.US.",
+      "Mei Liu runs Intentional Studio. She is a product and operations leader with 13+ years across startups, data, AI, and machine learning, most recently at Binance.US.",
   },
   {
     question: "What does Intentional Studio do?",
     answer:
-      "Intentional Studio teaches teams how to use AI in real workflows, builds custom AI apps and internal tools, and redesigns websites for companies whose public presence no longer matches their work.",
+      "Intentional Studio teaches teams to use AI in the workflows they already have, builds custom AI apps and internal tools, and redesigns websites when a company's public presence has fallen behind its actual work.",
   },
   {
     question: "Is Intentional Studio the same as Google AI Studio?",
@@ -200,10 +200,10 @@ export default function AboutPage() {
             </div>
             <div className="self-end text-lg leading-relaxed text-ink-2">
               <p>
-                Intentional Studio AI, LLC helps businesses turn AI from
-                scattered experiments into working habits and useful software:
-                training, agents, internal tools, automation, and websites that
-                explain the new work clearly.
+                Intentional Studio AI, LLC turns scattered AI experiments into
+                work your team actually does: training people, building agents
+                and internal tools, automating the busywork, and rebuilding
+                websites that explain it all.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href="/ai-training" className="btn btn-primary">
@@ -221,21 +221,22 @@ export default function AboutPage() {
               <div className="about-grid">
                 <div className="about-prose">
                   <p className="lede">
-                    The model is no longer the bottleneck. The question is
-                    whether a team can choose the right work, use the tools
-                    safely, and build the small systems that make AI practical.
+                    The model is no longer the hard part. The hard part is
+                    picking the right work to hand it, using the tools without
+                    getting burned, and building the small systems that make AI
+                    stick.
                   </p>
                   <p>
-                    Mei Liu brings 13+ years in startup product and operating
-                    roles, specializing in data, AI, and machine learning. Most
-                    recently, she worked at Binance.US, with earlier stops
-                    building product and growth functions from zero.
+                    I am Mei Liu. I have spent 13+ years in startup product and
+                    operating roles, most of it close to data, AI, and machine
+                    learning. Most recently I was at Binance.US. Before that I
+                    built product and growth functions from zero.
                   </p>
                   <p>
-                    She started Intentional Studio because the same gap kept
-                    appearing across teams: people had access to powerful AI
-                    tools, but not the training, workflows, or custom software
-                    needed to make those tools useful in daily work.
+                    I started Intentional Studio because I kept seeing the same
+                    gap. Teams had powerful AI tools and no idea how to make them
+                    pay off. What was missing was the training, the workflows,
+                    and the software to fit AI into the actual job.
                   </p>
                   <ul className="recognition">
                     <li>
@@ -256,7 +257,7 @@ export default function AboutPage() {
                       13<sup>+</sup>
                     </span>
                     <span className="fact-label">
-                      Years in product, ops, data, AI, and ML
+                      Years in product, ops, data, and AI
                     </span>
                   </div>
                   <div className="fact fact-maroon">
@@ -272,7 +273,7 @@ export default function AboutPage() {
                   <div className="fact">
                     <span className="fact-num">3-4</span>
                     <span className="fact-label">
-                      Engagements accepted per quarter
+                      Engagements taken per quarter
                     </span>
                   </div>
                 </div>
@@ -288,7 +289,7 @@ export default function AboutPage() {
                   Direct answers
                 </p>
                 <h2 className="section-title">
-                  Clear facts for people and AI systems.
+                  Straight answers for people and AI systems.
                 </h2>
               </div>
               <dl className="grid gap-4 md:grid-cols-2">
@@ -309,9 +310,9 @@ export default function AboutPage() {
                   Public references
                 </h3>
                 <p className="mt-3 max-w-3xl leading-relaxed text-ink-2">
-                  These public profiles help disambiguate Mei Liu and
-                  Intentional Studio from other similarly named studios,
-                  products, and people.
+                  A few public profiles, so you can tell Mei Liu and Intentional
+                  Studio apart from the other studios, products, and people with
+                  similar names.
                 </p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <a
@@ -359,11 +360,11 @@ export default function AboutPage() {
                   Want to work with the studio?
                 </p>
                 <h2 className="contact-title">
-                  Tell me what your team is trying to make useful.
+                  Tell me what your team is trying to fix.
                 </h2>
                 <p className="contact-sub">
-                  Send the problem, the people involved, and the rough timeline.
-                  I will help find the first useful training or build.
+                  Send the problem, who is involved, and a rough timeline. I
+                  will point you to the first training or build worth doing.
                 </p>
                 <Link href="/start" className="btn btn-primary">
                   Start the intake
