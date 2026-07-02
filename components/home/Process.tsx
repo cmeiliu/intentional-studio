@@ -16,7 +16,7 @@ const steps = [
   {
     num: "03",
     title: "Short cycles",
-    body: "2–3 week sprints with something usable at the end of each. You see progress, you give notes.",
+    body: "2-3 week sprints, each ending with something you can actually use. You see progress, you give notes.",
   },
   {
     num: "04",

@@ -31,17 +31,15 @@ export function Hero() {
         <div className="hero-text">
           <motion.p className="eyebrow" {...rise(0.05)}>
             <span className="eyebrow-line" />
-            Hello, I&apos;m Mei —
+            Hi, I&apos;m Mei.
           </motion.p>
 
           <WordReveal className="hero-title" segments={heroTitle} />
 
           <motion.p className="hero-sub" {...rise(0.55)}>
-            I run Intentional Studio, an AI training and custom app studio for
-            teams that want AI to become useful in real workflows. I teach your
-            team how to work with AI, build the custom software you can&apos;t buy
-            off-the-shelf, and redesign websites that need to explain the new
-            work.
+            I run Intentional Studio. I do AI training that actually sticks,
+            build the custom apps teams can&apos;t buy anywhere, and rebuild the
+            websites that make good companies look dated.
           </motion.p>
 
           <motion.div className="hero-cta" {...rise(0.68)}>
@@ -84,7 +82,7 @@ export function Hero() {
               </div>
               <div className="card-row">
                 <span className="card-key">Engagements</span>
-                <span className="card-val">3–4 / quarter</span>
+                <span className="card-val">3 to 4 a quarter</span>
               </div>
             </div>
           </TiltCard>
