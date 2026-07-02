@@ -6,12 +6,12 @@ const steps = [
   {
     num: "01",
     title: "Discovery call",
-    body: "Free, 30 minutes, no pitch deck. We figure out whether this is even worth doing.",
+    body: "A short call to understand the team, the problem, and whether AI is even the right move.",
   },
   {
     num: "02",
     title: "Working session",
-    body: "I sit with your team and watch how you actually move before anything is built or taught.",
+    body: "We sit with your team and watch how you actually work before anything gets built or taught.",
   },
   {
     num: "03",
@@ -21,7 +21,7 @@ const steps = [
   {
     num: "04",
     title: "Hand it back",
-    body: "Clean code, clear docs, and a team that can carry it forward without me. No lock-in.",
+    body: "Clean code, clear docs, and a team that can carry it forward without us. No lock-in.",
   },
 ];
 
@@ -35,7 +35,7 @@ export function Process() {
             How we&apos;ll work
           </p>
           <h2 className="section-title section-title-light">
-            A short, honest <em>process</em>.
+            From first call to <em>handoff</em>.
           </h2>
         </Reveal>
 

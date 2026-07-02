@@ -23,7 +23,7 @@ const cards: Card[] = [
     tagCls: "workcard-tag tag-maroon",
     year: "2026",
     title: "Pebbled",
-    desc: "The platform behind this studio. A recorded scoping call becomes requirements, tickets, and a working app. The custom tool no SaaS vendor sells, built mostly by agents and finished by hand.",
+    desc: "A recorded scoping call becomes requirements, tickets, and a working app. The custom tool no SaaS vendor sells, built mostly by agents and finished by hand.",
     stack: ["Next.js 16", "React 19", "Anthropic SDK", "Neon"],
     arrow: "Visit pebbled.ai ↗",
   },
@@ -42,7 +42,7 @@ const cards: Card[] = [
     tagCls: "workcard-tag tag-cream",
     year: "2026",
     title: "Lip Smacking Foodie Tours",
-    desc: "Restaurant-outreach automation for one of Las Vegas's longest-running food-tour operators: reads the Rezdy manifest, uses Claude to parse dietary notes and celebrations, and renders per-restaurant email digests with a Google-Sheet approval UI.",
+    desc: "Restaurant-outreach automation for one of Las Vegas's longest-running food-tour operators: reads the Rezdy manifest, uses Claude to parse dietary notes and celebrations, and renders per-restaurant email digests with an in-app approval UI.",
     stack: ["Python", "Claude", "Rezdy", "Gmail API"],
     arrow: "Private repo",
   },
@@ -65,11 +65,11 @@ const cards: Card[] = [
     arrow: "Private repo",
   },
   {
-    tag: "Brand & site",
+    tag: "Product · Platform",
     tagCls: "workcard-tag tag-turquoise",
     year: "2026",
     title: "Step Inside My World",
-    desc: "A personal-brand website with a custom identity and front-end, designed and built by one person. Made to feel like the person behind it, not a template.",
+    desc: "An interactive portfolio platform, think LinkedIn but more customizable. Candidates show off real AI skills across different roles, and recruiters find the right people faster.",
     stack: ["Next.js", "TypeScript", "Vercel"],
     arrow: "Private repo",
   },
@@ -99,14 +99,13 @@ export function Work() {
         <Reveal className="section-head">
           <p className="eyebrow eyebrow-turquoise">
             <span className="eyebrow-line" />
-            Browse my recent
+            What we&apos;ve shipped
           </p>
           <h2 className="section-title">
             Selected <em>work</em>.
           </h2>
           <p className="section-sub">
-            Most of what I ship is private. These are the ones I&apos;m allowed to
-            talk about.
+            Recent work across AI, custom software, and brand.
           </p>
         </Reveal>
 

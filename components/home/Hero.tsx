@@ -32,32 +32,24 @@ export function Hero() {
         <div className="hero-text">
           <motion.p className="eyebrow" {...rise(0.05)}>
             <span className="eyebrow-line" />
-            Hi, I&apos;m Mei.
+            AI training, software &amp; brand
           </motion.p>
 
           <WordReveal className="hero-title" segments={heroTitle} />
 
           <motion.p className="hero-sub" {...rise(0.55)}>
-            I run the studio. I do AI training that actually sticks, build the
-            custom apps teams can&apos;t buy anywhere, and rebuild the websites
-            that make good companies look dated.
+            We run AI training that actually sticks, build the custom apps
+            teams can&apos;t buy anywhere, and rebuild the websites that make
+            good companies look dated.
           </motion.p>
 
           <motion.div className="hero-cta" {...rise(0.68)}>
-            <Magnetic href="/start" className="btn btn-primary">
-              Book a call
+            <Magnetic href="#contact" className="btn btn-primary">
+              Get in touch
             </Magnetic>
             <Magnetic href="#work" className="btn btn-ghost" strength={0.25}>
               See recent work →
             </Magnetic>
-          </motion.div>
-
-          <motion.p className="hero-reassure" {...rise(0.74)}>
-            Free 30-min call · no pitch, no deck.
-          </motion.p>
-
-          <motion.div className="hero-tags" {...rise(0.82)}>
-            <span className="tag tag-turquoise">Currently booking · Q3 2026</span>
           </motion.div>
         </div>
 
@@ -78,12 +70,8 @@ export function Hero() {
                 <span className="card-val">Mei Liu</span>
               </div>
               <div className="card-row">
-                <span className="card-key">Practice</span>
+                <span className="card-key">Focus</span>
                 <span className="card-val">AI training · Custom apps</span>
-              </div>
-              <div className="card-row">
-                <span className="card-key">Engagements</span>
-                <span className="card-val">3 to 4 a quarter</span>
               </div>
             </div>
           </TiltCard>
