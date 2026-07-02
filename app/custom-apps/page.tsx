@@ -241,7 +241,7 @@ export default function CustomAppsPage() {
               {[
                 ["8", "custom apps shipped"],
                 ["3-6", "weeks to a first version"],
-                ["100%", "built by hand, with the tools"],
+                ["300+", "lifetime projects shipped"],
               ].map(([value, label]) => (
                 <div
                   key={label}
