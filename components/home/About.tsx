@@ -3,7 +3,7 @@
 import { Counter, Reveal, Stagger, StaggerItem } from "./primitives";
 
 const facts = [
-  { to: 13, suffix: "+", label: "Years in product, ops & AI", cls: "fact" },
+  { to: 15, suffix: "+", label: "Years in product, ops & AI", cls: "fact" },
   { to: 12, suffix: "+", label: "Workshops delivered", cls: "fact fact-maroon" },
   { to: 8, suffix: "", label: "Custom apps shipped", cls: "fact fact-turquoise" },
   { to: 300, suffix: "+", label: "Lifetime projects shipped", cls: "fact" },
@@ -31,7 +31,7 @@ export function About() {
               back to the old way of doing things. That gap is where we work.
             </p>
             <p>
-              The studio is led by Mei Liu, with thirteen years in startup
+              The studio is led by Mei Liu, with fifteen years in startup
               product and operating roles, most of it building Internal Tools
               and Enablement at Coinbase, Binance, Uber, and Netflix. We started
               Intentional Studio because the AI work we kept getting pulled into
