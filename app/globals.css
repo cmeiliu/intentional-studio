@@ -265,7 +265,7 @@ sup { font-size: 0.55em; vertical-align: super; }
 }
 .topnav-cta:hover { background: var(--maroon) !important; transform: translateY(-1px); }
 
-@media (max-width: 880px) {
+@media (max-width: 1100px) {
   .topnav a:not(.topnav-cta) { display: none; }
 }
 
@@ -731,6 +731,12 @@ sup { font-size: 0.55em; vertical-align: super; }
 .service-maroon .service-foot,
 .service-turquoise .service-foot { border-color: rgba(255,255,255,0.16); }
 .service-foot em { font-size: 16px; opacity: 1; }
+.service-foot a {
+  display: inline-block;
+  margin-top: 8px;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
 
 /* ---------- WORK ---------- */
 .section-work { background: var(--cream-deep); border-top: 1px solid var(--rule); }

@@ -40,6 +40,29 @@ Simulation evidence is written under `.sim-out/`. The runner uses system Chrome
 and defaults to `http://127.0.0.1:3000`; override with `SIM_BASE_URL` or
 `--base-url` when the dev server is on another port.
 
+## SEO/GEO checks
+
+Start the local server, then run the SEO/GEO verification gate:
+
+```bash
+npm run dev -- --hostname 127.0.0.1 --port 3000
+npm run seo:check
+```
+
+For production verification after deploy:
+
+```bash
+SEO_CHECK_BASE_URL=https://www.intentional.studio npm run seo:check
+```
+
+To generate a production evidence worksheet for rank/GEO tracking:
+
+```bash
+SEO_REPORT_BASE_URL=https://www.intentional.studio npm run seo:report
+```
+
+Launch and indexing steps live in `docs/seo-geo-launch.md`.
+
 ## Backend
 
 The funnel stores sessions and bookings in the `pebbled-lead-gen` Neon database.

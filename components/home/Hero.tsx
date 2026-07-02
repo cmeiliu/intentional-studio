@@ -37,17 +37,18 @@ export function Hero() {
           <WordReveal className="hero-title" segments={heroTitle} />
 
           <motion.p className="hero-sub" {...rise(0.55)}>
-            I run Intentional Studio. Three things, mostly: I teach your team how
-            to work with AI, I build the custom software you can&apos;t buy
-            off-the-shelf, and I redesign the websites that look like they were
-            made before any of this existed.
+            I run Intentional Studio, an AI training and custom app studio for
+            teams that want AI to become useful in real workflows. I teach your
+            team how to work with AI, build the custom software you can&apos;t buy
+            off-the-shelf, and redesign websites that need to explain the new
+            work.
           </motion.p>
 
           <motion.div className="hero-cta" {...rise(0.68)}>
             <Magnetic href="/start" className="btn btn-primary">
               Book a call
             </Magnetic>
-            <Magnetic href="#work" className="btn btn-ghost" strength={0.25}>
+            <Magnetic href="/work" className="btn btn-ghost" strength={0.25}>
               See recent work →
             </Magnetic>
           </motion.div>
@@ -79,7 +80,7 @@ export function Hero() {
               </div>
               <div className="card-row">
                 <span className="card-key">Practice</span>
-                <span className="card-val">AI · Software · Brand</span>
+                <span className="card-val">AI training · Custom apps</span>
               </div>
               <div className="card-row">
                 <span className="card-key">Engagements</span>

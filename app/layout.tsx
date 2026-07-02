@@ -3,6 +3,12 @@ import { Geist, JetBrains_Mono, Newsreader } from "next/font/google";
 import Script from "next/script";
 import { PostHogProvider } from "./PostHogProvider";
 import { Aurora } from "@/components/home/Aurora";
+import {
+  FOUNDER_NAME,
+  SITE_NAME,
+  SITE_URL,
+  absoluteUrl,
+} from "@/lib/seo";
 import "./globals.css";
 
 const geist = Geist({
@@ -23,12 +29,70 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500"],
 });
 
+const siteDescription =
+  "Intentional Studio is Mei Liu's AI training and custom app studio for businesses that want practical AI adoption, internal tools, automation, agents, and websites that explain the work clearly.";
+
 export const metadata: Metadata = {
-  title: "Intentional Studio - Mei Liu",
+  metadataBase: new URL(SITE_URL),
+  applicationName: SITE_NAME,
+  title: {
+    default: `${SITE_NAME} | AI Training & Custom Apps by ${FOUNDER_NAME}`,
+    template: `%s | ${SITE_NAME}`,
+  },
   description:
-    "An AI practice run by Mei Liu. Teaching, custom software, and website redesigns for businesses that want to actually use AI.",
+    siteDescription,
+  keywords: [
+    "Intentional Studio",
+    "Mei Liu",
+    "AI training",
+    "AI training for businesses",
+    "custom apps",
+    "custom AI apps",
+    "AI agents",
+    "business automation",
+    "internal tools",
+  ],
+  authors: [{ name: FOUNDER_NAME, url: SITE_URL }],
+  creator: FOUNDER_NAME,
+  publisher: SITE_NAME,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: `${SITE_NAME} | AI Training & Custom Apps by ${FOUNDER_NAME}`,
+    description: siteDescription,
+    url: "/",
+    siteName: SITE_NAME,
+    type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "/assets/mei.jpg",
+        alt: `${FOUNDER_NAME}, founder of ${SITE_NAME}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} | AI Training & Custom Apps`,
+    description: siteDescription,
+    images: [absoluteUrl("/assets/mei.jpg")],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   icons: {
-    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%236e1f2c'/%3E%3Cpath d='M16 0a16 16 0 0 1 0 32z' fill='%238fd6bc'/%3E%3C/svg%3E",
+    icon: "/intentional-studio-logo.svg",
+    shortcut: "/intentional-studio-logo.svg",
+    apple: "/intentional-studio-logo.svg",
   },
 };
 

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Intentional Studio</title>
+  <desc id="desc">A two-color circular mark for Intentional Studio.</desc>
+  <rect width="512" height="512" rx="96" fill="#f7f1e3"/>
+  <circle cx="256" cy="256" r="176" fill="#6e1f2c"/>
+  <path d="M256 80a176 176 0 0 1 0 352z" fill="#8fd6bc"/>
+  <circle cx="256" cy="256" r="174" fill="none" stroke="#1a1814" stroke-opacity=".08" stroke-width="4"/>
+</svg>

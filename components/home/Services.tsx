@@ -6,30 +6,52 @@ const services = [
   {
     cls: "service service-cream",
     roman: "I.",
-    pill: "Teaching",
-    name: "Workshops & coaching",
-    desc: "For teams just starting with AI, and for teams that have already stalled. We run hands-on, not slideware.",
+    pill: "AI Training",
+    name: "AI training workshops & coaching",
+    desc: "Practical AI training for teams just starting with AI, and for teams that have already stalled. We run hands-on, not slideware.",
     list: [
       "Half-day exec primers",
       "Engineering bootcamps (Claude Code, Cursor, agents)",
       "1:1 coaching for founders & leads",
       "Custom playbooks for your workflows",
     ],
-    foot: { pre: "From ", em: "$3,500", post: " · 1–2 weeks" },
+    foot: {
+      pre: "From ",
+      em: "$3,500",
+      post: " · 1–2 weeks",
+      links: [
+        { href: "/ai-training", label: "AI training details →" },
+        {
+          href: "/guides/ai-training-for-business-teams",
+          label: "AI training guide →",
+        },
+      ],
+    },
   },
   {
     cls: "service service-maroon",
     roman: "II.",
-    pill: "Software",
-    name: "Custom apps & agents",
-    desc: "The tool no vendor sells you, because it only fits your team. Built to the shape of how you actually work — internal dashboards, AI agents, automation suites.",
+    pill: "Custom Apps",
+    name: "Custom AI apps & agents",
+    desc: "Custom AI apps and internal tools built to the shape of your team. Dashboards, agents, automation suites, and workflow software.",
     list: [
       "Claude / OpenAI-powered apps",
       "Internal dashboards & ops tools",
       "Skill packs for Claude Code, Codex, OpenClaw",
       "End-to-end automation (think Zapier, but real)",
     ],
-    foot: { pre: "From ", em: "$12,000", post: " · 3–6 weeks" },
+    foot: {
+      pre: "From ",
+      em: "$12,000",
+      post: " · 3–6 weeks",
+      links: [
+        { href: "/custom-apps", label: "Custom app details →" },
+        {
+          href: "/guides/custom-ai-apps-for-business",
+          label: "Custom AI apps guide →",
+        },
+      ],
+    },
   },
   {
     cls: "service service-turquoise",
@@ -43,7 +65,7 @@ const services = [
       "Brand systems that scale",
       "Copy that doesn't sound like a robot",
     ],
-    foot: { pre: "From ", em: "$8,000", post: " · 2–4 weeks" },
+    foot: { pre: "From ", em: "$8,000", post: " · 2–4 weeks", links: [] },
   },
 ];
 
@@ -60,8 +82,9 @@ export function Services() {
             Three rooms, <em>one studio</em>.
           </h2>
           <p className="section-sub">
-            Most engagements pull from more than one. Pick the door that sounds
-            most like your problem — we&apos;ll figure out the rest together.
+            AI training often turns into custom apps, and custom apps usually
+            need clearer words around them. Pick the door that sounds most like
+            your problem - we&apos;ll figure out the rest together.
           </p>
         </Reveal>
 
@@ -83,6 +106,12 @@ export function Services() {
                 {s.foot.pre}
                 <em>{s.foot.em}</em>
                 {s.foot.post}
+                {s.foot.links?.map((link) => (
+                  <span key={link.href}>
+                    <br />
+                    <a href={link.href}>{link.label}</a>
+                  </span>
+                ))}
               </div>
             </StaggerItem>
           ))}

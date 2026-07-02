@@ -1,9 +1,48 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
+import {
+  FOUNDER_NAME,
+  SITE_NAME,
+  absoluteUrl,
+  organizationId,
+  personSameAs,
+  personId,
+} from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Learn · Intentional Studio",
+  title: "AI Automation Courses for Entrepreneurs",
   description:
-    "Two self-paced courses that take non-technical entrepreneurs from using AI to automating their work and building their own software.",
+    "Self-paced AI automation and AI app-building courses from Intentional Studio for non-technical entrepreneurs who want to automate real work and ship useful software.",
+  alternates: {
+    canonical: "/learn",
+  },
+  keywords: [
+    "AI automation course",
+    "AI training for entrepreneurs",
+    "learn AI automation",
+    "build apps with AI",
+    "Intentional Studio learn",
+  ],
+  openGraph: {
+    title: `AI Automation Courses for Entrepreneurs | ${SITE_NAME}`,
+    description:
+      "Two stackable Intentional Studio courses for automating real work and building useful software with AI.",
+    url: "/learn",
+    type: "website",
+    images: [
+      {
+        url: "/assets/mei.jpg",
+        alt: `${FOUNDER_NAME}, founder of ${SITE_NAME}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `AI Automation Courses for Entrepreneurs | ${SITE_NAME}`,
+    description:
+      "Self-paced AI automation and AI app-building courses from Intentional Studio.",
+    images: [absoluteUrl("/assets/mei.jpg")],
+  },
 };
 
 type Lesson = { code: string; title: string; file: string; deep?: boolean };
@@ -125,24 +164,89 @@ function lessonHref(dir: string, file: string) {
   return `/learn/lessons/${dir}/${file}.html`;
 }
 
+const learnJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": organizationId,
+      name: SITE_NAME,
+      url: absoluteUrl("/"),
+      logo: absoluteUrl("/intentional-studio-logo.svg"),
+      founder: {
+        "@id": personId,
+      },
+    },
+    {
+      "@type": "Person",
+      "@id": personId,
+      name: FOUNDER_NAME,
+      url: absoluteUrl("/about"),
+      image: absoluteUrl("/assets/mei.jpg"),
+      sameAs: personSameAs,
+    },
+    {
+      "@type": "WebPage",
+      "@id": absoluteUrl("/learn#webpage"),
+      name: "AI Automation Courses for Entrepreneurs",
+      description:
+        "Self-paced AI automation and AI app-building courses from Intentional Studio for non-technical entrepreneurs.",
+      url: absoluteUrl("/learn"),
+      isPartOf: {
+        "@id": absoluteUrl("/#website"),
+      },
+      about: [
+        "AI automation training",
+        "AI app building",
+        "AI training for entrepreneurs",
+      ],
+    },
+    {
+      "@type": "ItemList",
+      "@id": absoluteUrl("/learn#courses"),
+      name: "Intentional Studio AI automation courses",
+      itemListElement: COURSES.map((course, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "Course",
+          name: course.title,
+          description: course.blurb,
+          url: absoluteUrl(`/learn#${course.id}`),
+          provider: {
+            "@id": organizationId,
+          },
+          creator: {
+            "@id": personId,
+          },
+        },
+      })),
+    },
+  ],
+};
+
 export default function LearnPage() {
   return (
-    <div className="flex flex-1 flex-col">
-      <header className="topbar">
-        <div className="topbar-inner">
-          <a href="/" className="brand">
-            <span className="brand-mark" />
-            Intentional Studio
-          </a>
-          <nav className="topnav">
-            <a href="/">Home</a>
-            <a href="/#services">Services</a>
-            <a href="/start" className="topnav-cta">
-              Get in touch →
+    <>
+      <JsonLd data={learnJsonLd} />
+      <div className="flex flex-1 flex-col">
+        <header className="topbar">
+          <div className="topbar-inner">
+            <a href="/" className="brand">
+              <span className="brand-mark" />
+              Intentional Studio
             </a>
-          </nav>
-        </div>
-      </header>
+            <nav className="topnav">
+              <a href="/">Home</a>
+              <a href="/ai-training">AI Training</a>
+              <a href="/custom-apps">Custom Apps</a>
+              <a href="/work">Work</a>
+              <a href="/start" className="topnav-cta">
+                Get in touch →
+              </a>
+            </nav>
+          </div>
+        </header>
 
       <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-12 md:px-10 md:py-16">
         <p className="eyebrow eyebrow-turquoise">
@@ -236,7 +340,8 @@ export default function LearnPage() {
           <code className="rounded bg-cream-2 px-1.5 py-0.5">ai-automation-for-entrepreneurs/</code>{" "}
           workspace.
         </p>
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 }

@@ -1,0 +1,52 @@
+# Intentional Studio
+
+Intentional Studio is Mei Liu's AI training and custom app studio for businesses that want practical AI adoption, internal tools, automation, agents, and websites that explain the work clearly.
+
+Canonical site: https://www.intentional.studio/
+Founder: Mei Liu
+Legal name: Intentional Studio AI, LLC
+Contact: mei@intentional.studio
+Primary geography: United States
+GitHub: https://github.com/cmeiliu/
+LinkedIn: https://www.linkedin.com/in/mei-liu-512
+Recognition profile: https://thewomenweadmire.com/leaders/mei-liu/
+
+## Primary pages
+
+- Home: https://www.intentional.studio/
+- About Intentional Studio and Mei Liu: https://www.intentional.studio/about
+- AI training: https://www.intentional.studio/ai-training
+- Custom apps: https://www.intentional.studio/custom-apps
+- Direct answers for AI systems: https://www.intentional.studio/answers
+- Selected work and proof: https://www.intentional.studio/work
+- AI and custom app guides: https://www.intentional.studio/guides
+- AI training for business teams guide: https://www.intentional.studio/guides/ai-training-for-business-teams
+- Custom AI apps for business guide: https://www.intentional.studio/guides/custom-ai-apps-for-business
+- Self-paced AI automation courses: https://www.intentional.studio/learn
+- Project intake: https://www.intentional.studio/start
+
+## Core services
+
+### AI training
+
+Intentional Studio teaches business teams how to use AI in real workflows. Engagements include executive primers, hands-on workshops, Claude Code and Cursor bootcamps, founder or lead coaching, and custom playbooks for repeatable work.
+
+The supporting guide for this service is https://www.intentional.studio/guides/ai-training-for-business-teams.
+
+### Custom apps and agents
+
+Intentional Studio builds custom software for work that off-the-shelf tools do not fit. Projects include internal dashboards, AI agents, automation suites, Claude and OpenAI-powered apps, and operational tools that connect to existing systems.
+
+The supporting guide for this service is https://www.intentional.studio/guides/custom-ai-apps-for-business.
+
+### Brand and website work
+
+Intentional Studio redesigns websites and landing pages for companies whose public face no longer matches the work they do.
+
+## Proof points
+
+- 13+ years in product, operations, data, AI, and machine learning.
+- Former product and operating work at Binance.US.
+- 12+ workshops delivered.
+- 8 custom apps shipped.
+- Selected work includes YourNegotiations.com, Binance.US Skill Suite, LipSmacking Foodie Tours apps, and Hiring Insight Manager.

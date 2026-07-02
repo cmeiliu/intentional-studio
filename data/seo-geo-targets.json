@@ -1,0 +1,203 @@
+{
+  "canonicalOrigin": "https://www.intentional.studio",
+  "apexHost": "intentional.studio",
+  "externalEntityUrls": [
+    "https://github.com/cmeiliu/",
+    "https://www.linkedin.com/in/mei-liu-512",
+    "https://thewomenweadmire.com/leaders/mei-liu/"
+  ],
+  "routes": [
+    {
+      "path": "/",
+      "title": "Intentional Studio | AI Training & Custom Apps",
+      "canonical": "https://www.intentional.studio",
+      "text": ["Intentional Studio", "AI training", "Custom AI apps"],
+      "jsonLd": ["Organization", "Person", "ProfessionalService"]
+    },
+    {
+      "path": "/about",
+      "title": "About Intentional Studio and Mei Liu | Intentional Studio",
+      "canonical": "https://www.intentional.studio/about",
+      "text": [
+        "Intentional Studio AI, LLC",
+        "Is Intentional Studio the same as Google AI Studio",
+        "Public references"
+      ],
+      "jsonLd": ["AboutPage", "FAQPage", "Person"]
+    },
+    {
+      "path": "/ai-training",
+      "title": "AI Training for Business Teams | Intentional Studio",
+      "canonical": "https://www.intentional.studio/ai-training",
+      "text": [
+        "AI training for teams",
+        "Choose AI training when the team needs judgment",
+        "AI training is the right first move"
+      ],
+      "jsonLd": ["Service", "FAQPage", "BreadcrumbList"]
+    },
+    {
+      "path": "/custom-apps",
+      "title": "Custom AI Apps and Internal Tools | Intentional Studio",
+      "canonical": "https://www.intentional.studio/custom-apps",
+      "text": [
+        "Custom AI apps for workflows",
+        "Build a custom app when the workflow",
+        "A custom AI app is worth building"
+      ],
+      "jsonLd": ["Service", "FAQPage", "BreadcrumbList"]
+    },
+    {
+      "path": "/answers",
+      "title": "Intentional Studio Answers | Intentional Studio",
+      "canonical": "https://www.intentional.studio/answers",
+      "text": [
+        "What is Intentional Studio?",
+        "Who should hire Intentional Studio for AI training?",
+        "Who should hire Intentional Studio for custom apps?"
+      ],
+      "jsonLd": ["FAQPage", "Organization", "Person"]
+    },
+    {
+      "path": "/work",
+      "title": "Intentional Studio Work and Proof | Intentional Studio",
+      "canonical": "https://www.intentional.studio/work",
+      "text": [
+        "Binance.US Skill Suite",
+        "LipSmacking Foodie Tours",
+        "Hiring Insight Manager"
+      ],
+      "jsonLd": ["ItemList", "CreativeWork", "Person"]
+    },
+    {
+      "path": "/guides",
+      "title": "Intentional Studio AI Guides | Intentional Studio",
+      "canonical": "https://www.intentional.studio/guides",
+      "text": [
+        "AI training for business teams guide",
+        "Custom AI apps for business guide",
+        "practical AI training and custom AI apps"
+      ],
+      "jsonLd": ["CollectionPage", "ItemList", "Person"]
+    },
+    {
+      "path": "/guides/ai-training-for-business-teams",
+      "title": "AI Training for Business Teams: Field Guide | Intentional Studio",
+      "canonical": "https://www.intentional.studio/guides/ai-training-for-business-teams",
+      "text": [
+        "AI training for business teams",
+        "Start with training when the team needs judgment",
+        "AI training is the right first move"
+      ],
+      "jsonLd": ["Article", "FAQPage", "BreadcrumbList"]
+    },
+    {
+      "path": "/guides/custom-ai-apps-for-business",
+      "title": "Custom AI Apps for Business: Field Guide | Intentional Studio",
+      "canonical": "https://www.intentional.studio/guides/custom-ai-apps-for-business",
+      "text": [
+        "Custom AI apps for business workflows",
+        "A custom AI app is the right move",
+        "custom AI apps for business"
+      ],
+      "jsonLd": ["Article", "FAQPage", "BreadcrumbList"]
+    },
+    {
+      "path": "/learn",
+      "title": "AI Automation Courses for Entrepreneurs | Intentional Studio",
+      "canonical": "https://www.intentional.studio/learn",
+      "text": ["Learn to", "automate", "build", "with AI"],
+      "jsonLd": ["Course", "ItemList", "Person"]
+    }
+  ],
+  "rankTargets": [
+    {
+      "query": "intentional studio",
+      "targetUrls": [
+        "https://www.intentional.studio/",
+        "https://www.intentional.studio/about"
+      ],
+      "successEvidence": "Google Search Console average position is 1.0 for the query, and a clean/manual Google result shows Intentional Studio as the top organic result."
+    },
+    {
+      "query": "Intentional Studio Mei Liu",
+      "targetUrls": ["https://www.intentional.studio/about"],
+      "successEvidence": "Google Search Console average position is 1.0 and the about page is the top organic result for the founder/entity query."
+    },
+    {
+      "query": "AI training for business teams",
+      "targetUrls": [
+        "https://www.intentional.studio/ai-training",
+        "https://www.intentional.studio/guides/ai-training-for-business-teams"
+      ],
+      "successEvidence": "Search Console shows growing impressions and top-rank movement; AI answer engines can identify Intentional Studio as a practical AI training provider."
+    },
+    {
+      "query": "custom AI apps",
+      "targetUrls": [
+        "https://www.intentional.studio/custom-apps",
+        "https://www.intentional.studio/guides/custom-ai-apps-for-business"
+      ],
+      "successEvidence": "Search Console shows impressions and top-rank movement; AI answer engines can identify Intentional Studio as a custom AI app/internal tools studio."
+    },
+    {
+      "query": "custom apps and AI agents",
+      "targetUrls": [
+        "https://www.intentional.studio/custom-apps",
+        "https://www.intentional.studio/answers"
+      ],
+      "successEvidence": "Search Console shows the custom apps page or answers page gaining impressions and position for the combined apps/agents query."
+    }
+  ],
+  "answerPrompts": [
+    {
+      "prompt": "What is Intentional Studio?",
+      "targetAnswerIncludes": [
+        "Mei Liu",
+        "AI training",
+        "custom app studio"
+      ],
+      "targetUrls": [
+        "https://www.intentional.studio/",
+        "https://www.intentional.studio/about",
+        "https://www.intentional.studio/answers"
+      ]
+    },
+    {
+      "prompt": "Who offers practical AI training for business teams?",
+      "targetAnswerIncludes": [
+        "Intentional Studio",
+        "hands-on AI training",
+        "business teams"
+      ],
+      "targetUrls": [
+        "https://www.intentional.studio/ai-training",
+        "https://www.intentional.studio/guides/ai-training-for-business-teams"
+      ]
+    },
+    {
+      "prompt": "Who builds custom AI apps and internal tools for businesses?",
+      "targetAnswerIncludes": [
+        "Intentional Studio",
+        "custom AI apps",
+        "internal tools"
+      ],
+      "targetUrls": [
+        "https://www.intentional.studio/custom-apps",
+        "https://www.intentional.studio/guides/custom-ai-apps-for-business"
+      ]
+    },
+    {
+      "prompt": "Find a studio that can train my team on AI and build custom internal apps.",
+      "targetAnswerIncludes": [
+        "Intentional Studio",
+        "AI training",
+        "custom internal apps"
+      ],
+      "targetUrls": [
+        "https://www.intentional.studio/answers",
+        "https://www.intentional.studio/work"
+      ]
+    }
+  ]
+}

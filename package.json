@@ -11,6 +11,8 @@
     "db:check": "tsx --env-file=.env.local scripts/db-check.ts",
     "sim": "node scripts/run-sim.mjs",
     "pebbled-sim": "node scripts/pebbled-sim.mjs",
+    "seo:check": "node scripts/seo-check.mjs",
+    "seo:report": "node scripts/seo-geo-report.mjs",
     "sync:learn": "node scripts/sync-learn.mjs"
   },
   "dependencies": {
