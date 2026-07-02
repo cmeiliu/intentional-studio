@@ -2,7 +2,18 @@
 
 import { Reveal, Stagger, StaggerItem } from "./primitives";
 
-const services = [
+type ServiceFootLink = { href: string; label: string };
+type Service = {
+  cls: string;
+  roman: string;
+  pill: string;
+  name: string;
+  desc: string;
+  list: string[];
+  foot: { pre: string; em: string; post: string; links: ServiceFootLink[] };
+};
+
+const services: Service[] = [
   {
     cls: "service service-cream",
     roman: "I.",
@@ -19,13 +30,7 @@ const services = [
       pre: "From ",
       em: "$3,500",
       post: " · 1-2 weeks",
-      links: [
-        { href: "/ai-training", label: "AI training details →" },
-        {
-          href: "/guides/ai-training-for-business-teams",
-          label: "AI training guide →",
-        },
-      ],
+      links: [],
     },
   },
   {
@@ -44,14 +49,7 @@ const services = [
       pre: "From ",
       em: "$12,000",
       post: " · 3-6 weeks",
-      links: [
-        { href: "/custom-apps", label: "Custom app details →" },
-        { href: "/ai-agents", label: "AI agent examples →" },
-        {
-          href: "/guides/custom-ai-apps-for-business",
-          label: "Custom AI apps guide →",
-        },
-      ],
+      links: [],
     },
   },
   {

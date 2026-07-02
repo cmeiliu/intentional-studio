@@ -21,12 +21,10 @@ export function Topbar() {
           Intentional Studio
         </a>
         <nav className="topnav">
-          <a href="/about">About</a>
-          <a href="/ai-training">AI Training</a>
-          <a href="/custom-apps">Custom Apps</a>
-          <a href="/work">Work</a>
-          <a href="/guides">Guides</a>
-          <a href="/answers">Answers</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#work">Work</a>
+          <a href="#process">Process</a>
           <a href="/learn">Learn</a>
           {/* Short-term: the /start funnel is paused, so route "Get in
               touch" straight to email. Subject prefilled to make the reply

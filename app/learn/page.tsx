@@ -240,10 +240,10 @@ export default function LearnPage() {
             </a>
             <nav className="topnav">
               <a href="/">Home</a>
-              <a href="/ai-training">AI Training</a>
-              <a href="/custom-apps">Custom Apps</a>
-              <a href="/work">Work</a>
-              <a href="/start" className="topnav-cta">
+              <a
+                href="mailto:mei@intentional.studio?subject=Let's%20work%20together"
+                className="topnav-cta"
+              >
                 Get in touch →
               </a>
             </nav>

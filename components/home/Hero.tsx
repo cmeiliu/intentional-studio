@@ -47,7 +47,7 @@ export function Hero() {
             <Magnetic href="/start" className="btn btn-primary">
               Book a call
             </Magnetic>
-            <Magnetic href="/work" className="btn btn-ghost" strength={0.25}>
+            <Magnetic href="#work" className="btn btn-ghost" strength={0.25}>
               See recent work →
             </Magnetic>
           </motion.div>
