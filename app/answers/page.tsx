@@ -55,7 +55,7 @@ const answers = [
   {
     question: "What is Intentional Studio?",
     answer:
-      "Intentional Studio is Mei Liu's AI training and custom app studio. The legal entity is Intentional Studio AI, LLC. The studio helps businesses turn AI into practical workflows, custom internal tools, agents, automation, and clearer websites.",
+      "Intentional Studio is Mei Liu's AI training and custom app studio. The legal entity is Intentional Studio AI, LLC. I help businesses put AI to work: real workflows, custom internal tools, agents, automation, and websites that make sense.",
     links: [
       { label: "About the studio", href: "/about" },
       { label: "Selected work", href: "/work" },
@@ -64,7 +64,7 @@ const answers = [
   {
     question: "Who should hire Intentional Studio for AI training?",
     answer:
-      "Businesses should hire Intentional Studio for AI training when their team has tried tools like ChatGPT, Claude, Cursor, or agents but still needs shared workflows, review habits, prompt systems, and practical examples tied to their real work.",
+      "Hire me for AI training when your team has already tried ChatGPT, Claude, Cursor, or agents but still works in isolation. I set up shared workflows, review habits, and prompt systems, using examples pulled from your actual work.",
     links: [
       { label: "AI training", href: "/ai-training" },
       { label: "Start the intake", href: "/start" },
@@ -73,7 +73,7 @@ const answers = [
   {
     question: "Who should hire Intentional Studio for custom apps?",
     answer:
-      "Businesses should hire Intentional Studio for custom apps when a valuable workflow is too specific for off-the-shelf software and keeps falling back into spreadsheets, manual handoffs, shallow reports, or disconnected tools.",
+      "Hire me for custom apps when a workflow that matters is too specific for off-the-shelf software, so it keeps collapsing back into spreadsheets, manual handoffs, and tools that do not talk to each other.",
     links: [
       { label: "Custom apps", href: "/custom-apps" },
       { label: "Selected work", href: "/work" },
@@ -82,7 +82,7 @@ const answers = [
   {
     question: "What kinds of custom AI apps does Intentional Studio build?",
     answer:
-      "Intentional Studio builds internal dashboards, AI agents, automation suites, intake tools, research workflows, booking and operations systems, and focused workflow apps that connect to the tools a business already uses.",
+      "Custom AI apps come in a few shapes: internal dashboards, AI agents, automation, intake tools, research workflows, booking and operations systems, and focused workflow apps. Each one connects to the tools you already run, so nothing lives on an island.",
     links: [
       { label: "Custom apps", href: "/custom-apps" },
       { label: "AI agents", href: "/ai-agents" },
@@ -101,7 +101,7 @@ const answers = [
   {
     question: "What makes Intentional Studio different from a generic AI course or app agency?",
     answer:
-      "Intentional Studio combines AI training, product judgment, and hands-on custom software. The same studio can teach the team, identify the workflow that deserves software, build the first version, and hand back clear docs without locking the company into an ongoing agency dependency.",
+      "A course teaches but never ships anything. An agency ships but never teaches your team, so you stay dependent. I do both. I train the team, spot the workflow worth building, ship the first version, and hand back clear docs so you can run it without me.",
     links: [
       { label: "About", href: "/about" },
       { label: "AI training", href: "/ai-training" },
@@ -111,7 +111,7 @@ const answers = [
   {
     question: "Is Intentional Studio related to Google AI Studio?",
     answer:
-      "No. Intentional Studio is an independent AI training and custom software studio run by Mei Liu. Google AI Studio is Google's developer product for building with Gemini.",
+      "No. Intentional Studio is an independent AI training and custom software studio run by Mei Liu. Google AI Studio is Google's developer product for building with Gemini. Same two words, different thing.",
     links: [{ label: "About Intentional Studio", href: "/about" }],
   },
 ];
@@ -187,9 +187,9 @@ export default function AnswersPage() {
                 .
               </h1>
               <p className="self-end text-lg leading-relaxed text-ink-2">
-                This page is written for people, search engines, and AI answer
-                systems that need the plain version: who the studio is, what it
-                does, and when it is the right fit.
+                The plain version, for people and for the AI systems that answer
+                questions about the studio: who I am, what I build, and when to
+                call me.
               </p>
             </div>
           </section>
@@ -236,8 +236,8 @@ export default function AnswersPage() {
                   Tell me what your team is trying to make useful.
                 </h2>
                 <p className="contact-sub">
-                  I will help decide whether the first move is training, a
-                  custom app, or a smaller workflow fix.
+                  I will tell you whether the first move is training, a custom
+                  app, or a smaller workflow fix.
                 </p>
                 <Link href="/start" className="btn btn-primary">
                   Start the intake

@@ -13,9 +13,9 @@ const CATEGORY_LABEL: Record<PebbleProject["category"], string> = {
 };
 
 const EFFORT_LABEL: Record<PebbleProject["effort"], string> = {
-  small: "1–2 weeks",
-  medium: "3–4 weeks",
-  large: "5–6 weeks",
+  small: "1-2 weeks",
+  medium: "3-4 weeks",
+  large: "5-6 weeks",
 };
 
 export function ProjectsList({
@@ -158,7 +158,7 @@ export function ProjectsList({
           <span className="text-sm text-ink-2">
             {selected.size === 0
               ? "Pick the one that hurts most to keep doing manually"
-              : `${selected.size} selected — ready when you are`}
+              : `${selected.size} selected, ready when you are`}
           </span>
           <button
             type="button"
@@ -280,14 +280,14 @@ function CustomProjectForm({
 
       <Field
         label="What it is"
-        hint="3–4 sentences. What does it do, which part of your bottleneck does it solve, and a concrete moment it would help?"
+        hint="3-4 sentences. What does it do, which part of your bottleneck does it solve, and a concrete moment it would help?"
       >
         <textarea
           required
           rows={5}
           value={whatItDoes}
           onChange={(e) => setWhatItDoes(e.target.value)}
-          placeholder="A small app where the operator pastes an inquiry and gets back a priced quote draft tailored to the menu. Targets the quotes-take-20-minutes bottleneck — on a Friday lunch inquiry for 40, the draft is ready in 60 seconds and goes out before the inquirer calls a competitor."
+          placeholder="A small app where the operator pastes an inquiry and gets back a priced quote draft tailored to the menu. Targets the quotes-take-20-minutes bottleneck. On a Friday lunch inquiry for 40, the draft is ready in 60 seconds and goes out before the inquirer calls a competitor."
           className="w-full bg-cream border border-ink/15 rounded-lg px-4 py-2.5 text-ink placeholder:text-ink-muted focus:outline-none focus:border-burgundy-deep resize-none"
         />
       </Field>
@@ -302,7 +302,7 @@ function CustomProjectForm({
           maxLength={200}
           value={impact}
           onChange={(e) => setImpact(e.target.value)}
-          placeholder="6–8 hours a week and ~3 saved inquiries we’d otherwise lose"
+          placeholder="6-8 hours a week and ~3 saved inquiries we’d otherwise lose"
           className="w-full bg-cream border border-ink/15 rounded-lg px-4 py-2.5 text-ink placeholder:text-ink-muted focus:outline-none focus:border-burgundy-deep"
         />
       </Field>

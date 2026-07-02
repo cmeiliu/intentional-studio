@@ -6,7 +6,7 @@ const facts = [
   { to: 13, suffix: "+", label: "Years in product, ops & AI", cls: "fact" },
   { to: 12, suffix: "+", label: "Workshops delivered", cls: "fact fact-maroon" },
   { to: 8, suffix: "", label: "Custom apps shipped", cls: "fact fact-turquoise" },
-  { to: 100, suffix: "%", label: "Built by hand, with the tools", cls: "fact" },
+  { to: 300, suffix: "+", label: "Lifetime projects shipped", cls: "fact" },
 ];
 
 export function About() {

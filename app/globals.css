@@ -115,11 +115,12 @@ sup { font-size: 0.55em; vertical-align: super; }
 .mono { font-family: var(--font-mono); }
 .h2 {
   font-family: var(--font-serif);
-  font-size: clamp(40px, 5.5vw, 76px);
+  font-size: clamp(32px, 4.2vw, 56px);
   font-weight: 400;
-  line-height: 1.05;
+  line-height: 1.08;
   letter-spacing: -0.02em;
   font-variation-settings: "opsz" 144;
+  text-wrap: balance;
 }
 .navlink {
   color: var(--color-ink-2);
@@ -532,6 +533,7 @@ sup { font-size: 0.55em; vertical-align: super; }
   font-size: clamp(40px, 5.6vw, 76px);
   line-height: 1.05;
   letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 .section-title em { color: var(--maroon); font-weight: 500; }
 .section-title-light { color: var(--cream); }

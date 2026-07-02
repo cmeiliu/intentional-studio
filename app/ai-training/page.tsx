@@ -56,22 +56,22 @@ const formats = [
   {
     name: "Executive AI primer",
     detail:
-      "A half-day session for leaders who need a grounded map of what AI can and cannot do, where risk lives, and what to try first.",
+      "A half-day session for leaders. Get a clear picture of what AI can do, what it can't, where the risk is, and what to try first.",
   },
   {
     name: "Hands-on team workshop",
     detail:
-      "A practical working session where the team brings real work, builds reusable prompts, and leaves with a shared AI operating rhythm.",
+      "A working session. The team brings real work, builds prompts they'll reuse, and leaves with a shared way of running AI day to day.",
   },
   {
     name: "Builder bootcamp",
     detail:
-      "Training for teams using Claude Code, Cursor, Codex, agents, and MCP-style tools to build or maintain software with AI.",
+      "For teams using Claude Code, Cursor, Codex, agents, and MCP-style tools to build and maintain software with AI.",
   },
   {
     name: "Custom AI playbooks",
     detail:
-      "Documented workflows for recurring tasks: research, reporting, customer operations, content, internal tools, and decision support.",
+      "Written workflows for the tasks you repeat: research, reporting, customer operations, content, internal tools, and decisions.",
   },
 ];
 
@@ -79,17 +79,17 @@ const faqs = [
   {
     question: "What kind of AI training does Intentional Studio offer?",
     answer:
-      "Intentional Studio offers practical AI training for business teams: executive primers, hands-on workshops, builder bootcamps, founder coaching, and custom playbooks for real workflows.",
+      "Practical AI training for business teams: executive primers, hands-on workshops, builder bootcamps, founder coaching, and custom playbooks built around real workflows.",
   },
   {
     question: "Who is the training for?",
     answer:
-      "The training is for founders, operators, product teams, marketers, customer teams, and engineers who have tried AI tools but need clearer habits, safer workflows, and working examples.",
+      "Founders, operators, product teams, marketers, customer teams, and engineers who have tried AI tools but need clearer habits, safer workflows, and examples that work.",
   },
   {
     question: "Which tools can the training cover?",
     answer:
-      "Training can cover ChatGPT, Claude, Claude Code, Cursor, Codex, agents, automation tools, and the surrounding workflow design needed to use them well.",
+      "ChatGPT, Claude, Claude Code, Cursor, Codex, agents, automation tools, and the workflow design that makes them useful.",
   },
 ];
 
@@ -216,15 +216,15 @@ export default function AiTrainingPage() {
                 AI training by Intentional Studio
               </p>
               <h1 className="h2 mt-5 text-ink">
-                AI training for teams that need to{" "}
+                AI training for business teams that want to{" "}
                 <span className="ital text-burgundy-deep">use the tools</span>,
                 not admire them.
               </h1>
               <p className="mt-7 max-w-2xl text-lg leading-relaxed text-ink-2">
-                I teach business teams how to turn AI from scattered experiments
-                into repeatable work: clearer prompts, safer reviews, better
-                automation habits, and working examples built around your actual
-                day.
+                Most teams have tried AI and gotten scattered results. I teach
+                them to turn it into work they can repeat: sharper prompts,
+                safer reviews, real automation habits, and examples built around
+                the way your team actually works.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href="/start" className="btn btn-primary">
@@ -239,7 +239,7 @@ export default function AiTrainingPage() {
               {[
                 ["12+", "workshops delivered"],
                 ["13+", "years across product, ops, data, AI, and ML"],
-                ["3-4", "engagements accepted per quarter"],
+                ["3-4", "engagements taken per quarter"],
               ].map(([value, label]) => (
                 <div
                   key={label}
@@ -267,8 +267,8 @@ export default function AiTrainingPage() {
                   Built around the work your team already has.
                 </h2>
                 <p className="section-sub">
-                  No generic tour of tools. Each session turns your actual
-                  workflows into examples the team can keep using.
+                  No generic tour of tools. Each session turns your own
+                  workflows into examples the team keeps using after I leave.
                 </p>
               </div>
               <div className="grid gap-4 md:grid-cols-2">
@@ -301,15 +301,15 @@ export default function AiTrainingPage() {
               <div className="space-y-5 text-base leading-relaxed text-ink-2">
                 <p>
                   Good AI training is not a slideshow about model names. It is
-                  the moment a team learns how to frame a task, check an answer,
-                  hand work between people and tools, and decide when automation
-                  is worth building.
+                  where a team learns to frame a task, check an answer, hand work
+                  between people and tools, and know when automation is worth
+                  building.
                 </p>
                 <p>
-                  Intentional Studio focuses on practical AI adoption: prompt
-                  systems, repeatable workflows, evaluation habits, team norms,
-                  and the bridge from training into custom apps when the process
-                  deserves software.
+                  Intentional Studio focuses on getting AI into daily use: prompt
+                  systems, workflows you can repeat, habits for checking output,
+                  clear team norms, and the move into Custom AI apps when a
+                  process earns its own software.
                 </p>
               </div>
             </div>
@@ -329,16 +329,18 @@ export default function AiTrainingPage() {
               </div>
               <div className="space-y-5 text-base leading-relaxed text-ink-2">
                 <p>
-                  AI training is the right first move when people are unsure
-                  which tasks belong in AI, how to review outputs, how to write
-                  reliable prompts, or how to turn one person&apos;s AI habit into
-                  a team workflow.
+                  Train first when people aren&apos;t sure which tasks belong in
+                  AI, how to review what it returns, how to write prompts that
+                  hold up, or how to turn one person&apos;s AI habit into a team
+                  workflow.
                 </p>
                 <p>
-                  Custom apps come later when the workflow is repeated,
-                  valuable, and specific enough to deserve software. Intentional
-                  Studio can help with both, but training comes first when the
-                  bottleneck is team confidence and shared practice.
+                  Software comes later, once a workflow is repeated often, worth
+                  real money, and specific enough to build for. Intentional Studio
+                  does both. When the real bottleneck is confidence and shared
+                  practice, not tooling, AI training is the right first move.
+                  AI training for teams like yours starts with judgment, then adds
+                  software once a workflow earns it.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Link
@@ -363,7 +365,7 @@ export default function AiTrainingPage() {
                   Common questions
                 </p>
                 <h2 className="section-title section-title-light">
-                  Plain answers for teams comparing AI training partners.
+                  Straight answers for teams choosing an AI training partner.
                 </h2>
               </div>
               <dl className="grid gap-4 md:grid-cols-3">
@@ -395,7 +397,7 @@ export default function AiTrainingPage() {
                   Bring the workflows. I&apos;ll bring the structure.
                 </h2>
                 <p className="contact-sub">
-                  Send the team, the tools, and the bottleneck. I&apos;ll help
+                  Tell me the team, the tools, and the bottleneck. I&apos;ll help
                   shape the first training engagement.
                 </p>
                 <Link href="/start" className="btn btn-primary">
