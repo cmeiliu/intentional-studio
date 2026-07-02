@@ -242,7 +242,6 @@ export default function LearnPage() {
               <a href="/#about">About</a>
               <a href="/#services">Services</a>
               <a href="/#work">Work</a>
-              <a href="/#process">Process</a>
               <a href="/learn">Learn</a>
               <a
                 href="mailto:mei@intentional.studio?subject=Let's%20work%20together"

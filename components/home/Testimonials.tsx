@@ -47,7 +47,7 @@ export function Testimonials() {
             Operators
           </p>
           <h2 className="section-title">
-            Built by the people <em>using it</em>.
+            What our clients <em>say</em>.
           </h2>
         </Reveal>
 

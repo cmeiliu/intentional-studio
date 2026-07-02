@@ -31,11 +31,11 @@ export function About() {
               back to the old way of doing things. That gap is where we work.
             </p>
             <p>
-              The studio is led by Mei Liu: thirteen years in startup product
-              and operating roles, mostly in data, AI, and ML, most recently at
-              Binance.US. Northwestern, Econ &amp; Legal Studies, magna cum
-              laude. We started Intentional Studio because the AI work we kept
-              getting pulled into deserved a real home.
+              The studio is led by Mei Liu, with thirteen years in startup
+              product and operating roles, most of it building Internal Tools
+              and Enablement at Coinbase, Binance, Uber, and Netflix. We started
+              Intentional Studio because the AI work we kept getting pulled into
+              deserved a real home.
             </p>
             <p>
               We take on the work we can do well, and we won&apos;t oversell

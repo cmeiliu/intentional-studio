@@ -55,7 +55,7 @@ const services: Service[] = [
   {
     cls: "service service-turquoise",
     roman: "III.",
-    pill: "Identity",
+    pill: "Marketing",
     name: "Brand & website",
     desc: "For companies whose work has outgrown how they look online. We design and build it end to end.",
     list: [
@@ -80,11 +80,6 @@ export function Services() {
           <h2 className="section-title">
             Three ways we can <em>help</em>.
           </h2>
-          <p className="section-sub">
-            AI training often turns into custom apps, and those apps usually
-            need clearer words around them. Pick whichever sounds most like your
-            problem and we&apos;ll sort out the rest.
-          </p>
         </Reveal>
 
         <Stagger className="services" staggerChildren={0.1}>
