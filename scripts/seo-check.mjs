@@ -53,6 +53,20 @@ function getJsonLdText(html) {
   return matches.map((match) => match[1]).join("\n");
 }
 
+function getHrefValues(html) {
+  return [...html.matchAll(/<a[^>]+href=["']([^"']+)["']/gi)].map((match) =>
+    decodeHtmlEntities(match[1]),
+  );
+}
+
+function normalizeLinkTarget(value) {
+  if (value.startsWith("#") || value.startsWith("mailto:") || value.startsWith("tel:")) {
+    return value;
+  }
+  const url = new URL(value, CANONICAL_ORIGIN);
+  return url.origin === CANONICAL_ORIGIN ? url.pathname.replace(/\/$/, "") || "/" : url.href;
+}
+
 async function fetchText(url, options = {}) {
   const res = await fetch(url, { redirect: "manual", ...options });
   const text = await res.text();
@@ -79,6 +93,16 @@ async function checkPage(route) {
   if (!jsonLd) fail(`${route.path}: missing JSON-LD`);
   for (const type of route.jsonLd) {
     if (!jsonLd.includes(type)) fail(`${route.path}: JSON-LD missing "${type}"`);
+  }
+
+  if (route.links) {
+    const pageLinks = new Set(getHrefValues(text).map(normalizeLinkTarget));
+    for (const link of route.links) {
+      const expectedLink = normalizeLinkTarget(link);
+      if (!pageLinks.has(expectedLink)) {
+        fail(`${route.path}: missing link to "${link}"`);
+      }
+    }
   }
 
   for (const url of externalEntityUrls) {

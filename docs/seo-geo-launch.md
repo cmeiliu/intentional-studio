@@ -41,7 +41,13 @@ npm run dev -- --hostname 127.0.0.1 --port 3000
 ```
 
 The check verifies titles, canonicals, JSON-LD, entity references, sitemap,
-robots, `llms.txt`, headers, and the apex-to-`www` redirect behavior.
+robots, `llms.txt`, headers, homepage links to the SEO/GEO landing pages, and
+the apex-to-`www` redirect behavior.
+
+Homepage copy can change freely as long as this gate stays green. In practice,
+keep visible mentions of `Intentional Studio`, `AI training`, and `Custom AI
+apps`, and keep the homepage linking to `/ai-training`, `/custom-apps`,
+`/guides`, `/answers`, `/work`, `/learn`, and `/start`.
 
 ## Post-deploy gate
 

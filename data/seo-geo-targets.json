@@ -12,7 +12,17 @@
       "title": "Intentional Studio | AI Training & Custom Apps",
       "canonical": "https://www.intentional.studio",
       "text": ["Intentional Studio", "AI training", "Custom AI apps"],
-      "jsonLd": ["Organization", "Person", "ProfessionalService"]
+      "jsonLd": ["Organization", "Person", "ProfessionalService"],
+      "links": [
+        "/about",
+        "/ai-training",
+        "/custom-apps",
+        "/guides",
+        "/answers",
+        "/work",
+        "/learn",
+        "/start"
+      ]
     },
     {
       "path": "/about",
