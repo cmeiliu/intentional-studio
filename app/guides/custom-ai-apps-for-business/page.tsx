@@ -21,31 +21,31 @@ const appTypes = [
   {
     name: "Internal dashboards",
     detail:
-      "Dashboards that answer operational questions instead of only displaying charts people still have to interpret by hand.",
+      "A dashboard that answers the operational question directly, so nobody has to read four charts and infer what to do next.",
   },
   {
     name: "AI assistants and agents",
     detail:
-      "Systems that research, classify, draft, summarize, route, or prepare work with review points built into the workflow.",
+      "A system that researches, classifies, drafts, summarizes, or routes work, with a human review point where it matters.",
   },
   {
     name: "Automation suites",
     detail:
-      "Connected processes across forms, CRMs, inboxes, calendars, spreadsheets, databases, and APIs.",
+      "One process wired across the tools you already use: forms, CRMs, inboxes, calendars, spreadsheets, databases, APIs.",
   },
   {
     name: "Workflow apps",
     detail:
-      "Focused tools for intake, triage, booking, reporting, hiring, customer operations, research, or approval flows.",
+      "A focused tool for one job: intake, triage, booking, reporting, hiring, customer ops, research, or approvals.",
   },
 ];
 
 const buildSignals = [
-  "The workflow is repeated often enough that manual handoffs are now a real cost.",
-  "The work depends on business-specific data, judgment, permissions, or approvals.",
-  "Generic software captures part of the process but leaves the team stitching the rest together.",
-  "The process is valuable enough that speed, quality, or consistency would change the business.",
-  "A trained human can describe the workflow clearly enough to design the first version.",
+  "You run the workflow often enough that the manual handoffs have become a real cost.",
+  "The work turns on your own data, judgment, permissions, or approvals.",
+  "Off-the-shelf software covers part of it and leaves your team taping the rest together.",
+  "The process matters enough that faster, cleaner, or more consistent output would move the business.",
+  "Someone on the team can describe the workflow clearly enough to design a first version.",
 ];
 
 const faqs = [
@@ -250,16 +250,16 @@ export default function CustomAiAppsGuidePage() {
                 </h1>
                 <div className="self-end text-lg leading-relaxed text-ink-2">
                   <p>
-                    Custom AI apps are worth building when a workflow is
-                    repeated, valuable, business-specific, and too important to
-                    keep patching together with spreadsheets and generic tools.
+                    Build a custom AI app when a workflow is repeated, valuable,
+                    and specific to your business, and you are tired of holding
+                    it together with spreadsheets and tools that almost fit.
                   </p>
                   <div className="mt-8 flex flex-wrap gap-3">
                     <Link href="/custom-apps" className="btn btn-primary">
                       See custom apps
                     </Link>
                     <Link href="/ai-training" className="btn btn-ghost">
-                      Compare AI training &rarr;
+                      Or compare AI training &rarr;
                     </Link>
                   </div>
                 </div>
@@ -274,22 +274,22 @@ export default function CustomAiAppsGuidePage() {
                     Best answer
                   </p>
                   <h2 className="section-title mt-5">
-                    Build custom software when the workflow has become part of
-                    the business.
+                    Build custom software once the workflow is part of how the
+                    business runs.
                   </h2>
                 </div>
                 <div className="space-y-5 text-base leading-relaxed text-ink-2">
                   <p>
-                    A custom AI app should not start with the model. It should
-                    start with the repeated work: who starts it, what data is
-                    needed, where judgment enters, what output the team trusts,
-                    and what happens when the system is uncertain.
+                    A custom AI app does not start with the model. It starts with
+                    the repeated work: who kicks it off, what data it needs, where
+                    human judgment enters, what output the team will act on, and
+                    what happens when the system is unsure.
                   </p>
                   <p>
-                    Intentional Studio builds narrow first versions for these
-                    workflows: internal dashboards, agents, automation suites,
-                    intake tools, research systems, and operations apps that fit
-                    how the team already works.
+                    Intentional Studio builds narrow first versions of exactly
+                    these: internal dashboards, agents, automation suites, intake
+                    tools, research systems, and operations apps that fit how your
+                    team already works.
                   </p>
                 </div>
               </div>
@@ -330,9 +330,8 @@ export default function CustomAiAppsGuidePage() {
                     Good custom apps make one important workflow easier to run.
                   </h2>
                   <p className="section-sub">
-                    The software can use AI heavily or lightly. The standard is
-                    whether it makes the business process clearer, faster, and
-                    easier to review.
+                    Some lean on AI, some barely touch it. The test is the same:
+                    does it make the work clearer, faster, and easier to check?
                   </p>
                 </div>
                 <div className="grid gap-4 md:grid-cols-2">
@@ -364,15 +363,15 @@ export default function CustomAiAppsGuidePage() {
                 </div>
                 <div className="space-y-5 text-base leading-relaxed text-ink-2">
                   <p>
-                    A useful first version names the workflow boundary, the
-                    inputs, the review moments, and the output that would make
-                    the work easier this month. It does not need to solve every
-                    edge case to be valuable.
+                    A useful first version picks one boundary: the inputs, the
+                    points where a person reviews, and the output that makes the
+                    work easier this month. It does not have to cover every edge
+                    case to earn its keep.
                   </p>
                   <p>
-                    If the team cannot describe the workflow yet, start with AI
-                    training or a working session. If the workflow is clear and
-                    painful, build the smallest system that removes the repeated
+                    If the team cannot yet describe the workflow, start with AI
+                    training or a working session. If it is already clear and
+                    painful, build the smallest thing that kills the repeated
                     drag.
                   </p>
                   <div className="flex flex-wrap gap-3">
@@ -395,7 +394,7 @@ export default function CustomAiAppsGuidePage() {
                     Common questions
                   </p>
                   <h2 className="section-title section-title-light">
-                    Plain answers about custom AI apps for business.
+                    Straight answers about custom AI apps for business.
                   </h2>
                 </div>
                 <dl className="grid gap-4 md:grid-cols-2">
@@ -425,11 +424,11 @@ export default function CustomAiAppsGuidePage() {
                   Have a workflow worth building?
                 </p>
                 <h2 className="contact-title">
-                  Tell me where the current system breaks.
+                  Tell me where the current setup breaks.
                 </h2>
                 <p className="contact-sub">
-                  I&apos;ll help decide whether the first move is a custom app,
-                  training, or a smaller workflow fix.
+                  I&apos;ll help you figure out whether the first move is a
+                  custom app, training, or a smaller fix to the workflow.
                 </p>
                 <Link href="/start" className="btn btn-primary">
                   Scope a custom app

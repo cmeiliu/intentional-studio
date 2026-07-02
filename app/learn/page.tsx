@@ -65,8 +65,8 @@ const COURSES: Course[] = [
     level: "Foundational",
     title: "Automate & Build",
     blurb:
-      "For any entrepreneur. Get an accurate mental model of AI, ship a no-code automation, and build + deploy a simple app just by describing it.",
-    meta: "17 lessons · ~4–5 weeks · no coding required",
+      "For any entrepreneur. Learn what AI can and can't do, ship a no-code automation that saves you hours, and build and deploy a working app by describing what you want.",
+    meta: "17 lessons · 4-5 weeks · no coding required",
     dir: "course-a",
     modules: [
       {
@@ -119,8 +119,8 @@ const COURSES: Course[] = [
     level: "Advanced",
     title: "Ship Real Software with AI Agents",
     blurb:
-      "For Course A grads and aspiring technical founders. Take a prototype to production-grade software — auth, data, payments, hosting — and wield the agentic toolkit.",
-    meta: "18 lessons · ~4–5 weeks · production + agents",
+      "For Course A grads and founders who want to go further. Take a prototype to real, production software with auth, data, payments, and hosting, then put AI agents to work building it.",
+    meta: "18 lessons · 4-5 weeks · production + agents",
     dir: "course-b",
     modules: [
       {
@@ -257,10 +257,11 @@ export default function LearnPage() {
           Learn to <span className="ital text-burgundy-deep">automate &amp; build</span> with AI.
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-2">
-          Two stackable courses that take a non-technical entrepreneur from
-          &ldquo;I&rsquo;ve tried ChatGPT&rdquo; to automating real work and
-          shipping their own software. Every lesson is short, hands-on, and tied
-          to building something in your own business. Click any lesson to preview it.
+          You&rsquo;ve tried ChatGPT. Now do something with it. These two courses
+          take you from poking at prompts to automating the busywork in your
+          business and shipping software you actually use. No coding background
+          needed. Every lesson is short, hands-on, and builds something real.
+          Click any lesson to preview it.
         </p>
 
         <div className="mt-6 flex flex-wrap gap-3">
@@ -334,9 +335,9 @@ export default function LearnPage() {
         ))}
 
         <p className="mt-12 text-sm text-ink-muted">
-          Lessons open in a new tab and link to each other (previous / next /
-          glossary). This is a working preview &mdash; content is still being
-          refined. Full outline lives in the repo&rsquo;s{" "}
+          Lessons open in a new tab and link to each other (previous, next,
+          glossary). This is a working preview, so content is still being
+          refined. The full outline lives in the repo&rsquo;s{" "}
           <code className="rounded bg-cream-2 px-1.5 py-0.5">ai-automation-for-entrepreneurs/</code>{" "}
           workspace.
         </p>

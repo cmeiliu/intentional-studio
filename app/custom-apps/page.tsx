@@ -55,22 +55,22 @@ const builds = [
   {
     name: "Internal dashboards",
     detail:
-      "One place for the metrics, decisions, and operational questions your team currently hunts across spreadsheets and shallow reports.",
+      "One screen for the numbers and decisions your team currently digs out of spreadsheets and stale reports.",
   },
   {
     name: "AI agents and assistants",
     detail:
-      "Claude and OpenAI-powered systems that research, summarize, draft, route, classify, or prepare work with human review built in.",
+      "Systems built on Claude and OpenAI that research, summarize, draft, route, and classify, with a human in the loop where it counts.",
   },
   {
     name: "Automation suites",
     detail:
-      "Connected workflows across forms, CRMs, calendars, inboxes, databases, and APIs when simple Zapier chains stop being enough.",
+      "Connected workflows across forms, CRMs, calendars, inboxes, databases, and APIs for when a Zapier chain stops holding up.",
   },
   {
     name: "Custom workflow apps",
     detail:
-      "Small, focused products for the exact process your team runs: intake, triage, booking, hiring, reporting, or customer operations.",
+      "Small products built for the exact process your team runs: intake, triage, booking, hiring, reporting, or customer operations.",
   },
 ];
 
@@ -78,17 +78,17 @@ const faqs = [
   {
     question: "What custom apps does Intentional Studio build?",
     answer:
-      "Intentional Studio builds custom AI apps, internal dashboards, agents, automation suites, and workflow tools for business operations that do not fit standard software.",
+      "Intentional Studio builds custom AI apps, internal dashboards, agents, automation suites, and workflow tools for business operations that standard software cannot fit.",
   },
   {
     question: "When should a company build a custom app?",
     answer:
-      "A custom app is worth considering when the workflow is repeated, valuable, specific to the business, and painful enough that spreadsheets, manual handoffs, or generic SaaS tools are slowing the team down.",
+      "Build when the workflow is repeated, valuable, and specific to your business, and when spreadsheets, manual handoffs, or generic SaaS are slowing the team down.",
   },
   {
     question: "How long does a custom app project take?",
     answer:
-      "Most first versions run in short 3-6 week cycles, with something usable at the end and documentation so the team can understand how the system works.",
+      "Most first versions ship in 3-6 weeks. You get something usable at the end, plus docs so the team understands how the system works.",
   },
 ];
 
@@ -223,8 +223,8 @@ export default function CustomAppsPage() {
               <p className="mt-7 max-w-2xl text-lg leading-relaxed text-ink-2">
                 I build the small, specific systems teams keep trying to fake
                 with spreadsheets, forms, and manual handoffs: dashboards,
-                agents, automation suites, and internal tools that fit the way
-                the business actually moves.
+                agents, automation suites, and internal tools that fit how the
+                business actually runs.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href="/start" className="btn btn-primary">
@@ -238,7 +238,7 @@ export default function CustomAppsPage() {
             <div className="grid content-center gap-3">
               {[
                 ["8", "custom apps shipped"],
-                ["3-6", "weeks for many first versions"],
+                ["3-6", "weeks to a first version"],
                 ["100%", "built by hand, with the tools"],
               ].map(([value, label]) => (
                 <div
@@ -264,12 +264,12 @@ export default function CustomAppsPage() {
                   What I build
                 </p>
                 <h2 className="section-title">
-                  Useful software for the work that keeps escaping the system.
+                  Software for the work that keeps slipping through the cracks.
                 </h2>
                 <p className="section-sub">
-                  Custom app projects start with the bottleneck, not the tech
-                  stack. The first version should make one valuable workflow
-                  easier to run, measure, or hand off.
+                  Every project starts with the bottleneck, not the tech stack.
+                  The first version makes one valuable workflow easier to run,
+                  measure, or hand off.
                 </p>
               </div>
               <div className="grid gap-4 md:grid-cols-2">
@@ -301,16 +301,17 @@ export default function CustomAppsPage() {
               </div>
               <div className="space-y-5 text-base leading-relaxed text-ink-2">
                 <p>
-                  The work starts by watching the workflow and naming the first
-                  useful version. From there, I build in short cycles so the
-                  team sees working software early and can correct the shape
-                  before the system gets heavy.
+                  A custom AI app is worth building when a workflow is repeated,
+                  expensive, and specific enough to shape. I start by watching
+                  the work and naming the first version to ship, then work in
+                  short cycles so the team sees software early and can adjust
+                  before it gets heavy.
                 </p>
                 <p>
                   You get clean code, practical docs, and a product that fits
-                  the process. If the better answer is training, a prompt
-                  library, or a simpler automation, I will say that before we
-                  build the larger thing.
+                  the process. If training, a prompt library, or a simpler
+                  automation would serve you better, I will say so before we
+                  build the bigger thing.
                 </p>
               </div>
             </div>
@@ -329,16 +330,15 @@ export default function CustomAppsPage() {
               </div>
               <div className="space-y-5 text-base leading-relaxed text-ink-2">
                 <p>
-                  A custom AI app is worth building when a team repeats the same
-                  valuable workflow, the work depends on business-specific data
-                  or judgment, and generic software forces too many manual
-                  handoffs.
+                  Build a custom AI app when the team repeats the same valuable
+                  workflow, the work leans on business-specific data or judgment,
+                  and generic software forces too many manual handoffs.
                 </p>
                 <p>
                   Intentional Studio builds focused first versions: internal
                   dashboards, AI agents, automation suites, intake tools,
-                  research workflows, and operations apps that make one
-                  important process easier to run.
+                  research workflows, and operations apps that make one important
+                  process easier to run.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Link
@@ -363,7 +363,7 @@ export default function CustomAppsPage() {
                   Common questions
                 </p>
                 <h2 className="section-title section-title-light">
-                  Plain answers for teams considering custom software.
+                  Straight answers for teams weighing custom software.
                 </h2>
               </div>
               <dl className="grid gap-4 md:grid-cols-3">
@@ -395,8 +395,8 @@ export default function CustomAppsPage() {
                   Tell me what the team is trying to make easier.
                 </h2>
                 <p className="contact-sub">
-                  Send the website, the bottleneck, and the rough timeline.
-                  I&apos;ll help pick the first version worth building.
+                  Send your website, the bottleneck, and a rough timeline. I&apos;ll
+                  help you pick the first version worth building.
                 </p>
                 <Link href="/start" className="btn btn-primary">
                   Scope a custom app

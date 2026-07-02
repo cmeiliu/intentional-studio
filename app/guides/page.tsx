@@ -20,14 +20,14 @@ const guides = [
     title: "AI training for business teams guide",
     href: "/guides/ai-training-for-business-teams",
     summary:
-      "How to decide whether your team needs AI training, what a useful workshop should cover, and when training should turn into a custom app.",
+      "How to tell if your team needs AI training, what a workshop should cover, and the point where training should become a custom app.",
     eyebrow: "Training",
   },
   {
     title: "Custom AI apps for business guide",
     href: "/guides/custom-ai-apps-for-business",
     summary:
-      "How to know when a workflow deserves custom software, what the first version should include, and where AI agents fit.",
+      "When a workflow is worth building software for, what to put in the first version, and where AI agents earn their place.",
     eyebrow: "Custom apps",
   },
 ];
@@ -166,14 +166,14 @@ export default function GuidesPage() {
               <h1 className="h2 text-ink">
                 Field guides for{" "}
                 <span className="ital text-burgundy-deep">
-                  practical AI training and custom AI apps
+                  AI training and Custom AI apps
                 </span>
                 .
               </h1>
               <p className="self-end text-lg leading-relaxed text-ink-2">
-                These guides explain how Intentional Studio thinks about AI
-                adoption: train the team when judgment is the bottleneck, and
-                build software when the workflow deserves a system.
+                Field notes on practical AI training and custom AI apps. How Intentional Studio decides where AI belongs. Train the team
+                when judgment is the bottleneck. Build software when the
+                workflow has outgrown doing it by hand.
               </p>
             </div>
           </section>
@@ -209,14 +209,15 @@ export default function GuidesPage() {
               <div className="contact">
                 <p className="eyebrow eyebrow-cream">
                   <span className="eyebrow-line" />
-                  Need the applied version?
+                  Want this applied to your work?
                 </p>
                 <h2 className="contact-title">
-                  Bring the workflow and I&apos;ll help choose the right move.
+                  Bring the workflow and I&apos;ll help you pick the right move.
                 </h2>
                 <p className="contact-sub">
-                  The answer may be training, a custom app, or a smaller
-                  workflow fix that gets the team moving.
+                  Sometimes that&apos;s training. Sometimes it&apos;s a custom
+                  app. Sometimes it&apos;s a small fix that gets the team
+                  unstuck.
                 </p>
                 <Link href="/start" className="btn btn-primary">
                   Start the intake
