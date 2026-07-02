@@ -310,16 +310,16 @@ sup { font-size: 0.55em; vertical-align: super; }
   width: 100%;
 }
 
-.hero-text { max-width: 620px; }
+.hero-text { max-width: 700px; }
 
 .hero-text .eyebrow { margin-bottom: 32px; }
 
 .hero-title {
   font-family: var(--serif);
   font-weight: 500;
-  font-size: clamp(48px, 7vw, 96px);
+  font-size: 48px;
   line-height: 1.0;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   margin-bottom: 36px;
 }
 .hero-title em {
@@ -327,12 +327,20 @@ sup { font-size: 0.55em; vertical-align: super; }
   font-weight: 500;
 }
 
+@media (min-width: 768px) {
+  .hero-title { font-size: 76px; }
+}
+
+@media (min-width: 1200px) {
+  .hero-title { font-size: 82px; }
+}
+
 .hero-sub {
   font-size: clamp(15px, 1.3vw, 17px);
   line-height: 1.65;
   color: var(--ink-soft);
   margin-bottom: 40px;
-  max-width: 540px;
+  max-width: 580px;
 }
 
 .hero-cta {

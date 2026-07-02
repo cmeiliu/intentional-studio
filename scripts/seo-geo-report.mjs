@@ -31,6 +31,14 @@ function getTagContent(html, tagName) {
   return match ? decodeHtmlEntities(normalizeWhitespace(match[1])) : "";
 }
 
+function getTagText(html, tagName) {
+  return normalizeWhitespace(
+    getTagContent(html, tagName)
+      .replace(/<!--[\s\S]*?-->/g, "")
+      .replace(/<[^>]+>/g, " "),
+  );
+}
+
 function getCanonical(html) {
   const match = html.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i);
   return match?.[1] ?? "";
@@ -42,12 +50,15 @@ async function fetchPage(route) {
     const res = await fetch(url, { redirect: "manual" });
     const text = await res.text();
     const title = getTagContent(text, "title");
+    const h1 = getTagText(text, "h1");
     const canonical = getCanonical(text);
     return {
       path: route.path,
       status: res.status,
       title,
       titleOk: title === route.title,
+      h1,
+      h1Ok: route.h1 ? h1 === route.h1 : true,
       canonical,
       canonicalOk: canonical === route.canonical,
     };
@@ -57,6 +68,8 @@ async function fetchPage(route) {
       status: "error",
       title: error.message,
       titleOk: false,
+      h1: "",
+      h1Ok: false,
       canonical: "",
       canonicalOk: false,
     };
@@ -84,13 +97,15 @@ const lines = [
   "",
   "## Deployment Surface",
   "",
-  "| Route | HTTP | Title OK | Canonical OK | Observed title |",
-  "| --- | ---: | --- | --- | --- |",
+  "| Route | HTTP | Title OK | H1 OK | Canonical OK | Observed title |",
+  "| --- | ---: | --- | --- | --- | --- |",
 ];
 
 for (const result of routeResults) {
   lines.push(
     `| ${result.path} | ${result.status} | ${statusIcon(result.titleOk)} | ${statusIcon(
+      result.h1Ok,
+    )} | ${statusIcon(
       result.canonicalOk,
     )} | ${mdEscape(result.title)} |`,
   );

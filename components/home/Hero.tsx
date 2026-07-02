@@ -5,8 +5,9 @@ import { EASE_OUT } from "@/lib/motion";
 import { Magnetic, TiltCard, WordReveal } from "./primitives";
 
 const heroTitle = [
-  { text: "I" },
-  { text: "help" },
+  { text: "Intentional" },
+  { text: "Studio" },
+  { text: "helps" },
   { text: "businesses" },
   { text: "", br: true },
   { text: "actually use", em: true },
@@ -37,9 +38,9 @@ export function Hero() {
           <WordReveal className="hero-title" segments={heroTitle} />
 
           <motion.p className="hero-sub" {...rise(0.55)}>
-            I run Intentional Studio. I do AI training that actually sticks,
-            build the custom apps teams can&apos;t buy anywhere, and rebuild the
-            websites that make good companies look dated.
+            I run the studio. I do AI training that actually sticks, build the
+            custom apps teams can&apos;t buy anywhere, and rebuild the websites
+            that make good companies look dated.
           </motion.p>
 
           <motion.div className="hero-cta" {...rise(0.68)}>

@@ -12,6 +12,7 @@
       "path": "/",
       "title": "Intentional Studio | AI Training & Custom Apps",
       "canonical": "https://www.intentional.studio",
+      "h1": "Intentional Studio helps businesses actually use AI.",
       "text": ["Intentional Studio", "AI training", "Custom AI apps"],
       "jsonLd": ["Organization", "Person", "ProfessionalService"],
       "links": [

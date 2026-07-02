@@ -43,6 +43,14 @@ function getTagContent(html, tagName) {
   return match ? decodeHtmlEntities(normalizeWhitespace(match[1])) : "";
 }
 
+function getTagText(html, tagName) {
+  return normalizeWhitespace(
+    getTagContent(html, tagName)
+      .replace(/<!--[\s\S]*?-->/g, "")
+      .replace(/<[^>]+>/g, " "),
+  );
+}
+
 function getCanonical(html) {
   const match = html.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i);
   return match?.[1] ?? "";
@@ -83,6 +91,11 @@ async function checkPage(route) {
   const canonical = getCanonical(text);
   if (canonical !== route.canonical) {
     fail(`${route.path}: expected canonical "${route.canonical}", got "${canonical}"`);
+  }
+
+  if (route.h1) {
+    const h1 = getTagText(text, "h1");
+    if (h1 !== route.h1) fail(`${route.path}: expected h1 "${route.h1}", got "${h1}"`);
   }
 
   for (const requiredText of route.text) {

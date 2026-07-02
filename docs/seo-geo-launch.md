@@ -47,8 +47,9 @@ robots, `llms.txt`, headers, homepage links to the SEO/GEO landing pages, and
 the apex-to-`www` redirect behavior.
 
 Homepage copy can change freely as long as this gate stays green. In practice,
-keep visible mentions of `Intentional Studio`, `AI training`, and `Custom AI
-apps`, and keep the homepage linking to `/ai-training`, `/custom-apps`,
+keep the homepage H1 as `Intentional Studio helps businesses actually use AI.`,
+keep visible mentions of `AI training` and `Custom AI apps`, and keep the
+homepage linking to `/ai-training`, `/custom-apps`,
 `/ai-agents`, `/guides`, `/answers`, `/work`, `/learn`, and `/start`.
 
 ## Post-deploy gate
@@ -144,6 +145,9 @@ Best next external references:
   Liu's LinkedIn profile.
 - Add a short LinkedIn post linking `/ai-training`, `/custom-apps`, and `/answers`.
 - Link to `/work` from project READMEs where appropriate.
+
+Use `docs/seo-geo-external-actions.md` for copy/paste profile text, post copy,
+Search Console URL lists, and off-site disambiguation steps.
 
 ## Rank measurement
 

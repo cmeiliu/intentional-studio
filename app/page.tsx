@@ -60,6 +60,7 @@ const homeJsonLd = {
       "@id": organizationId,
       name: SITE_NAME,
       legalName: LEGAL_NAME,
+      description: pageDescription,
       url: SITE_URL,
       mainEntityOfPage: absoluteUrl("/about"),
       logo: absoluteUrl("/intentional-studio-logo.svg"),
@@ -105,6 +106,7 @@ const homeJsonLd = {
       "@type": "WebSite",
       "@id": websiteId,
       name: SITE_NAME,
+      description: pageDescription,
       url: SITE_URL,
       inLanguage: "en-US",
       publisher: {
@@ -115,6 +117,7 @@ const homeJsonLd = {
       "@type": "ProfessionalService",
       "@id": absoluteUrl("/#professional-service"),
       name: SITE_NAME,
+      description: pageDescription,
       url: SITE_URL,
       image: absoluteUrl("/assets/mei.jpg"),
       founder: {
