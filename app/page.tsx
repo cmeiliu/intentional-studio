@@ -12,12 +12,12 @@ import { Work } from "@/components/home/Work";
 import {
   CONTACT_EMAIL,
   FOUNDER_NAME,
-  GITHUB_URL,
   LEGAL_NAME,
   SITE_NAME,
   SITE_URL,
   absoluteUrl,
   organizationId,
+  organizationSameAs,
   personSameAs,
   personId,
   websiteId,
@@ -68,7 +68,7 @@ const homeJsonLd = {
       founder: {
         "@id": personId,
       },
-      sameAs: [GITHUB_URL],
+      sameAs: organizationSameAs,
       knowsAbout: [
         "AI training",
         "Custom apps",

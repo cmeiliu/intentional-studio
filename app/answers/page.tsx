@@ -8,6 +8,7 @@ import {
   SITE_NAME,
   absoluteUrl,
   organizationId,
+  organizationSameAs,
   personSameAs,
   personId,
 } from "@/lib/seo";
@@ -134,6 +135,7 @@ const jsonLd = {
       name: SITE_NAME,
       legalName: LEGAL_NAME,
       url: absoluteUrl("/"),
+      sameAs: organizationSameAs,
       founder: {
         "@id": personId,
       },

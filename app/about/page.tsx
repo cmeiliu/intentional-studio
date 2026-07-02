@@ -3,6 +3,7 @@ import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { SiteHeader } from "@/components/SiteHeader";
 import {
+  COMPANY_LINKEDIN_URL,
   CONTACT_EMAIL,
   FOUNDER_NAME,
   GITHUB_URL,
@@ -13,6 +14,7 @@ import {
   WOMEN_WE_ADMIRE_URL,
   absoluteUrl,
   organizationId,
+  organizationSameAs,
   personId,
   personSameAs,
 } from "@/lib/seo";
@@ -90,7 +92,7 @@ const jsonLd = {
       logo: absoluteUrl("/intentional-studio-logo.svg"),
       image: absoluteUrl("/assets/mei.jpg"),
       email: CONTACT_EMAIL,
-      sameAs: [GITHUB_URL],
+      sameAs: organizationSameAs,
       founder: {
         "@id": personId,
       },
@@ -312,13 +314,36 @@ export default function AboutPage() {
                   products, and people.
                 </p>
                 <div className="mt-5 flex flex-wrap gap-3">
-                  <a href={GITHUB_URL} target="_blank" rel="noopener" className="btn btn-ghost">
+                  <a
+                    href={GITHUB_URL}
+                    target="_blank"
+                    rel="noopener"
+                    className="btn btn-ghost"
+                  >
                     GitHub
                   </a>
-                  <a href={LINKEDIN_URL} target="_blank" rel="noopener" className="btn btn-ghost">
-                    LinkedIn
+                  <a
+                    href={COMPANY_LINKEDIN_URL}
+                    target="_blank"
+                    rel="noopener"
+                    className="btn btn-ghost"
+                  >
+                    LinkedIn company
                   </a>
-                  <a href={WOMEN_WE_ADMIRE_URL} target="_blank" rel="noopener" className="btn btn-ghost">
+                  <a
+                    href={LINKEDIN_URL}
+                    target="_blank"
+                    rel="noopener"
+                    className="btn btn-ghost"
+                  >
+                    Mei on LinkedIn
+                  </a>
+                  <a
+                    href={WOMEN_WE_ADMIRE_URL}
+                    target="_blank"
+                    rel="noopener"
+                    className="btn btn-ghost"
+                  >
                     Women We Admire
                   </a>
                 </div>

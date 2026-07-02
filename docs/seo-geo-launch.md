@@ -132,12 +132,16 @@ Keep these profiles consistent with the site language:
 
 - GitHub: `https://github.com/cmeiliu/`
 - LinkedIn: `https://www.linkedin.com/in/mei-liu-512`
+- LinkedIn company profile: `https://www.linkedin.com/company/intentional-studio`
 - Women We Admire: `https://thewomenweadmire.com/leaders/mei-liu/`
 
 Best next external references:
 
 - Add `intentional.studio` to GitHub profile website field.
-- Add `Intentional Studio AI, LLC` and `https://www.intentional.studio/` to LinkedIn.
+- Refresh the LinkedIn company profile description to match the AI training,
+  custom apps, and AI agents positioning.
+- Add `Intentional Studio AI, LLC` and `https://www.intentional.studio/` to Mei
+  Liu's LinkedIn profile.
 - Add a short LinkedIn post linking `/ai-training`, `/custom-apps`, and `/answers`.
 - Link to `/work` from project READMEs where appropriate.
 

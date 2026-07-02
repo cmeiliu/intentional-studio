@@ -7,6 +7,7 @@ import {
   SITE_NAME,
   absoluteUrl,
   organizationId,
+  organizationSameAs,
   personSameAs,
   personId,
 } from "@/lib/seo";
@@ -108,6 +109,7 @@ const jsonLd = {
       name: SITE_NAME,
       url: absoluteUrl("/"),
       logo: absoluteUrl("/intentional-studio-logo.svg"),
+      sameAs: organizationSameAs,
       founder: {
         "@id": personId,
       },
