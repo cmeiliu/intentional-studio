@@ -28,19 +28,19 @@ export function About() {
             <p className="lede">
               The model isn&apos;t your bottleneck. Your team is. Most companies
               tried ChatGPT, watched a demo, bought a few seats, and quietly went
-              back to the old way of doing things. That gap is where I work.
+              back to the old way of doing things. That gap is where we work.
             </p>
             <p>
-              Thirteen years in startup product and operating roles, mostly in
-              data, AI, and ML. Most recently at Binance.US, and before that
-              building product and growth teams from scratch. Northwestern, Econ
-              &amp; Legal Studies, magna cum laude. I started Intentional Studio
-              because the AI work I kept getting pulled into deserved a real home.
+              The studio is led by Mei Liu, with thirteen years in startup
+              product and operating roles, most of it building Internal Tools
+              and Enablement at Coinbase, Binance, Uber, and Netflix. We started
+              Intentional Studio because the AI work we kept getting pulled into
+              deserved a real home.
             </p>
             <p>
-              I take three or four engagements a quarter and do them well. I
-              won&apos;t oversell you. If we&apos;re not a fit, I&apos;ll tell you
-              on the first call.
+              We take on the work we can do well, and we won&apos;t oversell
+              you. If we&apos;re not the right fit, we&apos;ll say so on the
+              first call.
             </p>
 
             <ul className="recognition">

@@ -239,7 +239,10 @@ export default function LearnPage() {
               Intentional Studio
             </a>
             <nav className="topnav">
-              <a href="/">Home</a>
+              <a href="/#about">About</a>
+              <a href="/#services">Services</a>
+              <a href="/#work">Work</a>
+              <a href="/learn">Learn</a>
               <a
                 href="mailto:mei@intentional.studio?subject=Let's%20work%20together"
                 className="topnav-cta"
@@ -259,11 +262,10 @@ export default function LearnPage() {
           Learn to <span className="ital text-burgundy-deep">automate &amp; build</span> with AI.
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-2">
-          You&rsquo;ve tried ChatGPT. Now do something with it. These two courses
-          take you from poking at prompts to automating the busywork in your
-          business and shipping software you actually use. No coding background
-          needed. Every lesson is short, hands-on, and builds something real.
-          Click any lesson to preview it.
+          Two self-paced courses on automating real work and shipping software
+          with AI. Lessons open in a new tab and link to each other (previous,
+          next, glossary). This is a working preview, so content is still being
+          refined.
         </p>
 
         <div className="mt-6 flex flex-wrap gap-3">
