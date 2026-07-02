@@ -13,22 +13,17 @@ export function Contact() {
           </StaggerItem>
           <StaggerItem>
             <h2 className="contact-title">
-              Tell me what you&apos;re trying to <em>build</em>.
+              Tell us what you&apos;re trying to <em>build</em>.
             </h2>
           </StaggerItem>
           <StaggerItem as="p" className="contact-sub">
-            Send a few sentences about the team, the problem, and the rough
-            timeline. I read everything and reply within two working days.
+            Tell us about your team, the problem, and the timeline. We&apos;ll
+            come back with how we&apos;d approach it.
           </StaggerItem>
           <StaggerItem>
             <a href="mailto:mei@intentional.studio" className="contact-email">
               mei<em>@</em>intentional.studio
             </a>
-          </StaggerItem>
-          <StaggerItem>
-            <div className="contact-meta">
-              <span>Currently booking · Q3 2026</span>
-            </div>
           </StaggerItem>
         </Stagger>
       </div>
