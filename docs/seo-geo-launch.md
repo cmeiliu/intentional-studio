@@ -64,6 +64,11 @@ to:
 https://www.intentional.studio/ai-training
 ```
 
+If the production check warns that Vercel returned `307`, the canonical
+location is still correct, but the domain redirect should be switched to a
+permanent `308` in the Vercel project/domain settings when project access is
+available.
+
 ## Search Console indexing
 
 In Google Search Console:
