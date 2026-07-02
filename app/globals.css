@@ -525,6 +525,7 @@ sup { font-size: 0.55em; vertical-align: super; }
   font-size: clamp(40px, 5.6vw, 76px);
   line-height: 1.05;
   letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 .section-title em { color: var(--maroon); font-weight: 500; }
 .section-title-light { color: var(--cream); }
