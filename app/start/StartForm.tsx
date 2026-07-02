@@ -25,6 +25,9 @@ export function StartForm() {
 
   const [url, setUrl] = useState("");
   const [email, setEmail] = useState("");
+  // Once the operator edits the email themselves, stop auto-filling it from
+  // the website field so we never clobber what they typed.
+  const [emailEdited, setEmailEdited] = useState(false);
   const [bottleneck, setBottleneck] = useState("");
   const [error, setError] = useState<string | null>(null);
 
@@ -177,7 +180,17 @@ export function StartForm() {
             type="text"
             required
             value={url}
-            onChange={(e) => setUrl(e.target.value)}
+            onChange={(e) => {
+              const next = e.target.value;
+              setUrl(next);
+              // Prefill the email with "@domain" so the operator only has
+              // to type the part before the @. Skip once they've edited the
+              // email themselves.
+              if (!emailEdited) {
+                const domain = prettyDomain(next);
+                setEmail(domain ? `@${domain}` : "");
+              }
+            }}
             disabled={submitting}
             placeholder="yourbusiness.com"
             className="w-full px-4 py-3 bg-cream-2 border border-ink/15 rounded-lg text-ink placeholder:text-ink-muted focus:outline-none focus:border-burgundy-deep transition-colors disabled:opacity-60"
@@ -194,7 +207,17 @@ export function StartForm() {
             required
             autoComplete="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setEmailEdited(true);
+            }}
+            onFocus={(e) => {
+              // When only the auto-filled "@domain" is present, put the
+              // cursor at the very start so typing lands before the @.
+              if (e.currentTarget.value.startsWith("@")) {
+                e.currentTarget.setSelectionRange(0, 0);
+              }
+            }}
             disabled={submitting}
             placeholder="you@yourbusiness.com"
             className="w-full px-4 py-3 bg-cream-2 border border-ink/15 rounded-lg text-ink placeholder:text-ink-muted focus:outline-none focus:border-burgundy-deep transition-colors disabled:opacity-60"
